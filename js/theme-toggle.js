@@ -34,7 +34,7 @@
     document.querySelectorAll('[data-theme-toggle]').forEach(btn => {
       const label = btn.querySelector('[data-theme-label]');
       if (label) {
-        label.textContent = theme === 'night' ? 'Night Race' : 'Day GP';
+        label.textContent = theme === 'night' ? 'Night' : 'Day';
       }
       btn.setAttribute('aria-label',
         `Schakel naar ${theme === 'night' ? 'lichte' : 'donkere'} modus`);
