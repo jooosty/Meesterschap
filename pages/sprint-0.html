@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="nl" data-theme="night">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sprint 0 Meesterschap</title>
+  <meta name="description" content="Sprint 0: een persoonlijke website bouwen die zichzelf ontsluit via games." />
+
+  <script src="../js/theme-toggle.js"></script>
+
+  <link rel="stylesheet" href="../css/reset.css" />
+  <link rel="stylesheet" href="../css/tokens.css" />
+  <link rel="stylesheet" href="../css/themes.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+
+  <style>
+    .code-block {
+      background: var(--color-bg-card);
+      border: var(--border-width) solid var(--color-border);
+      border-left: 3px solid var(--color-accent);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      overflow-x: auto;
+      margin-block: var(--space-md);
+    }
+    .code-block pre {
+      font-family: var(--font-mono);
+      font-size: var(--fs-sm);
+      color: var(--color-text);
+      line-height: 1.6;
+      margin: 0;
+      white-space: pre;
+    }
+    .kw  { color: var(--color-accent-cool); }
+    .fn  { color: var(--color-accent-green); }
+    .str { color: var(--color-accent); }
+    .cm  { color: var(--color-text-dim); font-style: italic; }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: var(--space-md);
+      margin-block: var(--space-lg);
+    }
+    .feature-card {
+      background: var(--color-bg-card);
+      border: var(--border-width) solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card::after {
+      content: attr(data-icon);
+      position: absolute;
+      bottom: var(--space-sm);
+      right: var(--space-md);
+      font-size: 2rem;
+      opacity: 0.15;
+      pointer-events: none;
+    }
+    .feature-card__title {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--color-accent);
+      margin-bottom: var(--space-xs);
+    }
+    .feature-card p {
+      font-size: var(--fs-sm);
+      color: var(--color-text-muted);
+      line-height: 1.5;
+    }
+
+    .week-log {
+      border-left: 2px solid var(--color-border);
+      padding-left: var(--space-md);
+      margin-block: var(--space-lg);
+    }
+    .week-log__day {
+      margin-bottom: var(--space-lg);
+      position: relative;
+    }
+    .week-log__day::before {
+      content: "";
+      position: absolute;
+      left: calc(-1 * var(--space-md) - 1px);
+      top: 6px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      transform: translateX(-4px);
+    }
+    .week-log__date {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--color-text-dim);
+      margin-bottom: var(--space-xs);
+    }
+    .week-log__heading {
+      font-family: var(--font-display);
+      font-size: var(--fs-base);
+      font-weight: 700;
+      color: var(--color-text);
+      margin-bottom: var(--space-xs);
+    }
+    .week-log ul { list-style: none; padding: 0; }
+    .week-log ul li {
+      font-size: var(--fs-sm);
+      color: var(--color-text-muted);
+      padding-left: var(--space-sm);
+      position: relative;
+      margin-bottom: var(--space-3xs);
+      line-height: 1.5;
+    }
+    .week-log ul li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.7em;
+      width: 6px;
+      height: 1px;
+      background: var(--color-accent);
+    }
+    .time-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-3xs);
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--color-text-dim);
+      letter-spacing: 0.1em;
+    }
+
+    .feedback-box {
+      background: var(--color-bg-card);
+      border: var(--border-thick) solid var(--color-accent-green);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      margin-block: var(--space-xl);
+      position: relative;
+    }
+    .feedback-box__label {
+      position: absolute;
+      top: calc(-1 * var(--fs-xs) - 4px);
+      left: var(--space-md);
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--color-accent-green);
+      background: var(--color-bg);
+      padding: 0 var(--space-2xs);
+    }
+    .feedback-box blockquote {
+      font-size: var(--fs-lg);
+      font-family: var(--font-display);
+      color: var(--color-text);
+      line-height: 1.4;
+      border: none;
+      padding: 0;
+      margin: 0;
+      background: transparent;
+      font-style: normal;
+    }
+    .feedback-box__author {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--color-text-dim);
+      margin-top: var(--space-sm);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .easter-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-3xs);
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--color-accent-cool);
+      border: 1px solid var(--color-accent-cool);
+      padding: 2px 8px;
+      border-radius: var(--radius-sm);
+      margin: var(--space-3xs);
+      opacity: 0.8;
+    }
+
+    .file-tree {
+      font-family: var(--font-mono);
+      font-size: var(--fs-sm);
+      background: var(--color-bg-card);
+      border: var(--border-width) solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-md) var(--space-lg);
+      line-height: 2;
+      color: var(--color-text-muted);
+      margin-block: var(--space-md);
+    }
+    .file-tree .dir  { color: var(--color-accent); font-weight: 700; }
+    .file-tree .file { color: var(--color-text-muted); }
+    .file-tree .new  { color: var(--color-accent-green); }
+
+    .insight-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: var(--space-md);
+      margin-block: var(--space-lg);
+    }
+    .insight-card {
+      background: var(--color-bg-card);
+      border: var(--border-width) solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+    }
+    .insight-card__num {
+      font-family: var(--font-mono);
+      font-size: var(--fs-2xl);
+      font-weight: 700;
+      color: var(--color-accent);
+      opacity: 0.2;
+      line-height: 1;
+      margin-bottom: var(--space-xs);
+    }
+    .insight-card__title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: var(--fs-base);
+      color: var(--color-text);
+      margin-bottom: var(--space-xs);
+    }
+    .insight-card p {
+      font-size: var(--fs-sm);
+      color: var(--color-text-muted);
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Skip naar inhoud</a>
+
+  <header class="nav">
+    <div class="container nav__inner">
+      <a href="../index.html" class="nav__brand" aria-label="Meesterschap home">
+        <span>MEESTERSCHAP</span>
+        <span class="nav__brand-tag">'25</span>
+      </a>
+      <button class="nav__toggle" data-nav-toggle aria-expanded="false" aria-controls="primary-nav" aria-label="Menu openen">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <line x1="3" y1="6" x2="17" y2="6"/>
+          <line x1="3" y1="10" x2="17" y2="10"/>
+          <line x1="3" y1="14" x2="17" y2="14"/>
+        </svg>
+      </button>
+      <nav aria-label="Hoofdnavigatie">
+        <ul class="nav__list" id="primary-nav" data-nav-list>
+          <li><a class="nav__link" href="../index.html">Home</a></li>
+          <li><a class="nav__link" href="sprint-0.html" aria-current="page">Sprint 0</a></li>
+          <li><a class="nav__link" href="hackathon.html">Hackathon</a></li>
+          <li><a class="nav__link" href="weekly-nerd.html">Weekly Nerd</a></li>
+          <li><a class="nav__link" href="weekly-geek.html">Weekly Geek</a></li>
+          <li><a class="nav__link" href="vakken.html">Vakken</a></li>
+          <li><a class="nav__link" href="meesterproef.html">Meesterproef</a></li>
+          <li><a class="nav__link" href="gesprekken.html">Gesprekken</a></li>
+          <li>
+            <button class="theme-toggle" data-theme-toggle aria-label="Wissel thema">
+              <span class="theme-toggle__indicator" aria-hidden="true"></span>
+              <span data-theme-label>Night Race</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="container">
+
+      <nav aria-label="Kruimelpad" class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span class="breadcrumb__sep">/</span>
+        <span>Sprint 0</span>
+      </nav>
+
+      <section class="hero fade-in" aria-labelledby="page-title">
+        <p class="eyebrow hero__eyebrow">Sector 01 Sprint 0</p>
+        <h1 id="page-title">Sprint<br>Zero</h1>
+        <p class="hero__lead">
+          Een persoonlijke website bouwen die je informatie verbergt achter games.
+          Speel Tetris, Minesweeper of 2048 om te ontgrendelen wie ik ben.
+        </p>
+      </section>
+
+      <div class="data-strip" role="region" aria-label="Sprint info">
+        <div class="data-strip__item">
+          <p class="data-strip__label">Deadline</p>
+          <p class="data-strip__value">12 FEB</p>
+        </div>
+        <div class="data-strip__item">
+          <p class="data-strip__label">Duur</p>
+          <p class="data-strip__value">8 dagen</p>
+        </div>
+        <div class="data-strip__item">
+          <p class="data-strip__label">Uren</p>
+          <p class="data-strip__value data-strip__value--accent">~32u</p>
+        </div>
+        <div class="data-strip__item">
+          <p class="data-strip__label">Beoordeling</p>
+          <p class="data-strip__value">VOLDAAN</p>
+        </div>
+      </div>
+
+      <article class="prose fade-in">
+
+        <h2>De opdracht</h2>
+        <p>
+          Maak een persoonlijke website die zichzelf onthult naarmate bezoekers punten verdienen.
+          Informatie over mij naam, leeftijd, locatie, hobbies, doelen is vergrendeld achter een gamescore.
+          Hoe meer je speelt, hoe meer je ontgrendelt.
+        </p>
+
+        <h2>Wat ik heb gebouwd</h2>
+        <p>
+          In twee weken en ~32 uur groeide de site van een simpele Tetris-clone naar een volledige mini-arcade
+          met drie games, easter eggs, een leaderboard en een mobiele versie.
+        </p>
+
+        <div class="feature-grid">
+          <div class="feature-card" data-icon="🎮">
+            <p class="feature-card__title">Tetris</p>
+            <p>Volledig werkend, met difficulty slider, speedup toggle, piece saving,
+              afbeeldingen als blokken en een mobiele besturing.</p>
+          </div>
+          <div class="feature-card" data-icon="💣">
+            <p class="feature-card__title">Minesweeper</p>
+            <p>Klassiek Minesweeper met instelbaar grid-formaat en mijnendichtheid.
+              Punten op basis van succesvol vrijgelegde vakjes.</p>
+          </div>
+          <div class="feature-card" data-icon="🔢">
+            <p class="feature-card__title">2048</p>
+            <p>Schuivende tegel-puzzel met animatie-feedback. Score telt mee voor het totaal
+              en activeert unlock drempelwaarden.</p>
+          </div>
+          <div class="feature-card" data-icon="🏆">
+            <p class="feature-card__title">Leaderboard</p>
+            <p>Scores worden opgeslagen in localStorage. Top 10 per game,
+              te openen via knop of door <code>lb</code> te typen.</p>
+          </div>
+          <div class="feature-card" data-icon="🌙">
+            <p class="feature-card__title">Dark / light mode</p>
+            <p>Keuze wordt opgeslagen en respecteert ook de systeeminstelling
+              als de gebruiker nog geen keuze heeft gemaakt.</p>
+          </div>
+          <div class="feature-card" data-icon="🚗">
+            <p class="feature-card__title">Easter eggs</p>
+            <p>Een auto rijdt langs het scherm, er zijn keyboard-sequenties verborgen
+              voor barrel rolls, meteorenregen en meer.</p>
+          </div>
+        </div>
+
+        <h2>Bestandsstructuur</h2>
+        <p>
+          Na de code review in week 2 is de structuur gesplitst in logische verantwoordelijkheden:
+        </p>
+        <div class="file-tree" role="img" aria-label="Bestandsstructuur van het project">
+          <span class="dir">📁 project/</span><br>
+          &nbsp;&nbsp;<span class="file">📄 index.html</span><br>
+          &nbsp;&nbsp;<span class="dir">📁 css/</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">📄 styles.css</span><br>
+          &nbsp;&nbsp;<span class="dir">📁 js/</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">📄 main.js</span>&nbsp; <span class="cm">— API, score state, leaderboard</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">📄 tetris.js</span>&nbsp; <span class="cm">— Tetris game logica</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">📄 minesweeper.js</span>&nbsp; <span class="cm">— Minesweeper logica</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">📄 2048.js</span>&nbsp; <span class="cm">— 2048 logica</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">📄 ui.js</span>&nbsp; <span class="cm">— Theme toggle, game switcher, auto</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="new">📄 effects.js</span>&nbsp; <span class="cm">— Easter eggs, overlays, animaties</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="new">📄 test.js</span>&nbsp; <span class="cm">— Smoke tests (typ "test")</span><br>
+          &nbsp;&nbsp;<span class="dir">📁 media/</span>&nbsp; <span class="cm">— sounds/, images/</span>
+        </div>
+
+        <h2>Code highlight: gedeelde score</h2>
+        <p>
+          Het lastigste was drie losse games één gecombineerde unlock-score laten bijhouden.
+          Ik heb een centrale <code>sharedScoreState</code> gemaakt in <code>main.js</code> die elk spel
+          aanroept via een globale functie:
+        </p>
+        <div class="code-block" role="region" aria-label="Code: setSharedScore">
+          <pre><span class="cm">// main.js centrale score state voor 3 games</span>
+<span class="kw">const</span> sharedScoreState = {
+  tetris: <span class="str">0</span>, minesweeper: <span class="str">0</span>, <span class="str">'2048'</span>: <span class="str">0</span>, total: <span class="str">0</span>
+};
+
+<span class="kw">window</span>.<span class="fn">setSharedScore</span> = <span class="kw">function</span>(value, source) {
+  <span class="kw">if</span> (!source || !(source <span class="kw">in</span> sharedScoreState)) <span class="kw">return</span>;
+  sharedScoreState[source] = normalizeSharedScore(value);
+  updateSharedTotal(); <span class="cm">// herberekent + triggert unlock</span>
+};</pre>
+        </div>
+        <p>
+          Elk spel roept <code>window.setSharedScore(score, 'tetris')</code> aan als zijn score verandert.
+          De totaalteller update live en checkt welke about-me-secties ontgrendeld moeten worden.
+        </p>
+
+        <h2>Code highlight: easter eggs via keysequenties</h2>
+        <p>
+          De easter eggs werken door keysequenties te tracken. Elke reeks heeft een eigen index die
+          reset na 1,2 seconden inactiviteit. Typ <code>roll</code> voor een barrel roll, of de Konami code
+          voor een meteorenregen:
+        </p>
+        <div class="code-block" role="region" aria-label="Code: barrel roll easter egg">
+          <pre><span class="cm">// effects.js barrel roll via "roll" typen</span>
+<span class="kw">const</span> rollSequence = [<span class="str">'r'</span>, <span class="str">'o'</span>, <span class="str">'l'</span>, <span class="str">'l'</span>];
+<span class="kw">let</span> rollIndex = <span class="str">0</span>;
+
+<span class="kw">function</span> <span class="fn">handleRollSequence</span>(key) {
+  <span class="kw">if</span> (key === rollSequence[rollIndex]) {
+    rollIndex += <span class="str">1</span>;
+    <span class="kw">if</span> (rollIndex === rollSequence.length) {
+      <span class="fn">triggerBarrelRoll</span>(); <span class="cm">// 🌀 roteer de hele pagina</span>
+      rollIndex = <span class="str">0</span>;
+    }
+  } <span class="kw">else</span> {
+    rollIndex = key === rollSequence[<span class="str">0</span>] ? <span class="str">1</span> : <span class="str">0</span>;
+  }
+}</pre>
+        </div>
+        <p>Alle verborgen commando's:</p>
+        <p>
+          <span class="easter-tag">roll → barrel roll</span>
+          <span class="easter-tag">scan → scanline sweep</span>
+          <span class="easter-tag">lb → leaderboard</span>
+          <span class="easter-tag">picture → foto galerij</span>
+          <span class="easter-tag">test → smoke tests</span>
+          <span class="easter-tag">Konami → meteorenregen</span>
+          <span class="easter-tag">Z vasthouden → slow motion</span>
+        </p>
+
+        <h2>Dag voor dag</h2>
+
+        <div class="week-log">
+
+          <div class="week-log__day">
+            <p class="week-log__date">Ma 4 februari 2026</p>
+            <p class="week-log__heading">Tetris + about me unlock + dark mode</p>
+            <ul>
+              <li>Tetris unlock-functionaliteit gebouwd</li>
+              <li>Programmeertalen toegevoegd aan API en frontend</li>
+              <li>Dark mode toggle gemaakt</li>
+            </ul>
+            <p class="time-badge" style="margin-top: var(--space-xs);">⏱ ~5u</p>
+          </div>
+
+          <div class="week-log__day">
+            <p class="week-log__date">Di 5 februari 2026</p>
+            <p class="week-log__heading">Difficulty, audio, mobiel &amp; eerste easter eggs</p>
+            <ul>
+              <li>Difficulty slider en speedup toggle aan Tetris toegevoegd</li>
+              <li>Audio geïntegreerd (thema + line clear)</li>
+              <li>Mobiele touch-besturing gebouwd</li>
+              <li>Overgestapt van eigen API naar school API (FDND Directus)</li>
+            </ul>
+            <p class="time-badge" style="margin-top: var(--space-xs);">⏱ ~6u 15m</p>
+          </div>
+
+          <div class="week-log__day">
+            <p class="week-log__date">Wo 6 februari 2026</p>
+            <p class="week-log__heading">Minesweeper + rijdende auto easter egg</p>
+            <ul>
+              <li>Tweede game gebouwd: Minesweeper</li>
+              <li>Auto rijdt willekeurig langs het scherm</li>
+              <li>Auto reageert op klikken met tekstballon</li>
+            </ul>
+            <p class="time-badge" style="margin-top: var(--space-xs);">⏱ ~6u</p>
+          </div>
+
+          <div class="week-log__day">
+            <p class="week-log__date">Zo 9 februari 2026</p>
+            <p class="week-log__heading">2048 + piece saving + Tetris blokken als foto's</p>
+            <ul>
+              <li>Derde game: 2048</li>
+              <li>Piece saving in Tetris</li>
+              <li>Foto galerij easter egg</li>
+              <li>Tetris blokken zijn nu afbeeldingen (willekeurig gegenereerd)</li>
+              <li>Tetris speed neemt toe naarmate je langer speelt</li>
+            </ul>
+            <p class="time-badge" style="margin-top: var(--space-xs);">⏱ ~6u 30m</p>
+          </div>
+
+          <div class="week-log__day">
+            <p class="week-log__date">Ma 10 februari 2026</p>
+            <p class="week-log__heading">Smoke tests + leaderboard + bestandsstructuur</p>
+            <ul>
+              <li>Smoke test overlay gebouwd (typ "test")</li>
+              <li>Leaderboard systeem met localStorage (top 10 per game)</li>
+              <li>Speedup aan/uit knop</li>
+              <li>Bestandsstructuur opgeschoond en gesplitst</li>
+            </ul>
+            <p class="time-badge" style="margin-top: var(--space-xs);">⏱ ~6u 30m</p>
+          </div>
+
+          <div class="week-log__day">
+            <p class="week-log__date">Di 11 februari 2026 Code Review</p>
+            <p class="week-log__heading">Person profile popup + cleanup</p>
+            <ul>
+              <li>Popup gebouwd die iedereen's profiel mooi toont</li>
+              <li>Code review feedback verwerkt: whitespace in CSS</li>
+              <li>Bestanden opgeschoond</li>
+            </ul>
+            <p class="time-badge" style="margin-top: var(--space-xs);">⏱ ~4u</p>
+          </div>
+
+        </div>
+
+        <h2>Feedback</h2>
+        <div class="feedback-box">
+          <span class="feedback-box__label">Officiële beoordeling · Voldaan</span>
+          <blockquote>
+            "Zeer omvangrijke website die goed weergeeft wie je bent en wat je kunt."
+          </blockquote>
+          <p class="feedback-box__author">Leerdoel 3 werd als meest interessant aangemerkt</p>
+        </div>
+
+        <h2>Nieuwe inzichten</h2>
+        <div class="insight-grid">
+          <div class="insight-card">
+            <p class="insight-card__num">01</p>
+            <p class="insight-card__title">CSS variabelen voor animaties</p>
+            <p>CSS custom properties zijn krachtig buiten kleurgebruik. Via <code>setProperty</code> in JS
+              kun je animaties sturen zonder classes te wisselen ik gebruikte dit voor de 2048 slide-richting.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__num">02</p>
+            <p class="insight-card__title">Responsive zonder framework</p>
+            <p>Met CSS Grid, <code>clamp()</code> voor fluid type en een handvol media queries
+              is een mobiele versie prima te bouwen ook voor interactieve games met touch controls.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__num">03</p>
+            <p class="insight-card__title">State management in vanilla JS</p>
+            <p>Drie games, één totaalscore. In plaats van een framework heb ik een globaal
+              pub/sub patroon gemaakt via <code>window.setSharedScore</code>. Simpel, makkelijk
+              uitbreidbaar en precies genoeg. Dit is wat ik wil blijven verdiepen.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__num">04</p>
+            <p class="insight-card__title">Leesbaarheid van CSS</p>
+            <p>Na de code review begreep ik hoe whitespace en naamgeving in CSS de leesbaarheid
+              enorm verbeteren. Code schrijf je ook voor andere mensen, niet alleen de browser.</p>
+          </div>
+        </div>
+
+        <h2>Reflectie</h2>
+        <p>
+          Sprint 0 was meteen een diepe duik in zelf bouwen. Drie games tegelijk schrijven die
+          ook op mobiel werken en een gecombineerde score bijhouden dat was meer dan verwacht.
+        </p>
+        <p>
+          Het meest geleerd van het organiseren van een project terwijl het groeit. Alles begon in
+          één bestand. Zodra dat te onoverzichtelijk werd, heb ik gesplitst per verantwoordelijkheid.
+          Dat maakte debuggen en uitbreiden aanzienlijk makkelijker.
+        </p>
+        <p>
+          De feedback dat leerdoel 3 het meest interessant was, bevestigt iets wat ik zelf ook voelde:
+          state management zonder framework is het soort low-level begrip dat ik wil verdiepen.
+          Wanneer heb je echt een library nodig, en wanneer kom je met vanilla JS verder dan je denkt?
+          Dat wordt een terugkerende vraag in de rest van de minor.
+        </p>
+
+        <p style="margin-top: var(--space-xl);">
+          <a href="https://jooosty.github.io/Personal-website/" target="_blank" class="btn">→ Bekijk de live site</a>
+          <a href="https://github.com/jooosty/Personal-website" target="_blank" class="btn" style="margin-left: var(--space-sm);">→ GitHub repo</a>
+        </p>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>© 2026 Joost Krebbers · Meesterschap Blog</p>
+      <p>Built from scratch · No frameworks · Two themes</p>
+    </div>
+  </footer>
+
+</body>
+</html>

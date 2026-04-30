@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="nl" data-theme="night">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vakken Meesterschap</title>
+  <meta name="description" content="Vakken: CSS to the Rescue (9,5/10) en Browser Technologies (10/10)." />
+
+  <script src="../js/theme-toggle.js"></script>
+
+  <link rel="stylesheet" href="../css/reset.css" />
+  <link rel="stylesheet" href="../css/tokens.css" />
+  <link rel="stylesheet" href="../css/themes.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+
+  <style>
+    /* ── Code block ── */
+    .code-block {
+      background: var(--color-bg-card);
+      border: var(--border-width) solid var(--color-border);
+      border-left: 3px solid var(--color-accent);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      overflow-x: auto;
+      margin-block: var(--space-md);
+    }
+    .code-block pre {
+      font-family: var(--font-mono);
+      font-size: var(--fs-sm);
+      line-height: 1.7;
+      margin: 0;
+      white-space: pre;
+      color: var(--color-text);
+    }
+    .kw  { color: var(--color-accent-cool); }
+    .fn  { color: var(--color-accent-green); }
+    .str { color: var(--color-accent); }
+    .cm  { color: var(--color-text-dim); font-style: italic; }
+    .sel { color: #c792ea; }
+
+    /* ── Score badge ── */
+    .score-badge {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-bg-card);
+      border: var(--border-thick) solid var(--color-accent-green);
+      border-radius: var(--radius-md);
+      padding: var(--space-md) var(--space-xl);
+      text-align: center;
+      box-shadow: 0 0 32px rgba(0, 255, 136, 0.08);
+    }
+    .score-badge__number {
+      font-family: var(--font-display);
+      font-size: var(--fs-3xl);
+      font-weight: 700;
+      color: var(--color-accent-green);
+      line-height: 1;
+    }
+    .score-badge__label {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--color-text-dim);
+      margin-top: var(--space-3xs);
+    }
+
+    /* ── Technique tags ── */
+    .tech-tag {
+      display: inline-flex;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      letter-spacing: 0.08em;
+      padding: 3px 10px;
+      border-radius: var(--radius-sm);
+      margin: var(--space-3xs);
+      border: 1px solid;
+    }
+    .tech-tag--css    { color: var(--color-accent-cool);  border-color: var(--color-accent-cool);  }
+    .tech-tag--state  { color: var(--color-accent);       border-color: var(--color-accent);        }
+    .tech-tag--anim   { color: #c792ea;                   border-color: #c792ea;                    }
+    .tech-tag--layout { color: var(--color-accent-green); border-color: var(--color-accent-green);  }
+
+    /* ── Component preview cards ── */
+    .component-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--space-md);
+      margin-block: var(--space-lg);
+    }
+    .component-card {
+      background: var(--color-bg-card);
+      border: var(--border-width) solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      position: relative;
+      overflow: hidden;
+    }
+    .component-card::before {
+      content: attr(data-num);
+      position: absolute;
+      top: var(--space-sm);
+      right: var(--space-md);
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--color-text-dim);
+      letter-spacing: 0.1em;
+    }
+    .component-card__title {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--color-accent);
+      margin-bottom: var(--space-xs);
+    }
+    .component-card p {
+      font-size: var(--fs-sm);
+      color: var(--color-text-muted);
+      line-height: 1.5;
+    }
+
+    /* ── Week log ── */
+    .week-log {
+      border-left: 2px solid var(--color-border);
+      padding-left: var(--space-md);
+      margin-block: var(--space-lg);
+    }
+    .week-log__day {
+      margin-bottom: var(--space-lg);
+      position: relative;
+    }
+    .week-log__day::before {
+      content: "";
+      position: absolute;
+      left: calc(-1 * var(--space-md) - 1px);
+      top: 6px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      transform: translateX(-4px);
+    }
+    .week-log__date {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--color-text-dim);
+      margin-bottom: var(--space-xs);
+    }
+    .week-log__heading {
+      font-family: var(--font-display);
+      font-size: var(--fs-base);
+      font-weight: 700;
+      color: var(--color-text);
+      margin-bottom: var(--space-xs);
+    }
+    .week-log ul { list-style: none; padding: 0; }
+    .week-log ul li {
+      font-size: var(--fs-sm);
+      color: var(--color-text-muted);
+      padding-left: var(--space-sm);
+      position: relative;
+      margin-bottom: var(--space-3xs);
+      line-height: 1.5;
+    }
+    .week-log ul li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.7em;
+      width: 6px;
+      height: 1px;
+      background: var(--color-accent);
+    }
+    .time-badge {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--color-text-dim);
+      margin-top: var(--space-xs);
+    }
+
+    /* ── Failed experiment block ── */
+    .failed-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: var(--space-md);
+      margin-block: var(--space-lg);
+    }
+    .failed-card {
+      background: var(--color-bg-card);
+      border: var(--border-width) solid var(--color-border);
+      border-left: 3px solid var(--color-accent-hot);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+    }
+    .failed-card__title {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-accent-hot);
+      margin-bottom: var(--space-xs);
+    }
+    .failed-card p {
+      font-size: var(--fs-sm);
+      color: var(--color-text-muted);
+      line-height: 1.5;
+    }
+
+    /* ── Insight cards ── */
+    .insight-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: var(--space-md);
+      margin-block: var(--space-lg);
+    }
+    .insight-card {
+      background: var(--color-bg-card);
+      border: var(--border-width) solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+    }
+    .insight-card__num {
+      font-family: var(--font-mono);
+      font-size: var(--fs-2xl);
+      font-weight: 700;
+      color: var(--color-accent);
+      opacity: 0.2;
+      line-height: 1;
+      margin-bottom: var(--space-xs);
+    }
+    .insight-card__title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: var(--fs-base);
+      color: var(--color-text);
+      margin-bottom: var(--space-xs);
+    }
+    .insight-card p {
+      font-size: var(--fs-sm);
+      color: var(--color-text-muted);
+      line-height: 1.5;
+    }
+
+    /* ── File tree ── */
+    .file-tree {
+      font-family: var(--font-mono);
+      font-size: var(--fs-sm);
+      background: var(--color-bg-card);
+      border: var(--border-width) solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-md) var(--space-lg);
+      line-height: 2;
+      color: var(--color-text-muted);
+      margin-block: var(--space-md);
+      overflow-x: auto;
+    }
+    .file-tree .dir  { color: var(--color-accent); font-weight: 700; }
+    .file-tree .cm   { color: var(--color-text-dim); font-style: italic; }
+    .file-tree .new  { color: var(--color-accent-green); }
+
+    /* ── Score + hero row ── */
+    .hero-row {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-xl);
+      flex-wrap: wrap;
+    }
+    .hero-row .hero { flex: 1; min-width: 280px; padding-block: 0; }
+  </style>
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Skip naar inhoud</a>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav">
+    <div class="container nav__inner">
+      <a href="../index.html" class="nav__brand" aria-label="Meesterschap home">
+        <span>MEESTERSCHAP</span>
+        <span class="nav__brand-tag">'25</span>
+      </a>
+      <button class="nav__toggle" data-nav-toggle aria-expanded="false" aria-controls="primary-nav" aria-label="Menu openen">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <line x1="3" y1="6" x2="17" y2="6"/>
+          <line x1="3" y1="10" x2="17" y2="10"/>
+          <line x1="3" y1="14" x2="17" y2="14"/>
+        </svg>
+      </button>
+      <nav aria-label="Hoofdnavigatie">
+        <ul class="nav__list" id="primary-nav" data-nav-list>
+          <li><a class="nav__link" href="../index.html">Home</a></li>
+          <li><a class="nav__link" href="sprint-0.html">Sprint 0</a></li>
+          <li><a class="nav__link" href="hackathon.html">Hackathon</a></li>
+          <li><a class="nav__link" href="weekly-nerd.html">Weekly Nerd</a></li>
+          <li><a class="nav__link" href="weekly-geek.html">Weekly Geek</a></li>
+          <li><a class="nav__link" href="vakken.html" aria-current="page">Vakken</a></li>
+          <li><a class="nav__link" href="meesterproef.html">Meesterproef</a></li>
+          <li><a class="nav__link" href="gesprekken.html">Gesprekken</a></li>
+          <li>
+            <button class="theme-toggle" data-theme-toggle aria-label="Wissel thema">
+              <span class="theme-toggle__indicator" aria-hidden="true"></span>
+              <span data-theme-label>Night Race</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============ MAIN ============ -->
+  <main id="main">
+    <div class="container">
+
+      <nav aria-label="Kruimelpad" class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span class="breadcrumb__sep">/</span>
+        <span>Vakken</span>
+      </nav>
+
+      <!-- HERO + SCORE -->
+      <div class="hero-row">
+        <section class="hero fade-in" aria-labelledby="page-title">
+          <p class="eyebrow hero__eyebrow">Sector 05 Vakken</p>
+          <h1 id="page-title">CSS to the<br>Rescue</h1>
+          <p class="hero__lead">
+            Een volledig functioneel kerncentrale bedieningspaneel gebouwd met bijna
+            uitsluitend CSS. Geen JavaScript voor interactie, geen ID- of class-selectors
+            voor styling alleen de kracht van CSS.
+          </p>
+        </section>
+        <div style="display:flex; align-items:center; padding-top: var(--space-2xl);">
+          <div class="score-badge fade-in" role="img" aria-label="Beoordeling: 9 komma 5 uit 10">
+            <span class="score-badge__number">9,5</span>
+            <span class="score-badge__label">/ 10</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- META STRIP -->
+      <div class="data-strip" role="region" aria-label="Vak info">
+        <div class="data-strip__item">
+          <p class="data-strip__label">Vak</p>
+          <p class="data-strip__value">CSS TTR</p>
+        </div>
+        <div class="data-strip__item">
+          <p class="data-strip__label">Concept</p>
+          <p class="data-strip__value">KRAFTWERK</p>
+        </div>
+        <div class="data-strip__item">
+          <p class="data-strip__label">Uren</p>
+          <p class="data-strip__value data-strip__value--accent">~24u</p>
+        </div>
+        <div class="data-strip__item">
+          <p class="data-strip__label">Score</p>
+          <p class="data-strip__value">9,5 / 10</p>
+        </div>
+      </div>
+
+      <article class="prose fade-in">
+
+        <!-- OPDRACHT -->
+        <h2>De opdracht</h2>
+        <p>
+          Maak een interactief component met bijna uitsluitend CSS. De twee kernregels:
+          geen IDs of classes als styling-hooks (alleen voor <code>:target</code> en
+          <code>&lt;label for&gt;</code>), en geen JavaScript voor logica alleen een
+          minimale range-to-custom-property bridge was toegestaan.
+        </p>
+        <p>
+          Het doel: de grenzen van CSS opzoeken. Alles wat je normaal met JavaScript zou doen,
+          moet opgelost worden met selectors, pseudo-classes en de cascade.
+        </p>
+
+        <!-- CONCEPT -->
+        <h2>Het concept: KRAFTWERK</h2>
+        <p>
+          Ik koos voor een fictief Duits kerncentrale bedieningspaneel, geïnspireerd op fotografieën
+          van verlaten Oost-Europese controlekamers. De naam KRAFTWERK Duits voor "energiecentrale"
+          paste perfect bij de retro-industriële esthetiek.
+        </p>
+        <p>
+          Het paneel bevat vier analoge meters, zes LED-indicatoren, drie toggleschakelaars,
+          vier draaiknoppen, START/STOP besturing en een retro scroll-drum MW display.
+          Alle interacties zijn puur CSS ze zijn onderling verbonden: schakel je een pomp uit
+          terwijl de centrale draait, dan flash het schakelpaneel oranje.
+        </p>
+
+        <p>
+          <span class="tech-tag tech-tag--css">@layer</span>
+          <span class="tech-tag tech-tag--css">CSS nesting</span>
+          <span class="tech-tag tech-tag--css">Container queries</span>
+          <span class="tech-tag tech-tag--state">:target</span>
+          <span class="tech-tag tech-tag--state">:checked</span>
+          <span class="tech-tag tech-tag--state">~ sibling selector</span>
+          <span class="tech-tag tech-tag--state">Container style queries</span>
+          <span class="tech-tag tech-tag--anim">@keyframes</span>
+          <span class="tech-tag tech-tag--anim">letter-corrupt animatie</span>
+          <span class="tech-tag tech-tag--layout">aspect-ratio</span>
+          <span class="tech-tag tech-tag--layout">SVG feTurbulence texture</span>
+          <span class="tech-tag tech-tag--css">mix-blend-mode</span>
+          <span class="tech-tag tech-tag--css">prefers-reduced-motion</span>
+        </p>
+
+        <!-- COMPONENTEN -->
+        <h2>Componenten</h2>
+
+        <div class="component-grid">
+          <div class="component-card" data-num="01">
+            <p class="component-card__title">Analoge meters × 4</p>
+            <p>Frequency, Pressure, Temperature, Power. Naald rotatie aangestuurd
+              via CSS custom property van de knob-range input. Werkt alleen als de
+              centrale actief is.</p>
+          </div>
+          <div class="component-card" data-num="02">
+            <p class="component-card__title">Toggle switches × 3</p>
+            <p>Pump A, Pump B, Turbine. Pure <code>input[type=checkbox]</code> met
+              gestylede <code>label</code>. Schakelen ze uit tijdens het draaien,
+              dan activeert een oranje waarschuwingsflash.</p>
+          </div>
+          <div class="component-card" data-num="03">
+            <p class="component-card__title">Draaiknoppen × 4</p>
+            <p><code>input[type=range]</code> gestyled als roterende knop. JS schrijft
+              alleen de knob-waarde naar een CSS custom property. Rotatie, kleur en
+              alle feedback: puur CSS.</p>
+          </div>
+          <div class="component-card" data-num="04">
+            <p class="component-card__title">LED indicatoren × 6</p>
+            <p>Reageren op de toggle switches: zet je Pump A uit, gaan de eerste
+              twee LEDs donker. Alles via de <code>~</code> sibling combinator en
+              <code>:not(:checked)</code>.</p>
+          </div>
+          <div class="component-card" data-num="05">
+            <p class="component-card__title">START / STOP</p>
+            <p>Anchor links die <code>:target</code> activeren op verborgen
+              <code>&lt;div&gt;</code> elementen buiten <code>&lt;main&gt;</code>.
+              De hele interactieve staat van het paneel hangt hier aan.</p>
+          </div>
+          <div class="component-card" data-num="06">
+            <p class="component-card__title">MW Scroll display</p>
+            <p>Retro "drum"-display gebouwd met 21 <code>&lt;span&gt;</code>-elementen
+              en een scroll-animatie. Dimmed als de centrale uit staat, flikkert
+              rood bij een meltdown.</p>
+          </div>
+          <div class="component-card" data-num="07">
+            <p class="component-card__title">EMERGENCY meltdown</p>
+            <p>Alle vier knoppen op maximum + centrale actief = EMERGENCY overlay.
+              Volledig via container style queries. Het scherm schudt,
+              de display flikkert rood.</p>
+          </div>
+          <div class="component-card" data-num="08">
+            <p class="component-card__title">Easter eggs × 5</p>
+            <p>Inspectie-stempel, ingenieursgravure, koffievlek, versleten pomp-label,
+              en een plantnaam die verschijnt bij 2 seconden hoveren op de titel.</p>
+          </div>
+        </div>
+
+        <!-- CSS HIGHLIGHTS -->
+        <h2>Code highlight: container style queries voor meltdown</h2>
+        <p>
+          Het gevaarlijkste onderdeel: als alle vier knoppen op 145 staan én de centrale draait,
+          treedt er een noodtoestand op. Dit vereist het checken van vier CSS custom property waarden
+          tegelijk iets wat normaal JavaScript vereist. De oplossing: geneste container style queries:
+        </p>
+
+        <div class="code-block" role="region" aria-label="Code: meltdown via container style queries">
+          <pre><span class="cm">/* state.css meltdown triggert alleen als alle 4 knoppen op 145 staan */</span>
+<span class="sel">@container style(--knob-power: 145)</span> {
+  <span class="sel">@container style(--knob-freq: 145)</span> {
+    <span class="sel">@container style(--knob-pressure: 145)</span> {
+      <span class="sel">@container style(--knob-temp: 145)</span> {
+
+        <span class="sel">#running:target ~ main > p:last-of-type</span> {
+          opacity: <span class="str">1</span>;
+          animation: emergency-pulse <span class="str">0.8s</span> ease-in-out infinite;
+        }
+
+        <span class="sel">#running:target ~ main</span> {
+          animation:
+            meltdown-shake <span class="str">0.15s</span> ease-in-out infinite,
+            overload-flash  <span class="str">0.6s</span> ease-in-out infinite;
+        }
+
+      }
+    }
+  }
+}</pre>
+        </div>
+
+        <p>
+          De knoppen schrijven hun waarde via één regel JavaScript naar <code>:root</code> als
+          custom property. Al het rest het lezen, vergelijken en reageren is puur CSS.
+        </p>
+
+        <h2>Code highlight: letter-corrupt animatie op de titel</h2>
+        <p>
+          De letters van KRAFTWERK flikkeren onregelmatig en wisselen kort van glyph alsof
+          er een elektrische storing is. Elke letter heeft zijn eigen timing via per-letter CSS variabelen:
+        </p>
+
+        <div class="code-block" role="region" aria-label="Code: letter corrupt animatie">
+          <pre><span class="cm">/* easter-eggs.css elke letter krijgt eigen timing */</span>
+<span class="cm">/* K */</span> <span class="sel">header > h1 > span:first-child > span:nth-child(1)</span> {
+  <span class="kw">--glyph</span>:            <span class="str">'К'</span>;        <span class="cm">/* Cyrillische lookalike */</span>
+  <span class="kw">--corrupt-duration</span>: <span class="str">11.3s</span>;
+  <span class="kw">--corrupt-delay</span>:    <span class="str">1.2s</span>;
+  <span class="kw">--flicker-duration</span>: <span class="str">2.8s</span>;
+}
+
+<span class="sel">header > h1 > span > span</span> {
+  animation:
+    letter-stamp-in  <span class="str">0.4s</span> cubic-bezier(<span class="str">0.22</span>, <span class="str">1</span>, <span class="str">0.36</span>, <span class="str">1</span>)
+                     var(<span class="kw">--stamp-delay</span>) forwards,
+    letter-flicker   var(<span class="kw">--flicker-duration</span>) var(<span class="kw">--flicker-delay</span>)
+                     ease-in-out infinite,
+    letter-hide      var(<span class="kw">--corrupt-duration</span>) var(<span class="kw">--corrupt-delay</span>)
+                     steps(<span class="str">1</span>, end) infinite;
+}</pre>
+        </div>
+
+        <p>
+          De <code>letter-hide</code> animatie maakt de echte letter voor ~100ms transparant
+          precies op het moment dat de <code>::before</code> pseudo-element de vervangings-glyph
+          toont zodat ze nooit tegelijk zichtbaar zijn.
+        </p>
+
+        <h2>Code highlight: knob → meter binding via custom properties</h2>
+        <p>
+          De enige JavaScript in het hele project schrijft de waarde van een
+          <code>input[type=range]</code> naar een CSS custom property op <code>:root</code>.
+          CSS pakt die waarde op en berekent de rotatie van de naald:
+        </p>
+
+        <div class="code-block" role="region" aria-label="Code: knob naar naald binding">
+          <pre><span class="cm">/* Het enige JS in het project range → custom property bridge */</span>
+<span class="kw">const</span> updateRange = range <span class="fn">=></span> {
+  document.documentElement.style.<span class="fn">setProperty</span>(
+    <span class="str">'--'</span> + range.name,
+    range.value
+  );
+};
+
+<span class="cm">/* state.css CSS pakt de waarde op, berekent rotatie */</span>
+<span class="sel">#running:target ~ main > section:first-of-type
+  > figure:nth-of-type(1) > div > span:nth-child(3)</span> {
+  transform: translateX(<span class="str">-50%</span>)
+    rotate(calc(var(<span class="kw">--knob-freq</span>) * <span class="str">0.48deg</span>));
+}</pre>
+        </div>
+
+        <!-- BESTANDSSTRUCTUUR -->
+        <h2>Bestandsstructuur</h2>
+        <p>
+          Na een grote file-restructuring in week 3 is alle CSS opgesplitst in 8 partials,
+          geordend via <code>@layer</code>:
+        </p>
+        <div class="file-tree" role="img" aria-label="Bestandsstructuur KRAFTWERK">
+          <span class="dir">📁 kraftwerk/</span><br>
+          &nbsp;&nbsp;<span class="cm">📄 index.html</span><br>
+          &nbsp;&nbsp;<span class="cm">📄 style.css</span>&nbsp; <span class="cm">— @layer declarations + @imports</span><br>
+          &nbsp;&nbsp;<span class="dir">📁 css/</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="new">📄 tokens.css</span>&nbsp; <span class="cm">— custom properties, kleurthema, spacing</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="new">📄 base.css</span>&nbsp; <span class="cm">— reset, body, header, typografie</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="new">📄 layout.css</span>&nbsp; <span class="cm">— paneel shell + sectie grid</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="new">📄 components.css</span>&nbsp; <span class="cm">— gauge, LED, switch, knob, buttons, display</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="new">📄 animations.css</span>&nbsp; <span class="cm">— @keyframes + reduced-motion</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="new">📄 state.css</span>&nbsp; <span class="cm">— :target/:checked driven interactie</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="new">📄 easter-eggs.css</span>&nbsp; <span class="cm">— verborgen details</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="new">📄 responsive.css</span>&nbsp; <span class="cm">— container + media queries</span>
+        </div>
+
+        <!-- WEEK LOGS -->
+        <h2>Dag voor dag</h2>
+
+        <div class="week-log">
+
+          <div class="week-log__day">
+            <p class="week-log__date">Do 19 februari 2026</p>
+            <p class="week-log__heading">Plan + basis HTML + 2 elementen gestyled</p>
+            <ul>
+              <li>Presentatie over het initiatieproject gehouden en andere presentaties bijgewoond</li>
+              <li>Basis HTML opgezet met één van elk gepland element</li>
+              <li>Twee elementen gestyled als startpunt</li>
+              <li>Concept gekozen: KRAFTWERK, fictief Duits kerncentralepaneel</li>
+            </ul>
+            <p class="time-badge">⏱ ~5u</p>
+          </div>
+
+          <div class="week-log__day">
+            <p class="week-log__date">Di 4 maart 2026</p>
+            <p class="week-log__heading">Alle elementen gestyled + volledig responsive + meltdown + draaiknoppen</p>
+            <ul>
+              <li>De overige elementen afgestyled</li>
+              <li>Hele pagina responsive gemaakt met puur CSS</li>
+              <li>Overload warning gebouwd met CSS only</li>
+              <li>Draaiknoppen werkend gemaakt via range + custom property</li>
+            </ul>
+            <p class="time-badge">⏱ ~4u 30m</p>
+          </div>
+
+          <div class="week-log__day">
+            <p class="week-log__date">Wo 5 maart 2026</p>
+            <p class="week-log__heading">Animaties + 2 stijlvarianten + betere display + waarschuwing</p>
+            <ul>
+              <li>Animaties toegevoegd aan het paneel</li>
+              <li>Twee stijlvarianten gemaakt en vergeleken</li>
+              <li>Power output display animatie verbeterd</li>
+              <li>Overload warning visueel versterkt</li>
+            </ul>
+            <p class="time-badge">⏱ ~4u 30m</p>
+          </div>
+
+          <div class="week-log__day">
+            <p class="week-log__date">Di 11 maart 2026</p>
+            <p class="week-log__heading">Titel restyling + alles naar Engels + easter eggs</p>
+            <ul>
+              <li>Titel visueel overhauled letters vallen één voor één in</li>
+              <li>Alles vertaald naar Engels</li>
+              <li>5 easter eggs gebouwd (stempel, gravure, koffievlek, versleten label, plantnaam)</li>
+            </ul>
+            <p class="time-badge">⏱ ~4u</p>
+          </div>
+
+          <div class="week-log__day">
+            <p class="week-log__date">Wo 12 maart 2026</p>
+            <p class="week-log__heading">File restructuring</p>
+            <ul>
+              <li>Alle CSS gesplitst in 8 logische partials</li>
+              <li><code>@layer</code> architectuur opgezet</li>
+            </ul>
+            <p class="time-badge">⏱ ~4u</p>
+          </div>
+
+          <div class="week-log__day">
+            <p class="week-log__date">Di 18 maart 2026</p>
+            <p class="week-log__heading">Titel "sensationeel" maken</p>
+            <ul>
+              <li>Letter-corrupt animatie gebouwd: elke letter wisselt kort naar een Cyrillische lookalike</li>
+              <li>Rode/cyaan chromatic aberration split-effect per letter</li>
+              <li>Veel trial-and-error voor de juiste timing</li>
+            </ul>
+            <p class="time-badge">⏱ ~2u 30m</p>
+          </div>
+
+        </div>
+
+        <!-- MISLUKTE EXPERIMENTEN -->
+        <h2>Experimenten die niet werkten</h2>
+        <p>
+          Drie dingen die ik probeerde, maar waar CSS fundamenteel niet voor geschikt is
+          en dat leerde me juist meer over de grenzen van het medium:
+        </p>
+
+        <div class="failed-grid">
+          <div class="failed-card">
+            <p class="failed-card__title">× Geluidseffecten</p>
+            <p>Ik wilde kliksgeluiden bij de schakelaars en een alarmtoon bij de meltdown.
+              CSS heeft geen audio capabilities dit is fundamenteel onmogelijk zonder JS.</p>
+          </div>
+          <div class="failed-card">
+            <p class="failed-card__title">× CSS-only timer</p>
+            <p>Een timer die bijhoudt hoe lang de centrale al draait. Er bestaat een
+              CSS-timer truc, maar deze integreren met de <code>:target</code> state
+              van het paneel bleek niet correct werkbaar.</p>
+          </div>
+          <div class="failed-card">
+            <p class="failed-card__title">× Willekeurige startwaarden</p>
+            <p>De knoppen beginnen altijd op dezelfde startpositie. CSS heeft geen
+              random-functie die beginwaarden van range inputs kan instellen
+              daarvoor is JS vereist.</p>
+          </div>
+        </div>
+
+        <!-- NIEUWE INZICHTEN -->
+        <h2>Nieuwe inzichten</h2>
+
+        <div class="insight-grid">
+          <div class="insight-card">
+            <p class="insight-card__num">01</p>
+            <p class="insight-card__title">CSS kan meer interactiviteit dan je denkt</p>
+            <p>Draaiknoppen, conditional waarschuwingen, een meltdown allemaal zonder logica-JS.
+              De sleutel: denk in termen van <em>state via inputs en pseudo-classes</em>, niet
+              in termen van event listeners.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__num">02</p>
+            <p class="insight-card__title">Container style queries = CSS conditional logic</p>
+            <p>Door custom property waarden te lezen via <code>@container style()</code> kun je
+              CSS conditioneel maken op basis van data niet alleen op basis van afmetingen.
+              Dit is krachtig en nog relatief onbekend.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__num">03</p>
+            <p class="insight-card__title">Selector specificity als architectuurtool</p>
+            <p>Zonder classes moet je bewust navigeren met sibling combinators (<code>~</code>),
+              <code>:nth-of-type()</code> en <code>:not()</code>. Dit dwingt je om de HTML-structuur
+              als ontwerpdocument te behandelen.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__num">04</p>
+            <p class="insight-card__title">Kleurnotaties voor dynamische gradients</p>
+            <p><code>hsl()</code>, <code>oklch()</code>, hex elke notatie heeft voordelen
+              voor bepaalde use cases. <code>hsl()</code> maakt het makkelijk om tonen
+              en tinten programmatisch te berekenen via <code>calc()</code>.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__num">05</p>
+            <p class="insight-card__title">@layer voor cascade-controle</p>
+            <p>Door CSS in lagen te organiseren kun je de cascade expliciet sturen
+              zonder te vertrouwen op specificity of volgorde van <code>@import</code>.
+              Maakt grote CSS-codebases aanzienlijk beheersbaarder.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__num">06</p>
+            <p class="insight-card__title">CSS grenzen bewust kennen</p>
+            <p>Het uitproberen van audio, timers en random en zien waarom die falen
+              leerde me meer over CSS dan de dingen die wel werkten. De grenzen kennen
+              is net zo waardevol als de mogelijkheden.</p>
+          </div>
+        </div>
+
+        <!-- REFLECTIE -->
+        <h2>Reflectie</h2>
+        <p>
+          CSS to the Rescue was het vak waarbij ik het meest verrast werd door CSS zelf.
+          Ik wist dat je er visuele dingen mee kon maken, maar een volledig interactief
+          bedieningspaneel waarbij knopwaarden meters aansturen, switches LEDs doden
+          en vier tegelijk maxen een noodalarm triggert puur via de cascade en selectors
+          had ik niet voor mogelijk gehouden.
+        </p>
+        <p>
+          Het concept hielp enorm. Door een duidelijk thema te kiezen een verouderde
+          kerncentrale kreeg elk CSS-probleem een narratieve context. De koffievlek is
+          niet zomaar een cirkel; de worn-off Pump B label is geen random easter egg maar
+          iets wat je in een echte verlaten controlekamer zou vinden.
+          Dat maakte elke technische beslissing ook een ontwerpbeslissing.
+        </p>
+        <p>
+          De 9,5 voelt verdiend, maar ook als aanmoediging: de halve punt die er af ging
+          laat ruimte voor wat ik nog beter kan. De file-restructuring kostte vier uur
+          meer dan ik had verwacht. Eerder structureren scheelt tijd achteraf.
+        </p>
+
+        <p style="margin-top: var(--space-xl);">
+          <a href="https://jooosty.github.io/CSS-Control-panel/" target="_blank" class="btn btn--primary">→ Bekijk KRAFTWERK live</a>
+          <a href="https://github.com/jooosty/CSS-Control-panel" target="_blank" class="btn" style="margin-left: var(--space-sm);">→ GitHub repo</a>
+        </p>
+
+      </article>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         VAK 2: BROWSER TECHNOLOGIES
+    ══════════════════════════════════════════ -->
+    <div class="container" style="margin-top: var(--space-3xl);">
+
+      <div class="stripe" aria-hidden="true"></div>
+
+      <div class="hero-row" style="margin-top: var(--space-xl);">
+        <section class="hero fade-in" aria-labelledby="bt-title">
+          <p class="eyebrow hero__eyebrow">Sector 05b Tweede vak</p>
+          <h1 id="bt-title">Browser<br>Technologies</h1>
+          <p class="hero__lead">
+            Een officiële belastingaangifte omzetten naar een toegankelijk, robuust en
+            gebruiksvriendelijk webformulier met progressive enhancement als uitgangspunt.
+          </p>
+        </section>
+        <div style="display:flex; align-items:center; padding-top: var(--space-2xl);">
+          <div class="score-badge fade-in" role="img" aria-label="Beoordeling: 10 uit 10">
+            <span class="score-badge__number">10</span>
+            <span class="score-badge__label">/ 10</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="data-strip" role="region" aria-label="Vak info Browser Tech">
+        <div class="data-strip__item">
+          <p class="data-strip__label">Vak</p>
+          <p class="data-strip__value">BT</p>
+        </div>
+        <div class="data-strip__item">
+          <p class="data-strip__label">Concept</p>
+          <p class="data-strip__value">ERFBELASTING</p>
+        </div>
+        <div class="data-strip__item">
+          <p class="data-strip__label">Uren</p>
+          <p class="data-strip__value data-strip__value--accent">~31u</p>
+        </div>
+        <div class="data-strip__item">
+          <p class="data-strip__label">Score</p>
+          <p class="data-strip__value">10 / 10</p>
+        </div>
+      </div>
+
+      <article class="prose fade-in">
+
+        <h2>De opdracht</h2>
+        <p>
+          Het web is voor iedereen. Dat klinkt simpel, maar in de praktijk betekent het dat je website
+          moet werken op oude browsers, nieuwe browsers, telefoons, game consoles, met screenreaders,
+          met een muis, met alleen een toetsenbord en alles daartussenin.
+        </p>
+        <p>
+          De eindopdracht: zet een officiële belasting-PDF om naar een interactief webformulier.
+          Aangifte erfbelasting een van de meest complexe formulieren die burgers moeten invullen.
+          Het uitgangspunt: HTML first, dan CSS, dan JavaScript. Elk niveau moet zelfstandig bruikbaar zijn.
+        </p>
+
+        <h2>Wat ik heb gebouwd</h2>
+        <p>
+          Een volledig meerstappe formulier voor de aangifte erfbelasting 2025, gebaseerd op het
+          officiële Belastingdienst-formulier. Het formulier begeleidt de gebruiker stap voor stap
+          door 9 secties, met real-time validatie, een voortgangsbalk, print-styling en donkere modus.
+          De stijl is gebaseerd op het officiële NS design system.
+        </p>
+
+        <p>
+          <span class="tech-tag tech-tag--css">NS design tokens</span>
+          <span class="tech-tag tech-tag--state">Progressive enhancement</span>
+          <span class="tech-tag tech-tag--state">localStorage draft</span>
+          <span class="tech-tag tech-tag--css">Print CSS</span>
+          <span class="tech-tag tech-tag--anim">Dark / light mode</span>
+          <span class="tech-tag tech-tag--layout">Elfproef BSN-validatie</span>
+          <span class="tech-tag tech-tag--layout">ValidityState API</span>
+          <span class="tech-tag tech-tag--css">fieldset / legend</span>
+          <span class="tech-tag tech-tag--state">aria-live validatie</span>
+          <span class="tech-tag tech-tag--state">&lt;dialog&gt; foutmeldingen</span>
+          <span class="tech-tag tech-tag--css">datalist landenkeuze</span>
+          <span class="tech-tag tech-tag--layout">SVG voortgangsbalk</span>
+        </p>
+
+        <div class="component-grid">
+          <div class="component-card" data-num="01">
+            <p class="component-card__title">9-staps formulier</p>
+            <p>Opgedeeld per logisch onderdeel: gegevens overledene, burgerlijke staat,
+              kinderen, testament, gemachtigde en verkrijgers. Elke stap toont alleen
+              wat relevant is voor de situatie van de gebruiker.</p>
+          </div>
+          <div class="component-card" data-num="02">
+            <p class="component-card__title">Elfproef BSN-validatie</p>
+            <p>Het BSN wordt gevalideerd met het elfproef-algoritme hetzelfde algoritme
+              dat de overheid gebruikt. Eerste check: formaat. Tweede check: wiskundige
+              geldigheid via de weging 9-8-7-6-5-4-3-2-1.</p>
+          </div>
+          <div class="component-card" data-num="03">
+            <p class="component-card__title">Real-time inline validatie</p>
+            <p>Elk veld geeft direct feedback bij <code>blur</code> en <code>input</code>.
+              Groen vinkje bij correct, rode foutmelding bij fout met
+              <code>aria-live="polite"</code> zodat screenreaders meeluisteren.</p>
+          </div>
+          <div class="component-card" data-num="04">
+            <p class="component-card__title">localStorage concept-opslag</p>
+            <p>Het formulier slaat automatisch alle veldwaarden op als concept.
+              De gebruiker kan het tabblad sluiten en later verder gaan waar hij gebleven was.</p>
+          </div>
+          <div class="component-card" data-num="05">
+            <p class="component-card__title">Print styling</p>
+            <p>Via <code>@media print</code> wordt het antwoordenoverzicht omgezet
+              naar een document dat lijkt op een officieel overheidsdocument.
+              Navigatie, knoppen en decoratie verdwijnen.</p>
+          </div>
+          <div class="component-card" data-num="06">
+            <p class="component-card__title">NS design system</p>
+            <p>Alle stijl is gebaseerd op de officiële NS design tokens kleurenschaal,
+              typografie, spacing, border radius, shadows. Het formulier ziet eruit
+              als iets dat NS zelf zou maken.</p>
+          </div>
+          <div class="component-card" data-num="07">
+            <p class="component-card__title">Voortgangsbalk met SVG</p>
+            <p>Een visuele voortgangsbalk bovenaan toont welke stap actief is.
+              De verbindingslijnen tussen de stapindicatoren zijn getekend met
+              inline SVG iets nieuws voor mij.</p>
+          </div>
+          <div class="component-card" data-num="08">
+            <p class="component-card__title">Conditionele vragen</p>
+            <p>Vragen over kinderen, testament en testamentaire erfgenamen verschijnen
+              alleen als de vorige vraag dat vereist. De volgende-vraag-knop verschijnt
+              pas als de huidige vraag beantwoord is.</p>
+          </div>
+        </div>
+
+        <h2>Code highlight: elfproef BSN-validatie</h2>
+        <p>
+          Een BSN is pas geldig als het elfproef-algoritme een som deelbaar door 11 oplevert.
+          De weging loopt van 9 tot 2 voor de eerste 8 cijfers, met -1 voor het 9e.
+          Dat klonk abstract totdat ik het stap voor stap uitschreef:
+        </p>
+
+        <div class="code-block" role="region" aria-label="Code: elfproef BSN validatie">
+          <pre><span class="cm">// Elfproef-validatie voor BSN</span>
+<span class="cm">// Bron: https://nl.wikipedia.org/wiki/Elfproef</span>
+<span class="kw">const</span> <span class="fn">elfValidBsn</span> = (bsn) => {
+  <span class="kw">if</span> (!<span class="str">/^\d{8,9}$/</span>.test(bsn)) <span class="kw">return false</span>;
+
+  <span class="cm">// Pad naar 9 cijfers (8-cijferige BSN's beginnen met 0)</span>
+  <span class="kw">const</span> digits = bsn.padStart(<span class="str">9</span>, <span class="str">"0"</span>).split(<span class="str">""</span>).map(Number);
+
+  <span class="kw">const</span> sum = digits.reduce((acc, digit, index) => {
+    <span class="kw">const</span> weight = index === <span class="str">8</span> ? <span class="str">-1</span> : <span class="str">9</span> - index;
+    <span class="cm">// Gewichten: 9, 8, 7, 6, 5, 4, 3, 2, -1</span>
+    <span class="kw">return</span> acc + digit * weight;
+  }, <span class="str">0</span>);
+
+  <span class="kw">return</span> sum % <span class="str">11</span> === <span class="str">0</span>;
+};</pre>
+        </div>
+
+        <h2>Code highlight: inline validatie met aria-live</h2>
+        <p>
+          Foutmeldingen die pas verschijnen na het versturen zijn frustrerend. Elk veld
+          valideert op <code>blur</code>, maar ook on <code>input</code> zodat feedback
+          direct verschijnt. De feedback-span wordt dynamisch aangemaakt als die nog niet bestaat,
+          en is voorzien van <code>aria-live="polite"</code> voor screenreaders:
+        </p>
+
+        <div class="code-block" role="region" aria-label="Code: inline validatie met aria-live">
+          <pre><span class="cm">// Feedback span zoeken of aanmaken naast het veld</span>
+<span class="kw">const</span> <span class="fn">getFeedback</span> = (el) => {
+  <span class="kw">let</span> next = el.nextElementSibling;
+  <span class="kw">while</span> (next) {
+    <span class="kw">if</span> (next.classList.contains(<span class="str">"inline-feedback"</span>)) <span class="kw">return</span> next;
+    <span class="kw">if</span> ([<span class="str">"INPUT"</span>, <span class="str">"LABEL"</span>, <span class="str">"SELECT"</span>].includes(next.tagName)) <span class="kw">break</span>;
+    next = next.nextElementSibling;
+  }
+  <span class="cm">// Bestaat nog niet maak hem aan</span>
+  <span class="kw">const</span> feedback = document.createElement(<span class="str">"span"</span>);
+  feedback.className = <span class="str">"inline-feedback"</span>;
+  feedback.setAttribute(<span class="str">"aria-live"</span>, <span class="str">"polite"</span>);
+  el.insertAdjacentElement(<span class="str">"afterend"</span>, feedback);
+  <span class="kw">return</span> feedback;
+};
+
+<span class="cm">// Validatie van voorletters (regex: elke letter gevolgd door een punt)</span>
+byId(<span class="str">"voorletters-overledene"</span>).addEventListener(<span class="str">"blur"</span>, <span class="kw">function</span>() {
+  <span class="kw">if</span> (!<span class="str">/^([A-Za-z]\.)+$/</span>.test(this.value.trim())) {
+    <span class="fn">markInvalid</span>(<span class="str">"voorletters-overledene"</span>, <span class="str">"Vul in als: A.B."</span>);
+  } <span class="kw">else</span> {
+    <span class="fn">markValid</span>(<span class="str">"voorletters-overledene"</span>);
+  }
+});</pre>
+        </div>
+
+        <h2>Code highlight: localStorage concept-opslag</h2>
+        <p>
+          Het formulier itereert alle velden en slaat naam + waarde op bij elke wijziging.
+          Bij terugkeer worden de waarden hersteld inclusief radio buttons:
+        </p>
+
+        <div class="code-block" role="region" aria-label="Code: localStorage draft opslaan">
+          <pre><span class="cm">// Alle velden serialiseren naar localStorage</span>
+<span class="kw">const</span> <span class="fn">saveFormDraft</span> = () => {
+  <span class="kw">const</span> draft = {};
+  formElement.querySelectorAll(<span class="str">"input, select, textarea"</span>).forEach((field) => {
+    <span class="kw">if</span> (!field.name || field.type === <span class="str">"file"</span>) <span class="kw">return</span>;
+    <span class="kw">if</span> (field.type === <span class="str">"radio"</span>) {
+      <span class="kw">if</span> (field.checked) draft[field.name] = field.value;
+      <span class="kw">return</span>;
+    }
+    draft[field.name] = field.value;
+  });
+  localStorage.setItem(<span class="str">"erfbelasting-form-draft"</span>, JSON.stringify(draft));
+};</pre>
+        </div>
+
+        <h2>Dag voor dag</h2>
+
+        <div class="week-log">
+          <div class="week-log__day">
+            <p class="week-log__date">Ma 16 februari 2026</p>
+            <p class="week-log__heading">Formulier pagina 1 + datumvalidatie + eerste styling</p>
+            <ul>
+              <li>Formulier voor pagina 1 van de aangifte erfbelasting gebouwd</li>
+              <li>Labels, radio buttons en duidelijkere vraagstelling</li>
+              <li>"Volgende vraag" knop verschijnt pas bij beantwoording</li>
+              <li>Datumvalidatie: geen toekomstige datum toegestaan</li>
+            </ul>
+            <p class="time-badge">⏱ ~4u</p>
+          </div>
+          <div class="week-log__day">
+            <p class="week-log__date">Di 17 februari 2026</p>
+            <p class="week-log__heading">Antwoordenpagina + validatie + NS-stijl</p>
+            <ul>
+              <li>Aparte pagina voor het tonen van ingevulde antwoorden</li>
+              <li>Helper functies in main.js voor leesbaarheid</li>
+              <li>Validatie uitgebreid en verfijnd</li>
+              <li>NS-huisstijl toegepast</li>
+            </ul>
+            <p class="time-badge">⏱ ~5u</p>
+          </div>
+          <div class="week-log__day">
+            <p class="week-log__date">Ma 2 maart 2026</p>
+            <p class="week-log__heading">Elfproef + NS tokens + localStorage</p>
+            <ul>
+              <li>Elfproef BSN-validatie geïmplementeerd</li>
+              <li>Volledige NS design tokens toegepast (eigen CSS vervangen)</li>
+              <li>Antwoorden opslaan in localStorage</li>
+            </ul>
+            <p class="time-badge">⏱ ~5u</p>
+          </div>
+          <div class="week-log__day">
+            <p class="week-log__date">Di 3 maart 2026</p>
+            <p class="week-log__heading">Print styling</p>
+            <ul>
+              <li>Print CSS gebouwd voor de antwoordenpagina</li>
+              <li>Het uitgeprinte document lijkt op een officieel overheidsdocument</li>
+            </ul>
+            <p class="time-badge">⏱ ~3u</p>
+          </div>
+          <div class="week-log__day">
+            <p class="week-log__date">Ma 9 &amp; Di 10 maart 2026</p>
+            <p class="week-log__heading">Vragen 2 &amp; 3 + voortgangsbalk + bronnenlijst</p>
+            <ul>
+              <li>Vragen 2 en 3 volledig gebouwd inclusief validatie</li>
+              <li>Voortgangsbalk toegevoegd met stap-indicator</li>
+              <li>Validatie robuuster gemaakt</li>
+              <li>Bronnenlijst aangelegd (30+ bronnen)</li>
+            </ul>
+            <p class="time-badge">⏱ ~8u</p>
+          </div>
+          <div class="week-log__day">
+            <p class="week-log__date">Ma 16 &amp; Di 17 maart 2026</p>
+            <p class="week-log__heading">Datalist + terug-knop + SVG voortgangsbalk + dark mode</p>
+            <ul>
+              <li><code>datalist</code> voor landenselectie</li>
+              <li>Terug-knop toegevoegd aan het formulier</li>
+              <li>Stap-labels in de voortgangsbalk</li>
+              <li>Mobiele styling gefixed</li>
+              <li>Dark/light mode toggle gebouwd met sun/moon SVG</li>
+            </ul>
+            <p class="time-badge">⏱ ~5u 45m</p>
+          </div>
+        </div>
+
+        <!-- FEEDBACK -->
+        <h2>Feedback</h2>
+        <div class="feedback-box">
+          <span class="feedback-box__label">Officiële beoordeling · 10 / 10</span>
+          <blockquote>
+            "Buitengewoon goed werk op alle gebieden. Je hebt niet alleen heel erg veel gedaan,
+            heel veel daarvan is ook nog eens van een buitengewoon niveau."
+          </blockquote>
+          <p class="feedback-box__author" style="margin-top: var(--space-sm);">
+            "Tof om te zien hoeveel aandacht je hebt besteed aan de vormgeving en de UX.
+            Alles ziet er erg goed uit."
+          </p>
+          <p class="feedback-box__author">
+            "Mooi om te zien dat je nu echt realiseert dat formulieren veel ingewikkelder zijn
+            dan je altijd dacht. Veel geleerd, veel gedaan, en van een erg hoge kwaliteit."
+          </p>
+        </div>
+
+        <!-- INZICHTEN -->
+        <h2>Nieuwe inzichten</h2>
+
+        <div class="insight-grid">
+          <div class="insight-card">
+            <p class="insight-card__num">01</p>
+            <p class="insight-card__title">Formulieren zijn complexer dan je denkt</p>
+            <p>Ik dacht dit al te kunnen. Maar als je een écht formulier bouwt met
+              conditionele vragen, validatie op meerdere niveaus en accessibility
+              merk je hoe veel er mis kan gaan. Dat inzicht is de kern van dit vak.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__num">02</p>
+            <p class="insight-card__title">HTML biedt meer dan je gebruikt</p>
+            <p><code>fieldset</code>, <code>legend</code>, <code>datalist</code>,
+              <code>dialog</code>, <code>autocomplete</code>, <code>inputmode</code>
+              allemaal native HTML features die UX verbeteren zonder een regel JavaScript.
+              Progressive enhancement werkt als je HTML serieus neemt.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__num">03</p>
+            <p class="insight-card__title">Validatie is een UX-beslissing</p>
+            <p>Wanneer toon je een foutmelding? Direct bij typen, bij blur, bij submit?
+              Elke keuze heeft gevolgen voor hoe frustrerend of behulpzaam het formulier aanvoelt.
+              Er is geen universeel juist antwoord het hangt af van het veldtype.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__num">04</p>
+            <p class="insight-card__title">localStorage als no-cost feature</p>
+            <p>Automatisch concept opslaan kost bijna geen code maar levert enorm veel UX op.
+              Niemand wil een lang formulier opnieuw beginnen omdat hij het tabblad sloot.
+              Dit is een standaard patroon dat ik voortaan altijd toepas.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__num">05</p>
+            <p class="insight-card__title">Een design system gebruiken leert je patronen</p>
+            <p>Het NS design system omzetten naar CSS tokens leerde me hoe je afstand en kleur
+              systematisch organiseert. Het duurde langer dan verwacht, maar het resultaat
+              is aanzienlijk consistenter dan eigen willekeurige waarden.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__num">06</p>
+            <p class="insight-card__title">SVG voor custom UI elementen</p>
+            <p>Voor de verbindingslijnen in de voortgangsbalk had ik inline SVG nodig.
+              Dat was nieuw voor mij ik wist dat SVG bestond maar had het nog nooit
+              bewust gebruikt om iets te tekenen in de UI.</p>
+          </div>
+        </div>
+
+        <!-- REFLECTIE -->
+        <h2>Reflectie</h2>
+        <p>
+          Browser Technologies was het vak waarbij ik het meest verrast werd door mezelf in
+          positieve zin. Aan het begin dacht ik formulieren al te begrijpen. Na zes weken bouwen
+          aan één complex formulier besef ik hoe naïef dat was.
+        </p>
+        <p>
+          Het leukste deel was het NS design system toepassen. Niet omdat het snel ging
+          (dat deed het niet), maar omdat ik voor het eerst een professioneel design system
+          van binnenuit leerde kennen. Je begrijpt pas waarom tokens bestaan als je ze gebruikt
+          om 30 velden consistent te stijlen.
+        </p>
+        <p>
+          De elfproef was een moment waarop techniek en werkelijkheid samenkwamen. Een algoritme
+          van papier naar werkende code brengen en het dan ook écht zien werken met testgetallen
+          van de Belastingdienst was bevredigend op een manier die ik niet had verwacht van een veldvalidatie.
+        </p>
+        <p>
+          De 10 is mooi. Maar de feedback dat ik nu écht begrijp hoe complex formulieren zijn
+          voelt als de eigenlijke beloning.
+        </p>
+
+        <p style="margin-top: var(--space-xl);">
+          <a href="https://jooosty.github.io/Browser-tech/" target="_blank" class="btn btn--primary">→ Bekijk het formulier live</a>
+          <a href="https://github.com/jooosty/Browser-tech" target="_blank" class="btn" style="margin-left: var(--space-sm);">→ GitHub repo</a>
+        </p>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>© 2026 Joost Krebbers · Meesterschap Blog</p>
+      <p>Built from scratch · No frameworks · Two themes</p>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,115 @@
+/* ============================================
+   THEMES — 2 stuks (eis vanuit opdracht)
+   Toggle via [data-theme] op <html>
+   ============================================ */
+
+/* === DEFAULT / NIGHT RACE === */
+/* Donker, neon, pit-wall-monitor sfeer */
+:root,
+[data-theme="night"] {
+  --color-bg: #0a0c10;
+  --color-bg-elevated: #14171d;
+  --color-bg-card: #1a1d24;
+  --color-surface: #21252e;
+
+  --color-text: #e8eaed;
+  --color-text-muted: #8b91a0;
+  --color-text-dim: #5a6070;
+
+  --color-accent: #ffd60a;          /* race yellow */
+  --color-accent-hot: #ff2a3c;      /* danger / sector red */
+  --color-accent-cool: #00d4ff;     /* telemetry cyan */
+  --color-accent-green: #00ff88;    /* personal best green */
+
+  --color-border: #2a2f3a;
+  --color-border-strong: #3a4150;
+
+  --color-grid-line: rgba(255, 255, 255, 0.04);
+
+  /* Track / racing stripe */
+  --gradient-stripe: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-accent) 20%,
+    var(--color-accent-hot) 50%,
+    var(--color-accent) 80%,
+    transparent 100%
+  );
+
+  --shadow-glow: 0 0 24px rgba(255, 214, 10, 0.15);
+  --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.4);
+
+  color-scheme: dark;
+}
+
+/* === DAY GP === */
+/* Licht, paddock-papier, ochtend-kwalificatie sfeer */
+[data-theme="day"] {
+  --color-bg: #f4f1ea;
+  --color-bg-elevated: #ffffff;
+  --color-bg-card: #ffffff;
+  --color-surface: #ebe7dd;
+
+  --color-text: #14171d;
+  --color-text-muted: #555a66;
+  --color-text-dim: #8b91a0;
+
+  --color-accent: #d62828;          /* paddock red */
+  --color-accent-hot: #003566;      /* deep navy */
+  --color-accent-cool: #0077b6;
+  --color-accent-green: #2a9d3a;
+
+  --color-border: #d4cfc2;
+  --color-border-strong: #14171d;
+
+  --color-grid-line: rgba(0, 0, 0, 0.04);
+
+  --gradient-stripe: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-accent) 20%,
+    var(--color-accent-hot) 50%,
+    var(--color-accent) 80%,
+    transparent 100%
+  );
+
+  --shadow-glow: 0 4px 16px rgba(214, 40, 40, 0.12);
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+  color-scheme: light;
+}
+
+/* Respect prefers-color-scheme als geen expliciete keuze */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    --color-bg: #f4f1ea;
+    --color-bg-elevated: #ffffff;
+    --color-bg-card: #ffffff;
+    --color-surface: #ebe7dd;
+    --color-text: #14171d;
+    --color-text-muted: #555a66;
+    --color-text-dim: #8b91a0;
+    --color-accent: #d62828;
+    --color-accent-hot: #003566;
+    --color-accent-cool: #0077b6;
+    --color-accent-green: #2a9d3a;
+    --color-border: #d4cfc2;
+    --color-border-strong: #14171d;
+    --color-grid-line: rgba(0, 0, 0, 0.04);
+    --shadow-glow: 0 4px 16px rgba(214, 40, 40, 0.12);
+    --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.08);
+    color-scheme: light;
+  }
+}
+
+/* Smooth theme transition */
+html {
+  transition: background-color var(--duration-base) var(--ease-out),
+              color var(--duration-base) var(--ease-out);
+}
+
+body, .card, .nav, .panel {
+  transition: background-color var(--duration-base) var(--ease-out),
+              border-color var(--duration-base) var(--ease-out),
+              color var(--duration-base) var(--ease-out);
+}

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="nl" data-theme="night">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meesterschap Joost Krebbers</title>
+  <meta name="description" content="Meesterschap blog persoonlijke website voor de minor Web Design & Development." />
+
+  <!-- Theme moet zo vroeg mogelijk geladen om FOUC te voorkomen -->
+  <script src="js/theme-toggle.js"></script>
+
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/themes.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Skip naar inhoud</a>
+
+  <!-- ============== NAV ============== -->
+  <header class="nav">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__brand" aria-label="Meesterschap home">
+        <span>MEESTERSCHAP</span>
+        <span class="nav__brand-tag">'25</span>
+      </a>
+
+      <button class="nav__toggle" data-nav-toggle aria-expanded="false" aria-controls="primary-nav" aria-label="Menu openen">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <line x1="3" y1="6" x2="17" y2="6"/>
+          <line x1="3" y1="10" x2="17" y2="10"/>
+          <line x1="3" y1="14" x2="17" y2="14"/>
+        </svg>
+      </button>
+
+      <nav aria-label="Hoofdnavigatie">
+        <ul class="nav__list" id="primary-nav" data-nav-list>
+          <li><a class="nav__link" href="index.html" aria-current="page">Home</a></li>
+          <li><a class="nav__link" href="pages/sprint-0.html">Sprint 0</a></li>
+          <li><a class="nav__link" href="pages/hackathon.html">Hackathon</a></li>
+          <li><a class="nav__link" href="pages/weekly-nerd.html">Weekly Nerd</a></li>
+          <li><a class="nav__link" href="pages/weekly-geek.html">Weekly Geek</a></li>
+          <li><a class="nav__link" href="pages/vakken.html">Vakken</a></li>
+          <li><a class="nav__link" href="pages/meesterproef.html">Meesterproef</a></li>
+          <li><a class="nav__link" href="pages/gesprekken.html">Gesprekken</a></li>
+          <li>
+            <button class="theme-toggle" data-theme-toggle aria-label="Wissel thema">
+              <span class="theme-toggle__indicator" aria-hidden="true"></span>
+              <span data-theme-label>Night Race</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============== MAIN ============== -->
+  <main id="main">
+    <div class="container">
+
+      <!-- HERO -->
+      <section class="hero fade-in" aria-labelledby="hero-title">
+        <p class="eyebrow hero__eyebrow">Season 2025 / 2026 Round 01</p>
+        <h1 id="hero-title">[Jouw<br>Naam]</h1>
+        <p class="hero__lead">
+          Welkom op mijn Meesterschap blog. Hier vind je alles wat ik tijdens de minor
+          Web Design &amp; Development heb gemaakt, geleerd en gedacht sprint na sprint,
+          sessie na sessie.
+        </p>
+      </section>
+
+      <div class="stripe" aria-hidden="true"></div>
+
+      <!-- TELEMETRY / STATS -->
+      <section aria-labelledby="stats-title">
+        <h2 id="stats-title" class="sr-only">Voortgang in cijfers</h2>
+        <div class="data-strip">
+          <div class="data-strip__item">
+            <p class="data-strip__label">Credits</p>
+            <p class="data-strip__value data-strip__value--accent">10 ECTS</p>
+          </div>
+          <div class="data-strip__item">
+            <p class="data-strip__label">Onderdelen</p>
+            <p class="data-strip__value">05</p>
+          </div>
+          <div class="data-strip__item">
+            <p class="data-strip__label">Gesprekken</p>
+            <p class="data-strip__value">03</p>
+          </div>
+          <div class="data-strip__item">
+            <p class="data-strip__label">Status</p>
+            <p class="data-strip__value">LIVE</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- DASHBOARD CARDS -->
+      <section aria-labelledby="onderdelen-title">
+        <p class="eyebrow" style="margin-bottom: var(--space-sm);">— Sectoren</p>
+        <h2 id="onderdelen-title" style="margin-bottom: var(--space-lg);">Onderdelen</h2>
+
+        <div class="dashboard">
+
+          <a href="pages/sprint-0.html" class="card fade-in">
+            <p class="card__number">SECTOR / 01</p>
+            <h3 class="card__title">Sprint 0</h3>
+            <p class="card__meta">Deadline · 12 Feb</p>
+            <p class="card__desc">Uitkomst en nieuwe inzichten van de start-sprint.</p>
+            <span class="card__status card__status--upcoming">— Te vullen</span>
+          </a>
+
+          <a href="pages/hackathon.html" class="card fade-in">
+            <p class="card__number">SECTOR / 02</p>
+            <h3 class="card__title">Hackathon</h3>
+            <p class="card__meta">Deadline · 26 Mrt</p>
+            <p class="card__desc">Mijn inbreng, het eindresultaat en wat ik heb meegenomen.</p>
+            <span class="card__status card__status--upcoming">— Te vullen</span>
+          </a>
+
+          <a href="pages/weekly-nerd.html" class="card fade-in">
+            <p class="card__number">SECTOR / 03</p>
+            <h3 class="card__title">Weekly Nerd</h3>
+            <p class="card__meta">Wekelijks · Sprekers</p>
+            <p class="card__desc">Verslagen van elke sessie: tools, ideeën, wat me triggerde.</p>
+            <span class="card__status card__status--upcoming">— Te vullen</span>
+          </a>
+
+          <a href="pages/weekly-geek.html" class="card fade-in">
+            <p class="card__number">SECTOR / 04</p>
+            <h3 class="card__title">Weekly Geek</h3>
+            <p class="card__meta">Wekelijks · Opdrachten</p>
+            <p class="card__desc">Wat ik elke week heb gemaakt en geleerd.</p>
+            <span class="card__status card__status--upcoming">— Te vullen</span>
+          </a>
+
+          <a href="pages/vakken.html" class="card fade-in">
+            <p class="card__number">SECTOR / 05</p>
+            <h3 class="card__title">Vakken</h3>
+            <p class="card__meta">Lopend</p>
+            <p class="card__desc">Uitkomsten en inzichten van de losse vakken.</p>
+            <span class="card__status card__status--upcoming">— Te vullen</span>
+          </a>
+
+          <a href="pages/meesterproef.html" class="card fade-in">
+            <p class="card__number">SECTOR / 06</p>
+            <h3 class="card__title">Meesterproef</h3>
+            <p class="card__meta">Deadline · 19 Jun</p>
+            <p class="card__desc">Het eindproject uitkomst, inbreng en reflectie.</p>
+            <span class="card__status card__status--upcoming">— Te vullen</span>
+          </a>
+
+          <a href="pages/gesprekken.html" class="card fade-in">
+            <p class="card__number">SECTOR / 07</p>
+            <h3 class="card__title">Gesprekken</h3>
+            <p class="card__meta">3 momenten</p>
+            <p class="card__desc">Reflecties per gesprek + blik op de toekomst.</p>
+            <span class="card__status card__status--upcoming">— Te vullen</span>
+          </a>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ============== FOOTER ============== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>© 2026 Joost Krebbers · Meesterschap Blog</p>
+      <p>Built from scratch · No frameworks · Two themes</p>
+    </div>
+  </footer>
+
+</body>
+</html>

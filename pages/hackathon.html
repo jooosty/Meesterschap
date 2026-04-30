@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="nl" data-theme="night">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hackathon Meesterschap</title>
+  <meta name="description" content="Hackathon: Nebula Xplorer een fictieve satellietmissie website voor SRON." />
+
+  <script src="../js/theme-toggle.js"></script>
+
+  <link rel="stylesheet" href="../css/reset.css" />
+  <link rel="stylesheet" href="../css/tokens.css" />
+  <link rel="stylesheet" href="../css/themes.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+
+  <style>
+    /* Code block */
+    .code-block {
+      background: var(--color-bg-card);
+      border: var(--border-width) solid var(--color-border);
+      border-left: 3px solid var(--color-accent);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      overflow-x: auto;
+      margin-block: var(--space-md);
+    }
+    .code-block pre {
+      font-family: var(--font-mono);
+      font-size: var(--fs-sm);
+      line-height: 1.7;
+      margin: 0;
+      white-space: pre;
+      color: var(--color-text);
+    }
+    .kw  { color: var(--color-accent-cool); }
+    .fn  { color: var(--color-accent-green); }
+    .str { color: var(--color-accent); }
+    .cm  { color: var(--color-text-dim); font-style: italic; }
+    .sel { color: #c792ea; }
+
+    /* Role badge */
+    .role-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2xs);
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      border: 1px solid var(--color-accent);
+      color: var(--color-accent);
+      padding: 4px 12px;
+      border-radius: var(--radius-sm);
+      margin-right: var(--space-xs);
+      margin-bottom: var(--space-xs);
+    }
+    .role-badge--cool { color: var(--color-accent-cool); border-color: var(--color-accent-cool); }
+    .role-badge--green { color: var(--color-accent-green); border-color: var(--color-accent-green); }
+    .role-badge--hot { color: var(--color-accent-hot); border-color: var(--color-accent-hot); }
+
+    /* Team grid */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-md);
+      margin-block: var(--space-lg);
+    }
+    .team-card {
+      background: var(--color-bg-card);
+      border: var(--border-width) solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+    }
+    .team-card__name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: var(--fs-base);
+      color: var(--color-text);
+      margin-bottom: var(--space-3xs);
+    }
+    .team-card__role {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-accent);
+    }
+
+    /* Feature grid */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: var(--space-md);
+      margin-block: var(--space-lg);
+    }
+    .feature-card {
+      background: var(--color-bg-card);
+      border: var(--border-width) solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card::after {
+      content: attr(data-icon);
+      position: absolute;
+      bottom: var(--space-sm);
+      right: var(--space-md);
+      font-size: 1.8rem;
+      opacity: 0.12;
+    }
+    .feature-card__title {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--color-accent);
+      margin-bottom: var(--space-xs);
+    }
+    .feature-card p {
+      font-size: var(--fs-sm);
+      color: var(--color-text-muted);
+      line-height: 1.5;
+    }
+
+    /* Contribution block */
+    .contribution-block {
+      background: var(--color-bg-card);
+      border: var(--border-width) solid var(--color-border);
+      border-left: 3px solid var(--color-accent-cool);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      margin-block: var(--space-lg);
+    }
+    .contribution-block h3 {
+      font-family: var(--font-display);
+      font-size: var(--fs-lg);
+      font-weight: 700;
+      color: var(--color-text);
+      margin-bottom: var(--space-sm);
+    }
+    .contribution-block ul { list-style: none; padding: 0; }
+    .contribution-block ul li {
+      font-size: var(--fs-sm);
+      color: var(--color-text-muted);
+      padding-left: var(--space-sm);
+      position: relative;
+      margin-bottom: var(--space-xs);
+      line-height: 1.6;
+    }
+    .contribution-block ul li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.7em;
+      width: 6px;
+      height: 1px;
+      background: var(--color-accent-cool);
+    }
+
+    /* Insight grid */
+    .insight-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: var(--space-md);
+      margin-block: var(--space-lg);
+    }
+    .insight-card {
+      background: var(--color-bg-card);
+      border: var(--border-width) solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+    }
+    .insight-card__num {
+      font-family: var(--font-mono);
+      font-size: var(--fs-2xl);
+      font-weight: 700;
+      color: var(--color-accent);
+      opacity: 0.2;
+      line-height: 1;
+      margin-bottom: var(--space-xs);
+    }
+    .insight-card__title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: var(--fs-base);
+      color: var(--color-text);
+      margin-bottom: var(--space-xs);
+    }
+    .insight-card p {
+      font-size: var(--fs-sm);
+      color: var(--color-text-muted);
+      line-height: 1.5;
+    }
+
+    /* File tree */
+    .file-tree {
+      font-family: var(--font-mono);
+      font-size: var(--fs-sm);
+      background: var(--color-bg-card);
+      border: var(--border-width) solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-md) var(--space-lg);
+      line-height: 2;
+      color: var(--color-text-muted);
+      margin-block: var(--space-md);
+      overflow-x: auto;
+    }
+    .file-tree .dir  { color: var(--color-accent); font-weight: 700; }
+    .file-tree .cm   { color: var(--color-text-dim); font-style: italic; }
+
+    /* Easter egg tags */
+    .egg-tag {
+      display: inline-flex;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      letter-spacing: 0.08em;
+      padding: 3px 10px;
+      border-radius: var(--radius-sm);
+      margin: var(--space-3xs);
+      border: 1px solid var(--color-accent-cool);
+      color: var(--color-accent-cool);
+    }
+
+    /* Challenge - lesson pairs */
+    .challenge-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-md);
+      margin-block: var(--space-lg);
+    }
+    .challenge-card {
+      background: var(--color-bg-card);
+      border: var(--border-width) solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+    }
+    .challenge-card__label {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: var(--space-xs);
+    }
+    .challenge-card__label--challenge { color: var(--color-accent-hot); }
+    .challenge-card__label--lesson    { color: var(--color-accent-green); }
+    .challenge-card p {
+      font-size: var(--fs-sm);
+      color: var(--color-text-muted);
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Skip naar inhoud</a>
+
+  <!-- NAV -->
+  <header class="nav">
+    <div class="container nav__inner">
+      <a href="../index.html" class="nav__brand" aria-label="Meesterschap home">
+        <span>MEESTERSCHAP</span>
+        <span class="nav__brand-tag">'25</span>
+      </a>
+      <button class="nav__toggle" data-nav-toggle aria-expanded="false" aria-controls="primary-nav" aria-label="Menu openen">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <line x1="3" y1="6" x2="17" y2="6"/>
+          <line x1="3" y1="10" x2="17" y2="10"/>
+          <line x1="3" y1="14" x2="17" y2="14"/>
+        </svg>
+      </button>
+      <nav aria-label="Hoofdnavigatie">
+        <ul class="nav__list" id="primary-nav" data-nav-list>
+          <li><a class="nav__link" href="../index.html">Home</a></li>
+          <li><a class="nav__link" href="sprint-0.html">Sprint 0</a></li>
+          <li><a class="nav__link" href="hackathon.html" aria-current="page">Hackathon</a></li>
+          <li><a class="nav__link" href="weekly-nerd.html">Weekly Nerd</a></li>
+          <li><a class="nav__link" href="weekly-geek.html">Weekly Geek</a></li>
+          <li><a class="nav__link" href="vakken.html">Vakken</a></li>
+          <li><a class="nav__link" href="meesterproef.html">Meesterproef</a></li>
+          <li><a class="nav__link" href="gesprekken.html">Gesprekken</a></li>
+          <li>
+            <button class="theme-toggle" data-theme-toggle aria-label="Wissel thema">
+              <span class="theme-toggle__indicator" aria-hidden="true"></span>
+              <span data-theme-label>Night Race</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="container">
+
+      <nav aria-label="Kruimelpad" class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span class="breadcrumb__sep">/</span>
+        <span>Hackathon</span>
+      </nav>
+
+      <!-- HERO -->
+      <section class="hero fade-in" aria-labelledby="page-title">
+        <p class="eyebrow hero__eyebrow">Sector 02 Hackathon</p>
+        <h1 id="page-title">Nebula<br>Xplorer</h1>
+        <p class="hero__lead">
+          In één week bouwen we als team een prototype voor SRON een fictieve website
+          voor een echte satellietmissie. X-ray telescoop, zwarte gaten, interactieve
+          satellite visualisatie en vijf cursor-modi.
+        </p>
+      </section>
+
+      <!-- META STRIP -->
+      <div class="data-strip" role="region" aria-label="Hackathon info">
+        <div class="data-strip__item">
+          <p class="data-strip__label">Deadline</p>
+          <p class="data-strip__value">26 MRT</p>
+        </div>
+        <div class="data-strip__item">
+          <p class="data-strip__label">Duur</p>
+          <p class="data-strip__value">1 week</p>
+        </div>
+        <div class="data-strip__item">
+          <p class="data-strip__label">Team</p>
+          <p class="data-strip__value data-strip__value--accent">Space Potatoes</p>
+        </div>
+        <div class="data-strip__item">
+          <p class="data-strip__label">Opdrachtgever</p>
+          <p class="data-strip__value">SRON</p>
+        </div>
+      </div>
+
+      <article class="prose fade-in">
+
+        <!-- DE OPDRACHT -->
+        <h2>De opdracht</h2>
+        <p>
+          In één week bouwen we als team een prototype voor een echte opdrachtgever: SRON
+          het Netherlands Institute for Space Research. De challenge: maak een website voor
+          NEBULA Xplorer, een fictieve maar realistische satellietmissie om zwarte gaten
+          te bestuderen met een X-ray telescoop.
+        </p>
+        <p>
+          Eisen: goede UX én over the top. Spectaculaire styling én over the top.
+          Responsive, toegankelijk, elegante code, oog voor detail en paaseieren verplicht.
+          Geen frameworks, native web technologie first.
+        </p>
+
+        <!-- HET CONCEPT -->
+        <h2>Het concept: NEBULA Xplorer</h2>
+        <p>
+          NEBULA staat voor <em>Netherlands Educational Satellite for Exploration of
+          Binary-Linked Astrophysics – X-ray Observer</em>. ~400 studenten van 14 Nederlandse
+          onderwijsinstellingen helpen SRON om deze satellietmissie van begin tot eind te bouwen.
+        </p>
+        <p>
+          Onze site vertelt dit verhaal: wetenschappelijke missie, instrumenten van de satelliet,
+          crew-pagina, stageplaatsen en contactformulier allemaal in een donkere, immersieve
+          ruimte-esthetiek met oranje accenten.
+        </p>
+
+        <!-- TEAM -->
+        <h2>Team Space Potatoes</h2>
+        <div class="team-grid">
+          <div class="team-card">
+            <p class="team-card__name">Joost Krebbers</p>
+            <p class="team-card__role">Cursor systeem · Easter eggs · Black hole animation</p>
+          </div>
+          <div class="team-card">
+            <p class="team-card__name">Teamlid 2</p>
+            <p class="team-card__role">Mission section · Layout · Typografie</p>
+          </div>
+          <div class="team-card">
+            <p class="team-card__name">Teamlid 3</p>
+            <p class="team-card__role">Instrument visualisatie · Hotspots</p>
+          </div>
+          <div class="team-card">
+            <p class="team-card__name">Teamlid 4</p>
+            <p class="team-card__role">Crew sectie · Contact form · Footer</p>
+          </div>
+        </div>
+        <p><em>Pas de teamnamen aan zodra je die wil toevoegen.</em></p>
+
+        <!-- MIJN INBRENG -->
+        <h2>Mijn inbreng</h2>
+        <p>
+          Mijn bijdragen aan het project:
+        </p>
+
+        <span class="role-badge">cursor.js</span>
+        <span class="role-badge role-badge--cool">easter-egg.js</span>
+        <span class="role-badge role-badge--cool">easter-egg.css</span>
+        <span class="role-badge role-badge--green">rocket-scrollbar.js</span>
+        <span class="role-badge role-badge--green">rocket-scrollbar.css</span>
+        <span class="role-badge role-badge--hot">typing-easter-egg.js</span>
+
+        <div class="contribution-block">
+          <h3>Cursor mode systeem</h3>
+          <ul>
+            <li>Vijf cursor-modi via cijfertoetsen 1–5: Astronaut, Comet, Black Hole, Laser, Supernova</li>
+            <li>Elke modus heeft een eigen SVG cursor én canvas-gebaseerd particle systeem</li>
+            <li>Astronaut: volgt de muis met vertraagd "drijvend in de ruimte" gevoel</li>
+            <li>Comet: laat een stofspoor achter in oranje en cyaan</li>
+            <li>Black Hole: particles worden van buiten naar binnen gezogen</li>
+            <li>Laser: trekt een gloeiende cyane lichtstreep achter de muis</li>
+            <li>Supernova: klik om 50 particles te exploderen in alle richtingen</li>
+            <li>Automatisch uitgeschakeld op touchscreens via <code>matchMedia('(pointer: coarse)')</code></li>
+            <li>Toast-notificatie bij elke moduswissel</li>
+          </ul>
+        </div>
+
+        <div class="contribution-block">
+          <h3>Easter egg: black hole klikken</h3>
+          <ul>
+            <li>Klik 10× op het zwarte gat op de homepage → animated accretie-schijf verschijnt als canvas overlay</li>
+            <li>Klik nog 10× (totaal 20) → portret van docent Sanne verschijnt geknipt als cirkel in het event horizon</li>
+            <li>Accretie-schijf volledig zelfgebouwd: meerdere lagen ellipsen, dust streaks, hot spot, ambient glow en photon ring allemaal in canvas</li>
+            <li>De foto van Sanne fadet in via een custom vignette zodat de randen vloeiend overgaan in de schijf</li>
+          </ul>
+        </div>
+
+        <div class="contribution-block">
+          <h3>Rocket scrollbar</h3>
+          <ul>
+            <li>Raket-SVG vervangt de native scrollbar en rijdt langs de rechterkant van de pagina</li>
+            <li>Schaalflammen gloeien oranje op bij scrollen (<code>.burning</code> class)</li>
+            <li>Track toont voortgang via een CSS custom property <code>--scroll-pct</code></li>
+            <li>Native scrollbar verborgen via <code>scrollbar-width: none</code> en <code>::-webkit-scrollbar</code></li>
+          </ul>
+        </div>
+
+        <div class="contribution-block">
+          <h3>Typing easter egg</h3>
+          <ul>
+            <li>Typ <code>STARS</code> op het toetsenbord → meteor-shower animatie verschijnt</li>
+            <li>10 shooting stars geanimeerd met CSS <code>@keyframes</code></li>
+            <li>Sequentie-tracking via eenvoudig index-patroon (zelfde structuur als de KRAFTWERK easter eggs)</li>
+          </ul>
+        </div>
+
+        <!-- FEATURES VAN DE HELE SITE -->
+        <h2>Wat de site kan</h2>
+
+        <div class="feature-grid">
+          <div class="feature-card" data-icon="🌑">
+            <p class="feature-card__title">Black hole hero</p>
+            <p>Pulserende zwart-gat animatie op de homepage met neon-oranje glow.
+              Klikbaar voor de easter egg overlay met accretie-schijf.</p>
+          </div>
+          <div class="feature-card" data-icon="🛸">
+            <p class="feature-card__title">Satellite hotspots</p>
+            <p>Interactieve satelliet-render met 13 klikbare hotspots.
+              Elk toont gedetailleerde technische specificaties van het echte NEBULA-Xplorer ontwerp.</p>
+          </div>
+          <div class="feature-card" data-icon="✨">
+            <p class="feature-card__title">5 cursor modi</p>
+            <p>Astronaut, Comet, Black Hole, Laser, Supernova.
+              Elk een eigen canvas particle systeem. Toetsen 1–5 om te wisselen.</p>
+          </div>
+          <div class="feature-card" data-icon="🚀">
+            <p class="feature-card__title">Rocket scrollbar</p>
+            <p>Native scrollbar vervangen door een vliegende raket die de schuifpositie bijhoudt.
+              Brand-effect bij scrollen.</p>
+          </div>
+          <div class="feature-card" data-icon="⭐">
+            <p class="feature-card__title">Crew sectie</p>
+            <p>Stervormige crew-kaarten die pulseren. Hover voor tooltip met naam en link.
+              Ring-burst animatie bij hover.</p>
+          </div>
+          <div class="feature-card" data-icon="📋">
+            <p class="feature-card__title">Contact met CSS popup</p>
+            <p>Contactformulier met custom checkbox (planeet + draaiende maan).
+              Bevestiging via <code>:target</code> popup geen JavaScript.</p>
+          </div>
+          <div class="feature-card" data-icon="🌊">
+            <p class="feature-card__title">Scroll-driven parallax</p>
+            <p>Stagebegeleiders-sectie met parallax-effect op afbeeldingen via
+              <code>animation-timeline: view()</code> puur CSS.</p>
+          </div>
+          <div class="feature-card" data-icon="🎯">
+            <p class="feature-card__title">Easter eggs × 3</p>
+            <p>Black hole klikken (10× en 20×), typ STARS voor meteoren,
+              Sanne verschijnt in het event horizon.</p>
+          </div>
+        </div>
+
+        <!-- BESTANDSSTRUCTUUR -->
+        <h2>Bestandsstructuur</h2>
+        <div class="file-tree" role="img" aria-label="Bestandsstructuur Nebula Xplorer">
+          <span class="dir">📁 nebula-xplorer/</span><br>
+          &nbsp;&nbsp;<span class="cm">📄 index.html</span><br>
+          &nbsp;&nbsp;<span class="cm">📄 style.css</span>&nbsp; <span class="cm">— base, nav, hero, black hole, responsive</span><br>
+          &nbsp;&nbsp;<span class="cm">📄 mission.css</span>&nbsp; <span class="cm">— mission sectie layout + content</span><br>
+          &nbsp;&nbsp;<span class="cm">📄 instrument.css</span>&nbsp; <span class="cm">— satellite viewer + hotspots</span><br>
+          &nbsp;&nbsp;<span class="cm">📄 crew-members.css</span>&nbsp; <span class="cm">— crew sterren, tooltips, parallax, stage</span><br>
+          &nbsp;&nbsp;<span class="cm">📄 contact.css</span>&nbsp; <span class="cm">— formulier, checkbox, :target popup</span><br>
+          &nbsp;&nbsp;<span class="cm">📄 footer.css</span>&nbsp; <span class="cm">— footer kaarten met hover-uitklap</span><br>
+          &nbsp;&nbsp;<span class="cm">📄 easter-egg.css</span>&nbsp; <span class="cm">— overlay styling</span><br>
+          &nbsp;&nbsp;<span class="cm">📄 rocket-scrollbar.css</span>&nbsp; <span class="cm">— raket track + fill</span><br>
+          &nbsp;&nbsp;<span class="cm">📄 script.js</span>&nbsp; <span class="cm">— sterren genereren, burger menu, actieve nav</span><br>
+          &nbsp;&nbsp;<span class="cm">📄 instrument.js</span>&nbsp; <span class="cm">— satelliet hotspot data + interactie</span><br>
+          &nbsp;&nbsp;<span class="cm">📄 cursor.js</span>&nbsp; <span class="cm">— 5 cursor modi + canvas particles</span><br>
+          &nbsp;&nbsp;<span class="cm">📄 easter-egg.js</span>&nbsp; <span class="cm">— black hole easter egg + Sanne reveal</span><br>
+          &nbsp;&nbsp;<span class="cm">📄 rocket-scrollbar.js</span>&nbsp; <span class="cm">— scroll tracking</span><br>
+          &nbsp;&nbsp;<span class="cm">📄 typing-easter-egg.js</span>&nbsp; <span class="cm">— STARS typing trigger</span>
+        </div>
+
+        <!-- CODE HIGHLIGHTS -->
+        <h2>Code highlight: de black hole easter egg</h2>
+        <p>
+          Na 10 klikken op het zwarte gat wordt een canvas-gebaseerde accretie-schijf getekend.
+          De schijf bestaat uit meerdere lagen ellipsen met licht fluctuerende opacity, dust streaks
+          en een photon ring. Na 20 klikken fadet een foto van Sanne in het event horizon:
+        </p>
+
+        <div class="code-block" role="region" aria-label="Code: black hole easter egg click teller">
+          <pre><span class="cm">// easter-egg.js click teller</span>
+blackHole.addEventListener(<span class="str">'click'</span>, () => {
+  clicks++;
+  <span class="kw">if</span> (clicks === <span class="str">10</span>) {
+    <span class="fn">openEgg</span>();          <span class="cm">// start canvas animatie</span>
+  } <span class="kw">else if</span> (clicks >= <span class="str">20</span>) {
+    clicks = <span class="str">0</span>;
+    <span class="fn">revealSanne</span>();     <span class="cm">// foto in event horizon</span>
+  }
+});
+
+<span class="kw">function</span> <span class="fn">drawSanne</span>(cx, cy, R) {
+  <span class="kw">if</span> (sanneAlpha < <span class="str">1</span>) sanneAlpha = Math.min(<span class="str">1</span>, sanneAlpha + <span class="str">0.012</span>);
+  eggCtx.save();
+  eggCtx.globalAlpha = sanneAlpha;
+  eggCtx.beginPath();
+  eggCtx.arc(cx, cy, R * <span class="str">0.92</span>, <span class="str">0</span>, PI2);
+  eggCtx.clip();                        <span class="cm">// knipt cirkel uit</span>
+  eggCtx.drawImage(sanneImg, cx-r, cy-r, r*<span class="str">2</span>, r*<span class="str">2</span>);
+  eggCtx.restore();
+}</pre>
+        </div>
+
+        <h2>Code highlight: cursor modi + touchscreen detectie</h2>
+        <p>
+          Het cursor-systeem detecteert automatisch of de bezoeker een touchscreen heeft via
+          <code>matchMedia</code>. Op touch-apparaten wordt het systeem volledig uitgeschakeld
+          zodat de native cursor terugkomt. Op desktop wisselt de gebruiker met toetsen 1–5:
+        </p>
+
+        <div class="code-block" role="region" aria-label="Code: cursor mode systeem">
+          <pre><span class="cm">// cursor.js touchscreen detectie</span>
+<span class="kw">const</span> mq = window.matchMedia(<span class="str">'(pointer: coarse)'</span>);
+
+<span class="kw">function</span> <span class="fn">applyPointerType</span>(isCoarse) {
+  <span class="kw">if</span> (isCoarse) {
+    <span class="fn">disable</span>();      <span class="cm">// native cursor terug</span>
+  } <span class="kw">else</span> {
+    <span class="fn">setMode</span>(<span class="str">'normal'</span>);
+    <span class="fn">enable</span>();
+  }
+}
+
+<span class="fn">applyPointerType</span>(mq.matches);
+mq.addEventListener(<span class="str">'change'</span>, e => <span class="fn">applyPointerType</span>(e.matches));
+
+<span class="cm">// Keybinds: 1=astronaut, 2=comet, 3=blackhole, 4=laser, 5=supernova</span>
+<span class="kw">const</span> KEY_MAP = {
+  <span class="str">'1'</span>: <span class="str">'astronaut'</span>, <span class="str">'2'</span>: <span class="str">'comet'</span>, <span class="str">'3'</span>: <span class="str">'blackhole'</span>,
+  <span class="str">'4'</span>: <span class="str">'laser'</span>,    <span class="str">'5'</span>: <span class="str">'supernova'</span>, <span class="str">'Escape'</span>: <span class="str">'normal'</span>
+};</pre>
+        </div>
+
+        <h2>Code highlight: rocket scrollbar</h2>
+        <p>
+          De raket schrijft zijn positie via een CSS custom property naar het track-element.
+          De <code>::after</code> pseudo op de track groeit van onderaf mee, zodat je een
+          "gelanceerde route" ziet:
+        </p>
+
+        <div class="code-block" role="region" aria-label="Code: rocket scrollbar">
+          <pre><span class="cm">/* rocket-scrollbar.css */</span>
+<span class="sel">#rocket-track::after</span> {
+  content: <span class="str">''</span>;
+  position: absolute;
+  bottom: <span class="str">0</span>;
+  height: calc(<span class="str">100%</span> - var(<span class="kw">--scroll-pct</span>, 0%));
+  background: linear-gradient(to top, <span class="str">rgba(235,93,52,0.55)</span>, <span class="str">rgba(110,231,255,0.3)</span>);
+}
+
+<span class="cm">// rocket-scrollbar.js schrijft de waarde</span>
+<span class="kw">const</span> pct = maxScroll > <span class="str">0</span> ? scrollTop / maxScroll : <span class="str">0</span>;
+track.style.<span class="fn">setProperty</span>(<span class="str">'--scroll-pct'</span>, (pct * <span class="str">100</span>).<span class="fn">toFixed</span>(<span class="str">2</span>) + <span class="str">'%'</span>);</pre>
+        </div>
+
+        <!-- EASTER EGGS OVERZICHT -->
+        <h2>Easter eggs</h2>
+        <p>
+          <span class="egg-tag">10× klik zwart gat → accretie-schijf</span>
+          <span class="egg-tag">20× klik → Sanne in event horizon</span>
+          <span class="egg-tag">Typ STARS → meteorenregen</span>
+          <span class="egg-tag">Toets 1 → astronaut cursor</span>
+          <span class="egg-tag">Toets 2 → comet trail</span>
+          <span class="egg-tag">Toets 3 → black hole cursor</span>
+          <span class="egg-tag">Toets 4 → laser cursor</span>
+          <span class="egg-tag">Toets 5 → supernova (klik om te exploderen)</span>
+        </p>
+
+        <!-- UITDAGINGEN EN LESSEN -->
+        <h2>Uitdagingen en wat ik ervan leerde</h2>
+
+        <div class="challenge-grid">
+          <div class="challenge-card">
+            <p class="challenge-card__label challenge-card__label--challenge">⚡ Uitdaging</p>
+            <p>Vijf canvas-systemen in één JS-file zonder dat ze elkaar beïnvloeden.
+              Elke modus heeft zijn eigen particle array en draw-logica.</p>
+          </div>
+          <div class="challenge-card">
+            <p class="challenge-card__label challenge-card__label--lesson">✓ Geleerd</p>
+            <p>requestAnimationFrame goed binnenshouden: één centrale loop met een
+              <code>rafRunning</code> flag voorkomt meerdere loops tegelijk bij moduswissel.</p>
+          </div>
+          <div class="challenge-card">
+            <p class="challenge-card__label challenge-card__label--challenge">⚡ Uitdaging</p>
+            <p>De accretie-schijf ziet er anders uit op elk schermformaat omdat
+              de black hole CSS-element van grootte verandert.</p>
+          </div>
+          <div class="challenge-card">
+            <p class="challenge-card__label challenge-card__label--lesson">✓ Geleerd</p>
+            <p><code>getBoundingClientRect()</code> per frame aanroepen geeft altijd de actuele
+              grootte en positie ook na scroll of resize.</p>
+          </div>
+          <div class="challenge-card">
+            <p class="challenge-card__label challenge-card__label--challenge">⚡ Uitdaging</p>
+            <p>Samenwerken in één codebase zonder merge-conflicten.
+              Iedereen had een eigen sectie, maar gedeelde styles liepen door elkaar.</p>
+          </div>
+          <div class="challenge-card">
+            <p class="challenge-card__label challenge-card__label--lesson">✓ Geleerd</p>
+            <p>Per feature een eigen CSS-bestand. Naamgeving afspreken voordat je begint.
+              Bij een langere hackathon zou ik eerder een CSS custom properties file willen.</p>
+          </div>
+        </div>
+
+        <!-- INZICHTEN -->
+        <h2>Nieuwe inzichten</h2>
+
+        <div class="insight-grid">
+          <div class="insight-card">
+            <p class="insight-card__num">01</p>
+            <p class="insight-card__title">Canvas als creatief tool</p>
+            <p>De accretie-schijf is het eerste stuk canvas-werk dat ik echt trots op ben.
+              Canvas is veel expressiever dan ik dacht zeker in combinatie met
+              requestAnimationFrame en layered transparante ellipsen.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__num">02</p>
+            <p class="insight-card__title">pointer: coarse als accessibility check</p>
+            <p>Touchscreen-gebruikers hebben geen cursor, dus een custom cursor systeem
+              is voor hen juist verstoringsvol. <code>matchMedia('(pointer: coarse)')</code>
+              laat je dit live detecteren inclusief wanneer iemand een muis aansluit.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__num">03</p>
+            <p class="insight-card__title">animation-timeline: view() voor parallax</p>
+            <p>CSS scroll-driven animations zijn rijp voor productiegebruik.
+              De stagebegeleiders-afbeeldingen bewegen soepel met de pagina mee
+              zonder één regel JavaScript en <code>prefers-reduced-motion</code>
+              schakelt ze netjes uit.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__num">04</p>
+            <p class="insight-card__title">Samen bouwen vraagt om structuur</p>
+            <p>Eén week, vier mensen, één codebase. Zonder afspraken over naamgeving
+              en bestandsstructuur loop je elkaar voor de voeten.
+              Goede afspraken vooraf zijn sneller dan opruimen achteraf.</p>
+          </div>
+        </div>
+
+        <!-- REFLECTIE -->
+        <h2>Reflectie</h2>
+        <p>
+          De hackathon was anders dan ik had verwacht in positieve zin. Je denkt van tevoren
+          dat je een week hebt en dat er dus tijd genoeg is. In de praktijk is een week razend snel
+          als je ook nog content moet schrijven, een concept moet uitdenken en een team moet afstemmen.
+        </p>
+        <p>
+          Mijn highlight was de accretie-schijf. Het begon als een simpel "klik-10x-easter-egg" maar
+          groeide uit tot iets waarvoor ik echt tijd heb genomen om goed te maken: de lichtfysica
+          van een zwart gat proberen te vertalen naar canvas-ellipsen, met de juiste kleurnuances
+          en pulse-timing. Dat Sanne's gezicht dan ook nog verschijnt na 20 klikken maakte het
+          compleet.
+        </p>
+        <p>
+          Ik heb ook geleerd dat het cursor-systeem meer complexiteit had dan ik van tevoren inschat.
+          Vijf modi, touchscreen-detectie, toast-notificaties, keybinds het leek klein maar had
+          veel randgevallen. Dat is misschien wel de grootste les van de hackathon:
+          <em>scope inschatten is een vaardigheid die je moet oefenen.</em>
+        </p>
+
+        <p style="margin-top: var(--space-xl);">
+          <a href="https://jooosty.github.io/Space-Potatoes/" target="_blank" class="btn btn--primary">→ Bekijk Nebula Xplorer live</a>
+          <a href="https://github.com/jooosty/Space-Potatoes" target="_blank" class="btn" style="margin-left: var(--space-sm);">→ GitHub repo</a>
+        </p>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>© 2026 Joost Krebbers · Meesterschap Blog</p>
+      <p>Built from scratch · No frameworks · Two themes</p>
+    </div>
+  </footer>
+
+</body>
+</html>
