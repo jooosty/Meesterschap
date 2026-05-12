@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="nl" data-theme="night">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API — Vakken — Meesterschap</title>
+  <meta name="description" content="API vak: F1 Explorer — live telemetrie visualiser op OpenF1. Beoordeling: 10/10." />
+  <script src="../js/theme-toggle.js"></script>
+  <link rel="stylesheet" href="../css/reset.css" />
+  <link rel="stylesheet" href="../css/tokens.css" />
+  <link rel="stylesheet" href="../css/themes.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <style>
+    .code-block {
+      background: var(--color-bg-card);
+      border: var(--border-width) solid var(--color-border);
+      border-left: 3px solid var(--color-accent);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      overflow-x: auto;
+      margin-block: var(--space-md);
+    }
+    .code-block pre {
+      font-family: var(--font-mono);
+      font-size: var(--fs-sm);
+      line-height: 1.7;
+      margin: 0;
+      white-space: pre;
+      color: var(--color-text);
+    }
+    .kw  { color: var(--color-accent-cool); }
+    .fn  { color: var(--color-accent-green); }
+    .str { color: var(--color-accent); }
+    .cm  { color: var(--color-text-dim); font-style: italic; }
+
+    /* Score badge */
+    .score-badge {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-bg-card);
+      border: var(--border-thick) solid var(--color-accent-green);
+      border-radius: var(--radius-md);
+      padding: var(--space-md) var(--space-xl);
+      text-align: center;
+      box-shadow: 0 0 32px rgba(0, 255, 136, 0.08);
+    }
+    .score-badge__number { font-family: var(--font-display); font-size: var(--fs-3xl); font-weight: 700; color: var(--color-accent-green); line-height: 1; }
+    .score-badge__label  { font-family: var(--font-mono); font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.2em; color: var(--color-text-dim); margin-top: var(--space-3xs); }
+    .hero-row { display: flex; align-items: flex-start; gap: var(--space-xl); flex-wrap: wrap; }
+    .hero-row .hero { flex: 1; min-width: 280px; padding-block: 0; }
+
+    /* Tech tags */
+    .tech-tag {
+      display: inline-flex;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      letter-spacing: 0.08em;
+      padding: 3px 10px;
+      border-radius: var(--radius-sm);
+      margin: var(--space-3xs);
+      border: 1px solid;
+    }
+    .tech-tag--api    { color: var(--color-accent-cool);  border-color: var(--color-accent-cool);  }
+    .tech-tag--three  { color: var(--color-accent);       border-color: var(--color-accent);        }
+    .tech-tag--astro  { color: #c792ea;                   border-color: #c792ea;                    }
+    .tech-tag--feature{ color: var(--color-accent-green); border-color: var(--color-accent-green);  }
+
+    /* Feature grid */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: var(--space-md);
+      margin-block: var(--space-lg);
+    }
+    .feature-card {
+      background: var(--color-bg-card);
+      border: var(--border-width) solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card::after {
+      content: attr(data-icon);
+      position: absolute;
+      bottom: var(--space-sm);
+      right: var(--space-md);
+      font-size: 1.8rem;
+      opacity: 0.12;
+    }
+    .feature-card__title { font-family: var(--font-mono); font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.15em; color: var(--color-accent); margin-bottom: var(--space-xs); }
+    .feature-card p { font-size: var(--fs-sm); color: var(--color-text-muted); line-height: 1.5; }
+
+    /* Module table */
+    .module-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--fs-sm);
+      margin-block: var(--space-lg);
+    }
+    .module-table th {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-text-dim);
+      text-align: left;
+      padding: var(--space-xs) var(--space-sm);
+      border-bottom: var(--border-width) solid var(--color-border);
+    }
+    .module-table td {
+      padding: var(--space-xs) var(--space-sm);
+      border-bottom: var(--border-width) solid var(--color-border);
+      color: var(--color-text-muted);
+      line-height: 1.5;
+      vertical-align: top;
+    }
+    .module-table tr:hover td { background: var(--color-bg-card); }
+    .module-table td:first-child { font-family: var(--font-mono); color: var(--color-accent-cool); white-space: nowrap; }
+    .module-table td:nth-child(2) { color: var(--color-text); }
+
+    /* Insight grid */
+    .insight-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-md); margin-block: var(--space-lg); }
+    .insight-card { background: var(--color-bg-card); border: var(--border-width) solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-md); }
+    .insight-card__num { font-family: var(--font-mono); font-size: var(--fs-2xl); font-weight: 700; color: var(--color-accent); opacity: 0.2; line-height: 1; margin-bottom: var(--space-xs); }
+    .insight-card__title { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-base); color: var(--color-text); margin-bottom: var(--space-xs); }
+    .insight-card p { font-size: var(--fs-sm); color: var(--color-text-muted); line-height: 1.5; }
+
+    /* Feedback box */
+    .feedback-box { background: var(--color-bg-card); border: var(--border-thick) solid var(--color-accent-green); border-radius: var(--radius-md); padding: var(--space-lg); margin-block: var(--space-xl); position: relative; }
+    .feedback-box__label { position: absolute; top: calc(-1 * var(--fs-xs) - 4px); left: var(--space-md); font-family: var(--font-mono); font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.15em; color: var(--color-accent-green); background: var(--color-bg); padding: 0 var(--space-2xs); }
+    .feedback-box blockquote { font-size: var(--fs-lg); font-family: var(--font-display); color: var(--color-text); line-height: 1.4; border: none; padding: 0; margin: 0; background: transparent; font-style: normal; }
+
+    /* File tree */
+    .file-tree { font-family: var(--font-mono); font-size: var(--fs-sm); background: var(--color-bg-card); border: var(--border-width) solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-md) var(--space-lg); line-height: 2; color: var(--color-text-muted); margin-block: var(--space-md); overflow-x: auto; }
+    .file-tree .dir { color: var(--color-accent); font-weight: 700; }
+    .file-tree .cm  { color: var(--color-text-dim); font-style: italic; }
+
+    /* Easter egg tag */
+    .egg-tag {
+      display: inline-flex;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      letter-spacing: 0.08em;
+      padding: 3px 10px;
+      border-radius: var(--radius-sm);
+      margin: var(--space-3xs);
+      border: 1px solid var(--color-accent-cool);
+      color: var(--color-accent-cool);
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Skip naar inhoud</a>
+
+  <header class="nav">
+    <div class="container nav__inner">
+      <a href="../index.html" class="nav__brand" aria-label="Meesterschap home">
+        <span>MEESTERSCHAP</span>
+        <span class="nav__brand-tag">'26</span>
+      </a>
+      <button class="nav__toggle" data-nav-toggle aria-expanded="false" aria-controls="primary-nav" aria-label="Menu openen">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <line x1="3" y1="6" x2="17" y2="6"/>
+          <line x1="3" y1="10" x2="17" y2="10"/>
+          <line x1="3" y1="14" x2="17" y2="14"/>
+        </svg>
+      </button>
+      <nav aria-label="Hoofdnavigatie">
+        <ul class="nav__list" id="primary-nav" data-nav-list>
+          <li><a class="nav__link" href="../index.html">Home</a></li>
+          <li><a class="nav__link" href="sprint-0.html">Sprint 0</a></li>
+          <li><a class="nav__link" href="hackathon.html">Hackathon</a></li>
+          <li><a class="nav__link" href="weekly-nerd.html">Weekly Nerd</a></li>
+          <li><a class="nav__link" href="weekly-geek.html">Weekly Geek</a></li>
+          <li class="nav__item--dropdown">
+            <button class="nav__dropdown-toggle" data-dropdown-toggle aria-expanded="false" aria-haspopup="true">
+              Vakken
+              <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg>
+            </button>
+            <ul class="nav__dropdown" role="menu">
+              <li role="none"><a href="vakken.html" role="menuitem">Overzicht</a></li>
+              <li role="none"><a href="vakken-css-ttr.html" role="menuitem">CSS to the Rescue <span class="nav__dropdown__score">9,5</span></a></li>
+              <li role="none"><a href="vakken-browser-tech.html" role="menuitem">Browser Tech <span class="nav__dropdown__score">10</span></a></li>
+              <li role="none"><a href="vakken-hcd.html" role="menuitem">Human Centered Design <span class="nav__dropdown__score">9</span></a></li>
+              <li role="none"><a href="vakken-api.html" role="menuitem" aria-current="page">API <span class="nav__dropdown__score">10</span></a></li>
+            </ul>
+          </li>
+          <li><a class="nav__link" href="meesterproef.html">Meesterproef</a></li>
+          <li>
+            <button class="theme-toggle" data-theme-toggle aria-label="Wissel thema">
+              <span class="theme-toggle__indicator" aria-hidden="true"></span>
+              <span data-theme-label>Night Race</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="container">
+
+      <nav aria-label="Kruimelpad" class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span class="breadcrumb__sep">/</span>
+        <a href="vakken.html">Vakken</a>
+        <span class="breadcrumb__sep">/</span>
+        <span>API</span>
+      </nav>
+
+      <div class="hero-row">
+        <section class="hero fade-in" aria-labelledby="page-title">
+          <p class="eyebrow hero__eyebrow">Sector 05d — API</p>
+          <h1 id="page-title">F1<br>Explorer</h1>
+          <p class="hero__lead">
+            Een live F1 telemetrie visualiser gebouwd op de OpenF1 API.
+            Rijdende stippen op een Three.js track, live lap towers, pit data,
+            team radio en een Doctor Who easter egg.
+          </p>
+        </section>
+        <div style="display:flex; align-items:center; padding-top: var(--space-2xl);">
+          <div class="score-badge fade-in" role="img" aria-label="Beoordeling: 10 uit 10">
+            <span class="score-badge__number">10</span>
+            <span class="score-badge__label">/ 10</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="data-strip" role="region" aria-label="Vak info">
+        <div class="data-strip__item">
+          <p class="data-strip__label">Vak</p>
+          <p class="data-strip__value">API</p>
+        </div>
+        <div class="data-strip__item">
+          <p class="data-strip__label">Stack</p>
+          <p class="data-strip__value">ASTRO + THREE</p>
+        </div>
+        <div class="data-strip__item">
+          <p class="data-strip__label">API</p>
+          <p class="data-strip__value data-strip__value--accent">OPENF1</p>
+        </div>
+        <div class="data-strip__item">
+          <p class="data-strip__label">Score</p>
+          <p class="data-strip__value">10 / 10</p>
+        </div>
+      </div>
+
+      <article class="prose fade-in">
+
+        <h2>De opdracht</h2>
+        <p>
+          Gebruik een externe API om een zinvolle, interactieve web-applicatie te bouwen.
+          Het doel: laten zien dat je data kunt ophalen, verwerken, weergeven — en dat je
+          de API goed genoeg begrijpt om er creatief mee om te gaan.
+        </p>
+
+        <h2>Het concept: F1 Explorer</h2>
+        <p>
+          F1 Explorer haalt live F1-sessiedata op via de OpenF1 API en visualiseert dit
+          als een interactief tijdlijn-replay. Je kiest een race, kwalificatie of vrije training
+          uit de seizoenskalender, klikt op "Load Track" en kijkt de sessie terug — real-time
+          of tot 50× versneld. Elke rijder is een stip op het circuit, met echte GPS-coördinaten
+          als basis.
+        </p>
+
+        <p>
+          <span class="tech-tag tech-tag--api">OpenF1 API</span>
+          <span class="tech-tag tech-tag--three">Three.js (WebGL)</span>
+          <span class="tech-tag tech-tag--astro">Astro</span>
+          <span class="tech-tag tech-tag--feature">Rate-limited fetcher</span>
+          <span class="tech-tag tech-tag--feature">Orthographic camera</span>
+          <span class="tech-tag tech-tag--feature">Canvas telemetry HUD</span>
+          <span class="tech-tag tech-tag--api">sessionStorage</span>
+          <span class="tech-tag tech-tag--three">BufferGeometry trails</span>
+          <span class="tech-tag tech-tag--feature">Web Audio API</span>
+          <span class="tech-tag tech-tag--three">TextureLoader headshots</span>
+        </p>
+
+        <h2>Wat de site kan</h2>
+
+        <div class="feature-grid">
+          <div class="feature-card" data-icon="🏎️">
+            <p class="feature-card__title">Live track replay</p>
+            <p>GPS-punten van alle rijders geplot op een Three.js orthografisch circuit.
+              Stippen met rijderskleur, foto als texture en een fading trail van de afgelopen 4 seconden.
+              Verstelbare snelheid: 1× tot 50×.</p>
+          </div>
+          <div class="feature-card" data-icon="📡">
+            <p class="feature-card__title">Race calendar</p>
+            <p>Seizoenskalender voor 2023, 2024 en 2025 opgehaald via de OpenF1 API.
+              Elk Grand Prix-weekend heeft klikbare sessie-pills (FP1, FP2, FP3, Q, SPR, R).</p>
+          </div>
+          <div class="feature-card" data-icon="📊">
+            <p class="feature-card__title">Live towers</p>
+            <p>Live intervals (race), kwalificatiescore per fase (Q1/Q2/Q3), praktijktijden,
+              live lap tracker, pit-stop tower, inhaalacties en race control berichten — allemaal
+              bijgehouden tot op de gesimuleerde tijdlijn.</p>
+          </div>
+          <div class="feature-card" data-icon="📻">
+            <p class="feature-card__title">Team radio</p>
+            <p>Teamradio-berichten spelen automatisch af op het juiste moment in de tijdlijn.
+              Popup met rijderskleur, play/pause en voortgangsbalk.</p>
+          </div>
+          <div class="feature-card" data-icon="🏁">
+            <p class="feature-card__title">Telemetry HUD</p>
+            <p>Klik een rijder aan voor een canvas-HUD: snelheid, RPM, throttle, rem, versnelling
+              en DRS — live bijgehouden via de car_data endpoint. Radiale arc-bars voor RPM en throttle.</p>
+          </div>
+          <div class="feature-card" data-icon="🎬">
+            <p class="feature-card__title">Podium screen</p>
+            <p>Aan het einde van een race verschijnt automatisch een podium-overlay met
+              P1/P2/P3 headshots en de snelste ronde.</p>
+          </div>
+          <div class="feature-card" data-icon="🌿">
+            <p class="feature-card__title">DRS zones</p>
+            <p>DRS-activatie uit de car_data wordt gemapped naar het circuit en gevisualiseerd
+              als lichtgroene segmenten met glow-effect.</p>
+          </div>
+          <div class="feature-card" data-icon="🎵">
+            <p class="feature-card__title">F1-thema bij laden</p>
+            <p>Tijdens het laden speelt het officiële F1-thema voor het sessiejaar.
+              Fade-in bij start, fade-out zodra de sessie geladen is.</p>
+          </div>
+        </div>
+
+        <h2>Module-architectuur</h2>
+        <p>
+          Het project is opgezet in Astro voor de UI-shell, met alle interactieve logica
+          verdeeld over ES modules. Elke module heeft één verantwoordelijkheid:
+        </p>
+
+        <table class="module-table" aria-label="Module-overzicht">
+          <thead>
+            <tr>
+              <th scope="col">Module</th>
+              <th scope="col">Verantwoordelijkheid</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>track-data.js</td><td>Rate-limited API fetcher, sessie- en locatiedata ophalen, driver info map bouwen</td></tr>
+            <tr><td>track-scene.js</td><td>Three.js scene, camera, renderer, track geometry, rijdersstipjes en raycasting</td></tr>
+            <tr><td>track-overlays.js</td><td>Driver trails (BufferGeometry), DRS zones (car_data → circuit-segmenten)</td></tr>
+            <tr><td>track-playback.js</td><td>Animatieloop, tijdlijn-scrubber, tower dispatch, weeroverlay, stationary detection</td></tr>
+            <tr><td>track-telemetry.js</td><td>Canvas HUD voor snelheid / RPM / throttle / rem / DRS per rijder</td></tr>
+            <tr><td>track-radio.js</td><td>Team radio popup — timed playback op de gesimuleerde tijdlijn</td></tr>
+            <tr><td>track-camera.js</td><td>Orthografisch zoom/pan, rijder-focus mode met smooth lerp</td></tr>
+            <tr><td>track-theme.js</td><td>F1-thema fade-in/out tijdens sessie laden</td></tr>
+            <tr><td>tower-race.js</td><td>Race interval tower — interval + gap, tyre-indicator, DNF detectie</td></tr>
+            <tr><td>tower-qualifying.js</td><td>Kwalificatietower — Q1/Q2/Q3 fases, eliminatielogica, gevarenkleur</td></tr>
+            <tr><td>tower-practice.js</td><td>Vrije training — beste rondetijden gesorteerd</td></tr>
+            <tr><td>tower-live-lap.js</td><td>Alleen vliegende ronden (stint-data als bron), sector S1/S2/S3 live</td></tr>
+            <tr><td>tower-pit.js</td><td>Pitstops met compound-wissel, compound-kleuren</td></tr>
+            <tr><td>tower-overtakes.js</td><td>Inhaalbewegingen met lap-nummer</td></tr>
+            <tr><td>tower-race-control.js</td><td>Race control berichten — vlaggen, safety car, DRS</td></tr>
+            <tr><td>tower-sectors.js</td><td>Sector-kleur logica (paars / groen / geel / blauw)</td></tr>
+            <tr><td>tower-base.js</td><td>Gedeelde tower-rij builder, team logo URL helper</td></tr>
+            <tr><td>tower-context-menu.js</td><td>Rechtermuisknop context menu op tower-rijen</td></tr>
+            <tr><td>tower-resize.js</td><td>Drag-to-resize en collapse/expand per tower</td></tr>
+            <tr><td>session-comparison.js</td><td>Rijder-vergelijking: lap-barchart + sectorvergelijking</td></tr>
+            <tr><td>podium-screen.js</td><td>Podium overlay na afloop van een race</td></tr>
+            <tr><td>easter-eggs.js</td><td>Keysequentie-dispatcher voor alle easter eggs</td></tr>
+            <tr><td>easter-egg-who.js</td><td>Doctor Who easter egg — rijders vervangen door DW-karakters</td></tr>
+          </tbody>
+        </table>
+
+        <h2>Code highlight: rate-limited API fetcher</h2>
+        <p>
+          De OpenF1 API heeft strikte limieten: max 3 requests per seconde en 28 per minuut.
+          In plaats van gewoon <code>fetch()</code> aan te roepen heb ik een wrapper gebouwd
+          die een rolling request-log bijhoudt en automatisch wacht als een limiet bereikt wordt:
+        </p>
+        <div class="code-block" role="region" aria-label="Code: rate-limited fetcher">
+          <pre><span class="cm">// track-data.js — automatisch wachten bij rate limits</span>
+<span class="kw">export function</span> <span class="fn">createApiFetcher</span>(onRateLimitMessage) {
+  <span class="kw">const</span> requestLog = [];
+  <span class="kw">const</span> PER_SEC = <span class="str">3</span>, PER_MIN = <span class="str">28</span>;
+  <span class="kw">const</span> delay = ms => <span class="kw">new</span> Promise(r => setTimeout(r, ms));
+
+  <span class="kw">return async function</span> <span class="fn">apiFetch</span>(url) {
+    <span class="kw">while</span> (true) {
+      <span class="kw">const</span> t = Date.now();
+      <span class="kw">while</span> (requestLog.length && requestLog[<span class="str">0</span>] < t - <span class="str">60_000</span>)
+        requestLog.shift();
+
+      <span class="kw">const</span> recentSec = requestLog.filter(ts => ts > t - <span class="str">1_000</span>).length;
+      <span class="kw">if</span> (recentSec >= PER_SEC) {
+        <span class="kw">const</span> oldest1s = requestLog.find(ts => ts > t - <span class="str">1_000</span>);
+        <span class="kw">await</span> delay(<span class="str">1_000</span> - (t - oldest1s) + <span class="str">50</span>);
+        <span class="kw">continue</span>;
+      }
+      <span class="kw">if</span> (requestLog.length >= PER_MIN) {
+        <span class="kw">await</span> delay(<span class="str">60_000</span> - (t - requestLog[<span class="str">0</span>]) + <span class="str">50</span>);
+        <span class="kw">continue</span>;
+      }
+      requestLog.push(Date.now());
+      <span class="kw">const</span> res = <span class="kw">await</span> fetch(url);
+      <span class="kw">if</span> (res.status === <span class="str">429</span>) {
+        requestLog.pop();
+        <span class="kw">await</span> delay(<span class="str">10_000</span>);
+        <span class="kw">continue</span>;
+      }
+      <span class="kw">return</span> res.json();
+    }
+  };
+}</pre>
+        </div>
+
+        <h2>Code highlight: driver trails via BufferGeometry</h2>
+        <p>
+          Elke rijder heeft een fading trail van de afgelopen 4 seconden. In plaats van steeds
+          nieuwe geometrie aan te maken, hergebruik ik een vaste <code>BufferGeometry</code>
+          met 41 vertices. Kleur per vertex fadet van transparant (staart) naar de teamkleur (kop):
+        </p>
+        <div class="code-block" role="region" aria-label="Code: driver trail BufferGeometry">
+          <pre><span class="cm">// track-overlays.js — vertex colors: transparant (staart) → teamkleur (kop)</span>
+<span class="kw">const</span> TRAIL_POINTS = <span class="str">40</span>;
+
+<span class="kw">const</span> geo = <span class="kw">new</span> THREE.<span class="fn">BufferGeometry</span>();
+geo.setAttribute(<span class="str">'position'</span>, <span class="kw">new</span> THREE.<span class="fn">BufferAttribute</span>(positions, <span class="str">3</span>));
+geo.setAttribute(<span class="str">'color'</span>,    <span class="kw">new</span> THREE.<span class="fn">BufferAttribute</span>(colors,    <span class="str">3</span>));
+
+<span class="cm">// Elke frame updaten — geen nieuwe objecten</span>
+<span class="kw">for</span> (<span class="kw">let</span> i = <span class="str">0</span>; i <= TRAIL_POINTS; i++) {
+  <span class="kw">const</span> alpha = i / TRAIL_POINTS; <span class="cm">// 0=onzichtbaar → 1=vol</span>
+  colors[i * <span class="str">3</span>]     = rgb.r * alpha;
+  colors[i * <span class="str">3</span> + <span class="str">1</span>] = rgb.g * alpha;
+  colors[i * <span class="str">3</span> + <span class="str">2</span>] = rgb.b * alpha;
+}
+geo.attributes.color.needsUpdate = <span class="kw">true</span>;</pre>
+        </div>
+
+        <h2>Code highlight: Doctor Who easter egg</h2>
+        <p>
+          Typ <code>who</code> op het toetsenbord en alle rijders op de grid worden vervangen
+          door Doctor Who-karakters. Portretten worden live opgehaald via de Wikipedia
+          pageimages API. Een tweede <code>who</code> zet alles terug:
+        </p>
+        <div class="code-block" role="region" aria-label="Code: Doctor Who easter egg">
+          <pre><span class="cm">// easter-egg-who.js — Wikipedia thumbnails ophalen en rijderinfo vervangen</span>
+<span class="kw">const</span> WHO_CHARACTERS = [
+  { name: <span class="str">'The Doctor'</span>, abbr: <span class="str">'DOC'</span>, colour: <span class="str">'#003B6F'</span>, wiki: <span class="str">'Tenth_Doctor'</span> },
+  { name: <span class="str">'The Dalek'</span>,  abbr: <span class="str">'DAL'</span>, colour: <span class="str">'#B8860B'</span>, wiki: <span class="kw">null</span>,
+    img: <span class="str">'https://upload.wikimedia.org/...'</span> },
+  <span class="cm">// ... 18 meer karakters</span>
+];
+
+<span class="kw">async function</span> <span class="fn">activate</span>() {
+  <span class="kw">const</span> pool   = <span class="fn">shuffle</span>(WHO_CHARACTERS).<span class="fn">slice</span>(<span class="str">0</span>, driverNums.length);
+  <span class="kw">const</span> thumbs = <span class="kw">await</span> <span class="fn">fetchWikiThumbnails</span>(pool.filter(c => c.wiki).map(c => c.wiki));
+
+  driverNums.forEach((dn, i) => {
+    <span class="kw">const</span> char = pool[i];
+    Object.assign(driverInfoMap[dn], {
+      acronym: char.abbr, lastName: char.name,
+      colour: char.colour,
+      headshotUrl: char.img ?? thumbs[char.wiki] ?? <span class="kw">null</span>,
+    });
+  });
+  <span class="cm">// Three.js dots live herladen met nieuwe texturen</span>
+  driverDots.forEach((dot, idx) => <span class="fn">reloadDotTexture</span>(dot.dotMesh, ...));
+}</pre>
+        </div>
+
+        <h2>Easter eggs</h2>
+        <p>
+          <span class="egg-tag">typ "who" → Doctor Who grid</span>
+          <span class="egg-tag">typ "max" → Max Verstappen geluidje</span>
+        </p>
+
+        <h2>Bestandsstructuur</h2>
+        <div class="file-tree" role="img" aria-label="Bestandsstructuur F1 Explorer">
+          <span class="dir">📁 f1-explorer/</span><br>
+          &nbsp;&nbsp;<span class="dir">📁 src/</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="dir">📁 pages/</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cm">📄 index.astro</span>&nbsp; <span class="cm">— shell: kalender + visualiser</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="dir">📁 components/</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cm">📄 TrackVisualiser.astro</span>&nbsp; <span class="cm">— alle HTML voor de visualiser UI</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cm">📄 RaceCalendar.astro</span>&nbsp; <span class="cm">— carousel + sessie-pills</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cm">📄 JsonExplorer.astro</span>&nbsp; <span class="cm">— raw API endpoint explorer</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="dir">📁 scripts/</span>&nbsp; <span class="cm">— alle JS modules (zie tabel hierboven)</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="dir">📁 styles/</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cm">📄 global.css</span><br>
+          &nbsp;&nbsp;<span class="dir">📁 public/</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="dir">📁 themes/</span>&nbsp; <span class="cm">— F1-thema audio per jaar</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="dir">📁 sounds/</span>&nbsp; <span class="cm">— easter egg geluiden</span>
+        </div>
+
+        <h2>Feedback</h2>
+        <div class="feedback-box">
+          <span class="feedback-box__label">Officiële beoordeling · 10 / 10</span>
+          <blockquote>
+            "Super goed gedaan, Joost!"
+          </blockquote>
+        </div>
+
+        <h2>Nieuwe inzichten</h2>
+        <div class="insight-grid">
+          <div class="insight-card">
+            <p class="insight-card__num">01</p>
+            <p class="insight-card__title">API rate limiting is een eerste-klas probleem</p>
+            <p>Een API aanroepen is makkelijk. Een API aanroepen zonder ban te krijgen
+              terwijl je 15+ endpoints parallel bevraagt, is een architectuurprobleem.
+              De rolling-window rate limiter was meer werk dan verwacht en meer waard dan ik dacht.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__num">02</p>
+            <p class="insight-card__title">Three.js voor data visualisatie</p>
+            <p>WebGL via Three.js is niet alleen voor 3D games. Een orthografisch cameramodel,
+              BufferGeometry voor trails en TextureLoader voor rijderfoto's — Three.js bleek een
+              uitstekende keuze voor een 2D data-visualisatie die soepel moet lopen.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__num">03</p>
+            <p class="insight-card__title">Module-splitting als architectuurdiscipline</p>
+            <p>22 JS-modules, elk met één verantwoordelijkheid. De verleiding om alles in één
+              file te stoppen was groot. De splitsing hield het project behapbaar en maakte
+              het makkelijk om losse towers te testen en uitbreiden.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__num">04</p>
+            <p class="insight-card__title">Tijdlijn-gebaseerde state is complex</p>
+            <p>Elke tower, elke trail, elke sector — ze moeten allemaal consistent zijn met
+              de gesimuleerde tijd. Scrubben naar een eerder moment, dan terug spelen.
+              Stationaire rijders verbergen. Dat soort randgevallen doe je pas echt goed
+              als je ze allemaal een keer fout hebt.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__num">05</p>
+            <p class="insight-card__title">Easter eggs verdienen architectuur</p>
+            <p>De Doctor Who easter egg vervangt rijdersinfo live in Three.js — inclusief
+              het herladen van texturen in bestaande dot-meshes. Dat vereiste een clean
+              interface tussen de easter egg module en de rest van het systeem.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__num">06</p>
+            <p class="insight-card__title">Astro als lichte app-shell</p>
+            <p>Astro laat je HTML componenten schrijven met zero JS-overhead. De zware
+              interactiviteit zit in vanilla JS modules — Astro doet alleen de structuur.
+              Die scheiding hield de site snel en de code overzichtelijk.</p>
+          </div>
+        </div>
+
+        <h2>Reflectie</h2>
+        <p>
+          Dit was het project waarbij ik voor het eerst echt in een externe API ben gedoken op
+          een schaal die er toe doet. Niet één endpoint, maar dertien. Niet één rijder, maar
+          twintig — tegelijk, met echte GPS-data die tot 50× versneld op het scherm rijdt.
+        </p>
+        <p>
+          Het moment waarop de eerste stippen over het circuit bewogen was een van de beste
+          momenten van de minor. Daarna werd het pas echt interessant: rate limiting,
+          stationary detection, de stint-gebaseerde flying lap filter, de canvas telemetry HUD.
+          Elk probleem was kleiner dan het volgende.
+        </p>
+        <p>
+          De Doctor Who easter egg was bewust overspecs. Niet gevraagd, wel leuk om te bouwen.
+          En het paste goed bij de opdracht: laat zien dat je de API begrijpt genoeg om er
+          creatief mee om te gaan.
+        </p>
+
+        <p style="margin-top: var(--space-xl);">
+          <a href="#" class="btn btn--primary">→ Bekijk F1 Explorer live</a>
+          <a href="#" class="btn" style="margin-left: var(--space-sm);">→ GitHub repo</a>
+        </p>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>© 2026 — Joost Krebbers · Meesterschap Blog</p>
+      <p>Built from scratch · No frameworks · Two themes</p>
+    </div>
+  </footer>
+
+</body>
+</html>
