@@ -4,28 +4,190 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Weekly Nerd — Meesterschap</title>
-  <meta name="description" content="Uitkomst en nieuwe inzichten van Sprint 0." />
-
+  <meta name="description" content="Weekly Nerd verslagen: Killian Valkhof, Peter-Paul Koch, Nils Binder, Rosa, Johan Huijkman, Marleen Stikker." />
   <script src="../js/theme-toggle.js"></script>
-
   <link rel="stylesheet" href="../css/reset.css" />
   <link rel="stylesheet" href="../css/tokens.css" />
   <link rel="stylesheet" href="../css/themes.css" />
   <link rel="stylesheet" href="../css/base.css" />
   <link rel="stylesheet" href="../css/components.css" />
+  <style>
+    /* Nerd entry */
+    .nerd-entry {
+      border-top: var(--border-width) solid var(--color-border);
+      padding-block: var(--space-2xl);
+    }
+    .nerd-entry:first-of-type { border-top: none; }
+
+    .nerd-entry__header {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+      margin-bottom: var(--space-lg);
+    }
+    .nerd-entry__num {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xl);
+      font-weight: 700;
+      color: var(--color-accent);
+      opacity: 0.18;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .nerd-entry__label {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--color-accent);
+      display: block;
+      margin-bottom: var(--space-3xs);
+    }
+    .nerd-entry__title {
+      font-family: var(--font-display);
+      font-size: var(--fs-xl);
+      font-weight: 700;
+      color: var(--color-text);
+      line-height: 1.1;
+      margin-bottom: var(--space-3xs);
+    }
+    .nerd-entry__sub {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--color-text-dim);
+      letter-spacing: 0.08em;
+    }
+
+    /* Tag */
+    .topic-tag {
+      display: inline-flex;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      letter-spacing: 0.08em;
+      padding: 3px 10px;
+      border-radius: var(--radius-sm);
+      margin: var(--space-3xs);
+      border: 1px solid var(--color-border);
+      color: var(--color-text-dim);
+    }
+
+    /* Key takeaway box */
+    .takeaway {
+      background: var(--color-bg-card);
+      border-left: 3px solid var(--color-accent-green);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: var(--space-sm) var(--space-md);
+      margin-top: var(--space-lg);
+    }
+    .takeaway__label {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--color-accent-green);
+      margin-bottom: var(--space-3xs);
+    }
+    .takeaway p {
+      font-size: var(--fs-sm);
+      color: var(--color-text-muted);
+      line-height: 1.6;
+    }
+
+    /* Quote */
+    .quote-block {
+      border-left: 3px solid var(--color-accent);
+      padding: var(--space-sm) var(--space-md);
+      margin-block: var(--space-md);
+      background: var(--color-bg-card);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    }
+    .quote-block p {
+      font-family: var(--font-display);
+      font-size: var(--fs-lg);
+      color: var(--color-text);
+      line-height: 1.4;
+      font-style: italic;
+    }
+    .quote-block cite {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--color-text-dim);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      display: block;
+      margin-top: var(--space-xs);
+      font-style: normal;
+    }
+
+    /* Concept grid */
+    .concept-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--space-md);
+      margin-block: var(--space-lg);
+    }
+    .concept-card {
+      background: var(--color-bg-card);
+      border: var(--border-width) solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+    }
+    .concept-card__title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: var(--fs-base);
+      color: var(--color-accent);
+      margin-bottom: var(--space-xs);
+    }
+    .concept-card p {
+      font-size: var(--fs-sm);
+      color: var(--color-text-muted);
+      line-height: 1.5;
+    }
+
+    /* Person row */
+    .person-row {
+      display: flex;
+      gap: var(--space-md);
+      align-items: flex-start;
+      padding: var(--space-md);
+      background: var(--color-bg-card);
+      border: var(--border-width) solid var(--color-border);
+      border-radius: var(--radius-md);
+      margin-block: var(--space-xs);
+    }
+    .person-row__label {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-accent);
+      min-width: 80px;
+      flex-shrink: 0;
+      padding-top: 2px;
+    }
+    .person-row p {
+      font-size: var(--fs-sm);
+      color: var(--color-text-muted);
+      line-height: 1.5;
+    }
+    .person-row p strong {
+      color: var(--color-text);
+    }
+  </style>
 </head>
 <body>
 
   <a href="#main" class="skip-link">Skip naar inhoud</a>
 
-  <!-- ============== NAV ============== -->
   <header class="nav">
     <div class="container nav__inner">
       <a href="../index.html" class="nav__brand" aria-label="Meesterschap home">
         <span>MEESTERSCHAP</span>
         <span class="nav__brand-tag">'26</span>
       </a>
-
       <button class="nav__toggle" data-nav-toggle aria-expanded="false" aria-controls="primary-nav" aria-label="Menu openen">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
           <line x1="3" y1="6" x2="17" y2="6"/>
@@ -33,7 +195,6 @@
           <line x1="3" y1="14" x2="17" y2="14"/>
         </svg>
       </button>
-
       <nav aria-label="Hoofdnavigatie">
         <ul class="nav__list" id="primary-nav" data-nav-list>
           <li><a class="nav__link" href="../index.html">Home</a></li>
@@ -41,31 +202,24 @@
           <li><a class="nav__link" href="hackathon.html">Hackathon</a></li>
           <li><a class="nav__link" href="weekly-nerd.html" aria-current="page">Weekly Nerd</a></li>
           <li><a class="nav__link" href="weekly-geek.html">Weekly Geek</a></li>
-        <li class="nav__item--dropdown">
+          <li class="nav__item--dropdown">
             <button class="nav__dropdown-toggle" data-dropdown-toggle aria-expanded="false" aria-haspopup="true">
-                Vakken
-                <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5"
-                    aria-hidden="true">
-                    <path d="M1 1l4 4 4-4" />
-                </svg>
+              Vakken
+              <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg>
             </button>
             <ul class="nav__dropdown" role="menu">
-                <li role="none"><a href="vakken.html" role="menuitem">Overzicht</a></li>
-                <li role="none"><a href="vakken-css-ttr.html" role="menuitem">CSS to the Rescue <span
-                            class="nav__dropdown__score">9,5</span></a></li>
-                <li role="none"><a href="vakken-browser-tech.html" role="menuitem">Browser Tech <span
-                            class="nav__dropdown__score">10</span></a></li>
-                <li role="none"><a href="vakken-hcd.html" role="menuitem">Human Centered Design <span
-                            class="nav__dropdown__score">9</span></a></li>
-                <li role="none"><a href="vakken-api.html" role="menuitem">API <span class="nav__dropdown__score">10</span></a>
-                </li>
+              <li role="none"><a href="vakken.html" role="menuitem">Overzicht</a></li>
+              <li role="none"><a href="vakken-css-ttr.html" role="menuitem">CSS to the Rescue <span class="nav__dropdown__score">9,5</span></a></li>
+              <li role="none"><a href="vakken-browser-tech.html" role="menuitem">Browser Tech <span class="nav__dropdown__score">10</span></a></li>
+              <li role="none"><a href="vakken-hcd.html" role="menuitem">Human Centered Design <span class="nav__dropdown__score">9</span></a></li>
+              <li role="none"><a href="vakken-api.html" role="menuitem">API <span class="nav__dropdown__score">10</span></a></li>
             </ul>
-        </li>
+          </li>
           <li><a class="nav__link" href="meesterproef.html">Meesterproef</a></li>
           <li>
             <button class="theme-toggle" data-theme-toggle aria-label="Wissel thema">
               <span class="theme-toggle__indicator" aria-hidden="true"></span>
-            <span data-theme-label>Night</span>
+              <span data-theme-label>Night Race</span>
             </button>
           </li>
         </ul>
@@ -73,71 +227,507 @@
     </div>
   </header>
 
-  <!-- ============== MAIN ============== -->
   <main id="main">
     <div class="container">
 
-      <!-- BREADCRUMB -->
       <nav aria-label="Kruimelpad" class="breadcrumb">
         <a href="../index.html">Home</a>
         <span class="breadcrumb__sep">/</span>
         <span>Weekly Nerd</span>
       </nav>
 
-      <!-- HERO -->
       <section class="hero fade-in" aria-labelledby="page-title">
         <p class="eyebrow hero__eyebrow">Sector 03 — Weekly Nerd</p>
-        <h1 id="page-title">Weekly Nerd</h1>
+        <h1 id="page-title">Weekly<br>Nerd</h1>
         <p class="hero__lead">
-          Verslagen van elke Weekly Nerd sessie — onderwerpen, tools, voorbeelden en ideeën die mij triggerden.
+          Zes sprekers, zes sessies. Van CSS als vervanging voor JavaScript tot het
+          open social web — elke Weekly Nerd liet me anders nadenken over het vak.
         </p>
       </section>
 
-      <!-- META STRIP -->
-      <div class="data-strip">
+      <div class="data-strip" role="region" aria-label="Weekly Nerd info">
         <div class="data-strip__item">
-          <p class="data-strip__label">Deadline</p>
-          <p class="data-strip__value">WEKELIJKS</p>
+          <p class="data-strip__label">Sessies</p>
+          <p class="data-strip__value">06</p>
         </div>
         <div class="data-strip__item">
-          <p class="data-strip__label">Duur</p>
-          <p class="data-strip__value">— dagen</p>
+          <p class="data-strip__label">Periode</p>
+          <p class="data-strip__value">FEB – APR</p>
         </div>
         <div class="data-strip__item">
-          <p class="data-strip__label">Status</p>
-          <p class="data-strip__value data-strip__value--accent">— WIP</p>
+          <p class="data-strip__label">Thema's</p>
+          <p class="data-strip__value data-strip__value--accent">CSS · A11Y · WEB</p>
         </div>
       </div>
 
-      <!-- CONTENT -->
-      <article class="prose">
-        <h2>Opdracht</h2>
+      <!-- ══════════════════════════════
+           SESSIE 1 — KILLIAN VALKHOF
+      ══════════════════════════════ -->
+      <article class="nerd-entry prose fade-in" aria-labelledby="nerd1-title">
+        <div class="nerd-entry__header">
+          <span class="nerd-entry__num" aria-hidden="true">01</span>
+          <div>
+            <span class="nerd-entry__label">4 februari 2026</span>
+            <h2 class="nerd-entry__title" id="nerd1-title">Killian Valkhof</h2>
+            <p class="nerd-entry__sub">CSS as a replacement for JavaScript</p>
+          </div>
+        </div>
+
+        <span class="topic-tag">Rule of Least Power</span>
+        <span class="topic-tag">CSS-only interactie</span>
+        <span class="topic-tag">Backward compatibility</span>
+        <span class="topic-tag">Input styling</span>
+        <span class="topic-tag">Accordeons &amp; dialogs</span>
+
+        <h3>Wat hij vertelde</h3>
         <p>
-          [Hier komt een korte beschrijving van wat de Sprint 0 opdracht was.]
+          Killian opende met een principe dat me de hele minor is bijgebleven:
+          de <strong>Rule of Least Power</strong> — kies altijd de minst krachtige taal
+          die geschikt is voor een taak. Voor het web betekent dat: kijk eerst naar HTML,
+          dan CSS, dan pas JavaScript.
         </p>
 
-        <h2>Wat ik heb gemaakt</h2>
+        <div class="quote-block">
+          <p>"Je kan meer CSS gebruiken voor dingen dan je denkt, in plaats van JS."</p>
+        </div>
+
         <p>
-          [Beschrijf je werk. Voeg screenshots, links of code voorbeelden toe.]
+          Browsers zijn backwards compatible — als iets ooit heeft gewerkt, moet het altijd
+          blijven werken. Dat is een belofte die browsers aan het web doen. Killian liet zien
+          dat je dat als voordeel kunt gebruiken: CSS die je leert, hoef je nooit opnieuw te leren.
         </p>
 
-        <h2>Nieuwe inzichten</h2>
-        <ul>
-          <li>[Inzicht 1 — wat heb je geleerd?]</li>
-          <li>[Inzicht 2 — wat verraste je?]</li>
-          <li>[Inzicht 3 — wat ga je anders doen?]</li>
-        </ul>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <p class="concept-card__title">appearance: none</p>
+            <p>Haalt alle browser-styling weg van een input, zodat je hem volledig zelf kunt stylen.
+              Inputs waren 10 jaar geleden moeilijk te stylen — nu niet meer.</p>
+          </div>
+          <div class="concept-card">
+            <p class="concept-card__title">scroll-behaviour: smooth</p>
+            <p>Smooth scrollen in puur CSS, zonder JavaScript. De browser bepaalt de animatie
+              en respecteert automatisch <code>prefers-reduced-motion</code>.</p>
+          </div>
+          <div class="concept-card">
+            <p class="concept-card__title">scroll-margin</p>
+            <p>Als je een fixed header hebt en smooth scrollt naar een anker, zorgt
+              <code>scroll-margin</code> dat de pagina stopt met de juiste afstand tot de top.</p>
+          </div>
+          <div class="concept-card">
+            <p class="concept-card__title">&lt;details&gt; &amp; accordeons</p>
+            <p>Native accordeon zonder JavaScript. Het <code>name</code> attribuut zorgt
+              dat maar één tegelijk open kan staan. <code>::marker</code> overschrijft het pijltje.
+              <code>&lt;details open&gt;</code> forceert de open staat.</p>
+          </div>
+          <div class="concept-card">
+            <p class="concept-card__title">&lt;dialog&gt;</p>
+            <p>De moderne vervanger van <code>alert()</code>. Je kunt hem stylen — alert niet.
+              Standaard onzichtbaar, needs JS om te openen — maar de rendering en
+              focus-trap zijn gratis.</p>
+          </div>
+          <div class="concept-card">
+            <p class="concept-card__title">prefers-reduced-motion</p>
+            <p>Gebruikers kunnen in het OS aangeven dat ze minder beweging willen.
+              <code>@media (prefers-reduced-motion: reduce)</code> respecteert dit in CSS.</p>
+          </div>
+        </div>
 
-        <h2>Reflectie</h2>
         <p>
-          [Korte reflectie: wat ging goed, wat moeilijk, wat neem je mee.]
+          Een scherpe observatie: als je iets leert, check dan niet alleen of het werkt —
+          maar of er iets beter bestaat. Kennis is geen eindbestemming.
         </p>
+
+        <div class="takeaway">
+          <p class="takeaway__label">Wat ik heb meegenomen</p>
+          <p>De Rule of Least Power herkende ik direct in KRAFTWERK (CSS to the Rescue).
+            Maar het echte inzicht was breder: elke keer als ik nu JavaScript schrijf,
+            vraag ik me eerst af of HTML of CSS het ook kan. Vaak wel.</p>
+        </div>
+      </article>
+
+      <!-- ══════════════════════════════
+           SESSIE 2 — PETER-PAUL KOCH
+      ══════════════════════════════ -->
+      <article class="nerd-entry prose fade-in" aria-labelledby="nerd2-title">
+        <div class="nerd-entry__header">
+          <span class="nerd-entry__num" aria-hidden="true">02</span>
+          <div>
+            <span class="nerd-entry__label">19 februari 2026</span>
+            <h2 class="nerd-entry__title" id="nerd2-title">Peter-Paul Koch</h2>
+            <p class="nerd-entry__sub">Browsers &amp; support detection</p>
+          </div>
+        </div>
+
+        <span class="topic-tag">Browser architectuur</span>
+        <span class="topic-tag">Rendering engine</span>
+        <span class="topic-tag">Render blocking</span>
+        <span class="topic-tag">Backward compatibility</span>
+        <span class="topic-tag">Browsergeschiedenis</span>
+
+        <h3>Wat hij vertelde</h3>
+        <p>
+          Peter-Paul Koch — auteur van quirksmode.org en een van de meest ervaren
+          browser-experts ter wereld — gaf een lezing over hoe browsers eigenlijk werken
+          en hoe we daarmee moeten omgaan als developers.
+        </p>
+
+        <h3>Wat zit er in een browser?</h3>
+        <div class="concept-grid">
+          <div class="concept-card">
+            <p class="concept-card__title">Rendering engine</p>
+            <p>Verantwoordelijk voor HTML en CSS parsing, rendering, en de constructie
+              van de DOM en AOM-trees. Niet voor de interface of JavaScript engine.
+              Chrome gebruikt Blink (afgesplitst van WebKit).</p>
+          </div>
+          <div class="concept-card">
+            <p class="concept-card__title">AOM — Accessibility Object Model</p>
+            <p>Naast de DOM bouwt de browser ook een AOM — een parallelle boom die
+              screenreaders en andere assistive technology gebruiken om de pagina te begrijpen.</p>
+          </div>
+          <div class="concept-card">
+            <p class="concept-card__title">Core vs DOM</p>
+            <p>Core: wat JavaScript een programmeertaal maakt (variabelen, functies, loops).
+              DOM: de manier waarop JS delen van een HTML-pagina kan aanspreken en wijzigen.
+              Twee aparte dingen.</p>
+          </div>
+          <div class="concept-card">
+            <p class="concept-card__title">Render blocking</p>
+            <p>CSS blokkeert altijd rendering. JavaScript ook — tenzij je <code>async</code>
+              of <code>defer</code> gebruikt. Defer: laad later, voer uit als DOM klaar is.
+              Async: laad en voer uit zodra klaar, ongeacht DOM.</p>
+          </div>
+        </div>
+
+        <h3>Een korte browsergeschiedenis</h3>
+        <p>
+          PPK nam ons mee door de browseroorlog — en hoe die het web heeft gevormd:
+        </p>
+        <p>
+          1990: WorldWideWeb — de allereerste browser, gebouwd door Tim Berners-Lee.
+          1993: Mosaic — eerste browser voor gewone mensen.
+          1994: Netscape — eerste betaalde browser.
+          1995: Internet Explorer &amp; Opera (Opera's oprichter was ook uitvinder van CSS).
+          2000: Konqueror — hobbyproject van Linux-gebruikers, engine later opgekocht door Apple.
+          2003: Safari. 2004: Firefox. 2007: Safari iOS. 2008: Chrome met de Blink-engine.
+          2024: Ladybird — nieuwe rendering engine, gestart als hobbyproject.
+        </p>
+
+        <div class="quote-block">
+          <p>"Browsers are the most hostile development platforms in the world."</p>
+          <cite>— Douglas Crockford (maker van JSON)</cite>
+        </div>
+
+        <p>
+          Backward compatibility: als iets ooit heeft gewerkt in een browser, moet het
+          altijd blijven werken. Geen doctype in je HTML? Dan valt de browser terug op
+          Internet Explorer 6-gedrag.
+        </p>
+
+        <div class="takeaway">
+          <p class="takeaway__label">Wat ik heb meegenomen</p>
+          <p>Ik kende het verschil tussen DOM en Core niet echt — ik gebruikte beide gewoon
+            als "JavaScript". Het AOM-model was nieuw voor mij en sloot direct aan op het
+            HCD-vak: de browser bouwt een aparte boom voor screenreaders.
+            Als je die negeert in je HTML, negeert de screenreader jouw content.</p>
+        </div>
+      </article>
+
+      <!-- ══════════════════════════════
+           SESSIE 3 — NILS BINDER
+      ══════════════════════════════ -->
+      <article class="nerd-entry prose fade-in" aria-labelledby="nerd3-title">
+        <div class="nerd-entry__header">
+          <span class="nerd-entry__num" aria-hidden="true">03</span>
+          <div>
+            <span class="nerd-entry__label">4 maart 2026</span>
+            <h2 class="nerd-entry__title" id="nerd3-title">Nils Binder</h2>
+            <p class="nerd-entry__sub">9Elements · Design voor het web</p>
+          </div>
+        </div>
+
+        <span class="topic-tag">Figma vs Photoshop</span>
+        <span class="topic-tag">Web development triangle</span>
+        <span class="topic-tag">Design tools</span>
+        <span class="topic-tag">CSS Grid live</span>
+
+        <h3>Wat hij vertelde</h3>
+        <p>
+          Nils Binder werkt bij 9Elements — een bureau dat communications design,
+          product development en web development combineert. Ze werkten onder andere voor
+          Schalke 04 en de OECD.
+        </p>
+        <p>
+          Hij nam ons mee door hoe het designproces voor het web is veranderd: van Photoshop
+          (20 jaar geleden) naar Figma (nu). Photoshop was gemaakt voor printontwerp en
+          deed dingen die op het web helemaal niet mogelijk waren. Figma is gebouwd voor
+          het web en sluit veel beter aan op wat browsers kunnen.
+        </p>
+
+        <div class="concept-grid">
+          <div class="concept-card">
+            <p class="concept-card__title">Figma vs Photoshop</p>
+            <p>Photoshop: overcompliceerd, gemaakt voor print, makkelijk dingen ontwerpen
+              die het web niet ondersteunt. Figma: eenvoudiger, variabelen, dichter bij
+              hoe het web werkt.</p>
+          </div>
+          <div class="concept-card">
+            <p class="concept-card__title">Web development triangle</p>
+            <p>De huidige workflow bij veel bureaus: Figma → Tailwind → AI. Nils liet zien
+              hoe dat de drempel verlaagt maar ook risico's meebrengt voor kwaliteit en begrip.</p>
+          </div>
+          <div class="concept-card">
+            <p class="concept-card__title">CSS Grid live</p>
+            <p>Nils demonstreerde live hoe je een nieuwspagina-layout bouwt met
+              <code>grid-template-columns: 2fr 3fr auto 1fr</code> — hoe weinig code je
+              nodig hebt als je CSS Grid echt begrijpt.</p>
+          </div>
+        </div>
+
+        <div class="quote-block">
+          <p>"In Figma is alles mogelijk wat op het web kan. Maar niet alles wat op het web kan, is beschikbaar in Figma."</p>
+        </div>
+
+        <div class="takeaway">
+          <p class="takeaway__label">Wat ik heb meegenomen</p>
+          <p>De web development triangle (Figma → Tailwind → AI) zette me aan het denken.
+            Het maakt dingen sneller, maar het vergroot ook de kans dat je nooit echt
+            begrijpt waarom iets werkt. De minor is een antwoord op die driehoek:
+            terug naar het fundament.</p>
+        </div>
+      </article>
+
+      <!-- ══════════════════════════════
+           SESSIE 4 — ROSA
+      ══════════════════════════════ -->
+      <article class="nerd-entry prose fade-in" aria-labelledby="nerd4-title">
+        <div class="nerd-entry__header">
+          <span class="nerd-entry__num" aria-hidden="true">04</span>
+          <div>
+            <span class="nerd-entry__label">2 april 2026</span>
+            <h2 class="nerd-entry__title" id="nerd4-title">Rosa</h2>
+            <p class="nerd-entry__sub">Hackers United — zelf hosten &amp; digitale soevereiniteit</p>
+          </div>
+        </div>
+
+        <span class="topic-tag">Zelf hosten</span>
+        <span class="topic-tag">Servers</span>
+        <span class="topic-tag">Static site generators</span>
+        <span class="topic-tag">Digitale afhankelijkheid</span>
+        <span class="topic-tag">Planned obsolescence</span>
+
+        <h3>Wat zij vertelde</h3>
+        <p>
+          Rosa — van Hackers United — stelde een vraag die ik me nog nooit had gesteld:
+          <em>waar leeft je website eigenlijk?</em> Het antwoord is bijna altijd "de cloud"
+          of "AWS" — wat in de praktijk betekent: op servers van een paar grote bedrijven,
+          ver buiten jouw controle.
+        </p>
+
+        <h3>Wat is een hacker?</h3>
+        <p>
+          Niet wat films ervan maken. In de context van Rosa: iemand die creatief omgaat
+          met systemen en beperkingen. Voorbeelden: een backend draaien op Google Sheets,
+          je eigen CMS bouwen, een proof of concept maken in Keynote.
+        </p>
+
+        <div class="concept-grid">
+          <div class="concept-card">
+            <p class="concept-card__title">Planned obsolescence</p>
+            <p>Apparaten en software worden bewust ontworpen om te verouderen — plannen
+              werken reparatie en hacken actief tegen. De enige oplossing lijkt soms
+              "niet kopen" en meer afhankelijkheid vermijden.</p>
+          </div>
+          <div class="concept-card">
+            <p class="concept-card__title">Rosa the travelling server</p>
+            <p>Rosa heeft een fysieke server die ze overal mee naartoe neemt.
+              Een server is gewoon een computer. Oudere hardware dwingt je anders
+              na te denken over frameworks en keuzes in HTML/CSS.</p>
+          </div>
+          <div class="concept-card">
+            <p class="concept-card__title">Static site generators</p>
+            <p>Minder belasting voor de server. Als alles faalt: je hebt nog steeds markdown.
+              Leesbare code. Eleventy (11ty) als voorbeeld: grote community,
+              veel documentatie.</p>
+          </div>
+          <div class="concept-card">
+            <p class="concept-card__title">Zelf hosten</p>
+            <p>Web dev server met Linux en Yunohost. Zelf hosten van: messaging platform,
+              je eigen website, een radioshow. Technisch mogelijk, maar vraagt
+              bewuste keuze.</p>
+          </div>
+        </div>
+
+        <div class="takeaway">
+          <p class="takeaway__label">Wat ik heb meegenomen</p>
+          <p>Ik had nog nooit nagedacht over waar mijn websites echt leven. Rosa maakte
+            dat concreet. Het is niet alleen een technische keuze — het is een politieke
+            keuze. En het koppelt direct aan wat Marleen Stikker later zou zeggen over
+            digitale afhankelijkheid.</p>
+        </div>
+      </article>
+
+      <!-- ══════════════════════════════
+           SESSIE 5 — JOHAN HUIJKMAN
+      ══════════════════════════════ -->
+      <article class="nerd-entry prose fade-in" aria-labelledby="nerd5-title">
+        <div class="nerd-entry__header">
+          <span class="nerd-entry__num" aria-hidden="true">05</span>
+          <div>
+            <span class="nerd-entry__label">9 april 2026</span>
+            <h2 class="nerd-entry__title" id="nerd5-title">Johan Huijkman</h2>
+            <p class="nerd-entry__sub">Accessibility &amp; WCAG in de praktijk</p>
+          </div>
+        </div>
+
+        <span class="topic-tag">WCAG 2.2</span>
+        <span class="topic-tag">POUR principes</span>
+        <span class="topic-tag">Screenreader</span>
+        <span class="topic-tag">Slechtziend</span>
+        <span class="topic-tag">Autisme</span>
+        <span class="topic-tag">Mobiliteitsbeperking</span>
+
+        <h3>Wat hij vertelde</h3>
+        <p>
+          Johan Huijkman gaf een van de meest concrete sessies van de minor. Hij opende
+          met een quote die me bijbleef:
+        </p>
+
+        <div class="quote-block">
+          <p>"Je gaat het pad zien als je het doorhebt. En je hoort het pad als je luistert."</p>
+        </div>
+
+        <p>
+          WCAG staat voor Web Content Accessibility Guidelines. De vier basisprincipes — POUR —
+          zijn de fundering van alles:
+          <strong>Perceivable</strong> (waarneembaar),
+          <strong>Operable</strong> (bedienbaar),
+          <strong>Understandable</strong> (begrijpelijk) en
+          <strong>Robust</strong> (robuust).
+        </p>
+
+        <h3>Drie gebruikers, drie problemen</h3>
+
+        <div class="person-row">
+          <p class="person-row__label">Martijn</p>
+          <p><strong>Slechtziend.</strong> Geen schermbeveiliging, maar alles heel groot zoomen.
+            Door elementen die in en uitschuiven verspringt de layout bij 400% zoom —
+            waardoor delen van de pagina onbereikbaar worden.
+            Wat helpt: gerelateerde info bij elkaar, animaties uitzetten, schaalbaarheid, focusrand.</p>
+        </div>
+
+        <div class="person-row">
+          <p class="person-row__label">Naduah</p>
+          <p><strong>Mobiliteitsproblemen.</strong> Problemen op de site: te veel velle kleuren,
+            te veel info tegelijk, te veel klikken voor info, info ver uit elkaar.
+            Wat helpt: rustige layout, minder stappen, info groeperen.</p>
+        </div>
+
+        <div class="person-row">
+          <p class="person-row__label">Guido</p>
+          <p><strong>Autist.</strong> Kan visuele en auditieve prikkels niet filteren.
+            Wat helpt: rustige layout en vormgeving, duidelijke instructies en meldingen,
+            voorspelbaarheid — geen verrassende animaties of pop-ups.</p>
+        </div>
+
+        <p>
+          Johan liet ook zien hoe je met "H" door headings kunt navigeren in een screenreader.
+          Elke foto hoeft geen alt-tekst — maar wél een leeg <code>alt=""</code> attribuut,
+          zodat de screenreader de afbeelding overslaat.
+        </p>
+
+        <div class="takeaway">
+          <p class="takeaway__label">Wat ik heb meegenomen</p>
+          <p>Deze sessie sloot perfect aan op het HCD-vak. Berend, Martijn, Naduah, Guido —
+            ze zijn allemaal anders. Accessibility is geen checklist die je afvinkt;
+            het is begrijpen hoe iemand de wereld ervaart en daar je ontwerp op aanpassen.
+            Testen met 400% zoom had ik daarvoor nooit gedaan. Nu altijd.</p>
+        </div>
+      </article>
+
+      <!-- ══════════════════════════════
+           SESSIE 6 — MARLEEN STIKKER
+      ══════════════════════════════ -->
+      <article class="nerd-entry prose fade-in" aria-labelledby="nerd6-title">
+        <div class="nerd-entry__header">
+          <span class="nerd-entry__num" aria-hidden="true">06</span>
+          <div>
+            <span class="nerd-entry__label">17 april 2026</span>
+            <h2 class="nerd-entry__title" id="nerd6-title">Marleen Stikker</h2>
+            <p class="nerd-entry__sub">The web you want — open social web</p>
+          </div>
+        </div>
+
+        <span class="topic-tag">Open social web</span>
+        <span class="topic-tag">Fediverse</span>
+        <span class="topic-tag">ActivityPub</span>
+        <span class="topic-tag">Privacy by design</span>
+        <span class="topic-tag">Big Tech regulatie</span>
+        <span class="topic-tag">Digitale soevereiniteit</span>
+
+        <h3>Wat zij vertelde</h3>
+        <p>
+          Marleen Stikker van Waag Futurelab sloot de Weekly Nerd-reeks af met een van
+          de meest urgente sessies: het web zoals we het willen versus het web zoals het
+          nu is. Sociale media bestaan al van 1994 — maar we hebben nooit de controle
+          gehad over onze privacy of wat we zien via algoritmes.
+        </p>
+
+        <div class="quote-block">
+          <p>"Waarom moet een stofzuiger foto's sturen naar het bedrijf?"</p>
+          <cite>— Marleen Stikker</cite>
+        </div>
+
+        <p>
+          Dat is geen rare vraag. Het is een symptoom van een groter probleem: digitale
+          afhankelijkheid en surveillance by design. Elk apparaat, elk platform — gebouwd
+          om data te verzamelen, niet om je te dienen.
+        </p>
+
+        <div class="concept-grid">
+          <div class="concept-card">
+            <p class="concept-card__title">Protocol, not platform</p>
+            <p>Het internet is gebouwd op protocollen (open standaarden). Sociale media
+              zijn gesloten platforms. Het Fediverse keert dit om: open protocollen
+              (ActivityPub) waarop iedereen een eigen server kan draaien.</p>
+          </div>
+          <div class="concept-card">
+            <p class="concept-card__title">Fediverse</p>
+            <p>Gefedereerd netwerk van verbonden servers. X → Mastodon,
+              Instagram → Pixelfed, YouTube → PeerTube, TikTok → Loops.video.
+              Geen centrale eigenaar, geen algoritme dat je gedrag verkoopt.</p>
+          </div>
+          <div class="concept-card">
+            <p class="concept-card__title">Regulatie als voorwaarde</p>
+            <p>EU-wetgeving (GDPR, Digital Services Act, Data Governance Act, AI Act)
+              opent markten, stimuleert creativiteit, verwelkomt nieuwe spelers
+              en verdedigt democratie. Regulatie is niet de vijand van innovatie.</p>
+          </div>
+          <div class="concept-card">
+            <p class="concept-card__title">Public stack</p>
+            <p>Nee: locked-in, AI-monopolies, surveillance, centralisatie, extractief.
+              Ja: interoperabel, public AI, privacy by design, gedistribueerd,
+              regeneratief, publieke waarden, democratie in control.</p>
+          </div>
+        </div>
+
+        <p>
+          Campagnes die Marleen noemde: <em>#MakeSocialsSocialAgain</em>,
+          People vs Big Tech, Public Spaces, Free Our Feeds.
+        </p>
+
+        <div class="takeaway">
+          <p class="takeaway__label">Wat ik heb meegenomen</p>
+          <p>Deze sessie verbond alles: Rosa's vraag over waar je website leeft, PPK's
+            uitleg over hoe browsers werken als publiek platform, de Weekly Geek sessie
+            over agentic AI. Het web is niet neutraal — het is ontworpen door mensen
+            met belangen. Als developer kies ik elke dag mee hoe dat web eruitziet.
+            Dat is een verantwoordelijkheid die ik daarvoor onderschatte.</p>
+        </div>
       </article>
 
     </div>
   </main>
 
-  <!-- ============== FOOTER ============== -->
   <footer class="footer">
     <div class="container footer__inner">
       <p>© 2026 — Joost Krebbers · Meesterschap Blog</p>
