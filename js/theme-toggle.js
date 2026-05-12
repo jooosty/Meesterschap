@@ -24,21 +24,24 @@
     return 'night';
   }
 
+  function syncThemeUI(theme) {
+    document.querySelectorAll('[data-theme-toggle]').forEach(btn => {
+      const label = btn.querySelector('[data-theme-label]');
+      if (label) {
+        label.textContent = theme === 'night' ? 'Night' : 'Day';
+      }
+      btn.setAttribute('aria-label',
+        `Schakel naar ${theme === 'night' ? 'lichte' : 'donkere'} modus`);
+    });
+  }
+
   function applyTheme(theme) {
     root.setAttribute('data-theme', theme);
     try {
       localStorage.setItem(STORAGE_KEY, theme);
     } catch (e) { /* ignore */ }
 
-    // Update toggle UI labels
-    document.querySelectorAll('[data-theme-toggle]').forEach(btn => {
-      const label = btn.querySelector('[data-theme-label]');
-      if (label) {
-        label.textContent = theme === 'night' ? 'Night Race' : 'Day GP';
-      }
-      btn.setAttribute('aria-label',
-        `Schakel naar ${theme === 'night' ? 'lichte' : 'donkere'} modus`);
-    });
+    syncThemeUI(theme);
   }
 
   // Apply ASAP to avoid flash of wrong theme
@@ -46,6 +49,8 @@
 
   // Wire up toggles when DOM is ready
   document.addEventListener('DOMContentLoaded', () => {
+    syncThemeUI(root.getAttribute('data-theme') || getInitialTheme());
+
     document.querySelectorAll('[data-theme-toggle]').forEach(btn => {
       btn.addEventListener('click', () => {
         const current = root.getAttribute('data-theme') || 'night';

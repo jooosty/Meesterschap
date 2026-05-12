@@ -42,7 +42,7 @@
   color-scheme: dark;
 }
 
-/* === DAY GP === */
+/* === DAY === */
 /* Licht, paddock-papier, ochtend-kwalificatie sfeer */
 [data-theme="day"] {
   --color-bg: #f4f1ea;
