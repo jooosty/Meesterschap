@@ -34,7 +34,7 @@
     document.querySelectorAll('[data-theme-toggle]').forEach(btn => {
       const label = btn.querySelector('[data-theme-label]');
       if (label) {
-        label.textContent = theme === 'night' ? 'Night' : 'Day';
+        label.textContent = theme === 'night' ? 'Night Race' : 'Day GP';
       }
       btn.setAttribute('aria-label',
         `Schakel naar ${theme === 'night' ? 'lichte' : 'donkere'} modus`);
@@ -63,5 +63,33 @@
         navToggle.setAttribute('aria-expanded', String(!open));
       });
     }
+
+    // Dropdown menus
+    document.querySelectorAll('[data-dropdown-toggle]').forEach(btn => {
+      const dropdown = btn.nextElementSibling;
+      if (!dropdown) return;
+
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const open = btn.getAttribute('aria-expanded') === 'true';
+        // close all others first
+        document.querySelectorAll('[data-dropdown-toggle]').forEach(b => {
+          b.setAttribute('aria-expanded', 'false');
+          b.nextElementSibling?.classList.remove('is-open');
+        });
+        if (!open) {
+          btn.setAttribute('aria-expanded', 'true');
+          dropdown.classList.add('is-open');
+        }
+      });
+    });
+
+    // Close dropdowns on outside click
+    document.addEventListener('click', () => {
+      document.querySelectorAll('[data-dropdown-toggle]').forEach(btn => {
+        btn.setAttribute('aria-expanded', 'false');
+        btn.nextElementSibling?.classList.remove('is-open');
+      });
+    });
   });
 })();

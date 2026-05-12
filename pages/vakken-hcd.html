@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="nl" data-theme="night">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Human Centered Design — Vakken — Meesterschap</title>
+  <meta name="description" content="Human Centered Design: Spraakberichten-splitter voor Berend. Beoordeling: 9/10." />
+  <script src="../js/theme-toggle.js"></script>
+  <link rel="stylesheet" href="../css/reset.css" />
+  <link rel="stylesheet" href="../css/tokens.css" />
+  <link rel="stylesheet" href="../css/themes.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <style>
+    .code-block {
+      background: var(--color-bg-card);
+      border: var(--border-width) solid var(--color-border);
+      border-left: 3px solid var(--color-accent);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      overflow-x: auto;
+      margin-block: var(--space-md);
+    }
+    .code-block pre {
+      font-family: var(--font-mono);
+      font-size: var(--fs-sm);
+      line-height: 1.7;
+      margin: 0;
+      white-space: pre;
+      color: var(--color-text);
+    }
+    .kw  { color: var(--color-accent-cool); }
+    .fn  { color: var(--color-accent-green); }
+    .str { color: var(--color-accent); }
+    .cm  { color: var(--color-text-dim); font-style: italic; }
+
+    /* Score badge */
+    .score-badge {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-bg-card);
+      border: var(--border-thick) solid var(--color-accent-green);
+      border-radius: var(--radius-md);
+      padding: var(--space-md) var(--space-xl);
+      text-align: center;
+      box-shadow: 0 0 32px rgba(0, 255, 136, 0.08);
+    }
+    .score-badge__number { font-family: var(--font-display); font-size: var(--fs-3xl); font-weight: 700; color: var(--color-accent-green); line-height: 1; }
+    .score-badge__label  { font-family: var(--font-mono); font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.2em; color: var(--color-text-dim); margin-top: var(--space-3xs); }
+    .hero-row { display: flex; align-items: flex-start; gap: var(--space-xl); flex-wrap: wrap; }
+    .hero-row .hero { flex: 1; min-width: 280px; padding-block: 0; }
+
+    /* Iteration timeline */
+    .iteration-list { margin-block: var(--space-lg); }
+    .iteration {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: var(--space-md);
+      padding-block: var(--space-lg);
+      border-top: var(--border-width) solid var(--color-border);
+    }
+    .iteration:last-child { border-bottom: var(--border-width) solid var(--color-border); }
+    .iteration__num {
+      font-family: var(--font-mono);
+      font-size: var(--fs-2xl);
+      font-weight: 700;
+      color: var(--color-accent);
+      opacity: 0.25;
+      line-height: 1;
+      padding-top: 4px;
+    }
+    .iteration__date {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--color-text-dim);
+      margin-bottom: var(--space-xs);
+    }
+    .iteration__title {
+      font-family: var(--font-display);
+      font-size: var(--fs-lg);
+      font-weight: 700;
+      color: var(--color-text);
+      margin-bottom: var(--space-sm);
+    }
+    .iteration ul { list-style: none; padding: 0; margin-bottom: var(--space-sm); }
+    .iteration ul li {
+      font-size: var(--fs-sm);
+      color: var(--color-text-muted);
+      padding-left: var(--space-sm);
+      position: relative;
+      margin-bottom: var(--space-3xs);
+      line-height: 1.5;
+    }
+    .iteration ul li::before { content: ""; position: absolute; left: 0; top: 0.7em; width: 6px; height: 1px; background: var(--color-accent); }
+
+    /* Quote / verdict */
+    .verdict {
+      background: var(--color-bg-card);
+      border-left: 3px solid var(--color-accent-cool);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: var(--space-sm) var(--space-md);
+      margin-top: var(--space-sm);
+    }
+    .verdict__label {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--color-accent-cool);
+      margin-bottom: var(--space-3xs);
+    }
+    .verdict p {
+      font-family: var(--font-display);
+      font-size: var(--fs-base);
+      color: var(--color-text);
+      line-height: 1.4;
+      font-weight: 400;
+      font-style: italic;
+    }
+
+    /* Principles grid */
+    .principle-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--space-md);
+      margin-block: var(--space-lg);
+    }
+    .principle-card {
+      background: var(--color-bg-card);
+      border: var(--border-width) solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+    }
+    .principle-card__title { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-base); color: var(--color-accent); margin-bottom: var(--space-xs); }
+    .principle-card p { font-size: var(--fs-sm); color: var(--color-text-muted); line-height: 1.5; }
+
+    /* Design choices table */
+    .choices-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--fs-sm);
+      margin-block: var(--space-lg);
+    }
+    .choices-table th {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-text-dim);
+      text-align: left;
+      padding: var(--space-xs) var(--space-sm);
+      border-bottom: var(--border-width) solid var(--color-border);
+    }
+    .choices-table td {
+      padding: var(--space-xs) var(--space-sm);
+      border-bottom: var(--border-width) solid var(--color-border);
+      color: var(--color-text-muted);
+      line-height: 1.5;
+      vertical-align: top;
+    }
+    .choices-table tr:hover td { background: var(--color-bg-card); }
+    .choices-table td:first-child { color: var(--color-text); font-weight: 500; white-space: nowrap; }
+
+    /* Insight grid */
+    .insight-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-md); margin-block: var(--space-lg); }
+    .insight-card { background: var(--color-bg-card); border: var(--border-width) solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-md); }
+    .insight-card__num { font-family: var(--font-mono); font-size: var(--fs-2xl); font-weight: 700; color: var(--color-accent); opacity: 0.2; line-height: 1; margin-bottom: var(--space-xs); }
+    .insight-card__title { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-base); color: var(--color-text); margin-bottom: var(--space-xs); }
+    .insight-card p { font-size: var(--fs-sm); color: var(--color-text-muted); line-height: 1.5; }
+
+    /* Feedback box */
+    .feedback-box { background: var(--color-bg-card); border: var(--border-thick) solid var(--color-accent-green); border-radius: var(--radius-md); padding: var(--space-lg); margin-block: var(--space-xl); position: relative; }
+    .feedback-box__label { position: absolute; top: calc(-1 * var(--fs-xs) - 4px); left: var(--space-md); font-family: var(--font-mono); font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.15em; color: var(--color-accent-green); background: var(--color-bg); padding: 0 var(--space-2xs); }
+    .feedback-box blockquote { font-size: var(--fs-lg); font-family: var(--font-display); color: var(--color-text); line-height: 1.4; border: none; padding: 0; margin: 0; background: transparent; font-style: normal; }
+  </style>
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Skip naar inhoud</a>
+
+  <header class="nav">
+    <div class="container nav__inner">
+      <a href="../index.html" class="nav__brand" aria-label="Meesterschap home">
+        <span>MEESTERSCHAP</span>
+        <span class="nav__brand-tag">'26</span>
+      </a>
+      <button class="nav__toggle" data-nav-toggle aria-expanded="false" aria-controls="primary-nav" aria-label="Menu openen">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <line x1="3" y1="6" x2="17" y2="6"/>
+          <line x1="3" y1="10" x2="17" y2="10"/>
+          <line x1="3" y1="14" x2="17" y2="14"/>
+        </svg>
+      </button>
+      <nav aria-label="Hoofdnavigatie">
+        <ul class="nav__list" id="primary-nav" data-nav-list>
+          <li><a class="nav__link" href="../index.html">Home</a></li>
+          <li><a class="nav__link" href="sprint-0.html">Sprint 0</a></li>
+          <li><a class="nav__link" href="hackathon.html">Hackathon</a></li>
+          <li><a class="nav__link" href="weekly-nerd.html">Weekly Nerd</a></li>
+          <li><a class="nav__link" href="weekly-geek.html">Weekly Geek</a></li>
+          <li class="nav__item--dropdown">
+            <button class="nav__dropdown-toggle" data-dropdown-toggle aria-expanded="false" aria-haspopup="true">
+              Vakken
+              <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg>
+            </button>
+            <ul class="nav__dropdown" role="menu">
+              <li role="none"><a href="vakken.html" role="menuitem">Overzicht</a></li>
+              <li role="none"><a href="vakken-css-ttr.html" role="menuitem">CSS to the Rescue <span class="nav__dropdown__score">9,5</span></a></li>
+              <li role="none"><a href="vakken-browser-tech.html" role="menuitem">Browser Tech <span class="nav__dropdown__score">10</span></a></li>
+              <li role="none"><a href="vakken-hcd.html" role="menuitem" aria-current="page">Human Centered Design <span class="nav__dropdown__score">9</span></a></li>
+            </ul>
+          </li>
+          <li><a class="nav__link" href="meesterproef.html">Meesterproef</a></li>
+          <li>
+            <button class="theme-toggle" data-theme-toggle aria-label="Wissel thema">
+              <span class="theme-toggle__indicator" aria-hidden="true"></span>
+              <span data-theme-label>Night Race</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="container">
+
+      <nav aria-label="Kruimelpad" class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span class="breadcrumb__sep">/</span>
+        <a href="vakken.html">Vakken</a>
+        <span class="breadcrumb__sep">/</span>
+        <span>Human Centered Design</span>
+      </nav>
+
+      <div class="hero-row">
+        <section class="hero fade-in" aria-labelledby="page-title">
+          <p class="eyebrow hero__eyebrow">Sector 05c — Human Centered Design</p>
+          <h1 id="page-title">Human<br>Centered Design</h1>
+          <p class="hero__lead">
+            Vijf iteraties co-design met Berend — blind, NVDA-gebruiker.
+            Het doel: lange spraakberichten opsplitsen zodat hij per onderwerp kan reageren.
+          </p>
+        </section>
+        <div style="display:flex; align-items:center; padding-top: var(--space-2xl);">
+          <div class="score-badge fade-in" role="img" aria-label="Beoordeling: 9 uit 10">
+            <span class="score-badge__number">9</span>
+            <span class="score-badge__label">/ 10</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="data-strip" role="region" aria-label="Vak info">
+        <div class="data-strip__item">
+          <p class="data-strip__label">Vak</p>
+          <p class="data-strip__value">HCD</p>
+        </div>
+        <div class="data-strip__item">
+          <p class="data-strip__label">Gebruiker</p>
+          <p class="data-strip__value">BEREND</p>
+        </div>
+        <div class="data-strip__item">
+          <p class="data-strip__label">Iteraties</p>
+          <p class="data-strip__value data-strip__value--accent">5</p>
+        </div>
+        <div class="data-strip__item">
+          <p class="data-strip__label">Score</p>
+          <p class="data-strip__value">9 / 10</p>
+        </div>
+      </div>
+
+      <article class="prose fade-in">
+
+        <!-- HET PROBLEEM -->
+        <h2>Het probleem</h2>
+        <p>
+          Berend is blind en communiceert dagelijks via spraakberichten. Het probleem: die berichten
+          bevatten vaak meerdere onderwerpen tegelijk. Hij moet het hele bericht horen, alles onthouden,
+          en dan één monolithisch antwoord teruggeven. Er is geen manier om per onderwerp te reageren.
+        </p>
+        <p>
+          De vraag: <em>hoe kunnen we het voor Berend mogelijk maken om op elk onderwerp in een
+          spraakbericht afzonderlijk te reageren?</em>
+        </p>
+
+        <!-- DE OPLOSSING -->
+        <h2>De oplossing: Spraakberichten-splitter</h2>
+        <p>
+          Een prototype dat Berend in staat stelt een lang spraakbericht op te nemen of een transcript
+          in te plakken, het bericht automatisch te splitsen in afzonderlijke zinnen, op elke zin
+          afzonderlijk te reageren via tekst of spraak, en alles tegelijk in te dienen.
+        </p>
+
+        <!-- EXCLUSIVE DESIGN PRINCIPLES -->
+        <h2>Exclusive Design Principles</h2>
+        <div class="principle-grid">
+          <div class="principle-card">
+            <p class="principle-card__title">Study Situation</p>
+            <p>Vijf directe testsessies met Berend — geen aannames, maar co-design met de persoon
+              die het product elke dag zou gebruiken. NVDA, Tab-navigatie, korte aankondigingen:
+              alles ontdekt door te observeren, niet door te raden.</p>
+          </div>
+          <div class="principle-card">
+            <p class="principle-card__title">Ignore Conventions</p>
+            <p>Geen traditioneel formulier. Tab is primair, Enter activeert handelingen,
+              boodschappen sluiten automatisch, alle antwoorden worden tegelijk verstuurd via
+              Ctrl+Enter. Alles anders dan standaard — bewust.</p>
+          </div>
+          <div class="principle-card">
+            <p class="principle-card__title">Prioritise Identity</p>
+            <p>Spraak is standaard, niet tekst. Geen overbodige visuele elementen.
+              Korte aankondigingen: "Antwoord op bericht 2" — nooit de hele berichttekst herhalen.
+              Alles geoptimaliseerd voor <em>Berend</em>, niet voor een generieke gebruiker.</p>
+          </div>
+          <div class="principle-card">
+            <p class="principle-card__title">Add Nonsense</p>
+            <p>Geluidje bij versturen via Web Audio API. Bericht-nummers in plaats van generieke
+              termen. Automatisch focus management. Chat-stijl antwoordenpagina geïnspireerd op
+              imBee — vertrouwd en herkenbaar.</p>
+          </div>
+        </div>
+
+        <!-- ITERATIES -->
+        <h2>De vijf iteraties</h2>
+        <div class="iteration-list">
+
+          <div class="iteration">
+            <p class="iteration__num" aria-hidden="true">01</p>
+            <div>
+              <p class="iteration__date">30 – 31 maart 2026</p>
+              <p class="iteration__title">Het begin — splitsen en kopiëren</p>
+              <ul>
+                <li>Spraakopname en transcript plakken gebouwd</li>
+                <li>Automatische zinssplitsing</li>
+                <li>Antwoordvelden per zin</li>
+                <li>Kopieerknop (per item)</li>
+              </ul>
+              <p style="font-size: var(--fs-sm); color: var(--color-text-muted); margin-bottom: var(--space-xs);">
+                Berend leerde ons: de kopieerknop was nutteloos — hij wil antwoorden versturen,
+                niet kopiëren. Tab-navigatie werkte niet logisch. Automatische focus helpt enorm.
+              </p>
+              <div class="verdict">
+                <p class="verdict__label">Berend's feedback</p>
+                <p>"Je moet me vertellen wat je aan het doen bent. Ik kan het niet zien."</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="iteration">
+            <p class="iteration__num" aria-hidden="true">02</p>
+            <div>
+              <p class="iteration__date">6 – 7 april 2026</p>
+              <p class="iteration__title">Tab-navigatie centraal</p>
+              <ul>
+                <li>Kopieerknop verwijderd</li>
+                <li>Boodschappen tabbaar gemaakt — Tab gaat door alle boodschappen</li>
+                <li>Enter opent een boodschap, focus gaat naar Spreek-in knop</li>
+                <li>Aria-labels bij tabben: berichttekst wordt voorgelezen</li>
+                <li>Boodschappen sluiten automatisch als je wegtabt zonder iets in te vullen</li>
+              </ul>
+              <div class="verdict">
+                <p class="verdict__label">Berend's feedback</p>
+                <p>"Tabbing voelt als thuiskomen."</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="iteration">
+            <p class="iteration__num" aria-hidden="true">03</p>
+            <div>
+              <p class="iteration__date">20 – 21 april 2026</p>
+              <p class="iteration__title">Bulk-actie en auditieve feedback</p>
+              <ul>
+                <li>Versturen-knop die alles tegelijk indient</li>
+                <li>Sneltoets Ctrl+Enter om overal ter plekke te versturen</li>
+                <li>Geluidje via Web Audio API + screenreader-aankondiging bij versturen</li>
+                <li>Alle boodschappen voorlezen bij tabben</li>
+              </ul>
+              <div class="verdict">
+                <p class="verdict__label">Berend's feedback</p>
+                <p>"Auditieve bevestiging werkt beter dan woorden alleen."</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="iteration">
+            <p class="iteration__num" aria-hidden="true">04</p>
+            <div>
+              <p class="iteration__date">Finale tuning</p>
+              <p class="iteration__title">Dubbele aankondigingen voorkomen</p>
+              <ul>
+                <li>Timer maakt geen geluid meer — puur visueel</li>
+                <li>Antwoordveld zegt alleen "Antwoord op bericht 2", niet de volledige berichttekst</li>
+                <li>Beantwoorden-knop aria-label: "Beantwoorden op bericht [nummer]" — geen herhaling</li>
+              </ul>
+              <div class="verdict">
+                <p class="verdict__label">Berend's feedback</p>
+                <p>"Ik zou dit zo gebruiken als het live zou gaan. Het voelt klaar."</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="iteration">
+            <p class="iteration__num" aria-hidden="true">05</p>
+            <div>
+              <p class="iteration__date">6 mei 2026</p>
+              <p class="iteration__title">Antwoordenpagina als losse chatpagina</p>
+              <ul>
+                <li>Antwoordenoverzicht verplaatst naar volledig aparte HTML-pagina (<code>antwoorden.html</code>)</li>
+                <li>Gegevens doorgegeven via <code>sessionStorage</code> — geen koppeling tussen bestanden op runtime</li>
+                <li>Chat-stijl interface geïnspireerd op imBee: groene achtergrond, witte inkomende bubbles, groene uitgaande bubbles</li>
+                <li>Elke antwoordbubble bevat geciteerd origineel bericht voor context</li>
+                <li>Alle originele berichten bovenaan, alle antwoorden gegroepeerd onderaan</li>
+                <li>Berichten zonder antwoord stilletjes overgeslagen — geen overbodige "geen antwoord" melding</li>
+              </ul>
+              <div class="verdict">
+                <p class="verdict__label">Belangrijkste inzicht</p>
+                <p>"Minder pagina-elementen op één scherm = minder cognitieve belasting voor de screenreader-gebruiker."</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- CODE HIGHLIGHTS -->
+        <h2>Code highlight: double rAF voor screenreader-aankondigingen</h2>
+        <p>
+          NVDA, JAWS en VoiceOver lezen <code>aria-live</code> regions niet altijd opnieuw als
+          de tekst gelijk wordt vervangen. De oplossing: eerst leegmaken, dan twee animatieframes
+          wachten voordat de nieuwe tekst er in komt:
+        </p>
+        <div class="code-block" role="region" aria-label="Code: double rAF announce functie">
+          <pre><span class="cm">// main.js — double rAF zorgt dat NVDA/JAWS/VoiceOver de regio altijd herleest</span>
+<span class="kw">function</span> <span class="fn">announce</span>(message) {
+  announcer.textContent = <span class="str">""</span>;
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      announcer.textContent = message;
+    });
+  });
+}</pre>
+        </div>
+
+        <h2>Code highlight: geluidje via Web Audio API</h2>
+        <p>
+          Berend wil auditieve bevestiging bij het versturen — geen browser-alert, geen tekst,
+          maar een vriendelijk "ding". Gebouwd zonder externe library, puur via de Web Audio API:
+        </p>
+        <div class="code-block" role="region" aria-label="Code: send sound via Web Audio API">
+          <pre><span class="cm">// main.js — sine wave die van 520Hz naar 780Hz ramt in 80ms</span>
+<span class="kw">function</span> <span class="fn">playSendSound</span>() {
+  <span class="kw">const</span> ctx  = <span class="kw">new</span> (window.AudioContext || window.webkitAudioContext)();
+  <span class="kw">const</span> osc  = ctx.<span class="fn">createOscillator</span>();
+  <span class="kw">const</span> gain = ctx.<span class="fn">createGain</span>();
+  osc.<span class="fn">connect</span>(gain);
+  gain.<span class="fn">connect</span>(ctx.destination);
+  osc.type = <span class="str">"sine"</span>;
+  osc.frequency.<span class="fn">setValueAtTime</span>(<span class="str">520</span>, ctx.currentTime);
+  osc.frequency.<span class="fn">exponentialRampToValueAtTime</span>(<span class="str">780</span>, ctx.currentTime + <span class="str">0.08</span>);
+  gain.gain.<span class="fn">setValueAtTime</span>(<span class="str">0.18</span>, ctx.currentTime);
+  gain.gain.<span class="fn">exponentialRampToValueAtTime</span>(<span class="str">0.001</span>, ctx.currentTime + <span class="str">0.25</span>);
+  osc.<span class="fn">start</span>(ctx.currentTime);
+  osc.<span class="fn">stop</span>(ctx.currentTime + <span class="str">0.25</span>);
+}</pre>
+        </div>
+
+        <h2>Code highlight: sessionStorage als pagina-brug</h2>
+        <p>
+          De antwoordenpagina is volledig los van <code>index.html</code>. Gegevens worden via
+          <code>sessionStorage</code> doorgegeven — zo heeft de screenreader op de nieuwe pagina
+          een schone start zonder de ruis van alle vorige elementen:
+        </p>
+        <div class="code-block" role="region" aria-label="Code: sessionStorage pagina-brug">
+          <pre><span class="cm">// main.js — sla data op vóór navigatie</span>
+sessionStorage.setItem(
+  <span class="str">"spraakberichten_antwoorden"</span>,
+  JSON.stringify(allMessages)
+);
+window.location.href = <span class="str">"antwoorden.html"</span>;
+
+<span class="cm">// antwoorden.js — lees data op nieuwe pagina</span>
+<span class="kw">const</span> raw = sessionStorage.getItem(<span class="str">"spraakberichten_antwoorden"</span>);
+<span class="kw">if</span> (raw) allMessages = JSON.parse(raw);</pre>
+        </div>
+
+        <!-- DESIGN CHOICES TABLE -->
+        <h2>Design keuzes en waarom</h2>
+        <table class="choices-table" aria-label="Overzicht van design keuzes">
+          <thead>
+            <tr>
+              <th scope="col">Keuze</th>
+              <th scope="col">Waarom</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Tab-navigatie primair</td>
+              <td>Berend navigeert exclusief met toetsenbord — muis bestaat niet in zijn workflow</td>
+            </tr>
+            <tr>
+              <td>Enter = Actie</td>
+              <td>Voelt naturlijker dan standaard "activeren" — minder stappen per handeling</td>
+            </tr>
+            <tr>
+              <td>Spraak vóór tekst</td>
+              <td>Berend communiceert liever gesproken — de Spreek-in knop is de eerste optie</td>
+            </tr>
+            <tr>
+              <td>Korte aria-labels</td>
+              <td>"Antwoord op 2" i.p.v. volledige berichttekst — geen dubbele aankondigingen</td>
+            </tr>
+            <tr>
+              <td>Geluidje bij versturen</td>
+              <td>Auditieve bevestiging voelt zekerder dan tekst alleen — ontdekt in iteratie 3</td>
+            </tr>
+            <tr>
+              <td>Automatisch sluiten bij wegtabben</td>
+              <td>Minder navigatiestappen, intuïtief — geen "annuleer" knop nodig</td>
+            </tr>
+            <tr>
+              <td>Ctrl+Enter sneltoets</td>
+              <td>Voor ervarenen, verborgen voor beginners — Berend begreep het meteen</td>
+            </tr>
+            <tr>
+              <td>Aparte antwoordenpagina</td>
+              <td>Screenreader start opnieuw, zonder ruis van vorige elementen</td>
+            </tr>
+            <tr>
+              <td>Antwoorden onderaan gegroepeerd</td>
+              <td>Eerst lezen, dan overzien — logische flow voor Berend</td>
+            </tr>
+            <tr>
+              <td>Geen "geen antwoord" melding</td>
+              <td>Overbodige ruis weghalen = rustiger screenreader-ervaring</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- FEEDBACK -->
+        <h2>Feedback</h2>
+        <div class="feedback-box">
+          <span class="feedback-box__label">Officiële beoordeling · 9 / 10</span>
+          <blockquote>
+            "Echt heel erg goed. Een enorme attention to detail, die met elke iteratie groeide.
+            Goed proces, en een goede reflectie."
+          </blockquote>
+        </div>
+
+        <!-- INZICHTEN -->
+        <h2>Nieuwe inzichten</h2>
+        <div class="insight-grid">
+          <div class="insight-card">
+            <p class="insight-card__num">01</p>
+            <p class="insight-card__title">Co-design met één persoon werkt</p>
+            <p>Je leert diepere dingen dan bij tien generieke testers. Eén persoon die het product
+              echt nodig heeft vertelt je dingen die geen user-story ooit zou bevatten.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__num">02</p>
+            <p class="insight-card__title">Auditieve feedback is niet optioneel</p>
+            <p>Voor screenreader-gebruikers is auditieve feedback net zo cruciaal als visuele
+              feedback voor ziende gebruikers. Het geluidje bij versturen deed meer
+              dan de tekst "Antwoorden verstuurd" ooit kon.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__num">03</p>
+            <p class="insight-card__title">Minder is meer</p>
+            <p>Verwijder de kopieerknop. Sluit boodschappen automatisch. Zeg geen dubbele dingen.
+              Elke element dat je weglaat is een navigatiestap minder voor iemand die
+              de hele pagina met Tab doorloopt.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__num">04</p>
+            <p class="insight-card__title">Tab is de interface</p>
+            <p>Als je Tab snapt, bouw je voor screenreader-gebruikers die Tab <em>prefereren</em>.
+              Tabvolgorde is geen detail — het is het ontwerp zelf.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__num">05</p>
+            <p class="insight-card__title">Paginagrenzen helpen</p>
+            <p>Een aparte pagina voor het antwoordoverzicht geeft de screenreader een schone start.
+              De mentale grens voor Berend was ook duidelijker: eerst reageren, dan overzien.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__num">06</p>
+            <p class="insight-card__title">Conventions bestaan voor iedereen</p>
+            <p>Sommige webconventies zijn gemaakt door mensen voor mensen die er op dezelfde manier
+              in navigeren. Exclusive Design leerde me te vragen: werkt deze conventie ook voor
+              Berend? Soms niet. Dan herzie je hem.</p>
+          </div>
+        </div>
+
+        <!-- REFLECTIE -->
+        <h2>Reflectie</h2>
+        <p>
+          HCD was het vak dat het meest van mij vroeg op persoonlijk vlak. Niet de code was complex,
+          maar het afstemmen op één specifieke persoon. Het eerste instinct bij feedback van Berend
+          was verdedigen — "maar het werkt toch?". Het tweede instinct was luisteren.
+        </p>
+        <p>
+          De vijf iteraties laten goed zien hoe het product transformeerde. Wat begon als een
+          functioneel prototype werd iets dat Berend herkende als zijn manier van werken.
+          Het moment waarop hij zei "het voelt klaar" was het beste compliment dat ik
+          bij dit vak kon krijgen.
+        </p>
+        <p>
+          De feedback over "attention to detail die met elke iteratie groeide" klopt. Je gaat
+          details zien die je normaal nooit zou opmerken — dubbele aria-aankondigingen,
+          de volgorde van Tab-stops, de timing van een geluidje. Dat niveau van aandacht
+          neem ik mee naar elk volgend project.
+        </p>
+
+        <p style="margin-top: var(--space-xl);">
+          <a href="#" class="btn btn--primary">→ Bekijk het prototype live</a>
+          <a href="#" class="btn" style="margin-left: var(--space-sm);">→ GitHub repo</a>
+        </p>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>© 2026 — Joost Krebbers · Meesterschap Blog</p>
+      <p>Built from scratch · No frameworks · Two themes</p>
+    </div>
+  </footer>
+
+</body>
+</html>

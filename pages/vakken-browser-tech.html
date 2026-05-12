@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="nl" data-theme="night">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Browser Technologies — Vakken — Meesterschap</title>
+  <meta name="description" content="Browser Technologies: aangifte erfbelasting formulier. Beoordeling: 10/10." />
+  <script src="../js/theme-toggle.js"></script>
+  <link rel="stylesheet" href="../css/reset.css" />
+  <link rel="stylesheet" href="../css/tokens.css" />
+  <link rel="stylesheet" href="../css/themes.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <style>
+    .code-block {
+      background: var(--color-bg-card);
+      border: var(--border-width) solid var(--color-border);
+      border-left: 3px solid var(--color-accent);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      overflow-x: auto;
+      margin-block: var(--space-md);
+    }
+    .code-block pre {
+      font-family: var(--font-mono);
+      font-size: var(--fs-sm);
+      line-height: 1.7;
+      margin: 0;
+      white-space: pre;
+      color: var(--color-text);
+    }
+    .kw  { color: var(--color-accent-cool); }
+    .fn  { color: var(--color-accent-green); }
+    .str { color: var(--color-accent); }
+    .cm  { color: var(--color-text-dim); font-style: italic; }
+    .score-badge {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-bg-card);
+      border: var(--border-thick) solid var(--color-accent-green);
+      border-radius: var(--radius-md);
+      padding: var(--space-md) var(--space-xl);
+      text-align: center;
+      box-shadow: 0 0 32px rgba(0, 255, 136, 0.08);
+    }
+    .score-badge__number {
+      font-family: var(--font-display);
+      font-size: var(--fs-3xl);
+      font-weight: 700;
+      color: var(--color-accent-green);
+      line-height: 1;
+    }
+    .score-badge__label {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--color-text-dim);
+      margin-top: var(--space-3xs);
+    }
+    .tech-tag {
+      display: inline-flex;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      letter-spacing: 0.08em;
+      padding: 3px 10px;
+      border-radius: var(--radius-sm);
+      margin: var(--space-3xs);
+      border: 1px solid;
+    }
+    .tech-tag--css    { color: var(--color-accent-cool);  border-color: var(--color-accent-cool);  }
+    .tech-tag--state  { color: var(--color-accent);       border-color: var(--color-accent);        }
+    .tech-tag--anim   { color: #c792ea;                   border-color: #c792ea;                    }
+    .tech-tag--layout { color: var(--color-accent-green); border-color: var(--color-accent-green);  }
+    .component-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--space-md);
+      margin-block: var(--space-lg);
+    }
+    .component-card {
+      background: var(--color-bg-card);
+      border: var(--border-width) solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      position: relative;
+      overflow: hidden;
+    }
+    .component-card::before {
+      content: attr(data-num);
+      position: absolute;
+      top: var(--space-sm);
+      right: var(--space-md);
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--color-text-dim);
+    }
+    .component-card__title { font-family: var(--font-mono); font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.15em; color: var(--color-accent); margin-bottom: var(--space-xs); }
+    .component-card p { font-size: var(--fs-sm); color: var(--color-text-muted); line-height: 1.5; }
+    .week-log { border-left: 2px solid var(--color-border); padding-left: var(--space-md); margin-block: var(--space-lg); }
+    .week-log__day { margin-bottom: var(--space-lg); position: relative; }
+    .week-log__day::before { content: ""; position: absolute; left: calc(-1 * var(--space-md) - 1px); top: 6px; width: 8px; height: 8px; border-radius: 50%; background: var(--color-accent); transform: translateX(-4px); }
+    .week-log__date { font-family: var(--font-mono); font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.15em; color: var(--color-text-dim); margin-bottom: var(--space-xs); }
+    .week-log__heading { font-family: var(--font-display); font-size: var(--fs-base); font-weight: 700; color: var(--color-text); margin-bottom: var(--space-xs); }
+    .week-log ul { list-style: none; padding: 0; }
+    .week-log ul li { font-size: var(--fs-sm); color: var(--color-text-muted); padding-left: var(--space-sm); position: relative; margin-bottom: var(--space-3xs); line-height: 1.5; }
+    .week-log ul li::before { content: ""; position: absolute; left: 0; top: 0.7em; width: 6px; height: 1px; background: var(--color-accent); }
+    .time-badge { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--color-text-dim); margin-top: var(--space-xs); }
+    .insight-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-md); margin-block: var(--space-lg); }
+    .insight-card { background: var(--color-bg-card); border: var(--border-width) solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-md); }
+    .insight-card__num { font-family: var(--font-mono); font-size: var(--fs-2xl); font-weight: 700; color: var(--color-accent); opacity: 0.2; line-height: 1; margin-bottom: var(--space-xs); }
+    .insight-card__title { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-base); color: var(--color-text); margin-bottom: var(--space-xs); }
+    .insight-card p { font-size: var(--fs-sm); color: var(--color-text-muted); line-height: 1.5; }
+    .feedback-box { background: var(--color-bg-card); border: var(--border-thick) solid var(--color-accent-green); border-radius: var(--radius-md); padding: var(--space-lg); margin-block: var(--space-xl); position: relative; }
+    .feedback-box__label { position: absolute; top: calc(-1 * var(--fs-xs) - 4px); left: var(--space-md); font-family: var(--font-mono); font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.15em; color: var(--color-accent-green); background: var(--color-bg); padding: 0 var(--space-2xs); }
+    .feedback-box blockquote { font-size: var(--fs-lg); font-family: var(--font-display); color: var(--color-text); line-height: 1.4; border: none; padding: 0; margin: 0; background: transparent; font-style: normal; }
+    .feedback-box__author { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--color-text-dim); margin-top: var(--space-sm); text-transform: uppercase; letter-spacing: 0.1em; }
+    .hero-row { display: flex; align-items: flex-start; gap: var(--space-xl); flex-wrap: wrap; }
+    .hero-row .hero { flex: 1; min-width: 280px; padding-block: 0; }
+  </style>
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Skip naar inhoud</a>
+
+  <header class="nav">
+    <div class="container nav__inner">
+      <a href="../index.html" class="nav__brand" aria-label="Meesterschap home">
+        <span>MEESTERSCHAP</span>
+        <span class="nav__brand-tag">'26</span>
+      </a>
+      <button class="nav__toggle" data-nav-toggle aria-expanded="false" aria-controls="primary-nav" aria-label="Menu openen">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <line x1="3" y1="6" x2="17" y2="6"/>
+          <line x1="3" y1="10" x2="17" y2="10"/>
+          <line x1="3" y1="14" x2="17" y2="14"/>
+        </svg>
+      </button>
+      <nav aria-label="Hoofdnavigatie">
+        <ul class="nav__list" id="primary-nav" data-nav-list>
+          <li><a class="nav__link" href="../index.html">Home</a></li>
+          <li><a class="nav__link" href="sprint-0.html">Sprint 0</a></li>
+          <li><a class="nav__link" href="hackathon.html">Hackathon</a></li>
+          <li><a class="nav__link" href="weekly-nerd.html">Weekly Nerd</a></li>
+          <li><a class="nav__link" href="weekly-geek.html">Weekly Geek</a></li>
+          <li class="nav__item--dropdown">
+            <button class="nav__dropdown-toggle" data-dropdown-toggle aria-expanded="false" aria-haspopup="true">
+              Vakken
+              <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg>
+            </button>
+            <ul class="nav__dropdown" role="menu">
+              <li role="none"><a href="vakken.html" role="menuitem">Overzicht</a></li>
+              <li role="none"><a href="vakken-css-ttr.html" role="menuitem">CSS to the Rescue <span class="nav__dropdown__score">9,5</span></a></li>
+              <li role="none"><a href="vakken-browser-tech.html" role="menuitem" aria-current="page">Browser Tech <span class="nav__dropdown__score">10</span></a></li>
+            </ul>
+          </li>
+          <li><a class="nav__link" href="meesterproef.html">Meesterproef</a></li>
+          <li>
+            <button class="theme-toggle" data-theme-toggle aria-label="Wissel thema">
+              <span class="theme-toggle__indicator" aria-hidden="true"></span>
+              <span data-theme-label>Night Race</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="container">
+
+      <nav aria-label="Kruimelpad" class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span class="breadcrumb__sep">/</span>
+        <a href="vakken.html">Vakken</a>
+        <span class="breadcrumb__sep">/</span>
+        <span>Browser Technologies</span>
+      </nav>
+
+      <div class="hero-row">
+        <section class="hero fade-in" aria-labelledby="page-title">
+          <p class="eyebrow hero__eyebrow">Sector 05b — Browser Technologies</p>
+          <h1 id="page-title">Browser<br>Technologies</h1>
+          <p class="hero__lead">
+            Een officiële belastingaangifte omzetten naar een toegankelijk, robuust en
+            gebruiksvriendelijk webformulier — met progressive enhancement als uitgangspunt.
+          </p>
+        </section>
+        <div style="display:flex; align-items:center; padding-top: var(--space-2xl);">
+          <div class="score-badge fade-in" role="img" aria-label="Beoordeling: 10 uit 10">
+            <span class="score-badge__number">10</span>
+            <span class="score-badge__label">/ 10</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="data-strip" role="region" aria-label="Vak info">
+        <div class="data-strip__item">
+          <p class="data-strip__label">Vak</p>
+          <p class="data-strip__value">BT</p>
+        </div>
+        <div class="data-strip__item">
+          <p class="data-strip__label">Concept</p>
+          <p class="data-strip__value">ERFBELASTING</p>
+        </div>
+        <div class="data-strip__item">
+          <p class="data-strip__label">Uren</p>
+          <p class="data-strip__value data-strip__value--accent">~31u</p>
+        </div>
+        <div class="data-strip__item">
+          <p class="data-strip__label">Score</p>
+          <p class="data-strip__value">10 / 10</p>
+        </div>
+      </div>
+
+      <article class="prose fade-in">
+
+        <h2>De opdracht</h2>
+        <p>
+          Het web is voor iedereen. Dat betekent dat je website moet werken op oude browsers,
+          nieuwe browsers, telefoons, game consoles, met screenreaders, met een muis, met alleen
+          een toetsenbord — en alles daartussenin.
+        </p>
+        <p>
+          De eindopdracht: zet een officiële belasting-PDF om naar een interactief webformulier.
+          Aangifte erfbelasting — een van de meest complexe formulieren die burgers moeten invullen.
+          Uitgangspunt: HTML first, dan CSS, dan JavaScript.
+        </p>
+
+        <h2>Wat ik heb gebouwd</h2>
+        <p>
+          Een volledig meerstappe formulier voor de aangifte erfbelasting 2025, gebaseerd op het
+          officiële Belastingdienst-formulier. Met real-time validatie, voortgangsbalk, print-styling
+          en donkere modus. De stijl is gebaseerd op het officiële NS design system.
+        </p>
+
+        <p>
+          <span class="tech-tag tech-tag--css">NS design tokens</span>
+          <span class="tech-tag tech-tag--state">Progressive enhancement</span>
+          <span class="tech-tag tech-tag--state">localStorage draft</span>
+          <span class="tech-tag tech-tag--css">Print CSS</span>
+          <span class="tech-tag tech-tag--anim">Dark / light mode</span>
+          <span class="tech-tag tech-tag--layout">Elfproef BSN-validatie</span>
+          <span class="tech-tag tech-tag--layout">ValidityState API</span>
+          <span class="tech-tag tech-tag--css">fieldset / legend</span>
+          <span class="tech-tag tech-tag--state">aria-live validatie</span>
+          <span class="tech-tag tech-tag--state">&lt;dialog&gt; foutmeldingen</span>
+          <span class="tech-tag tech-tag--css">datalist landenkeuze</span>
+          <span class="tech-tag tech-tag--layout">SVG voortgangsbalk</span>
+        </p>
+
+        <h2>Componenten</h2>
+        <div class="component-grid">
+          <div class="component-card" data-num="01">
+            <p class="component-card__title">9-staps formulier</p>
+            <p>Opgedeeld per logisch onderdeel. Elke stap toont alleen wat relevant is voor de situatie van de gebruiker.</p>
+          </div>
+          <div class="component-card" data-num="02">
+            <p class="component-card__title">Elfproef BSN-validatie</p>
+            <p>Het BSN wordt gevalideerd met het elfproef-algoritme via weging 9-8-7-6-5-4-3-2-1.</p>
+          </div>
+          <div class="component-card" data-num="03">
+            <p class="component-card__title">Real-time inline validatie</p>
+            <p>Elk veld geeft direct feedback bij <code>blur</code>. Groen vinkje of rode fout, met <code>aria-live="polite"</code> voor screenreaders.</p>
+          </div>
+          <div class="component-card" data-num="04">
+            <p class="component-card__title">localStorage concept-opslag</p>
+            <p>Automatisch alle veldwaarden opslaan als concept. De gebruiker kan het tabblad sluiten en later verder gaan.</p>
+          </div>
+          <div class="component-card" data-num="05">
+            <p class="component-card__title">Print styling</p>
+            <p>Via <code>@media print</code> wordt het antwoordenoverzicht een document dat lijkt op een officieel overheidsdocument.</p>
+          </div>
+          <div class="component-card" data-num="06">
+            <p class="component-card__title">NS design system</p>
+            <p>Alle stijl is gebaseerd op de officiële NS design tokens — kleurenschaal, typografie, spacing, border radius, shadows.</p>
+          </div>
+          <div class="component-card" data-num="07">
+            <p class="component-card__title">SVG voortgangsbalk</p>
+            <p>Visuele voortgangsbalk met stap-indicators. Verbindingslijnen getekend met inline SVG.</p>
+          </div>
+          <div class="component-card" data-num="08">
+            <p class="component-card__title">Conditionele vragen</p>
+            <p>Vragen over kinderen, testament en erfgenamen verschijnen alleen als de vorige vraag dat vereist.</p>
+          </div>
+        </div>
+
+        <h2>Code highlight: elfproef BSN-validatie</h2>
+        <div class="code-block" role="region" aria-label="Code: elfproef BSN validatie">
+          <pre><span class="cm">// Elfproef-validatie voor BSN (weging 9-8-7-6-5-4-3-2-1)</span>
+<span class="kw">const</span> <span class="fn">elfValidBsn</span> = (bsn) => {
+  <span class="kw">if</span> (!<span class="str">/^\d{8,9}$/</span>.test(bsn)) <span class="kw">return false</span>;
+  <span class="kw">const</span> digits = bsn.padStart(<span class="str">9</span>, <span class="str">"0"</span>).split(<span class="str">""</span>).map(Number);
+  <span class="kw">const</span> sum = digits.reduce((acc, digit, index) => {
+    <span class="kw">const</span> weight = index === <span class="str">8</span> ? <span class="str">-1</span> : <span class="str">9</span> - index;
+    <span class="kw">return</span> acc + digit * weight;
+  }, <span class="str">0</span>);
+  <span class="kw">return</span> sum % <span class="str">11</span> === <span class="str">0</span>;
+};</pre>
+        </div>
+
+        <h2>Code highlight: inline validatie met aria-live</h2>
+        <div class="code-block" role="region" aria-label="Code: inline validatie met aria-live">
+          <pre><span class="cm">// Feedback span zoeken of aanmaken naast het veld</span>
+<span class="kw">const</span> <span class="fn">getFeedback</span> = (el) => {
+  <span class="kw">let</span> next = el.nextElementSibling;
+  <span class="kw">while</span> (next) {
+    <span class="kw">if</span> (next.classList.contains(<span class="str">"inline-feedback"</span>)) <span class="kw">return</span> next;
+    next = next.nextElementSibling;
+  }
+  <span class="kw">const</span> feedback = document.createElement(<span class="str">"span"</span>);
+  feedback.className = <span class="str">"inline-feedback"</span>;
+  feedback.setAttribute(<span class="str">"aria-live"</span>, <span class="str">"polite"</span>);
+  el.insertAdjacentElement(<span class="str">"afterend"</span>, feedback);
+  <span class="kw">return</span> feedback;
+};</pre>
+        </div>
+
+        <h2>Code highlight: localStorage concept-opslag</h2>
+        <div class="code-block" role="region" aria-label="Code: localStorage draft opslaan">
+          <pre><span class="kw">const</span> <span class="fn">saveFormDraft</span> = () => {
+  <span class="kw">const</span> draft = {};
+  formElement.querySelectorAll(<span class="str">"input, select, textarea"</span>).forEach((field) => {
+    <span class="kw">if</span> (!field.name || field.type === <span class="str">"file"</span>) <span class="kw">return</span>;
+    <span class="kw">if</span> (field.type === <span class="str">"radio"</span>) {
+      <span class="kw">if</span> (field.checked) draft[field.name] = field.value;
+      <span class="kw">return</span>;
+    }
+    draft[field.name] = field.value;
+  });
+  localStorage.setItem(<span class="str">"erfbelasting-form-draft"</span>, JSON.stringify(draft));
+};</pre>
+        </div>
+
+        <h2>Dag voor dag</h2>
+        <div class="week-log">
+          <div class="week-log__day">
+            <p class="week-log__date">Ma 16 februari 2026</p>
+            <p class="week-log__heading">Formulier pagina 1 + datumvalidatie + eerste styling</p>
+            <ul>
+              <li>Formulier voor pagina 1 van de aangifte erfbelasting gebouwd</li>
+              <li>"Volgende vraag" knop verschijnt pas bij beantwoording</li>
+              <li>Datumvalidatie: geen toekomstige datum toegestaan</li>
+            </ul>
+            <p class="time-badge">⏱ ~4u</p>
+          </div>
+          <div class="week-log__day">
+            <p class="week-log__date">Di 17 februari 2026</p>
+            <p class="week-log__heading">Antwoordenpagina + validatie + NS-stijl</p>
+            <ul>
+              <li>Aparte pagina voor het tonen van ingevulde antwoorden</li>
+              <li>Validatie uitgebreid en verfijnd</li>
+              <li>NS-huisstijl toegepast</li>
+            </ul>
+            <p class="time-badge">⏱ ~5u</p>
+          </div>
+          <div class="week-log__day">
+            <p class="week-log__date">Ma 2 maart 2026</p>
+            <p class="week-log__heading">Elfproef + NS tokens + localStorage</p>
+            <ul>
+              <li>Elfproef BSN-validatie geïmplementeerd</li>
+              <li>Volledige NS design tokens toegepast</li>
+              <li>Antwoorden opslaan in localStorage</li>
+            </ul>
+            <p class="time-badge">⏱ ~5u</p>
+          </div>
+          <div class="week-log__day">
+            <p class="week-log__date">Di 3 maart 2026</p>
+            <p class="week-log__heading">Print styling</p>
+            <ul>
+              <li>Print CSS gebouwd — ziet eruit als officieel overheidsdocument</li>
+            </ul>
+            <p class="time-badge">⏱ ~3u</p>
+          </div>
+          <div class="week-log__day">
+            <p class="week-log__date">Ma 9 &amp; Di 10 maart 2026</p>
+            <p class="week-log__heading">Vragen 2 &amp; 3 + voortgangsbalk + bronnenlijst</p>
+            <ul>
+              <li>Vragen 2 en 3 volledig gebouwd inclusief validatie</li>
+              <li>Voortgangsbalk toegevoegd</li>
+              <li>Bronnenlijst aangelegd (30+ bronnen)</li>
+            </ul>
+            <p class="time-badge">⏱ ~8u</p>
+          </div>
+          <div class="week-log__day">
+            <p class="week-log__date">Ma 16 &amp; Di 17 maart 2026</p>
+            <p class="week-log__heading">Datalist + terug-knop + SVG voortgangsbalk + dark mode</p>
+            <ul>
+              <li><code>datalist</code> voor landenselectie</li>
+              <li>Terug-knop en stap-labels in de voortgangsbalk</li>
+              <li>Dark/light mode toggle gebouwd met sun/moon SVG</li>
+            </ul>
+            <p class="time-badge">⏱ ~5u 45m</p>
+          </div>
+        </div>
+
+        <h2>Feedback</h2>
+        <div class="feedback-box">
+          <span class="feedback-box__label">Officiële beoordeling · 10 / 10</span>
+          <blockquote>
+            "Buitengewoon goed werk op alle gebieden. Je hebt niet alleen heel erg veel gedaan,
+            heel veel daarvan is ook nog eens van een buitengewoon niveau."
+          </blockquote>
+          <p class="feedback-box__author" style="margin-top: var(--space-sm);">
+            "Tof om te zien hoeveel aandacht je hebt besteed aan de vormgeving en de UX. Alles ziet er erg goed uit."
+          </p>
+          <p class="feedback-box__author">
+            "Mooi om te zien dat je nu echt realiseert dat formulieren veel ingewikkelder zijn dan je altijd dacht."
+          </p>
+        </div>
+
+        <h2>Nieuwe inzichten</h2>
+        <div class="insight-grid">
+          <div class="insight-card">
+            <p class="insight-card__num">01</p>
+            <p class="insight-card__title">Formulieren zijn complexer dan je denkt</p>
+            <p>Als je een écht formulier bouwt — met conditionele vragen, validatie op meerdere niveaus
+              en accessibility — merk je hoe veel er mis kan gaan.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__num">02</p>
+            <p class="insight-card__title">HTML biedt meer dan je gebruikt</p>
+            <p><code>fieldset</code>, <code>legend</code>, <code>datalist</code>, <code>dialog</code>,
+              <code>autocomplete</code>, <code>inputmode</code> — native features die UX verbeteren zonder JavaScript.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__num">03</p>
+            <p class="insight-card__title">Validatie is een UX-beslissing</p>
+            <p>Wanneer toon je een foutmelding? Direct bij typen, bij blur, bij submit? Elke keuze heeft gevolgen
+              voor hoe frustrerend of behulpzaam het formulier aanvoelt.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__num">04</p>
+            <p class="insight-card__title">localStorage als no-cost feature</p>
+            <p>Automatisch concept opslaan kost bijna geen code maar levert enorm veel UX op.
+              Niemand wil een lang formulier opnieuw beginnen.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__num">05</p>
+            <p class="insight-card__title">Een design system gebruiken leert je patronen</p>
+            <p>Het NS design system omzetten naar CSS tokens leerde me hoe je afstand en kleur
+              systematisch organiseert.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__num">06</p>
+            <p class="insight-card__title">SVG voor custom UI elementen</p>
+            <p>Voor de verbindingslijnen in de voortgangsbalk had ik inline SVG nodig —
+              nieuw voor mij en precies genoeg voor dit doel.</p>
+          </div>
+        </div>
+
+        <h2>Reflectie</h2>
+        <p>
+          Browser Technologies was het vak waarbij ik het meest verrast werd door mezelf.
+          Aan het begin dacht ik formulieren al te begrijpen. Na zes weken bouwen aan één
+          complex formulier besef ik hoe naïef dat was.
+        </p>
+        <p>
+          De elfproef was een moment waarop techniek en werkelijkheid samenkwamen. Een algoritme
+          van papier naar werkende code brengen — en het dan ook écht zien werken met testgetallen
+          van de Belastingdienst — was bevredigend op een manier die ik niet had verwacht.
+        </p>
+        <p>
+          De 10 is mooi. Maar de feedback dat ik nu écht begrijp hoe complex formulieren zijn
+          voelt als de eigenlijke beloning.
+        </p>
+
+        <p style="margin-top: var(--space-xl);">
+          <a href="#" class="btn btn--primary">→ Bekijk het formulier live</a>
+          <a href="#" class="btn" style="margin-left: var(--space-sm);">→ GitHub repo</a>
+        </p>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>© 2026 — Joost Krebbers · Meesterschap Blog</p>
+      <p>Built from scratch · No frameworks · Two themes</p>
+    </div>
+  </footer>
+
+</body>
+</html>

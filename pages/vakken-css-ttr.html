@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="nl" data-theme="night">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CSS to the Rescue — Vakken — Meesterschap</title>
+  <meta name="description" content="CSS to the Rescue: KRAFTWERK kerncentrale-paneel. Beoordeling: 9,5/10." />
+  <script src="../js/theme-toggle.js"></script>
+  <link rel="stylesheet" href="../css/reset.css" />
+  <link rel="stylesheet" href="../css/tokens.css" />
+  <link rel="stylesheet" href="../css/themes.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <style>
+    .code-block {
+      background: var(--color-bg-card);
+      border: var(--border-width) solid var(--color-border);
+      border-left: 3px solid var(--color-accent);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      overflow-x: auto;
+      margin-block: var(--space-md);
+    }
+    .code-block pre {
+      font-family: var(--font-mono);
+      font-size: var(--fs-sm);
+      line-height: 1.7;
+      margin: 0;
+      white-space: pre;
+      color: var(--color-text);
+    }
+    .kw  { color: var(--color-accent-cool); }
+    .fn  { color: var(--color-accent-green); }
+    .str { color: var(--color-accent); }
+    .cm  { color: var(--color-text-dim); font-style: italic; }
+    .sel { color: #c792ea; }
+    .score-badge {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-bg-card);
+      border: var(--border-thick) solid var(--color-accent-green);
+      border-radius: var(--radius-md);
+      padding: var(--space-md) var(--space-xl);
+      text-align: center;
+      box-shadow: 0 0 32px rgba(0, 255, 136, 0.08);
+    }
+    .score-badge__number {
+      font-family: var(--font-display);
+      font-size: var(--fs-3xl);
+      font-weight: 700;
+      color: var(--color-accent-green);
+      line-height: 1;
+    }
+    .score-badge__label {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--color-text-dim);
+      margin-top: var(--space-3xs);
+    }
+    .tech-tag {
+      display: inline-flex;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      letter-spacing: 0.08em;
+      padding: 3px 10px;
+      border-radius: var(--radius-sm);
+      margin: var(--space-3xs);
+      border: 1px solid;
+    }
+    .tech-tag--css    { color: var(--color-accent-cool);  border-color: var(--color-accent-cool);  }
+    .tech-tag--state  { color: var(--color-accent);       border-color: var(--color-accent);        }
+    .tech-tag--anim   { color: #c792ea;                   border-color: #c792ea;                    }
+    .tech-tag--layout { color: var(--color-accent-green); border-color: var(--color-accent-green);  }
+    .component-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--space-md);
+      margin-block: var(--space-lg);
+    }
+    .component-card {
+      background: var(--color-bg-card);
+      border: var(--border-width) solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      position: relative;
+      overflow: hidden;
+    }
+    .component-card::before {
+      content: attr(data-num);
+      position: absolute;
+      top: var(--space-sm);
+      right: var(--space-md);
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--color-text-dim);
+      letter-spacing: 0.1em;
+    }
+    .component-card__title {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--color-accent);
+      margin-bottom: var(--space-xs);
+    }
+    .component-card p { font-size: var(--fs-sm); color: var(--color-text-muted); line-height: 1.5; }
+    .week-log { border-left: 2px solid var(--color-border); padding-left: var(--space-md); margin-block: var(--space-lg); }
+    .week-log__day { margin-bottom: var(--space-lg); position: relative; }
+    .week-log__day::before {
+      content: "";
+      position: absolute;
+      left: calc(-1 * var(--space-md) - 1px);
+      top: 6px;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      transform: translateX(-4px);
+    }
+    .week-log__date { font-family: var(--font-mono); font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.15em; color: var(--color-text-dim); margin-bottom: var(--space-xs); }
+    .week-log__heading { font-family: var(--font-display); font-size: var(--fs-base); font-weight: 700; color: var(--color-text); margin-bottom: var(--space-xs); }
+    .week-log ul { list-style: none; padding: 0; }
+    .week-log ul li { font-size: var(--fs-sm); color: var(--color-text-muted); padding-left: var(--space-sm); position: relative; margin-bottom: var(--space-3xs); line-height: 1.5; }
+    .week-log ul li::before { content: ""; position: absolute; left: 0; top: 0.7em; width: 6px; height: 1px; background: var(--color-accent); }
+    .time-badge { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--color-text-dim); margin-top: var(--space-xs); }
+    .failed-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-md); margin-block: var(--space-lg); }
+    .failed-card { background: var(--color-bg-card); border: var(--border-width) solid var(--color-border); border-left: 3px solid var(--color-accent-hot); border-radius: var(--radius-md); padding: var(--space-md); }
+    .failed-card__title { font-family: var(--font-mono); font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-accent-hot); margin-bottom: var(--space-xs); }
+    .failed-card p { font-size: var(--fs-sm); color: var(--color-text-muted); line-height: 1.5; }
+    .insight-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-md); margin-block: var(--space-lg); }
+    .insight-card { background: var(--color-bg-card); border: var(--border-width) solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-md); }
+    .insight-card__num { font-family: var(--font-mono); font-size: var(--fs-2xl); font-weight: 700; color: var(--color-accent); opacity: 0.2; line-height: 1; margin-bottom: var(--space-xs); }
+    .insight-card__title { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-base); color: var(--color-text); margin-bottom: var(--space-xs); }
+    .insight-card p { font-size: var(--fs-sm); color: var(--color-text-muted); line-height: 1.5; }
+    .file-tree { font-family: var(--font-mono); font-size: var(--fs-sm); background: var(--color-bg-card); border: var(--border-width) solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-md) var(--space-lg); line-height: 2; color: var(--color-text-muted); margin-block: var(--space-md); overflow-x: auto; }
+    .file-tree .dir { color: var(--color-accent); font-weight: 700; }
+    .file-tree .new { color: var(--color-accent-green); }
+    .hero-row { display: flex; align-items: flex-start; gap: var(--space-xl); flex-wrap: wrap; }
+    .hero-row .hero { flex: 1; min-width: 280px; padding-block: 0; }
+  </style>
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Skip naar inhoud</a>
+
+  <header class="nav">
+    <div class="container nav__inner">
+      <a href="../index.html" class="nav__brand" aria-label="Meesterschap home">
+        <span>MEESTERSCHAP</span>
+        <span class="nav__brand-tag">'26</span>
+      </a>
+      <button class="nav__toggle" data-nav-toggle aria-expanded="false" aria-controls="primary-nav" aria-label="Menu openen">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <line x1="3" y1="6" x2="17" y2="6"/>
+          <line x1="3" y1="10" x2="17" y2="10"/>
+          <line x1="3" y1="14" x2="17" y2="14"/>
+        </svg>
+      </button>
+      <nav aria-label="Hoofdnavigatie">
+        <ul class="nav__list" id="primary-nav" data-nav-list>
+          <li><a class="nav__link" href="../index.html">Home</a></li>
+          <li><a class="nav__link" href="sprint-0.html">Sprint 0</a></li>
+          <li><a class="nav__link" href="hackathon.html">Hackathon</a></li>
+          <li><a class="nav__link" href="weekly-nerd.html">Weekly Nerd</a></li>
+          <li><a class="nav__link" href="weekly-geek.html">Weekly Geek</a></li>
+          <li class="nav__item--dropdown">
+            <button class="nav__dropdown-toggle" data-dropdown-toggle aria-expanded="false" aria-haspopup="true">
+              Vakken
+              <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg>
+            </button>
+            <ul class="nav__dropdown" role="menu">
+              <li role="none"><a href="vakken.html" role="menuitem">Overzicht</a></li>
+              <li role="none"><a href="vakken-css-ttr.html" role="menuitem" aria-current="page">CSS to the Rescue <span class="nav__dropdown__score">9,5</span></a></li>
+              <li role="none"><a href="vakken-browser-tech.html" role="menuitem">Browser Tech <span class="nav__dropdown__score">10</span></a></li>
+            </ul>
+          </li>
+          <li><a class="nav__link" href="meesterproef.html">Meesterproef</a></li>
+          <li>
+            <button class="theme-toggle" data-theme-toggle aria-label="Wissel thema">
+              <span class="theme-toggle__indicator" aria-hidden="true"></span>
+              <span data-theme-label>Night Race</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="container">
+
+      <nav aria-label="Kruimelpad" class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span class="breadcrumb__sep">/</span>
+        <a href="vakken.html">Vakken</a>
+        <span class="breadcrumb__sep">/</span>
+        <span>CSS to the Rescue</span>
+      </nav>
+
+      <div class="hero-row">
+        <section class="hero fade-in" aria-labelledby="page-title">
+          <p class="eyebrow hero__eyebrow">Sector 05a — CSS to the Rescue</p>
+          <h1 id="page-title">CSS to the<br>Rescue</h1>
+          <p class="hero__lead">
+            Een volledig functioneel kerncentrale bedieningspaneel gebouwd met bijna
+            uitsluitend CSS. Geen JavaScript voor interactie, geen ID- of class-selectors
+            voor styling — alleen de kracht van CSS.
+          </p>
+        </section>
+        <div style="display:flex; align-items:center; padding-top: var(--space-2xl);">
+          <div class="score-badge fade-in" role="img" aria-label="Beoordeling: 9 komma 5 uit 10">
+            <span class="score-badge__number">9,5</span>
+            <span class="score-badge__label">/ 10</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="data-strip" role="region" aria-label="Vak info">
+        <div class="data-strip__item">
+          <p class="data-strip__label">Vak</p>
+          <p class="data-strip__value">CSS TTR</p>
+        </div>
+        <div class="data-strip__item">
+          <p class="data-strip__label">Concept</p>
+          <p class="data-strip__value">KRAFTWERK</p>
+        </div>
+        <div class="data-strip__item">
+          <p class="data-strip__label">Uren</p>
+          <p class="data-strip__value data-strip__value--accent">~24u</p>
+        </div>
+        <div class="data-strip__item">
+          <p class="data-strip__label">Score</p>
+          <p class="data-strip__value">9,5 / 10</p>
+        </div>
+      </div>
+
+      <article class="prose fade-in">
+
+        <h2>De opdracht</h2>
+        <p>
+          Maak een interactief component met bijna uitsluitend CSS. De twee kernregels:
+          geen IDs of classes als styling-hooks (alleen voor <code>:target</code> en
+          <code>&lt;label for&gt;</code>), en geen JavaScript voor logica — alleen een
+          minimale range-to-custom-property bridge was toegestaan.
+        </p>
+        <p>
+          Het doel: de grenzen van CSS opzoeken. Alles wat je normaal met JavaScript zou doen,
+          moet opgelost worden met selectors, pseudo-classes en de cascade.
+        </p>
+
+        <h2>Het concept: KRAFTWERK</h2>
+        <p>
+          Ik koos voor een fictief Duits kerncentrale bedieningspaneel, geïnspireerd op fotografieën
+          van verlaten Oost-Europese controlekamers. De naam KRAFTWERK — Duits voor "energiecentrale" —
+          paste perfect bij de retro-industriële esthetiek.
+        </p>
+        <p>
+          Het paneel bevat vier analoge meters, zes LED-indicatoren, drie toggleschakelaars,
+          vier draaiknoppen, START/STOP besturing en een retro scroll-drum MW display.
+          Alle interacties zijn puur CSS — ze zijn onderling verbonden: schakel je een pomp uit
+          terwijl de centrale draait, dan flash het schakelpaneel oranje.
+        </p>
+
+        <p>
+          <span class="tech-tag tech-tag--css">@layer</span>
+          <span class="tech-tag tech-tag--css">CSS nesting</span>
+          <span class="tech-tag tech-tag--css">Container queries</span>
+          <span class="tech-tag tech-tag--state">:target</span>
+          <span class="tech-tag tech-tag--state">:checked</span>
+          <span class="tech-tag tech-tag--state">~ sibling selector</span>
+          <span class="tech-tag tech-tag--state">Container style queries</span>
+          <span class="tech-tag tech-tag--anim">@keyframes</span>
+          <span class="tech-tag tech-tag--anim">letter-corrupt animatie</span>
+          <span class="tech-tag tech-tag--layout">aspect-ratio</span>
+          <span class="tech-tag tech-tag--layout">SVG feTurbulence texture</span>
+          <span class="tech-tag tech-tag--css">mix-blend-mode</span>
+          <span class="tech-tag tech-tag--css">prefers-reduced-motion</span>
+        </p>
+
+        <h2>Componenten</h2>
+        <div class="component-grid">
+          <div class="component-card" data-num="01">
+            <p class="component-card__title">Analoge meters × 4</p>
+            <p>Frequency, Pressure, Temperature, Power. Naald rotatie aangestuurd
+              via CSS custom property van de knob-range input. Werkt alleen als de centrale actief is.</p>
+          </div>
+          <div class="component-card" data-num="02">
+            <p class="component-card__title">Toggle switches × 3</p>
+            <p>Pump A, Pump B, Turbine. Pure <code>input[type=checkbox]</code> met gestylede <code>label</code>.
+              Schakelen ze uit tijdens het draaien, dan activeert een oranje waarschuwingsflash.</p>
+          </div>
+          <div class="component-card" data-num="03">
+            <p class="component-card__title">Draaiknoppen × 4</p>
+            <p><code>input[type=range]</code> gestyled als roterende knop. JS schrijft alleen de knob-waarde
+              naar een CSS custom property. Rotatie, kleur en alle feedback: puur CSS.</p>
+          </div>
+          <div class="component-card" data-num="04">
+            <p class="component-card__title">LED indicatoren × 6</p>
+            <p>Reageren op de toggle switches via de <code>~</code> sibling combinator en <code>:not(:checked)</code>.</p>
+          </div>
+          <div class="component-card" data-num="05">
+            <p class="component-card__title">START / STOP</p>
+            <p>Anchor links die <code>:target</code> activeren op verborgen <code>&lt;div&gt;</code> elementen.
+              De hele interactieve staat van het paneel hangt hier aan.</p>
+          </div>
+          <div class="component-card" data-num="06">
+            <p class="component-card__title">MW Scroll display</p>
+            <p>Retro "drum"-display gebouwd met 21 <code>&lt;span&gt;</code>-elementen en een scroll-animatie.
+              Flikkert rood bij een meltdown.</p>
+          </div>
+          <div class="component-card" data-num="07">
+            <p class="component-card__title">EMERGENCY meltdown</p>
+            <p>Alle vier knoppen op maximum + centrale actief = EMERGENCY overlay.
+              Volledig via container style queries. Het scherm schudt.</p>
+          </div>
+          <div class="component-card" data-num="08">
+            <p class="component-card__title">Easter eggs × 5</p>
+            <p>Inspectie-stempel, ingenieursgravure, koffievlek, versleten pomp-label,
+              en een plantnaam die verschijnt bij 2 seconden hoveren op de titel.</p>
+          </div>
+        </div>
+
+        <h2>Code highlight: container style queries voor meltdown</h2>
+        <p>
+          Als alle vier knoppen op 145 staan én de centrale draait, treedt er een noodtoestand op.
+          Dit vereist het checken van vier CSS custom property waarden tegelijk — normaal JavaScript werk.
+          De oplossing: geneste container style queries:
+        </p>
+        <div class="code-block" role="region" aria-label="Code: meltdown via container style queries">
+          <pre><span class="cm">/* state.css — meltdown triggert alleen als alle 4 knoppen op 145 staan */</span>
+<span class="sel">@container style(--knob-power: 145)</span> {
+  <span class="sel">@container style(--knob-freq: 145)</span> {
+    <span class="sel">@container style(--knob-pressure: 145)</span> {
+      <span class="sel">@container style(--knob-temp: 145)</span> {
+        <span class="sel">#running:target ~ main > p:last-of-type</span> {
+          opacity: <span class="str">1</span>;
+          animation: emergency-pulse <span class="str">0.8s</span> ease-in-out infinite;
+        }
+        <span class="sel">#running:target ~ main</span> {
+          animation:
+            meltdown-shake <span class="str">0.15s</span> ease-in-out infinite,
+            overload-flash  <span class="str">0.6s</span> ease-in-out infinite;
+        }
+      }
+    }
+  }
+}</pre>
+        </div>
+
+        <h2>Code highlight: letter-corrupt animatie</h2>
+        <p>
+          De letters van KRAFTWERK flikkeren onregelmatig en wisselen kort van glyph — alsof er een
+          elektrische storing is. Elke letter heeft zijn eigen timing via per-letter CSS variabelen:
+        </p>
+        <div class="code-block" role="region" aria-label="Code: letter corrupt animatie">
+          <pre><span class="cm">/* K */</span> <span class="sel">header > h1 > span:first-child > span:nth-child(1)</span> {
+  <span class="kw">--glyph</span>:            <span class="str">'К'</span>;
+  <span class="kw">--corrupt-duration</span>: <span class="str">11.3s</span>;
+  <span class="kw">--corrupt-delay</span>:    <span class="str">1.2s</span>;
+  <span class="kw">--flicker-duration</span>: <span class="str">2.8s</span>;
+}
+<span class="sel">header > h1 > span > span</span> {
+  animation:
+    letter-stamp-in  <span class="str">0.4s</span> cubic-bezier(<span class="str">0.22</span>, <span class="str">1</span>, <span class="str">0.36</span>, <span class="str">1</span>) var(<span class="kw">--stamp-delay</span>) forwards,
+    letter-flicker   var(<span class="kw">--flicker-duration</span>) var(<span class="kw">--flicker-delay</span>) ease-in-out infinite,
+    letter-hide      var(<span class="kw">--corrupt-duration</span>) var(<span class="kw">--corrupt-delay</span>) steps(<span class="str">1</span>, end) infinite;
+}</pre>
+        </div>
+
+        <h2>Code highlight: knob → meter binding</h2>
+        <p>
+          De enige JavaScript schrijft de waarde van <code>input[type=range]</code> naar een
+          CSS custom property. CSS pakt die op en berekent de rotatie van de naald:
+        </p>
+        <div class="code-block" role="region" aria-label="Code: knob naar naald binding">
+          <pre><span class="cm">/* Het enige JS — range → custom property bridge */</span>
+<span class="kw">const</span> updateRange = range <span class="fn">=></span> {
+  document.documentElement.style.<span class="fn">setProperty</span>(<span class="str">'--'</span> + range.name, range.value);
+};
+
+<span class="cm">/* CSS pakt de waarde op */</span>
+<span class="sel">#running:target ~ main > section:first-of-type
+  > figure:nth-of-type(1) > div > span:nth-child(3)</span> {
+  transform: translateX(<span class="str">-50%</span>) rotate(calc(var(<span class="kw">--knob-freq</span>) * <span class="str">0.48deg</span>));
+}</pre>
+        </div>
+
+        <h2>Bestandsstructuur</h2>
+        <div class="file-tree" role="img" aria-label="Bestandsstructuur KRAFTWERK">
+          <span class="dir">📁 kraftwerk/</span><br>
+          &nbsp;&nbsp;<span class="cm">📄 index.html</span><br>
+          &nbsp;&nbsp;<span class="cm">📄 style.css</span>&nbsp; <span class="cm">— @layer declarations + @imports</span><br>
+          &nbsp;&nbsp;<span class="dir">📁 css/</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="new">📄 tokens.css</span>&nbsp; <span class="cm">— custom properties, kleurthema, spacing</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="new">📄 base.css</span>&nbsp; <span class="cm">— reset, body, header, typografie</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="new">📄 layout.css</span>&nbsp; <span class="cm">— paneel shell + sectie grid</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="new">📄 components.css</span>&nbsp; <span class="cm">— gauge, LED, switch, knob, buttons, display</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="new">📄 animations.css</span>&nbsp; <span class="cm">— @keyframes + reduced-motion</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="new">📄 state.css</span>&nbsp; <span class="cm">— :target/:checked driven interactie</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="new">📄 easter-eggs.css</span>&nbsp; <span class="cm">— verborgen details</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="new">📄 responsive.css</span>&nbsp; <span class="cm">— container + media queries</span>
+        </div>
+
+        <h2>Dag voor dag</h2>
+        <div class="week-log">
+          <div class="week-log__day">
+            <p class="week-log__date">Do 19 februari 2026</p>
+            <p class="week-log__heading">Plan + basis HTML + 2 elementen gestyled</p>
+            <ul>
+              <li>Presentatie over het initiatieproject gehouden en andere presentaties bijgewoond</li>
+              <li>Basis HTML opgezet met één van elk gepland element</li>
+              <li>Concept gekozen: KRAFTWERK, fictief Duits kerncentralepaneel</li>
+            </ul>
+            <p class="time-badge">⏱ ~5u</p>
+          </div>
+          <div class="week-log__day">
+            <p class="week-log__date">Di 4 maart 2026</p>
+            <p class="week-log__heading">Alle elementen gestyled + responsive + meltdown + draaiknoppen</p>
+            <ul>
+              <li>Hele pagina responsive gemaakt met puur CSS</li>
+              <li>Overload warning gebouwd met CSS only</li>
+              <li>Draaiknoppen werkend gemaakt via range + custom property</li>
+            </ul>
+            <p class="time-badge">⏱ ~4u 30m</p>
+          </div>
+          <div class="week-log__day">
+            <p class="week-log__date">Wo 5 maart 2026</p>
+            <p class="week-log__heading">Animaties + 2 stijlvarianten + betere display</p>
+            <ul>
+              <li>Animaties toegevoegd aan het paneel</li>
+              <li>Twee stijlvarianten gemaakt en vergeleken</li>
+              <li>Overload warning visueel versterkt</li>
+            </ul>
+            <p class="time-badge">⏱ ~4u 30m</p>
+          </div>
+          <div class="week-log__day">
+            <p class="week-log__date">Di 11 maart 2026</p>
+            <p class="week-log__heading">Titel restyling + alles naar Engels + easter eggs</p>
+            <ul>
+              <li>Titel visueel overhauled — letters vallen één voor één in</li>
+              <li>5 easter eggs gebouwd (stempel, gravure, koffievlek, versleten label, plantnaam)</li>
+            </ul>
+            <p class="time-badge">⏱ ~4u</p>
+          </div>
+          <div class="week-log__day">
+            <p class="week-log__date">Wo 12 maart 2026</p>
+            <p class="week-log__heading">File restructuring</p>
+            <ul>
+              <li>Alle CSS gesplitst in 8 logische partials</li>
+              <li><code>@layer</code> architectuur opgezet</li>
+            </ul>
+            <p class="time-badge">⏱ ~4u</p>
+          </div>
+          <div class="week-log__day">
+            <p class="week-log__date">Di 18 maart 2026</p>
+            <p class="week-log__heading">Titel "sensationeel" maken</p>
+            <ul>
+              <li>Letter-corrupt animatie: elke letter wisselt kort naar een Cyrillische lookalike</li>
+              <li>Chromatic aberration split-effect per letter</li>
+            </ul>
+            <p class="time-badge">⏱ ~2u 30m</p>
+          </div>
+        </div>
+
+        <h2>Experimenten die niet werkten</h2>
+        <div class="failed-grid">
+          <div class="failed-card">
+            <p class="failed-card__title">× Geluidseffecten</p>
+            <p>CSS heeft geen audio capabilities — kliksgeluiden bij schakelaars zijn fundamenteel onmogelijk zonder JS.</p>
+          </div>
+          <div class="failed-card">
+            <p class="failed-card__title">× CSS-only timer</p>
+            <p>Een lopende timer integreren met de <code>:target</code> state bleek niet correct werkbaar.</p>
+          </div>
+          <div class="failed-card">
+            <p class="failed-card__title">× Willekeurige startwaarden</p>
+            <p>CSS heeft geen random-functie die beginwaarden van range inputs kan instellen.</p>
+          </div>
+        </div>
+
+        <h2>Nieuwe inzichten</h2>
+        <div class="insight-grid">
+          <div class="insight-card">
+            <p class="insight-card__num">01</p>
+            <p class="insight-card__title">CSS kan meer interactiviteit dan je denkt</p>
+            <p>Draaiknoppen, conditional waarschuwingen, een meltdown — zonder logica-JS.
+              Denk in state via inputs en pseudo-classes, niet in event listeners.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__num">02</p>
+            <p class="insight-card__title">Container style queries = CSS conditional logic</p>
+            <p>Custom property waarden lezen via <code>@container style()</code> maakt CSS
+              conditioneel op basis van data — niet alleen afmetingen.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__num">03</p>
+            <p class="insight-card__title">Selector specificity als architectuurtool</p>
+            <p>Zonder classes navigeer je bewust met <code>~</code>, <code>:nth-of-type()</code>
+              en <code>:not()</code>. De HTML-structuur is je ontwerpdocument.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__num">04</p>
+            <p class="insight-card__title">@layer voor cascade-controle</p>
+            <p>CSS in lagen organiseren stuurt de cascade expliciet zonder te vertrouwen
+              op specificity of importvolgorde.</p>
+          </div>
+        </div>
+
+        <h2>Reflectie</h2>
+        <p>
+          CSS to the Rescue was het vak waarbij ik het meest verrast werd — door CSS zelf.
+          Een volledig interactief bedieningspaneel waarbij knopwaarden meters aansturen,
+          switches LEDs doden en vier maxen een noodalarm triggert — puur via de cascade —
+          had ik niet voor mogelijk gehouden.
+        </p>
+        <p>
+          Het concept hielp enorm. Door een duidelijk thema te kiezen kreeg elk CSS-probleem
+          een narratieve context. De koffievlek is niet zomaar een cirkel; de worn-off Pump B label
+          is iets wat je in een echte verlaten controlekamer zou vinden.
+          Elke technische beslissing werd ook een ontwerpbeslissing.
+        </p>
+        <p>
+          De 9,5 voelt verdiend maar ook als aanmoediging. Eerder structureren scheelt tijd —
+          de file-restructuring kostte vier uur die ik vroeger had kunnen besparen.
+        </p>
+
+        <p style="margin-top: var(--space-xl);">
+          <a href="#" class="btn btn--primary">→ Bekijk KRAFTWERK live</a>
+          <a href="#" class="btn" style="margin-left: var(--space-sm);">→ GitHub repo</a>
+        </p>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>© 2026 — Joost Krebbers · Meesterschap Blog</p>
+      <p>Built from scratch · No frameworks · Two themes</p>
+    </div>
+  </footer>
+
+</body>
+</html>

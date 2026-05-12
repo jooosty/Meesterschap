@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Meesterschap — [Jouw Naam]</title>
+  <title>Meesterschap — Joost Krebbers</title>
   <meta name="description" content="Meesterschap blog — persoonlijke website voor de minor Web Design & Development." />
 
   <!-- Theme moet zo vroeg mogelijk geladen om FOUC te voorkomen -->
@@ -24,7 +24,7 @@
     <div class="container nav__inner">
       <a href="index.html" class="nav__brand" aria-label="Meesterschap home">
         <span>MEESTERSCHAP</span>
-        <span class="nav__brand-tag">'25</span>
+        <span class="nav__brand-tag">'26</span>
       </a>
 
       <button class="nav__toggle" data-nav-toggle aria-expanded="false" aria-controls="primary-nav" aria-label="Menu openen">
@@ -42,7 +42,18 @@
           <li><a class="nav__link" href="pages/hackathon.html">Hackathon</a></li>
           <li><a class="nav__link" href="pages/weekly-nerd.html">Weekly Nerd</a></li>
           <li><a class="nav__link" href="pages/weekly-geek.html">Weekly Geek</a></li>
-          <li><a class="nav__link" href="pages/vakken.html">Vakken</a></li>
+          <li class="nav__item--dropdown">
+            <button class="nav__dropdown-toggle" data-dropdown-toggle aria-expanded="false" aria-haspopup="true">
+              Vakken
+              <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg>
+            </button>
+            <ul class="nav__dropdown" role="menu">
+              <li role="none"><a href="pages/vakken.html" role="menuitem">Overzicht</a></li>
+              <li role="none"><a href="pages/vakken-css-ttr.html" role="menuitem">CSS to the Rescue <span class="nav__dropdown__score">9,5</span></a></li>
+              <li role="none"><a href="pages/vakken-browser-tech.html" role="menuitem">Browser Tech <span class="nav__dropdown__score">10</span></a></li>
+              <li role="none"><a href="pages/vakken-hcd.html" role="menuitem">Human Centered Design <span class="nav__dropdown__score">9</span></a></li>
+            </ul>
+          </li>
           <li><a class="nav__link" href="pages/meesterproef.html">Meesterproef</a></li>
           <li>
             <button class="theme-toggle" data-theme-toggle aria-label="Wissel thema">
@@ -138,7 +149,7 @@
             <p class="card__number">SECTOR / 05</p>
             <h3 class="card__title">Vakken</h3>
             <p class="card__meta">CSS TTR · 9,5/10 &nbsp;·&nbsp; Browser Tech · 10/10</p>
-            <p class="card__desc">KRAFTWERK kerncentrale-paneel in puur CSS, en een aangifte erfbelasting-formulier gebouwd met progressive enhancement.</p>
+            <p class="card__desc">KRAFTWERK in puur CSS, aangifte erfbelasting-formulier en een spraakberichten-splitter voor een blinde gebruiker.</p>
             <span class="card__status card__status--done">✓ Afgerond</span>
           </a>
 
@@ -161,7 +172,7 @@
   <!-- ============== FOOTER ============== -->
   <footer class="footer">
     <div class="container footer__inner">
-      <p>© 2026 — [Jouw Naam] · Meesterschap Blog</p>
+      <p>© 2026 — Joost Krebbers · Meesterschap Blog</p>
       <p>Built from scratch · No frameworks · Two themes</p>
     </div>
   </footer>
