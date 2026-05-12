@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vakken Meesterschap</title>
+  <title>Vakken — Meesterschap</title>
   <meta name="description" content="Vakken: CSS to the Rescue (9,5/10) en Browser Technologies (10/10)." />
 
   <script src="../js/theme-toggle.js"></script>
@@ -284,7 +284,7 @@
     <div class="container nav__inner">
       <a href="../index.html" class="nav__brand" aria-label="Meesterschap home">
         <span>MEESTERSCHAP</span>
-        <span class="nav__brand-tag">'25</span>
+        <span class="nav__brand-tag">'26</span>
       </a>
       <button class="nav__toggle" data-nav-toggle aria-expanded="false" aria-controls="primary-nav" aria-label="Menu openen">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -302,11 +302,10 @@
           <li><a class="nav__link" href="weekly-geek.html">Weekly Geek</a></li>
           <li><a class="nav__link" href="vakken.html" aria-current="page">Vakken</a></li>
           <li><a class="nav__link" href="meesterproef.html">Meesterproef</a></li>
-          <li><a class="nav__link" href="gesprekken.html">Gesprekken</a></li>
           <li>
             <button class="theme-toggle" data-theme-toggle aria-label="Wissel thema">
               <span class="theme-toggle__indicator" aria-hidden="true"></span>
-            <span data-theme-label>Night</span>
+              <span data-theme-label>Night Race</span>
             </button>
           </li>
         </ul>
@@ -327,12 +326,12 @@
       <!-- HERO + SCORE -->
       <div class="hero-row">
         <section class="hero fade-in" aria-labelledby="page-title">
-          <p class="eyebrow hero__eyebrow">Sector 05 Vakken</p>
+          <p class="eyebrow hero__eyebrow">Sector 05 — Vakken</p>
           <h1 id="page-title">CSS to the<br>Rescue</h1>
           <p class="hero__lead">
             Een volledig functioneel kerncentrale bedieningspaneel gebouwd met bijna
             uitsluitend CSS. Geen JavaScript voor interactie, geen ID- of class-selectors
-            voor styling alleen de kracht van CSS.
+            voor styling — alleen de kracht van CSS.
           </p>
         </section>
         <div style="display:flex; align-items:center; padding-top: var(--space-2xl);">
@@ -370,7 +369,7 @@
         <p>
           Maak een interactief component met bijna uitsluitend CSS. De twee kernregels:
           geen IDs of classes als styling-hooks (alleen voor <code>:target</code> en
-          <code>&lt;label for&gt;</code>), en geen JavaScript voor logica alleen een
+          <code>&lt;label for&gt;</code>), en geen JavaScript voor logica — alleen een
           minimale range-to-custom-property bridge was toegestaan.
         </p>
         <p>
@@ -382,13 +381,13 @@
         <h2>Het concept: KRAFTWERK</h2>
         <p>
           Ik koos voor een fictief Duits kerncentrale bedieningspaneel, geïnspireerd op fotografieën
-          van verlaten Oost-Europese controlekamers. De naam KRAFTWERK Duits voor "energiecentrale"
+          van verlaten Oost-Europese controlekamers. De naam KRAFTWERK — Duits voor "energiecentrale" —
           paste perfect bij de retro-industriële esthetiek.
         </p>
         <p>
           Het paneel bevat vier analoge meters, zes LED-indicatoren, drie toggleschakelaars,
           vier draaiknoppen, START/STOP besturing en een retro scroll-drum MW display.
-          Alle interacties zijn puur CSS ze zijn onderling verbonden: schakel je een pomp uit
+          Alle interacties zijn puur CSS — ze zijn onderling verbonden: schakel je een pomp uit
           terwijl de centrale draait, dan flash het schakelpaneel oranje.
         </p>
 
@@ -466,11 +465,11 @@
         <p>
           Het gevaarlijkste onderdeel: als alle vier knoppen op 145 staan én de centrale draait,
           treedt er een noodtoestand op. Dit vereist het checken van vier CSS custom property waarden
-          tegelijk iets wat normaal JavaScript vereist. De oplossing: geneste container style queries:
+          tegelijk — iets wat normaal JavaScript vereist. De oplossing: geneste container style queries:
         </p>
 
         <div class="code-block" role="region" aria-label="Code: meltdown via container style queries">
-          <pre><span class="cm">/* state.css meltdown triggert alleen als alle 4 knoppen op 145 staan */</span>
+          <pre><span class="cm">/* state.css — meltdown triggert alleen als alle 4 knoppen op 145 staan */</span>
 <span class="sel">@container style(--knob-power: 145)</span> {
   <span class="sel">@container style(--knob-freq: 145)</span> {
     <span class="sel">@container style(--knob-pressure: 145)</span> {
@@ -495,17 +494,17 @@
 
         <p>
           De knoppen schrijven hun waarde via één regel JavaScript naar <code>:root</code> als
-          custom property. Al het rest het lezen, vergelijken en reageren is puur CSS.
+          custom property. Al het rest — het lezen, vergelijken en reageren — is puur CSS.
         </p>
 
         <h2>Code highlight: letter-corrupt animatie op de titel</h2>
         <p>
-          De letters van KRAFTWERK flikkeren onregelmatig en wisselen kort van glyph alsof
+          De letters van KRAFTWERK flikkeren onregelmatig en wisselen kort van glyph — alsof
           er een elektrische storing is. Elke letter heeft zijn eigen timing via per-letter CSS variabelen:
         </p>
 
         <div class="code-block" role="region" aria-label="Code: letter corrupt animatie">
-          <pre><span class="cm">/* easter-eggs.css elke letter krijgt eigen timing */</span>
+          <pre><span class="cm">/* easter-eggs.css — elke letter krijgt eigen timing */</span>
 <span class="cm">/* K */</span> <span class="sel">header > h1 > span:first-child > span:nth-child(1)</span> {
   <span class="kw">--glyph</span>:            <span class="str">'К'</span>;        <span class="cm">/* Cyrillische lookalike */</span>
   <span class="kw">--corrupt-duration</span>: <span class="str">11.3s</span>;
@@ -527,7 +526,7 @@
         <p>
           De <code>letter-hide</code> animatie maakt de echte letter voor ~100ms transparant
           precies op het moment dat de <code>::before</code> pseudo-element de vervangings-glyph
-          toont zodat ze nooit tegelijk zichtbaar zijn.
+          toont — zodat ze nooit tegelijk zichtbaar zijn.
         </p>
 
         <h2>Code highlight: knob → meter binding via custom properties</h2>
@@ -538,7 +537,7 @@
         </p>
 
         <div class="code-block" role="region" aria-label="Code: knob naar naald binding">
-          <pre><span class="cm">/* Het enige JS in het project range → custom property bridge */</span>
+          <pre><span class="cm">/* Het enige JS in het project — range → custom property bridge */</span>
 <span class="kw">const</span> updateRange = range <span class="fn">=></span> {
   document.documentElement.style.<span class="fn">setProperty</span>(
     <span class="str">'--'</span> + range.name,
@@ -546,7 +545,7 @@
   );
 };
 
-<span class="cm">/* state.css CSS pakt de waarde op, berekent rotatie */</span>
+<span class="cm">/* state.css — CSS pakt de waarde op, berekent rotatie */</span>
 <span class="sel">#running:target ~ main > section:first-of-type
   > figure:nth-of-type(1) > div > span:nth-child(3)</span> {
   transform: translateX(<span class="str">-50%</span>)
@@ -620,7 +619,7 @@
             <p class="week-log__date">Di 11 maart 2026</p>
             <p class="week-log__heading">Titel restyling + alles naar Engels + easter eggs</p>
             <ul>
-              <li>Titel visueel overhauled letters vallen één voor één in</li>
+              <li>Titel visueel overhauled — letters vallen één voor één in</li>
               <li>Alles vertaald naar Engels</li>
               <li>5 easter eggs gebouwd (stempel, gravure, koffievlek, versleten label, plantnaam)</li>
             </ul>
@@ -653,7 +652,7 @@
         <!-- MISLUKTE EXPERIMENTEN -->
         <h2>Experimenten die niet werkten</h2>
         <p>
-          Drie dingen die ik probeerde, maar waar CSS fundamenteel niet voor geschikt is
+          Drie dingen die ik probeerde, maar waar CSS fundamenteel niet voor geschikt is —
           en dat leerde me juist meer over de grenzen van het medium:
         </p>
 
@@ -661,7 +660,7 @@
           <div class="failed-card">
             <p class="failed-card__title">× Geluidseffecten</p>
             <p>Ik wilde kliksgeluiden bij de schakelaars en een alarmtoon bij de meltdown.
-              CSS heeft geen audio capabilities dit is fundamenteel onmogelijk zonder JS.</p>
+              CSS heeft geen audio capabilities — dit is fundamenteel onmogelijk zonder JS.</p>
           </div>
           <div class="failed-card">
             <p class="failed-card__title">× CSS-only timer</p>
@@ -672,7 +671,7 @@
           <div class="failed-card">
             <p class="failed-card__title">× Willekeurige startwaarden</p>
             <p>De knoppen beginnen altijd op dezelfde startpositie. CSS heeft geen
-              random-functie die beginwaarden van range inputs kan instellen
+              random-functie die beginwaarden van range inputs kan instellen —
               daarvoor is JS vereist.</p>
           </div>
         </div>
@@ -684,7 +683,7 @@
           <div class="insight-card">
             <p class="insight-card__num">01</p>
             <p class="insight-card__title">CSS kan meer interactiviteit dan je denkt</p>
-            <p>Draaiknoppen, conditional waarschuwingen, een meltdown allemaal zonder logica-JS.
+            <p>Draaiknoppen, conditional waarschuwingen, een meltdown — allemaal zonder logica-JS.
               De sleutel: denk in termen van <em>state via inputs en pseudo-classes</em>, niet
               in termen van event listeners.</p>
           </div>
@@ -692,7 +691,7 @@
             <p class="insight-card__num">02</p>
             <p class="insight-card__title">Container style queries = CSS conditional logic</p>
             <p>Door custom property waarden te lezen via <code>@container style()</code> kun je
-              CSS conditioneel maken op basis van data niet alleen op basis van afmetingen.
+              CSS conditioneel maken op basis van data — niet alleen op basis van afmetingen.
               Dit is krachtig en nog relatief onbekend.</p>
           </div>
           <div class="insight-card">
@@ -705,7 +704,7 @@
           <div class="insight-card">
             <p class="insight-card__num">04</p>
             <p class="insight-card__title">Kleurnotaties voor dynamische gradients</p>
-            <p><code>hsl()</code>, <code>oklch()</code>, hex elke notatie heeft voordelen
+            <p><code>hsl()</code>, <code>oklch()</code>, hex — elke notatie heeft voordelen
               voor bepaalde use cases. <code>hsl()</code> maakt het makkelijk om tonen
               en tinten programmatisch te berekenen via <code>calc()</code>.</p>
           </div>
@@ -719,7 +718,7 @@
           <div class="insight-card">
             <p class="insight-card__num">06</p>
             <p class="insight-card__title">CSS grenzen bewust kennen</p>
-            <p>Het uitproberen van audio, timers en random en zien waarom die falen
+            <p>Het uitproberen van audio, timers en random — en zien waarom die falen —
               leerde me meer over CSS dan de dingen die wel werkten. De grenzen kennen
               is net zo waardevol als de mogelijkheden.</p>
           </div>
@@ -728,28 +727,28 @@
         <!-- REFLECTIE -->
         <h2>Reflectie</h2>
         <p>
-          CSS to the Rescue was het vak waarbij ik het meest verrast werd door CSS zelf.
+          CSS to the Rescue was het vak waarbij ik het meest verrast werd — door CSS zelf.
           Ik wist dat je er visuele dingen mee kon maken, maar een volledig interactief
           bedieningspaneel waarbij knopwaarden meters aansturen, switches LEDs doden
-          en vier tegelijk maxen een noodalarm triggert puur via de cascade en selectors
+          en vier tegelijk maxen een noodalarm triggert — puur via de cascade en selectors —
           had ik niet voor mogelijk gehouden.
         </p>
         <p>
-          Het concept hielp enorm. Door een duidelijk thema te kiezen een verouderde
-          kerncentrale kreeg elk CSS-probleem een narratieve context. De koffievlek is
+          Het concept hielp enorm. Door een duidelijk thema te kiezen — een verouderde
+          kerncentrale — kreeg elk CSS-probleem een narratieve context. De koffievlek is
           niet zomaar een cirkel; de worn-off Pump B label is geen random easter egg maar
           iets wat je in een echte verlaten controlekamer zou vinden.
           Dat maakte elke technische beslissing ook een ontwerpbeslissing.
         </p>
         <p>
           De 9,5 voelt verdiend, maar ook als aanmoediging: de halve punt die er af ging
-          laat ruimte voor wat ik nog beter kan. De file-restructuring kostte vier uur
+          laat ruimte voor wat ik nog beter kan. De file-restructuring kostte vier uur —
           meer dan ik had verwacht. Eerder structureren scheelt tijd achteraf.
         </p>
 
         <p style="margin-top: var(--space-xl);">
-          <a href="https://jooosty.github.io/CSS-Control-panel/" target="_blank" class="btn btn--primary">→ Bekijk KRAFTWERK live</a>
-          <a href="https://github.com/jooosty/CSS-Control-panel" target="_blank" class="btn" style="margin-left: var(--space-sm);">→ GitHub repo</a>
+          <a href="#" class="btn btn--primary">→ Bekijk KRAFTWERK live</a>
+          <a href="#" class="btn" style="margin-left: var(--space-sm);">→ GitHub repo</a>
         </p>
 
       </article>
@@ -764,11 +763,11 @@
 
       <div class="hero-row" style="margin-top: var(--space-xl);">
         <section class="hero fade-in" aria-labelledby="bt-title">
-          <p class="eyebrow hero__eyebrow">Sector 05b Tweede vak</p>
+          <p class="eyebrow hero__eyebrow">Sector 05b — Tweede vak</p>
           <h1 id="bt-title">Browser<br>Technologies</h1>
           <p class="hero__lead">
             Een officiële belastingaangifte omzetten naar een toegankelijk, robuust en
-            gebruiksvriendelijk webformulier met progressive enhancement als uitgangspunt.
+            gebruiksvriendelijk webformulier — met progressive enhancement als uitgangspunt.
           </p>
         </section>
         <div style="display:flex; align-items:center; padding-top: var(--space-2xl);">
@@ -804,11 +803,11 @@
         <p>
           Het web is voor iedereen. Dat klinkt simpel, maar in de praktijk betekent het dat je website
           moet werken op oude browsers, nieuwe browsers, telefoons, game consoles, met screenreaders,
-          met een muis, met alleen een toetsenbord en alles daartussenin.
+          met een muis, met alleen een toetsenbord — en alles daartussenin.
         </p>
         <p>
           De eindopdracht: zet een officiële belasting-PDF om naar een interactief webformulier.
-          Aangifte erfbelasting een van de meest complexe formulieren die burgers moeten invullen.
+          Aangifte erfbelasting — een van de meest complexe formulieren die burgers moeten invullen.
           Het uitgangspunt: HTML first, dan CSS, dan JavaScript. Elk niveau moet zelfstandig bruikbaar zijn.
         </p>
 
@@ -844,14 +843,14 @@
           </div>
           <div class="component-card" data-num="02">
             <p class="component-card__title">Elfproef BSN-validatie</p>
-            <p>Het BSN wordt gevalideerd met het elfproef-algoritme hetzelfde algoritme
+            <p>Het BSN wordt gevalideerd met het elfproef-algoritme — hetzelfde algoritme
               dat de overheid gebruikt. Eerste check: formaat. Tweede check: wiskundige
               geldigheid via de weging 9-8-7-6-5-4-3-2-1.</p>
           </div>
           <div class="component-card" data-num="03">
             <p class="component-card__title">Real-time inline validatie</p>
             <p>Elk veld geeft direct feedback bij <code>blur</code> en <code>input</code>.
-              Groen vinkje bij correct, rode foutmelding bij fout met
+              Groen vinkje bij correct, rode foutmelding bij fout — met
               <code>aria-live="polite"</code> zodat screenreaders meeluisteren.</p>
           </div>
           <div class="component-card" data-num="04">
@@ -867,7 +866,7 @@
           </div>
           <div class="component-card" data-num="06">
             <p class="component-card__title">NS design system</p>
-            <p>Alle stijl is gebaseerd op de officiële NS design tokens kleurenschaal,
+            <p>Alle stijl is gebaseerd op de officiële NS design tokens — kleurenschaal,
               typografie, spacing, border radius, shadows. Het formulier ziet eruit
               als iets dat NS zelf zou maken.</p>
           </div>
@@ -875,7 +874,7 @@
             <p class="component-card__title">Voortgangsbalk met SVG</p>
             <p>Een visuele voortgangsbalk bovenaan toont welke stap actief is.
               De verbindingslijnen tussen de stapindicatoren zijn getekend met
-              inline SVG iets nieuws voor mij.</p>
+              inline SVG — iets nieuws voor mij.</p>
           </div>
           <div class="component-card" data-num="08">
             <p class="component-card__title">Conditionele vragen</p>
@@ -889,7 +888,7 @@
         <p>
           Een BSN is pas geldig als het elfproef-algoritme een som deelbaar door 11 oplevert.
           De weging loopt van 9 tot 2 voor de eerste 8 cijfers, met -1 voor het 9e.
-          Dat klonk abstract totdat ik het stap voor stap uitschreef:
+          Dat klonk abstract — totdat ik het stap voor stap uitschreef:
         </p>
 
         <div class="code-block" role="region" aria-label="Code: elfproef BSN validatie">
@@ -928,7 +927,7 @@
     <span class="kw">if</span> ([<span class="str">"INPUT"</span>, <span class="str">"LABEL"</span>, <span class="str">"SELECT"</span>].includes(next.tagName)) <span class="kw">break</span>;
     next = next.nextElementSibling;
   }
-  <span class="cm">// Bestaat nog niet maak hem aan</span>
+  <span class="cm">// Bestaat nog niet — maak hem aan</span>
   <span class="kw">const</span> feedback = document.createElement(<span class="str">"span"</span>);
   feedback.className = <span class="str">"inline-feedback"</span>;
   feedback.setAttribute(<span class="str">"aria-live"</span>, <span class="str">"polite"</span>);
@@ -949,7 +948,7 @@ byId(<span class="str">"voorletters-overledene"</span>).addEventListener(<span c
         <h2>Code highlight: localStorage concept-opslag</h2>
         <p>
           Het formulier itereert alle velden en slaat naam + waarde op bij elke wijziging.
-          Bij terugkeer worden de waarden hersteld inclusief radio buttons:
+          Bij terugkeer worden de waarden hersteld — inclusief radio buttons:
         </p>
 
         <div class="code-block" role="region" aria-label="Code: localStorage draft opslaan">
@@ -1062,15 +1061,15 @@ byId(<span class="str">"voorletters-overledene"</span>).addEventListener(<span c
           <div class="insight-card">
             <p class="insight-card__num">01</p>
             <p class="insight-card__title">Formulieren zijn complexer dan je denkt</p>
-            <p>Ik dacht dit al te kunnen. Maar als je een écht formulier bouwt met
-              conditionele vragen, validatie op meerdere niveaus en accessibility
+            <p>Ik dacht dit al te kunnen. Maar als je een écht formulier bouwt — met
+              conditionele vragen, validatie op meerdere niveaus en accessibility —
               merk je hoe veel er mis kan gaan. Dat inzicht is de kern van dit vak.</p>
           </div>
           <div class="insight-card">
             <p class="insight-card__num">02</p>
             <p class="insight-card__title">HTML biedt meer dan je gebruikt</p>
             <p><code>fieldset</code>, <code>legend</code>, <code>datalist</code>,
-              <code>dialog</code>, <code>autocomplete</code>, <code>inputmode</code>
+              <code>dialog</code>, <code>autocomplete</code>, <code>inputmode</code> —
               allemaal native HTML features die UX verbeteren zonder een regel JavaScript.
               Progressive enhancement werkt als je HTML serieus neemt.</p>
           </div>
@@ -1079,7 +1078,7 @@ byId(<span class="str">"voorletters-overledene"</span>).addEventListener(<span c
             <p class="insight-card__title">Validatie is een UX-beslissing</p>
             <p>Wanneer toon je een foutmelding? Direct bij typen, bij blur, bij submit?
               Elke keuze heeft gevolgen voor hoe frustrerend of behulpzaam het formulier aanvoelt.
-              Er is geen universeel juist antwoord het hangt af van het veldtype.</p>
+              Er is geen universeel juist antwoord — het hangt af van het veldtype.</p>
           </div>
           <div class="insight-card">
             <p class="insight-card__num">04</p>
@@ -1099,7 +1098,7 @@ byId(<span class="str">"voorletters-overledene"</span>).addEventListener(<span c
             <p class="insight-card__num">06</p>
             <p class="insight-card__title">SVG voor custom UI elementen</p>
             <p>Voor de verbindingslijnen in de voortgangsbalk had ik inline SVG nodig.
-              Dat was nieuw voor mij ik wist dat SVG bestond maar had het nog nooit
+              Dat was nieuw voor mij — ik wist dat SVG bestond maar had het nog nooit
               bewust gebruikt om iets te tekenen in de UI.</p>
           </div>
         </div>
@@ -1107,7 +1106,7 @@ byId(<span class="str">"voorletters-overledene"</span>).addEventListener(<span c
         <!-- REFLECTIE -->
         <h2>Reflectie</h2>
         <p>
-          Browser Technologies was het vak waarbij ik het meest verrast werd door mezelf in
+          Browser Technologies was het vak waarbij ik het meest verrast werd door mezelf — in
           positieve zin. Aan het begin dacht ik formulieren al te begrijpen. Na zes weken bouwen
           aan één complex formulier besef ik hoe naïef dat was.
         </p>
@@ -1119,8 +1118,8 @@ byId(<span class="str">"voorletters-overledene"</span>).addEventListener(<span c
         </p>
         <p>
           De elfproef was een moment waarop techniek en werkelijkheid samenkwamen. Een algoritme
-          van papier naar werkende code brengen en het dan ook écht zien werken met testgetallen
-          van de Belastingdienst was bevredigend op een manier die ik niet had verwacht van een veldvalidatie.
+          van papier naar werkende code brengen — en het dan ook écht zien werken met testgetallen
+          van de Belastingdienst — was bevredigend op een manier die ik niet had verwacht van een veldvalidatie.
         </p>
         <p>
           De 10 is mooi. Maar de feedback dat ik nu écht begrijp hoe complex formulieren zijn
@@ -1128,8 +1127,8 @@ byId(<span class="str">"voorletters-overledene"</span>).addEventListener(<span c
         </p>
 
         <p style="margin-top: var(--space-xl);">
-          <a href="https://jooosty.github.io/Browser-tech/" target="_blank" class="btn btn--primary">→ Bekijk het formulier live</a>
-          <a href="https://github.com/jooosty/Browser-tech" target="_blank" class="btn" style="margin-left: var(--space-sm);">→ GitHub repo</a>
+          <a href="#" class="btn btn--primary">→ Bekijk het formulier live</a>
+          <a href="#" class="btn" style="margin-left: var(--space-sm);">→ GitHub repo</a>
         </p>
 
       </article>
@@ -1138,7 +1137,7 @@ byId(<span class="str">"voorletters-overledene"</span>).addEventListener(<span c
 
   <footer class="footer">
     <div class="container footer__inner">
-      <p>© 2026 Joost Krebbers · Meesterschap Blog</p>
+      <p>© 2026 — Joost Krebbers · Meesterschap Blog</p>
       <p>Built from scratch · No frameworks · Two themes</p>
     </div>
   </footer>
