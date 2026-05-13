@@ -11,149 +11,6 @@
   <link rel="stylesheet" href="../css/themes.css" />
   <link rel="stylesheet" href="../css/base.css" />
   <link rel="stylesheet" href="../css/components.css" />
-  <style>
-    .code-block {
-      background: var(--color-bg-card);
-      border: var(--border-width) solid var(--color-border);
-      border-left: 3px solid var(--color-accent);
-      border-radius: var(--radius-md);
-      padding: var(--space-md);
-      overflow-x: auto;
-      margin-block: var(--space-md);
-    }
-    .code-block pre {
-      font-family: var(--font-mono);
-      font-size: var(--fs-sm);
-      line-height: 1.7;
-      margin: 0;
-      white-space: pre;
-      color: var(--color-text);
-    }
-    .kw  { color: var(--color-accent-cool); }
-    .fn  { color: var(--color-accent-green); }
-    .str { color: var(--color-accent); }
-    .cm  { color: var(--color-text-dim); font-style: italic; }
-
-    /* Score badge */
-    .score-badge {
-      display: inline-flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: var(--color-bg-card);
-      border: var(--border-thick) solid var(--color-accent-green);
-      border-radius: var(--radius-md);
-      padding: var(--space-md) var(--space-xl);
-      text-align: center;
-      box-shadow: 0 0 32px rgba(0, 255, 136, 0.08);
-    }
-    .score-badge__number { font-family: var(--font-display); font-size: var(--fs-3xl); font-weight: 700; color: var(--color-accent-green); line-height: 1; }
-    .score-badge__label  { font-family: var(--font-mono); font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.2em; color: var(--color-text-dim); margin-top: var(--space-3xs); }
-    .hero-row { display: flex; align-items: flex-start; gap: var(--space-xl); flex-wrap: wrap; }
-    .hero-row .hero { flex: 1; min-width: 280px; padding-block: 0; }
-
-    /* Tech tags */
-    .tech-tag {
-      display: inline-flex;
-      align-items: center;
-      font-family: var(--font-mono);
-      font-size: var(--fs-xs);
-      letter-spacing: 0.08em;
-      padding: 3px 10px;
-      border-radius: var(--radius-sm);
-      margin: var(--space-3xs);
-      border: 1px solid;
-    }
-    .tech-tag--api    { color: var(--color-accent-cool);  border-color: var(--color-accent-cool);  }
-    .tech-tag--three  { color: var(--color-accent);       border-color: var(--color-accent);        }
-    .tech-tag--astro  { color: #c792ea;                   border-color: #c792ea;                    }
-    .tech-tag--feature{ color: var(--color-accent-green); border-color: var(--color-accent-green);  }
-
-    /* Feature grid */
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: var(--space-md);
-      margin-block: var(--space-lg);
-    }
-    .feature-card {
-      background: var(--color-bg-card);
-      border: var(--border-width) solid var(--color-border);
-      border-radius: var(--radius-md);
-      padding: var(--space-md);
-      position: relative;
-      overflow: hidden;
-    }
-    .feature-card::after {
-      content: attr(data-icon);
-      position: absolute;
-      bottom: var(--space-sm);
-      right: var(--space-md);
-      font-size: 1.8rem;
-      opacity: 0.12;
-    }
-    .feature-card__title { font-family: var(--font-mono); font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.15em; color: var(--color-accent); margin-bottom: var(--space-xs); }
-    .feature-card p { font-size: var(--fs-sm); color: var(--color-text-muted); line-height: 1.5; }
-
-    /* Module table */
-    .module-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: var(--fs-sm);
-      margin-block: var(--space-lg);
-    }
-    .module-table th {
-      font-family: var(--font-mono);
-      font-size: var(--fs-xs);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--color-text-dim);
-      text-align: left;
-      padding: var(--space-xs) var(--space-sm);
-      border-bottom: var(--border-width) solid var(--color-border);
-    }
-    .module-table td {
-      padding: var(--space-xs) var(--space-sm);
-      border-bottom: var(--border-width) solid var(--color-border);
-      color: var(--color-text-muted);
-      line-height: 1.5;
-      vertical-align: top;
-    }
-    .module-table tr:hover td { background: var(--color-bg-card); }
-    .module-table td:first-child { font-family: var(--font-mono); color: var(--color-accent-cool); white-space: nowrap; }
-    .module-table td:nth-child(2) { color: var(--color-text); }
-
-    /* Insight grid */
-    .insight-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-md); margin-block: var(--space-lg); }
-    .insight-card { background: var(--color-bg-card); border: var(--border-width) solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-md); }
-    .insight-card__num { font-family: var(--font-mono); font-size: var(--fs-2xl); font-weight: 700; color: var(--color-accent); opacity: 0.2; line-height: 1; margin-bottom: var(--space-xs); }
-    .insight-card__title { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-base); color: var(--color-text); margin-bottom: var(--space-xs); }
-    .insight-card p { font-size: var(--fs-sm); color: var(--color-text-muted); line-height: 1.5; }
-
-    /* Feedback box */
-    .feedback-box { background: var(--color-bg-card); border: var(--border-thick) solid var(--color-accent-green); border-radius: var(--radius-md); padding: var(--space-lg); margin-block: var(--space-xl); position: relative; }
-    .feedback-box__label { position: absolute; top: calc(-1 * var(--fs-xs) - 4px); left: var(--space-md); font-family: var(--font-mono); font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.15em; color: var(--color-accent-green); background: var(--color-bg); padding: 0 var(--space-2xs); }
-    .feedback-box blockquote { font-size: var(--fs-lg); font-family: var(--font-display); color: var(--color-text); line-height: 1.4; border: none; padding: 0; margin: 0; background: transparent; font-style: normal; }
-
-    /* File tree */
-    .file-tree { font-family: var(--font-mono); font-size: var(--fs-sm); background: var(--color-bg-card); border: var(--border-width) solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-md) var(--space-lg); line-height: 2; color: var(--color-text-muted); margin-block: var(--space-md); overflow-x: auto; }
-    .file-tree .dir { color: var(--color-accent); font-weight: 700; }
-    .file-tree .cm  { color: var(--color-text-dim); font-style: italic; }
-
-    /* Easter egg tag */
-    .egg-tag {
-      display: inline-flex;
-      align-items: center;
-      font-family: var(--font-mono);
-      font-size: var(--fs-xs);
-      letter-spacing: 0.08em;
-      padding: 3px 10px;
-      border-radius: var(--radius-sm);
-      margin: var(--space-3xs);
-      border: 1px solid var(--color-accent-cool);
-      color: var(--color-accent-cool);
-    }
-  </style>
 </head>
 <body>
 
@@ -224,7 +81,7 @@
             team radio en een Doctor Who easter egg.
           </p>
         </section>
-        <div style="display:flex; align-items:center; padding-top: var(--space-2xl);">
+        <div class="hero-score">
           <div class="score-badge fade-in" role="img" aria-label="Beoordeling: 10 uit 10">
             <span class="score-badge__number">10</span>
             <span class="score-badge__label">/ 10</span>
@@ -598,9 +455,9 @@ geo.attributes.color.needsUpdate = <span class="kw">true</span>;</pre>
             </ul>
         </div>
 
-        <p style="margin-top: var(--space-xl);">
+        <p class="mt-xl">
           <a href="#" class="btn btn--primary">→ Bekijk F1 Explorer live</a>
-          <a href="#" class="btn" style="margin-left: var(--space-sm);">→ GitHub repo</a>
+        <a href="#" class="btn ml-sm">→ GitHub repo</a>
         </p>
 
       </article>

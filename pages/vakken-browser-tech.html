@@ -10,111 +10,7 @@
   <link rel="stylesheet" href="../css/tokens.css" />
   <link rel="stylesheet" href="../css/themes.css" />
   <link rel="stylesheet" href="../css/base.css" />
-  <link rel="stylesheet" href="../css/components.css" />
-  <style>
-    .code-block {
-      background: var(--color-bg-card);
-      border: var(--border-width) solid var(--color-border);
-      border-left: 3px solid var(--color-accent);
-      border-radius: var(--radius-md);
-      padding: var(--space-md);
-      line-height: 1.7;
-      margin: 0;
-      white-space: pre;
-      color: var(--color-text);
-    }
-    .kw  { color: var(--color-accent-cool); }
-    .fn  { color: var(--color-accent-green); }
-    .str { color: var(--color-accent); }
-    .cm  { color: var(--color-text-dim); font-style: italic; }
-    .score-badge {
-      display: inline-flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: var(--color-bg-card);
-      border: var(--border-thick) solid var(--color-accent-green);
-      border-radius: var(--radius-md);
-      padding: var(--space-md) var(--space-xl);
-      text-align: center;
-      box-shadow: 0 0 32px rgba(0, 255, 136, 0.08);
-    }
-    .score-badge__number {
-      font-family: var(--font-display);
-      font-size: var(--fs-3xl);
-      font-weight: 700;
-      color: var(--color-accent-green);
-      line-height: 1;
-    }
-    .score-badge__label {
-      font-family: var(--font-mono);
-      font-size: var(--fs-xs);
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      color: var(--color-text-dim);
-      margin-top: var(--space-3xs);
-    }
-    .tech-tag {
-      display: inline-flex;
-      align-items: center;
-      font-family: var(--font-mono);
-      font-size: var(--fs-xs);
-      letter-spacing: 0.08em;
-      padding: 3px 10px;
-      border-radius: var(--radius-sm);
-      margin: var(--space-3xs);
-      border: 1px solid;
-    }
-    .tech-tag--css    { color: var(--color-accent-cool);  border-color: var(--color-accent-cool);  }
-    .tech-tag--state  { color: var(--color-accent);       border-color: var(--color-accent);        }
-    .tech-tag--anim   { color: #c792ea;                   border-color: #c792ea;                    }
-    .tech-tag--layout { color: var(--color-accent-green); border-color: var(--color-accent-green);  }
-    .component-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: var(--space-md);
-      margin-block: var(--space-lg);
-    }
-    .component-card {
-      background: var(--color-bg-card);
-      border: var(--border-width) solid var(--color-border);
-      border-radius: var(--radius-md);
-      padding: var(--space-md);
-      position: relative;
-      overflow: hidden;
-    }
-    .component-card::before {
-      content: attr(data-num);
-      position: absolute;
-      top: var(--space-sm);
-      right: var(--space-md);
-      font-family: var(--font-mono);
-      font-size: var(--fs-xs);
-      color: var(--color-text-dim);
-    }
-    .component-card__title { font-family: var(--font-mono); font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.15em; color: var(--color-accent); margin-bottom: var(--space-xs); }
-    .component-card p { font-size: var(--fs-sm); color: var(--color-text-muted); line-height: 1.5; }
-    .week-log { border-left: 2px solid var(--color-border); padding-left: var(--space-md); margin-block: var(--space-lg); }
-    .week-log__day { margin-bottom: var(--space-lg); position: relative; }
-    .week-log__day::before { content: ""; position: absolute; left: calc(-1 * var(--space-md) - 1px); top: 6px; width: 8px; height: 8px; border-radius: 50%; background: var(--color-accent); transform: translateX(-4px); }
-    .week-log__date { font-family: var(--font-mono); font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.15em; color: var(--color-text-dim); margin-bottom: var(--space-xs); }
-    .week-log__heading { font-family: var(--font-display); font-size: var(--fs-base); font-weight: 700; color: var(--color-text); margin-bottom: var(--space-xs); }
-    .week-log ul { list-style: none; padding: 0; }
-    .week-log ul li { font-size: var(--fs-sm); color: var(--color-text-muted); padding-left: var(--space-sm); position: relative; margin-bottom: var(--space-3xs); line-height: 1.5; }
-    .week-log ul li::before { content: ""; position: absolute; left: 0; top: 0.7em; width: 6px; height: 1px; background: var(--color-accent); }
-    .time-badge { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--color-text-dim); margin-top: var(--space-xs); }
-    .insight-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-md); margin-block: var(--space-lg); }
-    .insight-card { background: var(--color-bg-card); border: var(--border-width) solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-md); }
-    .insight-card__num { font-family: var(--font-mono); font-size: var(--fs-2xl); font-weight: 700; color: var(--color-accent); opacity: 0.2; line-height: 1; margin-bottom: var(--space-xs); }
-    .insight-card__title { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-base); color: var(--color-text); margin-bottom: var(--space-xs); }
-    .insight-card p { font-size: var(--fs-sm); color: var(--color-text-muted); line-height: 1.5; }
-    .feedback-box { background: var(--color-bg-card); border: var(--border-thick) solid var(--color-accent-green); border-radius: var(--radius-md); padding: var(--space-lg); margin-block: var(--space-xl); position: relative; }
-    .feedback-box__label { position: absolute; top: calc(-1 * var(--fs-xs) - 4px); left: var(--space-md); font-family: var(--font-mono); font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.15em; color: var(--color-accent-green); background: var(--color-bg); padding: 0 var(--space-2xs); }
-    .feedback-box blockquote { font-size: var(--fs-lg); font-family: var(--font-display); color: var(--color-text); line-height: 1.4; border: none; padding: 0; margin: 0; background: transparent; font-style: normal; }
-    .feedback-box__author { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--color-text-dim); margin-top: var(--space-sm); text-transform: uppercase; letter-spacing: 0.1em; }
-    .hero-row { display: flex; align-items: flex-start; gap: var(--space-xl); flex-wrap: wrap; }
-    .hero-row .hero { flex: 1; min-width: 280px; padding-block: 0; }
-  </style>
+<link rel="stylesheet" href="../css/components.css" />
 </head>
 <body>
 
@@ -149,6 +45,9 @@
               <li role="none"><a href="vakken.html" role="menuitem">Overzicht</a></li>
               <li role="none"><a href="vakken-css-ttr.html" role="menuitem">CSS to the Rescue <span class="nav__dropdown__score">9,5</span></a></li>
               <li role="none"><a href="vakken-browser-tech.html" role="menuitem" aria-current="page">Browser Tech <span class="nav__dropdown__score">10</span></a></li>
+            <li role="none"><a href="vakken-hcd.html" role="menuitem">Human Centered Design <span
+                        class="nav__dropdown__score">9</span></a></li>
+            <li role="none"><a href="vakken-api.html" role="menuitem">API <span class="nav__dropdown__score">10</span></a></li>
             </ul>
           </li>
           <li><a class="nav__link" href="meesterproef.html">Meesterproef</a></li>
@@ -183,7 +82,7 @@
             gebruiksvriendelijk webformulier met progressive enhancement als uitgangspunt.
           </p>
         </section>
-        <div style="display:flex; align-items:center; padding-top: var(--space-2xl);">
+        <div class="hero-score">
           <div class="score-badge fade-in" role="img" aria-label="Beoordeling: 10 uit 10">
             <span class="score-badge__number">10</span>
             <span class="score-badge__label">/ 10</span>
@@ -399,7 +298,7 @@
             "Buitengewoon goed werk op alle gebieden. Je hebt niet alleen heel erg veel gedaan,
             heel veel daarvan is ook nog eens van een buitengewoon niveau."
           </blockquote>
-          <p class="feedback-box__author" style="margin-top: var(--space-sm);">
+        <p class="feedback-box__author">
             "Tof om te zien hoeveel aandacht je hebt besteed aan de vormgeving en de UX. Alles ziet er erg goed uit."
           </p>
           <p class="feedback-box__author">
@@ -480,9 +379,9 @@
             </ul>
         </div>
 
-        <p style="margin-top: var(--space-xl);">
+        <p class="mt-xl">
           <a href="#" class="btn btn--primary">→ Bekijk het formulier live</a>
-          <a href="#" class="btn" style="margin-left: var(--space-sm);">→ GitHub repo</a>
+        <a href="#" class="btn ml-sm">→ GitHub repo</a>
         </p>
 
       </article>
