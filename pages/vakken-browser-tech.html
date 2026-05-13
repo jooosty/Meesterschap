@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Browser Technologies — Vakken — Meesterschap</title>
+<title>Browser Technologies Vakken Meesterschap</title>
   <meta name="description" content="Browser Technologies: aangifte erfbelasting formulier. Beoordeling: 10/10." />
   <script src="../js/theme-toggle.js"></script>
   <link rel="stylesheet" href="../css/reset.css" />
@@ -18,12 +18,6 @@
       border-left: 3px solid var(--color-accent);
       border-radius: var(--radius-md);
       padding: var(--space-md);
-      overflow-x: auto;
-      margin-block: var(--space-md);
-    }
-    .code-block pre {
-      font-family: var(--font-mono);
-      font-size: var(--fs-sm);
       line-height: 1.7;
       margin: 0;
       white-space: pre;
@@ -182,11 +176,11 @@
 
       <div class="hero-row">
         <section class="hero fade-in" aria-labelledby="page-title">
-          <p class="eyebrow hero__eyebrow">Sector 05b — Browser Technologies</p>
+        <p class="eyebrow hero__eyebrow">Sector 05b Browser Technologies</p>
           <h1 id="page-title">Browser<br>Technologies</h1>
           <p class="hero__lead">
             Een officiële belastingaangifte omzetten naar een toegankelijk, robuust en
-            gebruiksvriendelijk webformulier — met progressive enhancement als uitgangspunt.
+            gebruiksvriendelijk webformulier met progressive enhancement als uitgangspunt.
           </p>
         </section>
         <div style="display:flex; align-items:center; padding-top: var(--space-2xl);">
@@ -222,11 +216,11 @@
         <p>
           Het web is voor iedereen. Dat betekent dat je website moet werken op oude browsers,
           nieuwe browsers, telefoons, game consoles, met screenreaders, met een muis, met alleen
-          een toetsenbord — en alles daartussenin.
+        een toetsenbord en alles daartussenin.
         </p>
         <p>
           De eindopdracht: zet een officiële belasting-PDF om naar een interactief webformulier.
-          Aangifte erfbelasting — een van de meest complexe formulieren die burgers moeten invullen.
+        Aangifte erfbelasting een van de meest complexe formulieren die burgers moeten invullen.
           Uitgangspunt: HTML first, dan CSS, dan JavaScript.
         </p>
 
@@ -276,7 +270,8 @@
           </div>
           <div class="component-card" data-num="06">
             <p class="component-card__title">NS design system</p>
-            <p>Alle stijl is gebaseerd op de officiële NS design tokens — kleurenschaal, typografie, spacing, border radius, shadows.</p>
+            <p>Alle stijl is gebaseerd op de officiële NS design tokens kleurenschaal, typografie, spacing, border radius, shadows.
+            </p>
           </div>
           <div class="component-card" data-num="07">
             <p class="component-card__title">SVG voortgangsbalk</p>
@@ -371,7 +366,7 @@
             <p class="week-log__date">Di 3 maart 2026</p>
             <p class="week-log__heading">Print styling</p>
             <ul>
-              <li>Print CSS gebouwd — ziet eruit als officieel overheidsdocument</li>
+            <li>Print CSS gebouwd ziet eruit als officieel overheidsdocument</li>
             </ul>
             <p class="time-badge">⏱ ~3u</p>
           </div>
@@ -417,14 +412,14 @@
           <div class="insight-card">
             <p class="insight-card__num">01</p>
             <p class="insight-card__title">Formulieren zijn complexer dan je denkt</p>
-            <p>Als je een écht formulier bouwt — met conditionele vragen, validatie op meerdere niveaus
-              en accessibility — merk je hoe veel er mis kan gaan.</p>
+            <p>Als je een écht formulier bouwt met conditionele vragen, validatie op meerdere niveaus
+                en accessibility merk je hoe veel er mis kan gaan.</p>
           </div>
           <div class="insight-card">
             <p class="insight-card__num">02</p>
             <p class="insight-card__title">HTML biedt meer dan je gebruikt</p>
             <p><code>fieldset</code>, <code>legend</code>, <code>datalist</code>, <code>dialog</code>,
-              <code>autocomplete</code>, <code>inputmode</code> — native features die UX verbeteren zonder JavaScript.</p>
+            <code>autocomplete</code>, <code>inputmode</code> native features die UX verbeteren zonder JavaScript.</p>
           </div>
           <div class="insight-card">
             <p class="insight-card__num">03</p>
@@ -447,7 +442,7 @@
           <div class="insight-card">
             <p class="insight-card__num">06</p>
             <p class="insight-card__title">SVG voor custom UI elementen</p>
-            <p>Voor de verbindingslijnen in de voortgangsbalk had ik inline SVG nodig —
+            <p>Voor de verbindingslijnen in de voortgangsbalk had ik inline SVG nodig
               nieuw voor mij en precies genoeg voor dit doel.</p>
           </div>
         </div>
@@ -460,13 +455,30 @@
         </p>
         <p>
           De elfproef was een moment waarop techniek en werkelijkheid samenkwamen. Een algoritme
-          van papier naar werkende code brengen — en het dan ook écht zien werken met testgetallen
-          van de Belastingdienst — was bevredigend op een manier die ik niet had verwacht.
+        van papier naar werkende code brengen en het dan ook écht zien werken met testgetallen
+        van de Belastingdienst was bevredigend op een manier die ik niet had verwacht.
         </p>
         <p>
           De 10 is mooi. Maar de feedback dat ik nu écht begrijp hoe complex formulieren zijn
           voelt als de eigenlijke beloning.
         </p>
+
+        <div class="learning-goals">
+            <p class="learning-goals__label">Learning goals</p>
+            <ul>
+                <li><strong>Learn how to effectively use CSS:</strong> Bij browser-tech viel het belang van toegankelijke
+                    focus-styling op. Ik ga consistente focus- en form-styles als basis opnemen in mijn componenten. Dit
+                    verbetert navigatie voor toetsenbordgebruikers.</li>
+                <li><strong>Learn how to animate using CSS:</strong> Transities voor validatie en input-feedback werkten goed en
+                    maakten interacties duidelijk. Ik ontwerp minimalistische feedback-animaties en respecteer
+                    <code>prefers-reduced-motion</code>. Dat houdt interfaces snel en toegankelijk.
+                </li>
+                <li><strong>Be more creative in designing:</strong> Heldere composities bleken gebruikers te helpen bij het
+                    scannen van content. Ik experimenteer met micro-interacties die de bruikbaarheid verhogen. Kleine bewegingen
+                    ondersteunen context zonder te storen.</li>
+        
+            </ul>
+        </div>
 
         <p style="margin-top: var(--space-xl);">
           <a href="#" class="btn btn--primary">→ Bekijk het formulier live</a>
@@ -479,7 +491,7 @@
 
   <footer class="footer">
     <div class="container footer__inner">
-      <p>© 2026 — Joost Krebbers · Meesterschap Blog</p>
+    <p>© 2026 Joost Krebbers · Meesterschap Blog</p>
       <p>Built from scratch · No frameworks · Two themes</p>
     </div>
   </footer>

@@ -13,7 +13,7 @@
   /* Body: leesbaar */
   --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
 
-  /* Type scale — fluid */
+/* Type scale fluid */
   --fs-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
   --fs-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
   --fs-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);

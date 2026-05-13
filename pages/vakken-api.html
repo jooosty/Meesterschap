@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>API — Vakken — Meesterschap</title>
-  <meta name="description" content="API vak: F1 Explorer — live telemetrie visualiser op OpenF1. Beoordeling: 10/10." />
+<title>API Vakken Meesterschap</title>
+<meta name="description" content="API vak: F1 Explorer live telemetrie visualiser op OpenF1. Beoordeling: 10/10." />
   <script src="../js/theme-toggle.js"></script>
   <link rel="stylesheet" href="../css/reset.css" />
   <link rel="stylesheet" href="../css/tokens.css" />
@@ -169,7 +169,22 @@
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
           <line x1="3" y1="6" x2="17" y2="6"/>
           <line x1="3" y1="10" x2="17" y2="10"/>
-          <line x1="3" y1="14" x2="17" y2="14"/>
+        <div class="learning-goals">
+            <p class="learning-goals__label">Learning goals</p>
+            <ul>
+                <li><strong>Learn how to effectively use CSS:</strong> Voor data-gedreven pagina's heb ik overzichtelijke
+                    tabellen en responsive kaarten gebouwd. Ik ga CSS-utilities voor datastructuren toevoegen aan mijn toolkit
+                    om herbruikbaarheid te vergroten. Dat maakt het makkelijker om nieuwe datasets te presenteren en te
+                    onderhouden.</li>
+                <li><strong>Learn how to animate using CSS:</strong> Animaties voor laadstaten en skeletons verbeterden de
+                    perceptie van performance. Ik ga deze patronen standaardiseren in data-fetch workflows. Hierdoor lijkt
+                    content sneller en gebruikers blijven betrokken tijdens laadmomenten.</li>
+                <li><strong>Be more creative in designing:</strong> Visualisatie van API-data wordt sterker met kleine grafische
+                    elementen. Ik test eenvoudige chart-embeds en kleurencoderingen om patronen zichtbaar te maken. Dit helpt
+                    bij snelle interpretatie van cijfers en maakt insights directer bruikbaar.</li>
+            </ul>
+        </div>
+
         </svg>
       </button>
       <nav aria-label="Hoofdnavigatie">
@@ -217,7 +232,7 @@
 
       <div class="hero-row">
         <section class="hero fade-in" aria-labelledby="page-title">
-          <p class="eyebrow hero__eyebrow">Sector 05d — API</p>
+        <p class="eyebrow hero__eyebrow">Sector 05d API</p>
           <h1 id="page-title">F1<br>Explorer</h1>
           <p class="hero__lead">
             Een live F1 telemetrie visualiser gebouwd op de OpenF1 API.
@@ -257,7 +272,7 @@
         <h2>De opdracht</h2>
         <p>
           Gebruik een externe API om een zinvolle, interactieve web-applicatie te bouwen.
-          Het doel: laten zien dat je data kunt ophalen, verwerken, weergeven — en dat je
+        Het doel: laten zien dat je data kunt ophalen, verwerken, weergeven en dat je
           de API goed genoeg begrijpt om er creatief mee om te gaan.
         </p>
 
@@ -265,7 +280,7 @@
         <p>
           F1 Explorer haalt live F1-sessiedata op via de OpenF1 API en visualiseert dit
           als een interactief tijdlijn-replay. Je kiest een race, kwalificatie of vrije training
-          uit de seizoenskalender, klikt op "Load Track" en kijkt de sessie terug — real-time
+        uit de seizoenskalender, klikt op "Load Track" en kijkt de sessie terug real-time
           of tot 50× versneld. Elke rijder is een stip op het circuit, met echte GPS-coördinaten
           als basis.
         </p>
@@ -300,7 +315,7 @@
           <div class="feature-card" data-icon="📊">
             <p class="feature-card__title">Live towers</p>
             <p>Live intervals (race), kwalificatiescore per fase (Q1/Q2/Q3), praktijktijden,
-              live lap tracker, pit-stop tower, inhaalacties en race control berichten — allemaal
+            live lap tracker, pit-stop tower, inhaalacties en race control berichten allemaal
               bijgehouden tot op de gesimuleerde tijdlijn.</p>
           </div>
           <div class="feature-card" data-icon="📻">
@@ -311,7 +326,7 @@
           <div class="feature-card" data-icon="🏁">
             <p class="feature-card__title">Telemetry HUD</p>
             <p>Klik een rijder aan voor een canvas-HUD: snelheid, RPM, throttle, rem, versnelling
-              en DRS — live bijgehouden via de car_data endpoint. Radiale arc-bars voor RPM en throttle.</p>
+            en DRS live bijgehouden via de car_data endpoint. Radiale arc-bars voor RPM en throttle.</p>
           </div>
           <div class="feature-card" data-icon="🎬">
             <p class="feature-card__title">Podium screen</p>
@@ -349,16 +364,31 @@
             <tr><td>track-overlays.js</td><td>Driver trails (BufferGeometry), DRS zones (car_data → circuit-segmenten)</td></tr>
             <tr><td>track-playback.js</td><td>Animatieloop, tijdlijn-scrubber, tower dispatch, weeroverlay, stationary detection</td></tr>
             <tr><td>track-telemetry.js</td><td>Canvas HUD voor snelheid / RPM / throttle / rem / DRS per rijder</td></tr>
-            <tr><td>track-radio.js</td><td>Team radio popup — timed playback op de gesimuleerde tijdlijn</td></tr>
+            <tr>
+                <td>track-radio.js</td>
+                <td>Team radio popup timed playback op de gesimuleerde tijdlijn</td>
+            </tr>
             <tr><td>track-camera.js</td><td>Orthografisch zoom/pan, rijder-focus mode met smooth lerp</td></tr>
             <tr><td>track-theme.js</td><td>F1-thema fade-in/out tijdens sessie laden</td></tr>
-            <tr><td>tower-race.js</td><td>Race interval tower — interval + gap, tyre-indicator, DNF detectie</td></tr>
-            <tr><td>tower-qualifying.js</td><td>Kwalificatietower — Q1/Q2/Q3 fases, eliminatielogica, gevarenkleur</td></tr>
-            <tr><td>tower-practice.js</td><td>Vrije training — beste rondetijden gesorteerd</td></tr>
+            <tr>
+                <td>tower-race.js</td>
+                <td>Race interval tower interval + gap, tyre-indicator, DNF detectie</td>
+            </tr>
+            <tr>
+                <td>tower-qualifying.js</td>
+                <td>Kwalificatietower Q1/Q2/Q3 fases, eliminatielogica, gevarenkleur</td>
+            </tr>
+            <tr>
+                <td>tower-practice.js</td>
+                <td>Vrije training beste rondetijden gesorteerd</td>
+            </tr>
             <tr><td>tower-live-lap.js</td><td>Alleen vliegende ronden (stint-data als bron), sector S1/S2/S3 live</td></tr>
             <tr><td>tower-pit.js</td><td>Pitstops met compound-wissel, compound-kleuren</td></tr>
             <tr><td>tower-overtakes.js</td><td>Inhaalbewegingen met lap-nummer</td></tr>
-            <tr><td>tower-race-control.js</td><td>Race control berichten — vlaggen, safety car, DRS</td></tr>
+            <tr>
+                <td>tower-race-control.js</td>
+                <td>Race control berichten vlaggen, safety car, DRS</td>
+            </tr>
             <tr><td>tower-sectors.js</td><td>Sector-kleur logica (paars / groen / geel / blauw)</td></tr>
             <tr><td>tower-base.js</td><td>Gedeelde tower-rij builder, team logo URL helper</td></tr>
             <tr><td>tower-context-menu.js</td><td>Rechtermuisknop context menu op tower-rijen</td></tr>
@@ -366,7 +396,10 @@
             <tr><td>session-comparison.js</td><td>Rijder-vergelijking: lap-barchart + sectorvergelijking</td></tr>
             <tr><td>podium-screen.js</td><td>Podium overlay na afloop van een race</td></tr>
             <tr><td>easter-eggs.js</td><td>Keysequentie-dispatcher voor alle easter eggs</td></tr>
-            <tr><td>easter-egg-who.js</td><td>Doctor Who easter egg — rijders vervangen door DW-karakters</td></tr>
+            <tr>
+                <td>easter-egg-who.js</td>
+                <td>Doctor Who easter egg rijders vervangen door DW-karakters</td>
+            </tr>
           </tbody>
         </table>
 
@@ -377,7 +410,7 @@
           die een rolling request-log bijhoudt en automatisch wacht als een limiet bereikt wordt:
         </p>
         <div class="code-block" role="region" aria-label="Code: rate-limited fetcher">
-          <pre><span class="cm">// track-data.js — automatisch wachten bij rate limits</span>
+        <pre><span class="cm">// track-data.js automatisch wachten bij rate limits</span>
 <span class="kw">export function</span> <span class="fn">createApiFetcher</span>(onRateLimitMessage) {
   <span class="kw">const</span> requestLog = [];
   <span class="kw">const</span> PER_SEC = <span class="str">3</span>, PER_MIN = <span class="str">28</span>;
@@ -419,14 +452,14 @@
           met 41 vertices. Kleur per vertex fadet van transparant (staart) naar de teamkleur (kop):
         </p>
         <div class="code-block" role="region" aria-label="Code: driver trail BufferGeometry">
-          <pre><span class="cm">// track-overlays.js — vertex colors: transparant (staart) → teamkleur (kop)</span>
+        <pre><span class="cm">// track-overlays.js vertex colors: transparant (staart) → teamkleur (kop)</span>
 <span class="kw">const</span> TRAIL_POINTS = <span class="str">40</span>;
 
 <span class="kw">const</span> geo = <span class="kw">new</span> THREE.<span class="fn">BufferGeometry</span>();
 geo.setAttribute(<span class="str">'position'</span>, <span class="kw">new</span> THREE.<span class="fn">BufferAttribute</span>(positions, <span class="str">3</span>));
 geo.setAttribute(<span class="str">'color'</span>,    <span class="kw">new</span> THREE.<span class="fn">BufferAttribute</span>(colors,    <span class="str">3</span>));
 
-<span class="cm">// Elke frame updaten — geen nieuwe objecten</span>
+<span class="cm">// Elke frame updaten geen nieuwe objecten</span>
 <span class="kw">for</span> (<span class="kw">let</span> i = <span class="str">0</span>; i <= TRAIL_POINTS; i++) {
   <span class="kw">const</span> alpha = i / TRAIL_POINTS; <span class="cm">// 0=onzichtbaar → 1=vol</span>
   colors[i * <span class="str">3</span>]     = rgb.r * alpha;
@@ -443,7 +476,7 @@ geo.attributes.color.needsUpdate = <span class="kw">true</span>;</pre>
           pageimages API. Een tweede <code>who</code> zet alles terug:
         </p>
         <div class="code-block" role="region" aria-label="Code: Doctor Who easter egg">
-          <pre><span class="cm">// easter-egg-who.js — Wikipedia thumbnails ophalen en rijderinfo vervangen</span>
+        <pre><span class="cm">// easter-egg-who.js Wikipedia thumbnails ophalen en rijderinfo vervangen</span>
 <span class="kw">const</span> WHO_CHARACTERS = [
   { name: <span class="str">'The Doctor'</span>, abbr: <span class="str">'DOC'</span>, colour: <span class="str">'#003B6F'</span>, wiki: <span class="str">'Tenth_Doctor'</span> },
   { name: <span class="str">'The Dalek'</span>,  abbr: <span class="str">'DAL'</span>, colour: <span class="str">'#B8860B'</span>, wiki: <span class="kw">null</span>,
@@ -513,7 +546,7 @@ geo.attributes.color.needsUpdate = <span class="kw">true</span>;</pre>
             <p class="insight-card__num">02</p>
             <p class="insight-card__title">Three.js voor data visualisatie</p>
             <p>WebGL via Three.js is niet alleen voor 3D games. Een orthografisch cameramodel,
-              BufferGeometry voor trails en TextureLoader voor rijderfoto's — Three.js bleek een
+            BufferGeometry voor trails en TextureLoader voor rijderfoto's Three.js bleek een
               uitstekende keuze voor een 2D data-visualisatie die soepel moet lopen.</p>
           </div>
           <div class="insight-card">
@@ -526,7 +559,7 @@ geo.attributes.color.needsUpdate = <span class="kw">true</span>;</pre>
           <div class="insight-card">
             <p class="insight-card__num">04</p>
             <p class="insight-card__title">Tijdlijn-gebaseerde state is complex</p>
-            <p>Elke tower, elke trail, elke sector — ze moeten allemaal consistent zijn met
+            <p>Elke tower, elke trail, elke sector ze moeten allemaal consistent zijn met
               de gesimuleerde tijd. Scrubben naar een eerder moment, dan terug spelen.
               Stationaire rijders verbergen. Dat soort randgevallen doe je pas echt goed
               als je ze allemaal een keer fout hebt.</p>
@@ -534,7 +567,7 @@ geo.attributes.color.needsUpdate = <span class="kw">true</span>;</pre>
           <div class="insight-card">
             <p class="insight-card__num">05</p>
             <p class="insight-card__title">Easter eggs verdienen architectuur</p>
-            <p>De Doctor Who easter egg vervangt rijdersinfo live in Three.js — inclusief
+            <p>De Doctor Who easter egg vervangt rijdersinfo live in Three.js inclusief
               het herladen van texturen in bestaande dot-meshes. Dat vereiste een clean
               interface tussen de easter egg module en de rest van het systeem.</p>
           </div>
@@ -542,7 +575,7 @@ geo.attributes.color.needsUpdate = <span class="kw">true</span>;</pre>
             <p class="insight-card__num">06</p>
             <p class="insight-card__title">Astro als lichte app-shell</p>
             <p>Astro laat je HTML componenten schrijven met zero JS-overhead. De zware
-              interactiviteit zit in vanilla JS modules — Astro doet alleen de structuur.
+            interactiviteit zit in vanilla JS modules Astro doet alleen de structuur.
               Die scheiding hield de site snel en de code overzichtelijk.</p>
           </div>
         </div>
@@ -551,7 +584,7 @@ geo.attributes.color.needsUpdate = <span class="kw">true</span>;</pre>
         <p>
           Dit was het project waarbij ik voor het eerst echt in een externe API ben gedoken op
           een schaal die er toe doet. Niet één endpoint, maar dertien. Niet één rijder, maar
-          twintig — tegelijk, met echte GPS-data die tot 50× versneld op het scherm rijdt.
+        twintig tegelijk, met echte GPS-data die tot 50× versneld op het scherm rijdt.
         </p>
         <p>
           Het moment waarop de eerste stippen over het circuit bewogen was een van de beste
@@ -576,7 +609,7 @@ geo.attributes.color.needsUpdate = <span class="kw">true</span>;</pre>
 
   <footer class="footer">
     <div class="container footer__inner">
-      <p>© 2026 — Joost Krebbers · Meesterschap Blog</p>
+    <p>© 2026 Joost Krebbers · Meesterschap Blog</p>
       <p>Built from scratch · No frameworks · Two themes</p>
     </div>
   </footer>

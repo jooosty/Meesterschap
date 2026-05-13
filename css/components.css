@@ -187,7 +187,7 @@
   position: relative;
 }
 
-/* === DASHBOARD GRID — homepage cards === */
+/* === DASHBOARD GRID homepage cards === */
 .dashboard {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -296,7 +296,7 @@
   border: 1px solid var(--color-border);
 }
 
-/* === DATA STRIP — telemetry style stats === */
+/* === DATA STRIP telemetry style stats === */
 .data-strip {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -428,7 +428,8 @@
 
 .nav__dropdown {
   position: absolute;
-  top: calc(100% + 0px); /* flush — gap covered by ::before bridge */
+top: calc(100% + 0px);
+    /* flush gap covered by ::before bridge */
   left: 50%;
   transform: translateX(-50%);
   min-width: 200px;

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Human Centered Design — Vakken — Meesterschap</title>
+<title>Human Centered Design Vakken Meesterschap</title>
   <meta name="description" content="Human Centered Design: Spraakberichten-splitter voor Berend. Beoordeling: 9/10." />
   <script src="../js/theme-toggle.js"></script>
   <link rel="stylesheet" href="../css/reset.css" />
@@ -239,10 +239,10 @@
 
       <div class="hero-row">
         <section class="hero fade-in" aria-labelledby="page-title">
-          <p class="eyebrow hero__eyebrow">Sector 05c — Human Centered Design</p>
+        <p class="eyebrow hero__eyebrow">Sector 05c Human Centered Design</p>
           <h1 id="page-title">Human<br>Centered Design</h1>
           <p class="hero__lead">
-            Vijf iteraties co-design met Berend — blind, NVDA-gebruiker.
+            Vijf iteraties co-design met Berend blind, NVDA-gebruiker.
             Het doel: lange spraakberichten opsplitsen zodat hij per onderwerp kan reageren.
           </p>
         </section>
@@ -300,7 +300,7 @@
         <div class="principle-grid">
           <div class="principle-card">
             <p class="principle-card__title">Study Situation</p>
-            <p>Vijf directe testsessies met Berend — geen aannames, maar co-design met de persoon
+            <p>Vijf directe testsessies met Berend geen aannames, maar co-design met de persoon
               die het product elke dag zou gebruiken. NVDA, Tab-navigatie, korte aankondigingen:
               alles ontdekt door te observeren, niet door te raden.</p>
           </div>
@@ -308,19 +308,19 @@
             <p class="principle-card__title">Ignore Conventions</p>
             <p>Geen traditioneel formulier. Tab is primair, Enter activeert handelingen,
               boodschappen sluiten automatisch, alle antwoorden worden tegelijk verstuurd via
-              Ctrl+Enter. Alles anders dan standaard — bewust.</p>
+            Ctrl+Enter. Alles anders dan standaard bewust.</p>
           </div>
           <div class="principle-card">
             <p class="principle-card__title">Prioritise Identity</p>
             <p>Spraak is standaard, niet tekst. Geen overbodige visuele elementen.
-              Korte aankondigingen: "Antwoord op bericht 2" — nooit de hele berichttekst herhalen.
+            Korte aankondigingen: "Antwoord op bericht 2" nooit de hele berichttekst herhalen.
               Alles geoptimaliseerd voor <em>Berend</em>, niet voor een generieke gebruiker.</p>
           </div>
           <div class="principle-card">
             <p class="principle-card__title">Add Nonsense</p>
             <p>Geluidje bij versturen via Web Audio API. Bericht-nummers in plaats van generieke
               termen. Automatisch focus management. Chat-stijl antwoordenpagina geïnspireerd op
-              imBee — vertrouwd en herkenbaar.</p>
+            imBee vertrouwd en herkenbaar.</p>
           </div>
         </div>
 
@@ -332,7 +332,7 @@
             <p class="iteration__num" aria-hidden="true">01</p>
             <div>
               <p class="iteration__date">30 – 31 maart 2026</p>
-              <p class="iteration__title">Het begin — splitsen en kopiëren</p>
+            <p class="iteration__title">Het begin splitsen en kopiëren</p>
               <ul>
                 <li>Spraakopname en transcript plakken gebouwd</li>
                 <li>Automatische zinssplitsing</li>
@@ -340,7 +340,7 @@
                 <li>Kopieerknop (per item)</li>
               </ul>
               <p style="font-size: var(--fs-sm); color: var(--color-text-muted); margin-bottom: var(--space-xs);">
-                Berend leerde ons: de kopieerknop was nutteloos — hij wil antwoorden versturen,
+                Berend leerde ons: de kopieerknop was nutteloos hij wil antwoorden versturen,
                 niet kopiëren. Tab-navigatie werkte niet logisch. Automatische focus helpt enorm.
               </p>
               <div class="verdict">
@@ -357,7 +357,7 @@
               <p class="iteration__title">Tab-navigatie centraal</p>
               <ul>
                 <li>Kopieerknop verwijderd</li>
-                <li>Boodschappen tabbaar gemaakt — Tab gaat door alle boodschappen</li>
+                <li>Boodschappen tabbaar gemaakt Tab gaat door alle boodschappen</li>
                 <li>Enter opent een boodschap, focus gaat naar Spreek-in knop</li>
                 <li>Aria-labels bij tabben: berichttekst wordt voorgelezen</li>
                 <li>Boodschappen sluiten automatisch als je wegtabt zonder iets in te vullen</li>
@@ -393,9 +393,9 @@
               <p class="iteration__date">Finale tuning</p>
               <p class="iteration__title">Dubbele aankondigingen voorkomen</p>
               <ul>
-                <li>Timer maakt geen geluid meer — puur visueel</li>
+                <li>Timer maakt geen geluid meer puur visueel</li>
                 <li>Antwoordveld zegt alleen "Antwoord op bericht 2", niet de volledige berichttekst</li>
-                <li>Beantwoorden-knop aria-label: "Beantwoorden op bericht [nummer]" — geen herhaling</li>
+                <li>Beantwoorden-knop aria-label: "Beantwoorden op bericht [nummer]" geen herhaling</li>
               </ul>
               <div class="verdict">
                 <p class="verdict__label">Berend's feedback</p>
@@ -411,11 +411,11 @@
               <p class="iteration__title">Antwoordenpagina als losse chatpagina</p>
               <ul>
                 <li>Antwoordenoverzicht verplaatst naar volledig aparte HTML-pagina (<code>antwoorden.html</code>)</li>
-                <li>Gegevens doorgegeven via <code>sessionStorage</code> — geen koppeling tussen bestanden op runtime</li>
+                <li>Gegevens doorgegeven via <code>sessionStorage</code> geen koppeling tussen bestanden op runtime</li>
                 <li>Chat-stijl interface geïnspireerd op imBee: groene achtergrond, witte inkomende bubbles, groene uitgaande bubbles</li>
                 <li>Elke antwoordbubble bevat geciteerd origineel bericht voor context</li>
                 <li>Alle originele berichten bovenaan, alle antwoorden gegroepeerd onderaan</li>
-                <li>Berichten zonder antwoord stilletjes overgeslagen — geen overbodige "geen antwoord" melding</li>
+                <li>Berichten zonder antwoord stilletjes overgeslagen geen overbodige "geen antwoord" melding</li>
               </ul>
               <div class="verdict">
                 <p class="verdict__label">Belangrijkste inzicht</p>
@@ -434,7 +434,7 @@
           wachten voordat de nieuwe tekst er in komt:
         </p>
         <div class="code-block" role="region" aria-label="Code: double rAF announce functie">
-          <pre><span class="cm">// main.js — double rAF zorgt dat NVDA/JAWS/VoiceOver de regio altijd herleest</span>
+        <pre><span class="cm">// main.js double rAF zorgt dat NVDA/JAWS/VoiceOver de regio altijd herleest</span>
 <span class="kw">function</span> <span class="fn">announce</span>(message) {
   announcer.textContent = <span class="str">""</span>;
   requestAnimationFrame(() => {
@@ -447,11 +447,11 @@
 
         <h2>Code highlight: geluidje via Web Audio API</h2>
         <p>
-          Berend wil auditieve bevestiging bij het versturen — geen browser-alert, geen tekst,
+        Berend wil auditieve bevestiging bij het versturen geen browser-alert, geen tekst,
           maar een vriendelijk "ding". Gebouwd zonder externe library, puur via de Web Audio API:
         </p>
         <div class="code-block" role="region" aria-label="Code: send sound via Web Audio API">
-          <pre><span class="cm">// main.js — sine wave die van 520Hz naar 780Hz ramt in 80ms</span>
+        <pre><span class="cm">// main.js sine wave die van 520Hz naar 780Hz ramt in 80ms</span>
 <span class="kw">function</span> <span class="fn">playSendSound</span>() {
   <span class="kw">const</span> ctx  = <span class="kw">new</span> (window.AudioContext || window.webkitAudioContext)();
   <span class="kw">const</span> osc  = ctx.<span class="fn">createOscillator</span>();
@@ -471,18 +471,18 @@
         <h2>Code highlight: sessionStorage als pagina-brug</h2>
         <p>
           De antwoordenpagina is volledig los van <code>index.html</code>. Gegevens worden via
-          <code>sessionStorage</code> doorgegeven — zo heeft de screenreader op de nieuwe pagina
+        <code>sessionStorage</code> doorgegeven zo heeft de screenreader op de nieuwe pagina
           een schone start zonder de ruis van alle vorige elementen:
         </p>
         <div class="code-block" role="region" aria-label="Code: sessionStorage pagina-brug">
-          <pre><span class="cm">// main.js — sla data op vóór navigatie</span>
+        <pre><span class="cm">// main.js sla data op vóór navigatie</span>
 sessionStorage.setItem(
   <span class="str">"spraakberichten_antwoorden"</span>,
   JSON.stringify(allMessages)
 );
 window.location.href = <span class="str">"antwoorden.html"</span>;
 
-<span class="cm">// antwoorden.js — lees data op nieuwe pagina</span>
+<span class="cm">// antwoorden.js lees data op nieuwe pagina</span>
 <span class="kw">const</span> raw = sessionStorage.getItem(<span class="str">"spraakberichten_antwoorden"</span>);
 <span class="kw">if</span> (raw) allMessages = JSON.parse(raw);</pre>
         </div>
@@ -499,31 +499,31 @@ window.location.href = <span class="str">"antwoorden.html"</span>;
           <tbody>
             <tr>
               <td>Tab-navigatie primair</td>
-              <td>Berend navigeert exclusief met toetsenbord — muis bestaat niet in zijn workflow</td>
+            <td>Berend navigeert exclusief met toetsenbord muis bestaat niet in zijn workflow</td>
             </tr>
             <tr>
               <td>Enter = Actie</td>
-              <td>Voelt naturlijker dan standaard "activeren" — minder stappen per handeling</td>
+            <td>Voelt naturlijker dan standaard "activeren" minder stappen per handeling</td>
             </tr>
             <tr>
               <td>Spraak vóór tekst</td>
-              <td>Berend communiceert liever gesproken — de Spreek-in knop is de eerste optie</td>
+            <td>Berend communiceert liever gesproken de Spreek-in knop is de eerste optie</td>
             </tr>
             <tr>
               <td>Korte aria-labels</td>
-              <td>"Antwoord op 2" i.p.v. volledige berichttekst — geen dubbele aankondigingen</td>
+            <td>"Antwoord op 2" i.p.v. volledige berichttekst geen dubbele aankondigingen</td>
             </tr>
             <tr>
               <td>Geluidje bij versturen</td>
-              <td>Auditieve bevestiging voelt zekerder dan tekst alleen — ontdekt in iteratie 3</td>
+            <td>Auditieve bevestiging voelt zekerder dan tekst alleen ontdekt in iteratie 3</td>
             </tr>
             <tr>
               <td>Automatisch sluiten bij wegtabben</td>
-              <td>Minder navigatiestappen, intuïtief — geen "annuleer" knop nodig</td>
+            <td>Minder navigatiestappen, intuïtief geen "annuleer" knop nodig</td>
             </tr>
             <tr>
               <td>Ctrl+Enter sneltoets</td>
-              <td>Voor ervarenen, verborgen voor beginners — Berend begreep het meteen</td>
+            <td>Voor ervarenen, verborgen voor beginners Berend begreep het meteen</td>
             </tr>
             <tr>
               <td>Aparte antwoordenpagina</td>
@@ -531,7 +531,7 @@ window.location.href = <span class="str">"antwoorden.html"</span>;
             </tr>
             <tr>
               <td>Antwoorden onderaan gegroepeerd</td>
-              <td>Eerst lezen, dan overzien — logische flow voor Berend</td>
+            <td>Eerst lezen, dan overzien logische flow voor Berend</td>
             </tr>
             <tr>
               <td>Geen "geen antwoord" melding</td>
@@ -577,7 +577,7 @@ window.location.href = <span class="str">"antwoorden.html"</span>;
             <p class="insight-card__num">04</p>
             <p class="insight-card__title">Tab is de interface</p>
             <p>Als je Tab snapt, bouw je voor screenreader-gebruikers die Tab <em>prefereren</em>.
-              Tabvolgorde is geen detail — het is het ontwerp zelf.</p>
+            Tabvolgorde is geen detail het is het ontwerp zelf.</p>
           </div>
           <div class="insight-card">
             <p class="insight-card__num">05</p>
@@ -599,7 +599,7 @@ window.location.href = <span class="str">"antwoorden.html"</span>;
         <p>
           HCD was het vak dat het meest van mij vroeg op persoonlijk vlak. Niet de code was complex,
           maar het afstemmen op één specifieke persoon. Het eerste instinct bij feedback van Berend
-          was verdedigen — "maar het werkt toch?". Het tweede instinct was luisteren.
+        was verdedigen "maar het werkt toch?". Het tweede instinct was luisteren.
         </p>
         <p>
           De vijf iteraties laten goed zien hoe het product transformeerde. Wat begon als een
@@ -609,10 +609,28 @@ window.location.href = <span class="str">"antwoorden.html"</span>;
         </p>
         <p>
           De feedback over "attention to detail die met elke iteratie groeide" klopt. Je gaat
-          details zien die je normaal nooit zou opmerken — dubbele aria-aankondigingen,
+        details zien die je normaal nooit zou opmerken dubbele aria-aankondigingen,
           de volgorde van Tab-stops, de timing van een geluidje. Dat niveau van aandacht
           neem ik mee naar elk volgend project.
         </p>
+
+        <div class="learning-goals">
+            <p class="learning-goals__label">Learning goals</p>
+            <ul>
+                <li><strong>Learn how to effectively use CSS:</strong> In HCD-contexten verschoof mijn focus naar leesbaarheid
+                    en logische DOM-orde. Vanaf nu schrijf ik CSS met accessibility als uitgangspunt en controleer tabindex en
+                    semantiek. Dat verhoogt bruikbaarheid voor alle gebruikers.</li>
+                <li><strong>Learn how to animate using CSS:</strong> Animaties moeten functioneel zijn voor HCD-projecten en
+                    mogen niet afleiden. Ik gebruik beweging spaarzaam en test altijd op toegankelijkheid, inclusief
+                    <code>prefers-reduced-motion</code>. Zo blijft de interface voorspelbaar en gebruiksvriendelijk.
+                </li>
+                <li><strong>Be more creative in designing:</strong> Creativiteit betekent hier ook inclusiviteit. Ik streef naar
+                    ontwerpen die verschillende gebruikers ondersteunen en varieer kleur- en contrastopties. Dit maakt mijn
+                    ontwerpen robuuster in de praktijk.</li>
+            </ul>
+        </div>
+        </ul>
+        </div>
 
         <p style="margin-top: var(--space-xl);">
           <a href="#" class="btn btn--primary">→ Bekijk het prototype live</a>
@@ -625,7 +643,7 @@ window.location.href = <span class="str">"antwoorden.html"</span>;
 
   <footer class="footer">
     <div class="container footer__inner">
-      <p>© 2026 — Joost Krebbers · Meesterschap Blog</p>
+    <p>© 2026 Joost Krebbers · Meesterschap Blog</p>
       <p>Built from scratch · No frameworks · Two themes</p>
     </div>
   </footer>

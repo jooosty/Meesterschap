@@ -1,4 +1,4 @@
-/* Modern CSS Reset — pragmatic, accessible defaults */
+/* Modern CSS Reset pragmatic, accessible defaults */
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -59,7 +59,7 @@ ul, ol {
   list-style: none;
 }
 
-/* Focus styles — visible & accessible */
+/* Focus styles visible & accessible */
 :focus-visible {
   outline: 3px solid var(--color-accent);
   outline-offset: 3px;

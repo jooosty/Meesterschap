@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CSS to the Rescue — Vakken — Meesterschap</title>
+<title>CSS to the Rescue Vakken Meesterschap</title>
   <meta name="description" content="CSS to the Rescue: KRAFTWERK kerncentrale-paneel. Beoordeling: 9,5/10." />
   <script src="../js/theme-toggle.js"></script>
   <link rel="stylesheet" href="../css/reset.css" />
@@ -206,12 +206,12 @@
 
       <div class="hero-row">
         <section class="hero fade-in" aria-labelledby="page-title">
-          <p class="eyebrow hero__eyebrow">Sector 05a — CSS to the Rescue</p>
+        <p class="eyebrow hero__eyebrow">Sector 05a CSS to the Rescue</p>
           <h1 id="page-title">CSS to the<br>Rescue</h1>
           <p class="hero__lead">
             Een volledig functioneel kerncentrale bedieningspaneel gebouwd met bijna
             uitsluitend CSS. Geen JavaScript voor interactie, geen ID- of class-selectors
-            voor styling — alleen de kracht van CSS.
+            voor styling alleen de kracht van CSS.
           </p>
         </section>
         <div style="display:flex; align-items:center; padding-top: var(--space-2xl);">
@@ -247,7 +247,7 @@
         <p>
           Maak een interactief component met bijna uitsluitend CSS. De twee kernregels:
           geen IDs of classes als styling-hooks (alleen voor <code>:target</code> en
-          <code>&lt;label for&gt;</code>), en geen JavaScript voor logica — alleen een
+        <code>&lt;label for&gt;</code>), en geen JavaScript voor logica alleen een
           minimale range-to-custom-property bridge was toegestaan.
         </p>
         <p>
@@ -258,13 +258,13 @@
         <h2>Het concept: KRAFTWERK</h2>
         <p>
           Ik koos voor een fictief Duits kerncentrale bedieningspaneel, geïnspireerd op fotografieën
-          van verlaten Oost-Europese controlekamers. De naam KRAFTWERK — Duits voor "energiecentrale" —
+        van verlaten Oost-Europese controlekamers. De naam KRAFTWERK Duits voor "energiecentrale"
           paste perfect bij de retro-industriële esthetiek.
         </p>
         <p>
           Het paneel bevat vier analoge meters, zes LED-indicatoren, drie toggleschakelaars,
           vier draaiknoppen, START/STOP besturing en een retro scroll-drum MW display.
-          Alle interacties zijn puur CSS — ze zijn onderling verbonden: schakel je een pomp uit
+        Alle interacties zijn puur CSS ze zijn onderling verbonden: schakel je een pomp uit
           terwijl de centrale draait, dan flash het schakelpaneel oranje.
         </p>
 
@@ -330,11 +330,11 @@
         <h2>Code highlight: container style queries voor meltdown</h2>
         <p>
           Als alle vier knoppen op 145 staan én de centrale draait, treedt er een noodtoestand op.
-          Dit vereist het checken van vier CSS custom property waarden tegelijk — normaal JavaScript werk.
+        Dit vereist het checken van vier CSS custom property waarden tegelijk normaal JavaScript werk.
           De oplossing: geneste container style queries:
         </p>
         <div class="code-block" role="region" aria-label="Code: meltdown via container style queries">
-          <pre><span class="cm">/* state.css — meltdown triggert alleen als alle 4 knoppen op 145 staan */</span>
+        <pre><span class="cm">/* state.css meltdown triggert alleen als alle 4 knoppen op 145 staan */</span>
 <span class="sel">@container style(--knob-power: 145)</span> {
   <span class="sel">@container style(--knob-freq: 145)</span> {
     <span class="sel">@container style(--knob-pressure: 145)</span> {
@@ -356,7 +356,7 @@
 
         <h2>Code highlight: letter-corrupt animatie</h2>
         <p>
-          De letters van KRAFTWERK flikkeren onregelmatig en wisselen kort van glyph — alsof er een
+        De letters van KRAFTWERK flikkeren onregelmatig en wisselen kort van glyph alsof er een
           elektrische storing is. Elke letter heeft zijn eigen timing via per-letter CSS variabelen:
         </p>
         <div class="code-block" role="region" aria-label="Code: letter corrupt animatie">
@@ -380,7 +380,7 @@
           CSS custom property. CSS pakt die op en berekent de rotatie van de naald:
         </p>
         <div class="code-block" role="region" aria-label="Code: knob naar naald binding">
-          <pre><span class="cm">/* Het enige JS — range → custom property bridge */</span>
+        <pre><span class="cm">/* Het enige JS range → custom property bridge */</span>
 <span class="kw">const</span> updateRange = range <span class="fn">=></span> {
   document.documentElement.style.<span class="fn">setProperty</span>(<span class="str">'--'</span> + range.name, range.value);
 };
@@ -444,7 +444,7 @@
             <p class="week-log__date">Di 11 maart 2026</p>
             <p class="week-log__heading">Titel restyling + alles naar Engels + easter eggs</p>
             <ul>
-              <li>Titel visueel overhauled — letters vallen één voor één in</li>
+            <li>Titel visueel overhauled letters vallen één voor één in</li>
               <li>5 easter eggs gebouwd (stempel, gravure, koffievlek, versleten label, plantnaam)</li>
             </ul>
             <p class="time-badge">⏱ ~4u</p>
@@ -473,7 +473,7 @@
         <div class="failed-grid">
           <div class="failed-card">
             <p class="failed-card__title">× Geluidseffecten</p>
-            <p>CSS heeft geen audio capabilities — kliksgeluiden bij schakelaars zijn fundamenteel onmogelijk zonder JS.</p>
+            <p>CSS heeft geen audio capabilities kliksgeluiden bij schakelaars zijn fundamenteel onmogelijk zonder JS.</p>
           </div>
           <div class="failed-card">
             <p class="failed-card__title">× CSS-only timer</p>
@@ -490,14 +490,14 @@
           <div class="insight-card">
             <p class="insight-card__num">01</p>
             <p class="insight-card__title">CSS kan meer interactiviteit dan je denkt</p>
-            <p>Draaiknoppen, conditional waarschuwingen, een meltdown — zonder logica-JS.
+            <p>Draaiknoppen, conditional waarschuwingen, een meltdown zonder logica-JS.
               Denk in state via inputs en pseudo-classes, niet in event listeners.</p>
           </div>
           <div class="insight-card">
             <p class="insight-card__num">02</p>
             <p class="insight-card__title">Container style queries = CSS conditional logic</p>
             <p>Custom property waarden lezen via <code>@container style()</code> maakt CSS
-              conditioneel op basis van data — niet alleen afmetingen.</p>
+            conditioneel op basis van data niet alleen afmetingen.</p>
           </div>
           <div class="insight-card">
             <p class="insight-card__num">03</p>
@@ -515,9 +515,9 @@
 
         <h2>Reflectie</h2>
         <p>
-          CSS to the Rescue was het vak waarbij ik het meest verrast werd — door CSS zelf.
+        CSS to the Rescue was het vak waarbij ik het meest verrast werd door CSS zelf.
           Een volledig interactief bedieningspaneel waarbij knopwaarden meters aansturen,
-          switches LEDs doden en vier maxen een noodalarm triggert — puur via de cascade —
+        switches LEDs doden en vier maxen een noodalarm triggert puur via de cascade
           had ik niet voor mogelijk gehouden.
         </p>
         <p>
@@ -527,9 +527,25 @@
           Elke technische beslissing werd ook een ontwerpbeslissing.
         </p>
         <p>
-          De 9,5 voelt verdiend maar ook als aanmoediging. Eerder structureren scheelt tijd —
+        De 9,5 voelt verdiend maar ook als aanmoediging. Eerder structureren scheelt tijd
           de file-restructuring kostte vier uur die ik vroeger had kunnen besparen.
         </p>
+
+        <div class="learning-goals">
+            <p class="learning-goals__label">Learning goals</p>
+            <ul>
+                <li><strong>Learn how to effectively use CSS:</strong> Ik merkte dat het structureren van CSS
+                    (component-classes, logische properties, container-queries) mijn workflow versnelt. Daarom ga ik deze
+                    patronen consequent toepassen in volgende projecten. Dit voorkomt veel herwerk en maakt onderhoud
+                    eenvoudiger.</li>
+                <li><strong>Learn how to animate using CSS:</strong> Voor kleine UI-reveal-animaties gebruikte ik keyframes en
+                    transities. Voortaan check ik altijd <code>prefers-reduced-motion</code> en bied ik een statische fallback.
+                    Zo blijft de ervaring voor iedereen betrouwbaar.</li>
+                <li><strong>Be more creative in designing:</strong> Door te spelen met compositie en kleur ontdekte ik
+                    interessante hiërarchie-opties. Ik zal deze experimenten vastleggen als kleine component-varianten. Die
+                    varianten kunnen later makkelijk hergebruikt worden in andere projecten.</li>
+            </ul>
+        </div>
 
         <p style="margin-top: var(--space-xl);">
           <a href="#" class="btn btn--primary">→ Bekijk KRAFTWERK live</a>
@@ -542,7 +558,7 @@
 
   <footer class="footer">
     <div class="container footer__inner">
-      <p>© 2026 — Joost Krebbers · Meesterschap Blog</p>
+    <p>© 2026 Joost Krebbers · Meesterschap Blog</p>
       <p>Built from scratch · No frameworks · Two themes</p>
     </div>
   </footer>
