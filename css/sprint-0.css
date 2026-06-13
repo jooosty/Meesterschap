@@ -1,0 +1,10 @@
+/* ============================================
+   SPRINT-0 — page-specific styles
+   Depends on: tokens.css, themes.css, components.css
+   ============================================ */
+
+/* === SYNTAX HIGHLIGHT TOKENS === */
+.kw  { color: var(--color-accent-cool); }
+.fn  { color: var(--color-accent-green); }
+.str { color: var(--color-accent); }
+.cm  { color: var(--color-text-dim); font-style: italic; }

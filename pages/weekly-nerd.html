@@ -11,172 +11,7 @@
   <link rel="stylesheet" href="../css/themes.css" />
   <link rel="stylesheet" href="../css/base.css" />
   <link rel="stylesheet" href="../css/components.css" />
-  <style>
-    /* Nerd entry */
-    .nerd-entry {
-      border-top: var(--border-width) solid var(--color-border);
-      padding-block: var(--space-2xl);
-    }
-    .nerd-entry:first-of-type { border-top: none; }
-
-    .nerd-entry__header {
-      display: flex;
-      align-items: baseline;
-      gap: var(--space-md);
-      flex-wrap: wrap;
-      margin-bottom: var(--space-lg);
-    }
-    .nerd-entry__num {
-      font-family: var(--font-mono);
-      font-size: var(--fs-3xl);
-      font-weight: 700;
-      color: var(--color-accent);
-      opacity: 0.18;
-      line-height: 1;
-      flex-shrink: 0;
-    }
-    .nerd-entry__label {
-      font-family: var(--font-mono);
-      font-size: var(--fs-xs);
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      color: var(--color-accent);
-      display: block;
-      margin-bottom: var(--space-3xs);
-    }
-    .nerd-entry__title {
-      font-family: var(--font-display);
-      font-size: var(--fs-xl);
-      font-weight: 700;
-      color: var(--color-text);
-      line-height: 1.1;
-      margin-bottom: var(--space-3xs);
-    }
-    .nerd-entry__sub {
-      font-family: var(--font-mono);
-      font-size: var(--fs-xs);
-      color: var(--color-text-dim);
-      letter-spacing: 0.08em;
-    }
-
-    /* Tag */
-    .topic-tag {
-      display: inline-flex;
-      align-items: center;
-      font-family: var(--font-mono);
-      font-size: var(--fs-xs);
-      letter-spacing: 0.08em;
-      padding: 3px 10px;
-      border-radius: var(--radius-sm);
-      margin: var(--space-3xs);
-      border: 1px solid var(--color-border);
-      color: var(--color-text-dim);
-    }
-
-    /* Key takeaway box */
-    .takeaway {
-      background: var(--color-bg-card);
-      border-left: 3px solid var(--color-accent-green);
-      border-radius: 0 var(--radius-md) var(--radius-md) 0;
-      padding: var(--space-sm) var(--space-md);
-      margin-top: var(--space-lg);
-    }
-    .takeaway__label {
-      font-family: var(--font-mono);
-      font-size: var(--fs-xs);
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--color-accent-green);
-      margin-bottom: var(--space-3xs);
-    }
-    .takeaway p {
-      font-size: var(--fs-sm);
-      color: var(--color-text-muted);
-      line-height: 1.6;
-    }
-
-    /* Quote */
-    .quote-block {
-      border-left: 3px solid var(--color-accent);
-      padding: var(--space-sm) var(--space-md);
-      margin-block: var(--space-md);
-      background: var(--color-bg-card);
-      border-radius: 0 var(--radius-md) var(--radius-md) 0;
-    }
-    .quote-block p {
-      font-family: var(--font-display);
-      font-size: var(--fs-lg);
-      color: var(--color-text);
-      line-height: 1.4;
-      font-style: italic;
-    }
-    .quote-block cite {
-      font-family: var(--font-mono);
-      font-size: var(--fs-xs);
-      color: var(--color-text-dim);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      display: block;
-      margin-top: var(--space-xs);
-      font-style: normal;
-    }
-
-    /* Concept grid */
-    .concept-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: var(--space-md);
-      margin-block: var(--space-lg);
-    }
-    .concept-card {
-      background: var(--color-bg-card);
-      border: var(--border-width) solid var(--color-border);
-      border-radius: var(--radius-md);
-      padding: var(--space-md);
-    }
-    .concept-card__title {
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: var(--fs-base);
-      color: var(--color-accent);
-      margin-bottom: var(--space-xs);
-    }
-    .concept-card p {
-      font-size: var(--fs-sm);
-      color: var(--color-text-muted);
-      line-height: 1.5;
-    }
-
-    /* Person row */
-    .person-row {
-      display: flex;
-      gap: var(--space-md);
-      align-items: flex-start;
-      padding: var(--space-md);
-      background: var(--color-bg-card);
-      border: var(--border-width) solid var(--color-border);
-      border-radius: var(--radius-md);
-      margin-block: var(--space-xs);
-    }
-    .person-row__label {
-      font-family: var(--font-mono);
-      font-size: var(--fs-xs);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--color-accent);
-      min-width: 80px;
-      flex-shrink: 0;
-      padding-top: 2px;
-    }
-    .person-row p {
-      font-size: var(--fs-sm);
-      color: var(--color-text-muted);
-      line-height: 1.5;
-    }
-    .person-row p strong {
-      color: var(--color-text);
-    }
-  </style>
+  <link rel="stylesheet" href="../css/weekly-nerd.css" />
 </head>
 <body>
 
@@ -248,11 +83,11 @@
       <div class="data-strip" role="region" aria-label="Weekly Nerd info">
         <div class="data-strip__item">
           <p class="data-strip__label">Sessies</p>
-          <p class="data-strip__value">06</p>
+          <p class="data-strip__value">10</p>
         </div>
         <div class="data-strip__item">
           <p class="data-strip__label">Periode</p>
-          <p class="data-strip__value">FEB – APR</p>
+          <p class="data-strip__value">FEB – MEI</p>
         </div>
         <div class="data-strip__item">
           <p class="data-strip__label">Thema's</p>
@@ -722,6 +557,426 @@
             over agentic AI. Het web is niet neutraal het is ontworpen door mensen
             met belangen. Als developer kies ik elke dag mee hoe dat web eruitziet.
             Dat is een verantwoordelijkheid die ik daarvoor onderschatte.</p>
+        </div>
+      </article>
+
+      <!-- ══════════════════════════════
+           SESSIE 7 HANS DE ZWART
+      ══════════════════════════════ -->
+      <article class="nerd-entry prose fade-in" aria-labelledby="nerd7-title">
+        <div class="nerd-entry__header">
+          <span class="nerd-entry__num" aria-hidden="true">07</span>
+          <div>
+            <span class="nerd-entry__label">21 mei 2026</span>
+            <h2 class="nerd-entry__title" id="nerd7-title">Hans de Zwart</h2>
+            <p class="nerd-entry__sub">Niets te verbergen? — Of toch wel?</p>
+          </div>
+        </div>
+
+        <span class="topic-tag">Privacy</span>
+        <span class="topic-tag">AVG / GDPR</span>
+        <span class="topic-tag">Contextuele integriteit</span>
+        <span class="topic-tag">Dataportabiliteit</span>
+        <span class="topic-tag">Agentic AI</span>
+        <span class="topic-tag">Surveillance</span>
+
+        <h3>Wat hij vertelde</h3>
+        <p>
+          Hans de Zwart opende met de vraag die iedereen denkt te kunnen beantwoorden
+          maar dat niet kan: wat is privacy eigenlijk? Hij legde drie lagen bloot.
+          Privacy als individueel recht — met rust gelaten worden. Als sociaal recht —
+          in elke context iemand anders kunnen zijn. En als democratische noodzaak —
+          de ruimte om je mening autonoom te vormen, zonder dat iemand meekijkt.
+        </p>
+
+        <div class="quote-block">
+          <p>"Ik loop door een wereld waar ik niets wil kopen, maar ik zit in een wereld die me alles probeert aan te smeren."</p>
+          <cite>— Hans de Zwart</cite>
+        </div>
+
+        <p>
+          Het concept dat me het meest bijbleef is <strong>contextuele integriteit</strong>:
+          privacy gaat niet over geheimhouding, maar over verwachting. Je deelt andere
+          dingen met je dokter dan met je werkgever, en dat klopt. Het wordt pas een
+          probleem als gegevens buiten die verwachte context terechtkomen — bij partijen
+          die je er niet voor had uitgenodigd. Eigenlijk is dat gewoon gezond verstand
+          over hoe je met elkaar omgaat, toegepast op data.
+        </p>
+
+        <h3>Hoe de wet het regelt</h3>
+
+        <div class="concept-grid">
+          <div class="concept-card">
+            <p class="concept-card__title">Toestemming</p>
+            <p>De meest gebruikte juridische grondslag om persoonsgegevens te verwerken.
+              Maar toestemming moet vrij én geïnformeerd zijn, en moet altijd ingetrokken
+              kunnen worden.</p>
+          </div>
+          <div class="concept-card">
+            <p class="concept-card__title">Doelbinding</p>
+            <p>Je mag data alleen gebruiken voor het doel waarvoor je die hebt verzameld.
+              Toestemming voor doel 1 is géén toestemming voor doel 2. Klinkt logisch,
+              maar wordt massaal genegeerd.</p>
+          </div>
+          <div class="concept-card">
+            <p class="concept-card__title">Rechten van betrokkenen</p>
+            <p>Inzage, correctie, aanvulling. Het recht op vergetelheid. En
+              dataportabiliteit: je mag je gegevens meenemen naar een andere partij.
+              Die rechten bestaan al — ze worden alleen zelden opgeëist.</p>
+          </div>
+          <div class="concept-card">
+            <p class="concept-card__title">Privacy by design</p>
+            <p>Minimaliseren: sla geen gegevens op die je niet nodig hebt. Wat je niet
+              hebt, kan niet lekken. Slimme cryptografie, hashes, differential privacy
+              — je kunt vaak de gewenste functionaliteit bouwen zónder de volledige data.</p>
+          </div>
+        </div>
+
+        <h3>Het web als surveillance-machine</h3>
+        <p>
+          Hans stelde een simpele vraag: als je met een gloednieuwe browser naar nu.nl
+          gaat, hoeveel partijen weten dan van dat bezoek? Het antwoord is schrikbarend.
+          In real time worden gegevens doorgestuurd naar tientallen adverteerders, nog
+          voor de pagina volledig geladen is. En dan is er nog een tweede vraag: bestaat
+          er nog een websitebezoek dat niet bij Google in beeld is?
+        </p>
+
+        <p>
+          En dan is er AI. ChatGPT is getraind op het internet — dus op alles wat er
+          over jou online staat. Agentic AI maakt het nog urgenter: agents gaan steeds
+          dieper je computer in, koppelen tools aan elkaar, handelen namens jou. Dat
+          maakt een nieuw soort surveillance mogelijk, één waarbij data niet alleen
+          wordt bewaard maar ook actief wordt ingezet.
+        </p>
+
+        <div class="takeaway">
+          <p class="takeaway__label">Wat ik heb meegenomen</p>
+          <p>Deze sessie sloot bijna te goed aan op Marleen Stikker. Waar zij het had
+            over het web dat je wilt, had Hans het over de prijs die je betaalt voor
+            het web dat er nu is. Wat me raak: als developer beslis ik mee. Welke
+            data vraag ik op? Welke sla ik op? Doelbinding is geen juridische
+            formaliteit — het is een ontwerpbeslissing. Minimaliseren is ook een
+            ontwerpbeslissing. Dat zijn mijn keuzes.</p>
+        </div>
+      </article>
+
+      <!-- ══════════════════════════════
+           SESSIE 8 MARVIN SERNEE
+      ══════════════════════════════ -->
+      <article class="nerd-entry prose fade-in" aria-labelledby="nerd8-title">
+        <div class="nerd-entry__header">
+          <span class="nerd-entry__num" aria-hidden="true">08</span>
+          <div>
+            <span class="nerd-entry__label">28 mei 2026</span>
+            <h2 class="nerd-entry__title" id="nerd8-title">Marvin Sernee — Q42</h2>
+            <p class="nerd-entry__sub">Design Systems &amp; Efficiëntie</p>
+          </div>
+        </div>
+
+        <span class="topic-tag">Design systems</span>
+        <span class="topic-tag">Atomic Design</span>
+        <span class="topic-tag">Design tokens</span>
+        <span class="topic-tag">Accessibility</span>
+        <span class="topic-tag">AI in dev</span>
+        <span class="topic-tag">Stakeholder management</span>
+
+        <h3>Wat hij vertelde</h3>
+        <p>
+          Marvin Sernee werkt bij Q42, een nerdagency die digitale producten bouwt voor
+          grote organisaties. Zijn sessie ging over design systems — niet als theoretisch
+          concept maar als iets wat je in een bestaande organisatie moet zien te laten landen,
+          met alle weerstand en legacy die daarbij komen kijken.
+        </p>
+
+        <p>
+          Elk traject begint met een assessment. Waarom werkt de huidige situatie niet?
+          Waar wil je naartoe? Waar sta je nu? Wat heb je nodig om er te komen?
+          Dat klinkt simpel, maar die vragen scherp beantwoorden is al het halve werk.
+          Vanuit die basis bouw je een design language, een Figma-structuur en een
+          schaalbaar system — en vertaal je dat naar een roadmap.
+        </p>
+
+        <h3>Waarom Atomic Design niet werkt</h3>
+        <p>
+          Marvin was eerlijk over Atomic Design: in theorie mooi, in de praktijk lastig.
+          De onderdelen worden al snel te klein en te specifiek, waardoor niemand het
+          meer eens is over wat nou precies een atom, molecule of organism is.
+          Ze kozen voor een ander mentaal model.
+        </p>
+
+        <div class="concept-grid">
+          <div class="concept-card">
+            <p class="concept-card__title">Foundation</p>
+            <p>De basisbouwstenen: design tokens, iconen, illustraties, basale styling.
+              Witruimte, kleuren, border radius. Alles wat de rest draagt.</p>
+          </div>
+          <div class="concept-card">
+            <p class="concept-card__title">Core components</p>
+            <p>Zelfstandige, herbruikbare componenten. Buttons, inputs, cards.
+              Dingen die op zichzelf staan en overal inzetbaar zijn.</p>
+          </div>
+          <div class="concept-card">
+            <p class="concept-card__title">Herbruikbare patronen</p>
+            <p>Combinaties van meerdere componenten die samen een gebruikersflow of
+              interactie oplossen. Een stap hoger dan losse componenten.</p>
+          </div>
+          <div class="concept-card">
+            <p class="concept-card__title">Nooit af</p>
+            <p>Een design system is geen project met een eindpunt. Het groeit mee met
+              het product, de organisatie en de gebruikers. Stoppen is verslechteren.</p>
+          </div>
+        </div>
+
+        <h3>Werken voor grote klanten</h3>
+        <p>
+          Bij grote organisaties spelen er meer krachten. Meer stakeholders, meer legacy,
+          vaste brand guidelines, meer afhankelijkheden. Business stakeholders denken
+          vanuit hun wensen, niet altijd vanuit de technische consequenties. En iedereen
+          heeft de hoogste prioriteit.
+        </p>
+
+        <div class="quote-block">
+          <p>"Gedeelde verantwoordelijkheid is geen verantwoordelijkheid."</p>
+          <cite>— Marvin Sernee</cite>
+        </div>
+
+        <p>
+          Zijn advies: focus altijd op het probleem, niet op de voorgestelde oplossing.
+          Stakeholders komen met oplossingen; jouw taak is te begrijpen welk probleem
+          erachter zit. De impact is groot — verbeteringen bij een grote organisatie
+          bereiken direct een grote groep bestaande gebruikers.
+        </p>
+
+        <h3>AI als junior, niet als vervanger</h3>
+        <p>
+          Marvin had een heldere kijk op AI die ik nergens anders zo geformuleerd had gehoord:
+          behandel AI als een peuter. Geef duidelijke richtlijnen, voorbeelden, context.
+          Hoe beter de instructies, hoe beter de output. Niet als excuus om lui te worden —
+          maar als versnelling voor het werk dat je sowieso al leuk vindt.
+          Debuggen, codebases analyseren, repetitieve taken: prima. Creatief werk dat je
+          vakmanschap vraagt: doe het zelf.
+        </p>
+
+        <h3>Toegankelijkheid zonder excuses</h3>
+        <p>
+          Het laatste deel van zijn sessie ging over accessibility bij grote klanten.
+          De drempel zo laag mogelijk maken: werksessies met designers én developers,
+          vroeg in het proces, niet als losse audit aan het einde. Als je toegankelijkheid
+          vanaf het begin meeneemt, kost het nauwelijks extra tijd.
+        </p>
+
+        <p>
+          Zijn punt over het native <code>&lt;dialog&gt;</code>-element sloot perfect
+          aan op wat Killian eerder vertelde: de browser biedt al een toegankelijke
+          oplossing met screenreader-ondersteuning en focusbeheer ingebouwd.
+          Waarom zelf iets bouwen dat slechter is?
+        </p>
+
+        <div class="takeaway">
+          <p class="takeaway__label">Wat ik heb meegenomen</p>
+          <p>Het model Foundation → Core components → Patronen is iets wat ik direct
+            kan toepassen, ook op kleinere projecten. Maar het echte inzicht was het
+            verhaal over stakeholders: focus op het probleem, niet de oplossing. En
+            de uitspraak over gedeelde verantwoordelijkheid bleef hangen — die gaat
+            over meer dan design systems.</p>
+        </div>
+      </article>
+
+      <!-- ══════════════════════════════
+           SESSIE 9 DE VOORHOEDE
+      ══════════════════════════════ -->
+      <article class="nerd-entry prose fade-in" aria-labelledby="nerd9-title">
+        <div class="nerd-entry__header">
+          <span class="nerd-entry__num" aria-hidden="true">09</span>
+          <div>
+            <span class="nerd-entry__label">4 juni 2026</span>
+            <h2 class="nerd-entry__title" id="nerd9-title">De Voorhoede</h2>
+            <p class="nerd-entry__sub">Marleen · Peter · Bas — drie invalshoeken, één bureau</p>
+          </div>
+        </div>
+
+        <span class="topic-tag">Headless CMS</span>
+        <span class="topic-tag">mix-blend-mode</span>
+        <span class="topic-tag">NL Design System</span>
+        <span class="topic-tag">Design tokens</span>
+        <span class="topic-tag">Offline-first</span>
+        <span class="topic-tag">Accessibility</span>
+
+        <h3>Wat zij vertelden</h3>
+        <p>
+          De Voorhoede stuurde drie mensen — Marleen, Peter en Bas — die elk een ander
+          stuk van het vak belichten. Zelden zo'n sessie gehad waarbij drie heel
+          verschillende perspectieven zo goed op elkaar aansloten.
+        </p>
+
+        <div class="person-row">
+          <p class="person-row__label">Marleen</p>
+          <p><strong>Medior front-end developer.</strong> Werkt veel met DatoCMS, een headless CMS
+            waarbij de front-end volledig losstaat van het contentbeheer. De klant beheert zelf
+            de content; het team bouwt de presentatielaag. Een groot deel van het dagelijks werk
+            bestaat uit het oplossen van CMS-gerelateerde problemen: custom classes schrijven,
+            plugins bouwen, blogfunctionaliteiten implementeren. Niet altijd glamoureus, maar
+            het houdt producten draaiend. Haar voorbeeld van <code>mix-blend-mode</code> als
+            creatieve CSS-oplossing was een goede herinnering dat je met standaard
+            eigenschappen verder kunt komen dan je denkt.</p>
+        </div>
+
+        <div class="person-row">
+          <p class="person-row__label">Peter</p>
+          <p><strong>Senior front-end developer, gespecialiseerd in accessibility.</strong>
+            Vertelde over het implementeren van het NL Design System — een bestaande site
+            opnieuw opbouwen met herbruikbare componenten in Astro. Centraal staat het idee
+            van design tokens: CSS opgesplitst in twee lagen. Eerst de waarden zelf —
+            kleuren, spacing, border radius — in een <code>tokens.json</code>. Dan de plekken
+            waar die waarden worden toegepast. Consistent, onderhoudbaar, en makkelijk aan te
+            passen zonder door de hele codebase te zoeken. Voor accessibility: focusindicator,
+            toetsenbordnavigatie, screenreader-ondersteuning. Niet als afterthought, maar
+            als startpunt.</p>
+        </div>
+
+        <div class="person-row">
+          <p class="person-row__label">Bas</p>
+          <p><strong>Offline-first development.</strong> Liet een webapplicatie voor
+            liftinspecteurs zien die ook zonder internet moet werken. Zijn analyse van waarom
+            projecten uitlopen was raak: klanten weten aan het begin nog niet precies wat ze
+            willen. Nieuwe inzichten ontstaan tijdens het bouwen, scope groeit mee.
+            Bij offline-first mag je dat niet als excuus gebruiken — je moet vanaf dag één
+            nadenken over wat er gebeurt als er geen verbinding is. Offline-ondersteuning is
+            geen extra functie die je er achteraf bijplakt. Het is een uitgangspunt.</p>
+        </div>
+
+        <div class="quote-block">
+          <p>"Offline ondersteuning is geen extra functie — het is een uitgangspunt van het ontwerp."</p>
+          <cite>— Bas, De Voorhoede</cite>
+        </div>
+
+        <div class="takeaway">
+          <p class="takeaway__label">Wat ik heb meegenomen</p>
+          <p>Peters tokens-opzet — waarden apart van toepassingen — is precies wat ik
+            in dit project ook heb gedaan met <code>tokens.css</code> en <code>themes.css</code>.
+            Fijn om te horen dat dat een bewuste keuze is bij een productioneel bureau, niet
+            alleen een persoonlijke voorkeur. En het verhaal van Bas over scope-creep herkende
+            ik direct: offline-first dwingt je eerlijk te zijn over wat een applicatie echt
+            nodig heeft. Dat is een goede les voor elk project.</p>
+        </div>
+      </article>
+
+      <!-- ══════════════════════════════
+           SESSIE 10 CYD STUMPEL
+      ══════════════════════════════ -->
+      <article class="nerd-entry prose fade-in" aria-labelledby="nerd10-title">
+        <div class="nerd-entry__header">
+          <span class="nerd-entry__num" aria-hidden="true">10</span>
+          <div>
+            <span class="nerd-entry__label">10 juni 2026</span>
+            <h2 class="nerd-entry__title" id="nerd10-title">Cyd Stumpel</h2>
+            <p class="nerd-entry__sub">Prefers enhanced motion</p>
+          </div>
+        </div>
+
+        <span class="topic-tag">Progressive enhancement</span>
+        <span class="topic-tag">Graceful degradation</span>
+        <span class="topic-tag">prefers-reduced-motion</span>
+        <span class="topic-tag">interpolate-size</span>
+        <span class="topic-tag">Popover API</span>
+        <span class="topic-tag">CSS-only animaties</span>
+
+        <h3>Wat zij vertelde</h3>
+        <p>
+          Cyd Stumpel opende met haar versie van het web dat ze wil: vol beweging,
+          creativiteit en openheid. Het open web is wat haar het meest aantrekt aan
+          het vak — tegelijkertijd is die openheid ook kwetsbaar. Websites zijn makkelijk
+          te kopiëren, en AI maakt dat alleen maar makkelijker.
+        </p>
+
+        <p>
+          Maar de echte scherpe observatie kwam daarna. Onderdelen die Cyd zelf voor het
+          web heeft ontworpen, bleken ontoegankelijk te zijn voor mensen zoals Léonie —
+          een blinde screenreader-gebruiker. Dat confronteert. Het web als gereedschap
+          werkt alleen als iedereen het kan gebruiken.
+        </p>
+
+        <div class="quote-block">
+          <p>"When you deliberately design for the worst acceptable experience first, everything that comes after becomes an enhancement instead of a requirement."</p>
+          <cite>— Cyd Stumpel</cite>
+        </div>
+
+        <p>
+          Dat is de kern van <strong>progressive enhancement</strong>. Haar analogie:
+          een roltrap kan kapotgaan, maar je kunt hem nog steeds als trap gebruiken.
+          Graceful degradation betekent dat animaties en visuele effecten de kerntaak
+          nooit ondermijnen. Begin met wat altijd moet werken. Alles daarna is een
+          verbetering, geen vereiste.
+        </p>
+
+        <h3>HTML first, CSS als laag</h3>
+        <p>
+          Cyd liet zien hoeveel er de afgelopen jaren aan HTML is toegevoegd zonder
+          dat veel mensen het door hebben. Het <code>&lt;details&gt;</code>-element werkt
+          al zonder JavaScript — en met het <code>name</code>-attribuut kun je een
+          exclusieve accordeon bouwen waarbij maar één item tegelijk open staat:
+        </p>
+
+        <pre><code>&lt;details name="faq"&gt;…&lt;/details&gt;
+&lt;details name="faq"&gt;…&lt;/details&gt;</code></pre>
+
+        <p>
+          De uitdaging is dat CSS-verbeteringen bovenop die semantiek een gelaagde aanpak
+          vragen. Haar voorbeeld met <code>interpolate-size: allow-keywords</code> laat
+          zien hoe dat werkt: animeren van <code>height: 0</code> naar <code>height: auto</code>
+          was jarenlang onmogelijk in CSS. Nu kan het — maar alleen in Firefox en Chrome,
+          en alleen als je het correct omhult met <code>@supports</code> en
+          <code>@media (prefers-reduced-motion: no-preference)</code>:
+        </p>
+
+        <pre><code>@supports (interpolate-size: allow-keywords) {
+  @media (prefers-reduced-motion: no-preference) {
+    ::details-content {
+      height: 0;
+      overflow: clip;
+      transition: height 0.4s ease-out, content-visibility, allow-discrete;
+    }
+    details[open]::details-content {
+      height: auto;
+    }
+  }
+}</code></pre>
+
+        <h3>Popover API zonder JavaScript</h3>
+        <p>
+          Het meest indrukwekkende stuk was de Popover API. Een popupmenu met animatie,
+          puur in CSS — geen JavaScript nodig. De truc zit in
+          <code>transition-behavior: allow-discrete</code> en <code>@starting-style</code>,
+          waarmee je de beginstaat van een animatie kunt definiëren voordat een element
+          zichtbaar wordt:
+        </p>
+
+        <pre><code>nav {
+  @supports selector(:popover-open) {
+    @media (prefers-reduced-motion: no-preference) {
+      clip-path: inset(0 100% 100% 0 round 0.15rem);
+      transition: 2s ease-out;
+      transition-behavior: allow-discrete;
+
+      &:popover-open {
+        clip-path: inset(0 round 0.15rem);
+
+        @starting-style {
+          clip-path: inset(0 100% 100% 0 round 0.15rem);
+        }
+      }
+    }
+  }
+}</code></pre>
+
+        <div class="takeaway">
+          <p class="takeaway__label">Wat ik heb meegenomen</p>
+          <p>De volgorde die Cyd beschrijft — HTML eerst, dan CSS als laag, dan animatie
+            als verbetering — is eigenlijk wat Killian ook bedoelde met de Rule of Least
+            Power. Maar Cyd maakt het concreter: het gaat niet alleen om welke taal je
+            kiest, maar ook om de volgorde van je beslissingen. Eerst de kerntaak.
+            Dan de laag. Dan de glitter. En <code>@starting-style</code> kende ik nog
+            niet — dat ga ik direct uitproberen.</p>
         </div>
       </article>
 

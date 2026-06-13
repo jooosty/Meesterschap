@@ -1,0 +1,39 @@
+/* ============================================
+   VAKKEN CSS TO THE RESCUE — page-specific styles
+   Depends on: tokens.css, themes.css, components.css
+   ============================================ */
+
+/* === FAILED ATTEMPTS GRID === */
+.failed-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-md);
+  margin-block: var(--space-lg);
+}
+.failed-card {
+  background: var(--color-bg-card);
+  border: var(--border-width) solid var(--color-border);
+  border-left: 3px solid var(--color-accent-hot);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+}
+.failed-card__title {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-accent-hot);
+  margin-bottom: var(--space-xs);
+}
+.failed-card p {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+/* === SYNTAX HIGHLIGHT TOKENS === */
+.kw  { color: var(--color-accent-cool); }
+.fn  { color: var(--color-accent-green); }
+.str { color: var(--color-accent); }
+.cm  { color: var(--color-text-dim); font-style: italic; }
+.sel { color: #c792ea; }

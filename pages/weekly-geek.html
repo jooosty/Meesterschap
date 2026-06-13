@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Weekly Geek Meesterschap</title>
+  <title>Weekly Geek Meesterschap</title>
   <meta name="description" content="Weekly Geek: vijf wekelijkse opdrachten over UX, accessibility en web fundamentals." />
 
   <script src="../js/theme-toggle.js"></script>
@@ -13,218 +13,8 @@
   <link rel="stylesheet" href="../css/themes.css" />
   <link rel="stylesheet" href="../css/base.css" />
   <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/weekly-geek.css" />
 
-  <style>
-    /* Geek entry */
-    .geek-entry {
-      border-top: var(--border-width) solid var(--color-border);
-      padding-block: var(--space-2xl);
-    }
-    .geek-entry:first-of-type {
-      border-top: none;
-    }
-
-    /* Entry header */
-    .geek-entry__header {
-      display: flex;
-      align-items: baseline;
-      gap: var(--space-md);
-      flex-wrap: wrap;
-      margin-bottom: var(--space-lg);
-    }
-    .geek-entry__num {
-      font-family: var(--font-mono);
-      font-size: var(--fs-3xl);
-      font-weight: 700;
-      color: var(--color-accent);
-      opacity: 0.18;
-      line-height: 1;
-      flex-shrink: 0;
-    }
-    .geek-entry__meta {
-      flex: 1;
-    }
-    .geek-entry__label {
-      font-family: var(--font-mono);
-      font-size: var(--fs-xs);
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      color: var(--color-accent);
-      display: block;
-      margin-bottom: var(--space-3xs);
-    }
-    .geek-entry__title {
-      font-family: var(--font-display);
-      font-size: var(--fs-xl);
-      font-weight: 700;
-      color: var(--color-text);
-      line-height: 1.1;
-      margin-bottom: var(--space-xs);
-    }
-    .geek-entry__source {
-      font-family: var(--font-mono);
-      font-size: var(--fs-xs);
-      color: var(--color-text-dim);
-      letter-spacing: 0.08em;
-    }
-    .geek-entry__source a {
-      color: var(--color-accent-cool);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-    }
-
-    /* Source tag */
-    .source-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--space-3xs);
-      font-family: var(--font-mono);
-      font-size: var(--fs-xs);
-      letter-spacing: 0.08em;
-      padding: 3px 10px;
-      border-radius: var(--radius-sm);
-      margin-bottom: var(--space-md);
-      border: 1px solid var(--color-border);
-      color: var(--color-text-dim);
-    }
-    .source-tag--article  { color: var(--color-accent-cool);  border-color: var(--color-accent-cool);  }
-    .source-tag--video    { color: #c792ea;                   border-color: #c792ea;                   }
-    .source-tag--opdracht { color: var(--color-accent-green); border-color: var(--color-accent-green); }
-    .source-tag--thesis   { color: var(--color-accent);       border-color: var(--color-accent);       }
-
-    /* Code block */
-    .code-block {
-      background: var(--color-bg-card);
-      border: var(--border-width) solid var(--color-border);
-      border-left: 3px solid var(--color-accent);
-      border-radius: var(--radius-md);
-      padding: var(--space-md);
-      overflow-x: auto;
-      margin-block: var(--space-md);
-    }
-    .code-block pre {
-      font-family: var(--font-mono);
-      font-size: var(--fs-sm);
-      line-height: 1.7;
-      margin: 0;
-      white-space: pre;
-      color: var(--color-text);
-    }
-    .kw  { color: var(--color-accent-cool); }
-    .fn  { color: var(--color-accent-green); }
-    .str { color: var(--color-accent); }
-    .cm  { color: var(--color-text-dim); font-style: italic; }
-    .attr{ color: #c792ea; }
-
-    /* Insight strip */
-    .insight-strip {
-      background: var(--color-bg-card);
-      border: var(--border-width) solid var(--color-border);
-      border-left: 3px solid var(--color-accent-green);
-      border-radius: var(--radius-md);
-      padding: var(--space-md) var(--space-lg);
-      margin-top: var(--space-lg);
-    }
-    .insight-strip__label {
-      font-family: var(--font-mono);
-      font-size: var(--fs-xs);
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--color-accent-green);
-      display: block;
-      margin-bottom: var(--space-xs);
-    }
-    .insight-strip p {
-      font-size: var(--fs-sm);
-      color: var(--color-text-muted);
-      line-height: 1.6;
-      max-width: 65ch;
-    }
-
-    /* Principle cards */
-    .principle-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: var(--space-md);
-      margin-block: var(--space-lg);
-    }
-    .principle-card {
-      background: var(--color-bg-card);
-      border: var(--border-width) solid var(--color-border);
-      border-radius: var(--radius-md);
-      padding: var(--space-md);
-    }
-    .principle-card__title {
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: var(--fs-base);
-      color: var(--color-accent);
-      margin-bottom: var(--space-xs);
-    }
-    .principle-card p {
-      font-size: var(--fs-sm);
-      color: var(--color-text-muted);
-      line-height: 1.5;
-    }
-
-    /* Quote block */
-    .quote-block {
-      border-left: 3px solid var(--color-accent);
-      padding: var(--space-sm) var(--space-lg);
-      margin-block: var(--space-lg);
-      background: var(--color-bg-card);
-      border-radius: 0 var(--radius-md) var(--radius-md) 0;
-    }
-    .quote-block p {
-      font-family: var(--font-display);
-      font-size: var(--fs-lg);
-      color: var(--color-text);
-      line-height: 1.4;
-      font-weight: 400;
-    }
-    .quote-block cite {
-      font-family: var(--font-mono);
-      font-size: var(--fs-xs);
-      color: var(--color-text-dim);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      display: block;
-      margin-top: var(--space-xs);
-      font-style: normal;
-    }
-
-    /* Compare strip before/after */
-    .compare-strip {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-md);
-      margin-block: var(--space-lg);
-    }
-    @media (max-width: 600px) {
-      .compare-strip { grid-template-columns: 1fr; }
-    }
-    .compare-strip__item {
-      background: var(--color-bg-card);
-      border: var(--border-width) solid var(--color-border);
-      border-radius: var(--radius-md);
-      padding: var(--space-md);
-    }
-    .compare-strip__label {
-      font-family: var(--font-mono);
-      font-size: var(--fs-xs);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      display: block;
-      margin-bottom: var(--space-xs);
-    }
-    .compare-strip__label--bad  { color: var(--color-accent-hot); }
-    .compare-strip__label--good { color: var(--color-accent-green); }
-    .compare-strip__item p {
-      font-size: var(--fs-sm);
-      color: var(--color-text-muted);
-      line-height: 1.5;
-    }
-  </style>
 </head>
 <body>
 
@@ -298,7 +88,7 @@
         <h1 id="page-title">Weekly<br>Geek</h1>
         <p class="hero__lead">
           Vijf wekelijkse opdrachten over UX, toegankelijkheid en web fundamentals.
-        Van icon design tot agentic AI elk onderwerp zette me aan het denken
+          Van icon design tot agentic AI elk onderwerp zette me aan het denken
           over hoe het web eigenlijk hoort te werken.
         </p>
       </section>
@@ -337,20 +127,20 @@
 
         <p>
           Nikita Prokopov analyseert wat er misging bij de iconen in macOS Tahoe.
-        Apple voegde een icoon toe aan bijna elk menu-item en dat blijkt precies het verkeerde te zijn.
+          Apple voegde een icoon toe aan bijna elk menu-item en dat blijkt precies het verkeerde te zijn.
         </p>
 
         <h3>Het kernprobleem</h3>
         <p>
           Een icoon heeft maar één functie: je helpen sneller vinden wat je zoekt. Daarvoor moeten
           iconen van elkaar <em>verschillen</em>. Maar als elk menu-item een icoon heeft, valt niets
-        meer op. Het effect is het tegenovergestelde van wat bedoeld was meer visuele ruis,
+          meer op. Het effect is het tegenovergestelde van wat bedoeld was meer visuele ruis,
           minder snelheid.
         </p>
 
         <p>
           Prokopov laat zien dat Tahoe er niet in slaagt consistent te zijn. Alleen voor de actie
-        "Nieuw" zijn er al meer dan tien verschillende iconen door Apple's eigen apps heen
+          "Nieuw" zijn er al meer dan tien verschillende iconen door Apple's eigen apps heen
           van een potlood tot een ster tot een cirkel met een plusje. Als iconen niet consistent zijn,
           kun je ze niet leren. En als je ze niet kunt leren, helpen ze je ook niet sneller te navigeren.
         </p>
@@ -396,7 +186,7 @@
 
         <p>
           Op het eerste gezicht simpel: maak iets klikbaar en laat het navigeren. Maar een echte link
-        doet veel meer dan dat het is toetsenbord-bedienbaar, zichtbaar voor screenreaders,
+          doet veel meer dan dat het is toetsenbord-bedienbaar, zichtbaar voor screenreaders,
           middelklik-baar, en biedt de browser informatie over de bestemming.
         </p>
 
@@ -436,7 +226,7 @@ fakeLink.addEventListener(<span class="str">'touchend'</span>, (event) => {
 
         <h3>Wat het verschil laat zien</h3>
         <p>
-        Deze implementatie werkt functioneel maar het is duidelijk hoeveel je mist tegenover
+          Deze implementatie werkt functioneel maar het is duidelijk hoeveel je mist tegenover
           een echte <code>&lt;a href&gt;</code>:
         </p>
 
@@ -451,7 +241,7 @@ fakeLink.addEventListener(<span class="str">'touchend'</span>, (event) => {
             <span class="compare-strip__label compare-strip__label--good">✓ Echte &lt;a href&gt;</span>
             <p>Werkt zonder JavaScript. Middelklik, rechtsklik, URL-preview in statusbalk.
               Native toetsenbordnavigatie. Semantisch correct voor screenreaders.
-            Browser-history, back-knop alles gratis.</p>
+              Browser-history, back-knop alles gratis.</p>
           </div>
         </div>
 
@@ -474,8 +264,7 @@ fakeLink.addEventListener(<span class="str">'touchend'</span>, (event) => {
             <span class="geek-entry__label">Weekly Geek 3</span>
             <h2 class="geek-entry__title" id="geek3-title">What Happened To Text Inputs?</h2>
             <p class="geek-entry__source">
-            Bron: <a href="https://briefs.video/videos/what-happened-to-text-inputs/" target="_blank" rel="noopener">briefs.video
-                Heydon Pickering</a>
+              Bron: <a href="https://briefs.video/videos/what-happened-to-text-inputs/" target="_blank" rel="noopener">briefs.video Heydon Pickering</a>
             </p>
           </div>
         </div>
@@ -491,7 +280,7 @@ fakeLink.addEventListener(<span class="str">'touchend'</span>, (event) => {
         <h3>De neerwaartse spiraal</h3>
         <p>
           De video schetst een patroon dat herkenbaar is in elk design-veld. Een designer
-        verwijdert de border van een input want "dat ziet er cleaner uit". Nu is het
+          verwijdert de border van een input want "dat ziet er cleaner uit". Nu is het
           formulier geen formulier meer te herkennen. Om dat op te lossen wordt het label
           naar <em>binnen</em> de input verplaatst, als placeholder. Maar placeholders zijn
           geen labels: ze verdwijnen zodra je begint te typen, ze hebben te weinig contrast,
@@ -505,7 +294,7 @@ fakeLink.addEventListener(<span class="str">'touchend'</span>, (event) => {
 
         <p>
           Elke "oplossing" voor een design-beslissing die niet werkte, creëert een nieuw probleem
-        dat weer een nieuwe oplossing vraagt. De video legt dit uit aan de hand van twee wolven
+          dat weer een nieuwe oplossing vraagt. De video legt dit uit aan de hand van twee wolven
           Adrian (gebruiker) en Chris (designer die niet kan stoppen met "innoveren").
         </p>
 
@@ -544,8 +333,7 @@ fakeLink.addEventListener(<span class="str">'touchend'</span>, (event) => {
             <span class="geek-entry__label">Weekly Geek 4</span>
             <h2 class="geek-entry__title" id="geek4-title">Exclusive Design</h2>
             <p class="geek-entry__source">
-            Bron: <a href="https://exclusive-design.vasilis.nl/" target="_blank" rel="noopener">exclusive-design.vasilis.nl Vasilis
-                van Gemert</a>
+              Bron: <a href="https://exclusive-design.vasilis.nl/" target="_blank" rel="noopener">exclusive-design.vasilis.nl Vasilis van Gemert</a>
             </p>
           </div>
         </div>
@@ -555,8 +343,8 @@ fakeLink.addEventListener(<span class="str">'touchend'</span>, (event) => {
         <p>
           Vasilis van Gemert stelt een ongemakkelijke vraag: in de afgelopen 25 jaar hebben
           webdesigners websites gebouwd voor mensen die zelf websites bouwen. Inclusief design
-        wordt bepleit, maar de expertise om te ontwerpen <em>voor</em> mensen met een beperking
-        en <em>samen met</em> hen is er nauwelijks.
+          wordt bepleit, maar de expertise om te ontwerpen <em>voor</em> mensen met een beperking
+          en <em>samen met</em> hen is er nauwelijks.
         </p>
 
         <h3>Het idee: flip the bias</h3>
@@ -587,14 +375,14 @@ fakeLink.addEventListener(<span class="str">'touchend'</span>, (event) => {
           <div class="principle-card" role="listitem">
             <p class="principle-card__title">Add nonsense</p>
             <p>Hoe tillen we toegankelijk design naar een hoger conceptueel niveau dan puur
-            functioneel? Door nonsens toe te staan onverwachte ideeën die soms betere
+              functioneel? Door nonsens toe te staan onverwachte ideeën die soms betere
               oplossingen opleveren dan voor de hand liggende aanpakken.</p>
           </div>
         </div>
 
         <div class="insight-strip">
           <span class="insight-strip__label">Wat ik heb meegenomen</span>
-        <p>Inclusive design en exclusive design zijn niet elkaars tegenpolen exclusive design
+          <p>Inclusive design en exclusive design zijn niet elkaars tegenpolen exclusive design
             is een onderzoeksmethode die inclusive design beter maakt. Door bewust te ontwerpen
             voor iemand die jij niet bent, leer je meer over je eigen blinde vlekken dan uit welk
             checklist dan ook. "Add nonsense" als principe triggerde me: toegankelijkheid hoeft
@@ -612,8 +400,7 @@ fakeLink.addEventListener(<span class="str">'touchend'</span>, (event) => {
             <span class="geek-entry__label">Weekly Geek 5</span>
             <h2 class="geek-entry__title" id="geek5-title">Accessibility and the Agentic Web</h2>
             <p class="geek-entry__source">
-            Bron: <a href="https://tetralogical.com/blog/2025/08/08/accessibility-and-the-agentic-web/" target="_blank"
-                rel="noopener">tetralogical.com Léonie Watson</a>
+              Bron: <a href="https://tetralogical.com/blog/2025/08/08/accessibility-and-the-agentic-web/" target="_blank" rel="noopener">tetralogical.com Léonie Watson</a>
             </p>
           </div>
         </div>
@@ -621,7 +408,7 @@ fakeLink.addEventListener(<span class="str">'touchend'</span>, (event) => {
         <span class="source-tag source-tag--article">Artikel · Léonie Watson, 2025</span>
 
         <p>
-        Léonie Watson zelf blind beschrijft wat het betekent om kleding te kopen op het web
+          Léonie Watson zelf blind beschrijft wat het betekent om kleding te kopen op het web
           als je de productafbeeldingen niet kunt zien. De meeste webshops bieden te weinig
           tekstuele informatie voor een zelfstandige aankoopbeslissing. AI begint dit op te lossen,
           maar agentic AI gaat een stap verder.
@@ -629,10 +416,10 @@ fakeLink.addEventListener(<span class="str">'touchend'</span>, (event) => {
 
         <h3>Van chatbot naar persoonlijk assistent</h3>
         <p>
-        Agentic AI heeft <em>agency</em> het kan acties uitvoeren namens jou, niet alleen
+          Agentic AI heeft <em>agency</em> het kan acties uitvoeren namens jou, niet alleen
           vragen beantwoorden. Watson beschrijft een platform (Innosearch/CoBrowse) dat je kunt
           vragen om te zoeken, filteren, productdetails op te halen uit afbeeldingen, en uiteindelijk
-        iets aan je winkelwagen toe te voegen via spraak als typen niet handig is.
+          iets aan je winkelwagen toe te voegen via spraak als typen niet handig is.
         </p>
 
         <div class="quote-block">
@@ -643,7 +430,7 @@ fakeLink.addEventListener(<span class="str">'touchend'</span>, (event) => {
         <h3>De grotere implicatie</h3>
         <p>
           Watson benoemt iets fundamenteels: als AI agents steeds vaker het web voor ons navigeren,
-        dan is accessibility niet meer alleen een mensenrechten-kwestie het bepaalt ook of
+          dan is accessibility niet meer alleen een mensenrechten-kwestie het bepaalt ook of
           AI-systemen jouw site correct kunnen lezen en doorsturen. Een slecht gemarkeerde afbeelding
           is niet alleen een probleem voor een blinde gebruiker; het is ook een probleem voor de
           AI-agent die voor die gebruiker werkt.
@@ -660,7 +447,7 @@ fakeLink.addEventListener(<span class="str">'touchend'</span>, (event) => {
             <span class="compare-strip__label compare-strip__label--good">Wat agentic AI biedt</span>
             <p>Consistent productformaat ongeacht de bronwebsite. Automatisch extraheren van
               informatie uit afbeeldingen. Conversationele filtering en toevoegen aan winkelwagen
-            zonder de webshop zelf te hoeven navigeren.</p>
+              zonder de webshop zelf te hoeven navigeren.</p>
           </div>
         </div>
 
@@ -680,7 +467,7 @@ fakeLink.addEventListener(<span class="str">'touchend'</span>, (event) => {
 
   <footer class="footer">
     <div class="container footer__inner">
-    <p>© 2026 Joost Krebbers · Meesterschap Blog</p>
+      <p>© 2026 Joost Krebbers · Meesterschap Blog</p>
       <p>Built from scratch · No frameworks · Two themes</p>
     </div>
   </footer>
