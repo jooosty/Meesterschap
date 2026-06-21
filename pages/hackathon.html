@@ -269,20 +269,20 @@
         <div class="file-tree" role="img" aria-label="Bestandsstructuur Nebula Xplorer">
           <span class="dir">📁 nebula-xplorer/</span><br>
           &nbsp;&nbsp;<span class="cm">📄 index.html</span><br>
-          &nbsp;&nbsp;<span class="cm">📄 style.css</span>&nbsp; <span class="cm">— base, nav, hero, black hole, responsive</span><br>
-          &nbsp;&nbsp;<span class="cm">📄 mission.css</span>&nbsp; <span class="cm">— mission sectie layout + content</span><br>
-          &nbsp;&nbsp;<span class="cm">📄 instrument.css</span>&nbsp; <span class="cm">— satellite viewer + hotspots</span><br>
-          &nbsp;&nbsp;<span class="cm">📄 crew-members.css</span>&nbsp; <span class="cm">— crew sterren, tooltips, parallax, stage</span><br>
-          &nbsp;&nbsp;<span class="cm">📄 contact.css</span>&nbsp; <span class="cm">— formulier, checkbox, :target popup</span><br>
-          &nbsp;&nbsp;<span class="cm">📄 footer.css</span>&nbsp; <span class="cm">— footer kaarten met hover-uitklap</span><br>
-          &nbsp;&nbsp;<span class="cm">📄 easter-egg.css</span>&nbsp; <span class="cm">— overlay styling</span><br>
-          &nbsp;&nbsp;<span class="cm">📄 rocket-scrollbar.css</span>&nbsp; <span class="cm">— raket track + fill</span><br>
-          &nbsp;&nbsp;<span class="cm">📄 script.js</span>&nbsp; <span class="cm">— sterren genereren, burger menu, actieve nav</span><br>
-          &nbsp;&nbsp;<span class="cm">📄 instrument.js</span>&nbsp; <span class="cm">— satelliet hotspot data + interactie</span><br>
-          &nbsp;&nbsp;<span class="cm">📄 cursor.js</span>&nbsp; <span class="cm">— 5 cursor modi + canvas particles</span><br>
-          &nbsp;&nbsp;<span class="cm">📄 easter-egg.js</span>&nbsp; <span class="cm">— black hole easter egg + Sanne reveal</span><br>
-          &nbsp;&nbsp;<span class="cm">📄 rocket-scrollbar.js</span>&nbsp; <span class="cm">— scroll tracking</span><br>
-          &nbsp;&nbsp;<span class="cm">📄 typing-easter-egg.js</span>&nbsp; <span class="cm">— STARS typing trigger</span>
+          &nbsp;&nbsp;<span class="cm">📄 style.css</span>&nbsp; <span class="cm">base, nav, hero, black hole, responsive</span><br>
+          &nbsp;&nbsp;<span class="cm">📄 mission.css</span>&nbsp; <span class="cm">mission sectie layout + content</span><br>
+          &nbsp;&nbsp;<span class="cm">📄 instrument.css</span>&nbsp; <span class="cm">satellite viewer + hotspots</span><br>
+          &nbsp;&nbsp;<span class="cm">📄 crew-members.css</span>&nbsp; <span class="cm">crew sterren, tooltips, parallax, stage</span><br>
+          &nbsp;&nbsp;<span class="cm">📄 contact.css</span>&nbsp; <span class="cm">formulier, checkbox, :target popup</span><br>
+          &nbsp;&nbsp;<span class="cm">📄 footer.css</span>&nbsp; <span class="cm">footer kaarten met hover-uitklap</span><br>
+          &nbsp;&nbsp;<span class="cm">📄 easter-egg.css</span>&nbsp; <span class="cm">overlay styling</span><br>
+          &nbsp;&nbsp;<span class="cm">📄 rocket-scrollbar.css</span>&nbsp; <span class="cm">raket track + fill</span><br>
+          &nbsp;&nbsp;<span class="cm">📄 script.js</span>&nbsp; <span class="cm">sterren genereren, burger menu, actieve nav</span><br>
+          &nbsp;&nbsp;<span class="cm">📄 instrument.js</span>&nbsp; <span class="cm">satelliet hotspot data + interactie</span><br>
+          &nbsp;&nbsp;<span class="cm">📄 cursor.js</span>&nbsp; <span class="cm">5 cursor modi + canvas particles</span><br>
+          &nbsp;&nbsp;<span class="cm">📄 easter-egg.js</span>&nbsp; <span class="cm">black hole easter egg + Sanne reveal</span><br>
+          &nbsp;&nbsp;<span class="cm">📄 rocket-scrollbar.js</span>&nbsp; <span class="cm">scroll tracking</span><br>
+          &nbsp;&nbsp;<span class="cm">📄 typing-easter-egg.js</span>&nbsp; <span class="cm">STARS typing trigger</span>
         </div>
 
         <!-- CODE HIGHLIGHTS -->
@@ -295,7 +295,7 @@
 
         <div class="code-block" role="region" aria-label="Code: black hole easter egg click teller">
         <pre><span class="cm">// easter-egg.js click teller</span>
-blackHole.addEventListener(<span class="str">'click'</span>, () => {
+blackHole.addEventListener(<span class="str">'click'</span> () => {
   clicks++;
   <span class="kw">if</span> (clicks === <span class="str">10</span>) {
     <span class="fn">openEgg</span>();          <span class="cm">// start canvas animatie</span>
@@ -306,13 +306,13 @@ blackHole.addEventListener(<span class="str">'click'</span>, () => {
 });
 
 <span class="kw">function</span> <span class="fn">drawSanne</span>(cx, cy, R) {
-  <span class="kw">if</span> (sanneAlpha < <span class="str">1</span>) sanneAlpha = Math.min(<span class="str">1</span>, sanneAlpha + <span class="str">0.012</span>);
+  <span class="kw">if</span> (sanneAlpha < <span class="str">1</span>) sanneAlpha = Math.min(<span class="str">1</span> sanneAlpha + <span class="str">0.012</span>);
   eggCtx.save();
   eggCtx.globalAlpha = sanneAlpha;
   eggCtx.beginPath();
-  eggCtx.arc(cx, cy, R * <span class="str">0.92</span>, <span class="str">0</span>, PI2);
+  eggCtx.arc(cx, cy, R * <span class="str">0.92</span> <span class="str">0</span> PI2);
   eggCtx.clip();                        <span class="cm">// knipt cirkel uit</span>
-  eggCtx.drawImage(sanneImg, cx-r, cy-r, r*<span class="str">2</span>, r*<span class="str">2</span>);
+  eggCtx.drawImage(sanneImg, cx-r, cy-r, r*<span class="str">2</span> r*<span class="str">2</span>);
   eggCtx.restore();
 }</pre>
         </div>
@@ -338,12 +338,12 @@ blackHole.addEventListener(<span class="str">'click'</span>, () => {
 }
 
 <span class="fn">applyPointerType</span>(mq.matches);
-mq.addEventListener(<span class="str">'change'</span>, e => <span class="fn">applyPointerType</span>(e.matches));
+mq.addEventListener(<span class="str">'change'</span> e => <span class="fn">applyPointerType</span>(e.matches));
 
 <span class="cm">// Keybinds: 1=astronaut, 2=comet, 3=blackhole, 4=laser, 5=supernova</span>
 <span class="kw">const</span> KEY_MAP = {
-  <span class="str">'1'</span>: <span class="str">'astronaut'</span>, <span class="str">'2'</span>: <span class="str">'comet'</span>, <span class="str">'3'</span>: <span class="str">'blackhole'</span>,
-  <span class="str">'4'</span>: <span class="str">'laser'</span>,    <span class="str">'5'</span>: <span class="str">'supernova'</span>, <span class="str">'Escape'</span>: <span class="str">'normal'</span>
+  <span class="str">'1'</span>: <span class="str">'astronaut'</span> <span class="str">'2'</span>: <span class="str">'comet'</span> <span class="str">'3'</span>: <span class="str">'blackhole'</span>
+  <span class="str">'4'</span>: <span class="str">'laser'</span>    <span class="str">'5'</span>: <span class="str">'supernova'</span> <span class="str">'Escape'</span>: <span class="str">'normal'</span>
 };</pre>
         </div>
 
@@ -360,13 +360,13 @@ mq.addEventListener(<span class="str">'change'</span>, e => <span class="fn">app
   content: <span class="str">''</span>;
   position: absolute;
   bottom: <span class="str">0</span>;
-  height: calc(<span class="str">100%</span> - var(<span class="kw">--scroll-pct</span>, 0%));
-  background: linear-gradient(to top, <span class="str">rgba(235,93,52,0.55)</span>, <span class="str">rgba(110,231,255,0.3)</span>);
+  height: calc(<span class="str">100%</span> - var(<span class="kw">--scroll-pct</span> 0%));
+  background: linear-gradient(to top, <span class="str">rgba(235,93,52,0.55)</span> <span class="str">rgba(110,231,255,0.3)</span>);
 }
 
 <span class="cm">// rocket-scrollbar.js schrijft de waarde</span>
 <span class="kw">const</span> pct = maxScroll > <span class="str">0</span> ? scrollTop / maxScroll : <span class="str">0</span>;
-track.style.<span class="fn">setProperty</span>(<span class="str">'--scroll-pct'</span>, (pct * <span class="str">100</span>).<span class="fn">toFixed</span>(<span class="str">2</span>) + <span class="str">'%'</span>);</pre>
+track.style.<span class="fn">setProperty</span>(<span class="str">'--scroll-pct'</span> (pct * <span class="str">100</span>).<span class="fn">toFixed</span>(<span class="str">2</span>) + <span class="str">'%'</span>);</pre>
         </div>
 
         <!-- EASTER EGGS OVERZICHT -->

@@ -238,9 +238,9 @@
 }
 <span class="sel">header > h1 > span > span</span> {
   animation:
-    letter-stamp-in  <span class="str">0.4s</span> cubic-bezier(<span class="str">0.22</span>, <span class="str">1</span>, <span class="str">0.36</span>, <span class="str">1</span>) var(<span class="kw">--stamp-delay</span>) forwards,
+    letter-stamp-in  <span class="str">0.4s</span> cubic-bezier(<span class="str">0.22</span> <span class="str">1</span> <span class="str">0.36</span> <span class="str">1</span>) var(<span class="kw">--stamp-delay</span>) forwards,
     letter-flicker   var(<span class="kw">--flicker-duration</span>) var(<span class="kw">--flicker-delay</span>) ease-in-out infinite,
-    letter-hide      var(<span class="kw">--corrupt-duration</span>) var(<span class="kw">--corrupt-delay</span>) steps(<span class="str">1</span>, end) infinite;
+    letter-hide      var(<span class="kw">--corrupt-duration</span>) var(<span class="kw">--corrupt-delay</span>) steps(<span class="str">1</span> end) infinite;
 }</pre>
         </div>
 
@@ -266,16 +266,16 @@
         <div class="file-tree" role="img" aria-label="Bestandsstructuur KRAFTWERK">
           <span class="dir">📁 kraftwerk/</span><br>
           &nbsp;&nbsp;<span class="cm">📄 index.html</span><br>
-          &nbsp;&nbsp;<span class="cm">📄 style.css</span>&nbsp; <span class="cm">— @layer declarations + @imports</span><br>
+          &nbsp;&nbsp;<span class="cm">📄 style.css</span>&nbsp; <span class="cm">@layer declarations + @imports</span><br>
           &nbsp;&nbsp;<span class="dir">📁 css/</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="new">📄 tokens.css</span>&nbsp; <span class="cm">— custom properties, kleurthema, spacing</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="new">📄 base.css</span>&nbsp; <span class="cm">— reset, body, header, typografie</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="new">📄 layout.css</span>&nbsp; <span class="cm">— paneel shell + sectie grid</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="new">📄 components.css</span>&nbsp; <span class="cm">— gauge, LED, switch, knob, buttons, display</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="new">📄 animations.css</span>&nbsp; <span class="cm">— @keyframes + reduced-motion</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="new">📄 state.css</span>&nbsp; <span class="cm">— :target/:checked driven interactie</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="new">📄 easter-eggs.css</span>&nbsp; <span class="cm">— verborgen details</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="new">📄 responsive.css</span>&nbsp; <span class="cm">— container + media queries</span>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="new">📄 tokens.css</span>&nbsp; <span class="cm">custom properties, kleurthema, spacing</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="new">📄 base.css</span>&nbsp; <span class="cm">reset, body, header, typografie</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="new">📄 layout.css</span>&nbsp; <span class="cm">paneel shell + sectie grid</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="new">📄 components.css</span>&nbsp; <span class="cm">gauge, LED, switch, knob, buttons, display</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="new">📄 animations.css</span>&nbsp; <span class="cm">@keyframes + reduced-motion</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="new">📄 state.css</span>&nbsp; <span class="cm">:target/:checked driven interactie</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="new">📄 easter-eggs.css</span>&nbsp; <span class="cm">verborgen details</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="new">📄 responsive.css</span>&nbsp; <span class="cm">container + media queries</span>
         </div>
 
         <h2>Dag voor dag</h2>
@@ -372,7 +372,7 @@
           <div class="insight-card">
             <p class="insight-card__num">03</p>
             <p class="insight-card__title">Selector specificity als architectuurtool</p>
-            <p>Zonder classes navigeer je bewust met <code>~</code>, <code>:nth-of-type()</code>
+            <p>Zonder classes navigeer je bewust met <code>~</code> <code>:nth-of-type()</code>
               en <code>:not()</code>. De HTML-structuur is je ontwerpdocument.</p>
           </div>
           <div class="insight-card">

@@ -167,14 +167,14 @@
           &nbsp;&nbsp;<span class="dir">📁 css/</span><br>
           &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">📄 styles.css</span><br>
           &nbsp;&nbsp;<span class="dir">📁 js/</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">📄 main.js</span>&nbsp; <span class="cm">— API, score state, leaderboard</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">📄 tetris.js</span>&nbsp; <span class="cm">— Tetris game logica</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">📄 minesweeper.js</span>&nbsp; <span class="cm">— Minesweeper logica</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">📄 2048.js</span>&nbsp; <span class="cm">— 2048 logica</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">📄 ui.js</span>&nbsp; <span class="cm">— Theme toggle, game switcher, auto</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="new">📄 effects.js</span>&nbsp; <span class="cm">— Easter eggs, overlays, animaties</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="new">📄 test.js</span>&nbsp; <span class="cm">— Smoke tests (typ "test")</span><br>
-          &nbsp;&nbsp;<span class="dir">📁 media/</span>&nbsp; <span class="cm">— sounds/, images/</span>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">📄 main.js</span>&nbsp; <span class="cm">API, score state, leaderboard</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">📄 tetris.js</span>&nbsp; <span class="cm">Tetris game logica</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">📄 minesweeper.js</span>&nbsp; <span class="cm">Minesweeper logica</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">📄 2048.js</span>&nbsp; <span class="cm">2048 logica</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">📄 ui.js</span>&nbsp; <span class="cm">Theme toggle, game switcher, auto</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="new">📄 effects.js</span>&nbsp; <span class="cm">Easter eggs, overlays, animaties</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="new">📄 test.js</span>&nbsp; <span class="cm">Smoke tests (typ "test")</span><br>
+          &nbsp;&nbsp;<span class="dir">📁 media/</span>&nbsp; <span class="cm">sounds/, images/</span>
         </div>
 
         <h2>Code highlight: gedeelde score</h2>
@@ -186,7 +186,7 @@
         <div class="code-block" role="region" aria-label="Code: setSharedScore">
         <pre><span class="cm">// main.js centrale score state voor 3 games</span>
 <span class="kw">const</span> sharedScoreState = {
-  tetris: <span class="str">0</span>, minesweeper: <span class="str">0</span>, <span class="str">'2048'</span>: <span class="str">0</span>, total: <span class="str">0</span>
+  tetris: <span class="str">0</span> minesweeper: <span class="str">0</span> <span class="str">'2048'</span>: <span class="str">0</span> total: <span class="str">0</span>
 };
 
 <span class="kw">window</span>.<span class="fn">setSharedScore</span> = <span class="kw">function</span>(value, source) {
@@ -208,7 +208,7 @@
         </p>
         <div class="code-block" role="region" aria-label="Code: barrel roll easter egg">
         <pre><span class="cm">// effects.js barrel roll via "roll" typen</span>
-<span class="kw">const</span> rollSequence = [<span class="str">'r'</span>, <span class="str">'o'</span>, <span class="str">'l'</span>, <span class="str">'l'</span>];
+<span class="kw">const</span> rollSequence = [<span class="str">'r'</span> <span class="str">'o'</span> <span class="str">'l'</span> <span class="str">'l'</span>];
 <span class="kw">let</span> rollIndex = <span class="str">0</span>;
 
 <span class="kw">function</span> <span class="fn">handleRollSequence</span>(key) {

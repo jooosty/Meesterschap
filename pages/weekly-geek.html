@@ -192,7 +192,7 @@
 
         <h3>Mijn implementatie</h3>
         <p>
-          Ik gebruikte een <code>input</code>-element met <code>role="link"</code>,
+          Ik gebruikte een <code>input</code>-element met <code>role="link"</code>
           <code>tabindex="0"</code> en visuele link-styling. Navigatie wordt afgehandeld via
           JavaScript: click, touchend en keydown (Enter):
         </p>
@@ -208,17 +208,17 @@
 &lt;/<span class="kw">input</span>&gt;
 
 <span class="cm">// JavaScript</span>
-fakeLink.addEventListener(<span class="str">'click'</span>, () => {
+fakeLink.addEventListener(<span class="str">'click'</span> () => {
   window.location.<span class="fn">assign</span>(fakeUrl);
 });
 
-fakeLink.addEventListener(<span class="str">'keydown'</span>, (event) => {
+fakeLink.addEventListener(<span class="str">'keydown'</span> (event) => {
   <span class="kw">if</span> (event.key === <span class="str">'Enter'</span>) {
     window.location.<span class="fn">assign</span>(fakeUrl);
   }
 });
 
-fakeLink.addEventListener(<span class="str">'touchend'</span>, (event) => {
+fakeLink.addEventListener(<span class="str">'touchend'</span> (event) => {
   event.<span class="fn">preventDefault</span>();
   window.location.<span class="fn">assign</span>(fakeUrl);
 });</pre>
@@ -289,7 +289,7 @@ fakeLink.addEventListener(<span class="str">'touchend'</span>, (event) => {
 
         <div class="quote-block">
           <p>"This is no longer an <em>in</em>put, because there's nothing to put anything into. This is an <em>on</em>put."</p>
-          <cite>— Heydon Pickering, Webbed Briefs</cite>
+          <cite>Heydon Pickering, Webbed Briefs</cite>
         </div>
 
         <p>
@@ -424,7 +424,7 @@ fakeLink.addEventListener(<span class="str">'touchend'</span>, (event) => {
 
         <div class="quote-block">
           <p>"It's a lot like having an actual personal shopping assistant in a bricks and mortar store."</p>
-          <cite>— Léonie Watson, TetraLogical</cite>
+          <cite>Léonie Watson, TetraLogical</cite>
         </div>
 
         <h3>De grotere implicatie</h3>

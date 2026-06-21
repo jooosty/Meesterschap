@@ -254,7 +254,7 @@
         <pre><span class="cm">// track-data.js automatisch wachten bij rate limits</span>
 <span class="kw">export function</span> <span class="fn">createApiFetcher</span>(onRateLimitMessage) {
   <span class="kw">const</span> requestLog = [];
-  <span class="kw">const</span> PER_SEC = <span class="str">3</span>, PER_MIN = <span class="str">28</span>;
+  <span class="kw">const</span> PER_SEC = <span class="str">3</span> PER_MIN = <span class="str">28</span>;
   <span class="kw">const</span> delay = ms => <span class="kw">new</span> Promise(r => setTimeout(r, ms));
 
   <span class="kw">return async function</span> <span class="fn">apiFetch</span>(url) {
@@ -297,8 +297,8 @@
 <span class="kw">const</span> TRAIL_POINTS = <span class="str">40</span>;
 
 <span class="kw">const</span> geo = <span class="kw">new</span> THREE.<span class="fn">BufferGeometry</span>();
-geo.setAttribute(<span class="str">'position'</span>, <span class="kw">new</span> THREE.<span class="fn">BufferAttribute</span>(positions, <span class="str">3</span>));
-geo.setAttribute(<span class="str">'color'</span>,    <span class="kw">new</span> THREE.<span class="fn">BufferAttribute</span>(colors,    <span class="str">3</span>));
+geo.setAttribute(<span class="str">'position'</span> <span class="kw">new</span> THREE.<span class="fn">BufferAttribute</span>(positions, <span class="str">3</span>));
+geo.setAttribute(<span class="str">'color'</span>    <span class="kw">new</span> THREE.<span class="fn">BufferAttribute</span>(colors,    <span class="str">3</span>));
 
 <span class="cm">// Elke frame updaten geen nieuwe objecten</span>
 <span class="kw">for</span> (<span class="kw">let</span> i = <span class="str">0</span>; i <= TRAIL_POINTS; i++) {
@@ -319,14 +319,14 @@ geo.attributes.color.needsUpdate = <span class="kw">true</span>;</pre>
         <div class="code-block" role="region" aria-label="Code: Doctor Who easter egg">
         <pre><span class="cm">// easter-egg-who.js Wikipedia thumbnails ophalen en rijderinfo vervangen</span>
 <span class="kw">const</span> WHO_CHARACTERS = [
-  { name: <span class="str">'The Doctor'</span>, abbr: <span class="str">'DOC'</span>, colour: <span class="str">'#003B6F'</span>, wiki: <span class="str">'Tenth_Doctor'</span> },
-  { name: <span class="str">'The Dalek'</span>,  abbr: <span class="str">'DAL'</span>, colour: <span class="str">'#B8860B'</span>, wiki: <span class="kw">null</span>,
+  { name: <span class="str">'The Doctor'</span> abbr: <span class="str">'DOC'</span> colour: <span class="str">'#003B6F'</span> wiki: <span class="str">'Tenth_Doctor'</span> },
+  { name: <span class="str">'The Dalek'</span>  abbr: <span class="str">'DAL'</span> colour: <span class="str">'#B8860B'</span> wiki: <span class="kw">null</span>
     img: <span class="str">'https://upload.wikimedia.org/...'</span> },
   <span class="cm">// ... 18 meer karakters</span>
 ];
 
 <span class="kw">async function</span> <span class="fn">activate</span>() {
-  <span class="kw">const</span> pool   = <span class="fn">shuffle</span>(WHO_CHARACTERS).<span class="fn">slice</span>(<span class="str">0</span>, driverNums.length);
+  <span class="kw">const</span> pool   = <span class="fn">shuffle</span>(WHO_CHARACTERS).<span class="fn">slice</span>(<span class="str">0</span> driverNums.length);
   <span class="kw">const</span> thumbs = <span class="kw">await</span> <span class="fn">fetchWikiThumbnails</span>(pool.filter(c => c.wiki).map(c => c.wiki));
 
   driverNums.forEach((dn, i) => {
@@ -334,11 +334,11 @@ geo.attributes.color.needsUpdate = <span class="kw">true</span>;</pre>
     Object.assign(driverInfoMap[dn], {
       acronym: char.abbr, lastName: char.name,
       colour: char.colour,
-      headshotUrl: char.img ?? thumbs[char.wiki] ?? <span class="kw">null</span>,
+      headshotUrl: char.img ?? thumbs[char.wiki] ?? <span class="kw">null</span>
     });
   });
   <span class="cm">// Three.js dots live herladen met nieuwe texturen</span>
-  driverDots.forEach((dot, idx) => <span class="fn">reloadDotTexture</span>(dot.dotMesh, ...));
+  driverDots.forEach((dot, idx) => <span class="fn">reloadDotTexture</span>(dot.dotMesh...));
 }</pre>
         </div>
 
@@ -353,17 +353,17 @@ geo.attributes.color.needsUpdate = <span class="kw">true</span>;</pre>
           <span class="dir">📁 f1-explorer/</span><br>
           &nbsp;&nbsp;<span class="dir">📁 src/</span><br>
           &nbsp;&nbsp;&nbsp;&nbsp;<span class="dir">📁 pages/</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cm">📄 index.astro</span>&nbsp; <span class="cm">— shell: kalender + visualiser</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cm">📄 index.astro</span>&nbsp; <span class="cm">shell: kalender + visualiser</span><br>
           &nbsp;&nbsp;&nbsp;&nbsp;<span class="dir">📁 components/</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cm">📄 TrackVisualiser.astro</span>&nbsp; <span class="cm">— alle HTML voor de visualiser UI</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cm">📄 RaceCalendar.astro</span>&nbsp; <span class="cm">— carousel + sessie-pills</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cm">📄 JsonExplorer.astro</span>&nbsp; <span class="cm">— raw API endpoint explorer</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="dir">📁 scripts/</span>&nbsp; <span class="cm">— alle JS modules (zie tabel hierboven)</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cm">📄 TrackVisualiser.astro</span>&nbsp; <span class="cm">alle HTML voor de visualiser UI</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cm">📄 RaceCalendar.astro</span>&nbsp; <span class="cm">carousel + sessie-pills</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cm">📄 JsonExplorer.astro</span>&nbsp; <span class="cm">raw API endpoint explorer</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="dir">📁 scripts/</span>&nbsp; <span class="cm">alle JS modules (zie tabel hierboven)</span><br>
           &nbsp;&nbsp;&nbsp;&nbsp;<span class="dir">📁 styles/</span><br>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cm">📄 global.css</span><br>
           &nbsp;&nbsp;<span class="dir">📁 public/</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="dir">📁 themes/</span>&nbsp; <span class="cm">— F1-thema audio per jaar</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="dir">📁 sounds/</span>&nbsp; <span class="cm">— easter egg geluiden</span>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="dir">📁 themes/</span>&nbsp; <span class="cm">F1-thema audio per jaar</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="dir">📁 sounds/</span>&nbsp; <span class="cm">easter egg geluiden</span>
         </div>
 
         <h2>Feedback</h2>

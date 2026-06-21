@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Meesterproef Meesterschap</title>
-  <meta name="description" content="Uitkomst en nieuwe inzichten van Sprint 0." />
+  <meta name="description" content="Meesterproef: een roterende D3-wereldbol en datapijplijn voor de Visdeurbel-datavisualisaties (Studio MOAN)." />
 
   <script src="../js/theme-toggle.js"></script>
 
@@ -89,7 +89,8 @@
         <p class="eyebrow hero__eyebrow">Sector 06 Meesterproef</p>
         <h1 id="page-title">Meesterproef</h1>
         <p class="hero__lead">
-        Het eindproject uitkomst, mijn inbreng en een eerlijke reflectie.
+          Mijn eindproject: een roterende wereldbol en datapijplijn voor de Visdeurbel-datavisualisaties,
+        gebouwd in opdracht van Studio MOAN. Hieronder de opdracht, mijn inbreng en een eerlijke reflectie.
         </p>
       </section>
 
@@ -101,34 +102,453 @@
         </div>
         <div class="data-strip__item">
           <p class="data-strip__label">Duur</p>
-          <p class="data-strip__value">— dagen</p>
+          <p class="data-strip__value">5 weken</p>
+        </div>
+        <div class="data-strip__item">
+          <p class="data-strip__label">Team</p>
+          <p class="data-strip__value">04 · CMD</p>
         </div>
         <div class="data-strip__item">
           <p class="data-strip__label">Status</p>
-          <p class="data-strip__value data-strip__value--accent">— WIP</p>
+          <p class="data-strip__value data-strip__value--accent">AFGEROND</p>
         </div>
       </div>
 
       <!-- CONTENT -->
-      <article class="prose">
+      <article class="prose fade-in">
+
         <h2>Opdracht</h2>
         <p>
+          De Visdeurbel in Utrecht laat je op een bel drukken zodra er een vis voor de sluis verschijnt,
+          zodat de sluiswachter open kan doen. Elke beldruk, elke gespotte vis en elk weggeklikt scherm wordt
+          anoniem gelogd, en die logs groeien aan tot honderden megabytes ruwe JSON. Studio MOAN vroeg ons om
+          daar iets van te maken: niet zomaar de cijfers tonen, maar de data <strong>voelbaar</strong> maken voor
+          iedereen die de Visdeurbel volgt, van jong tot oud, in de bestaande huisstijl.
+        </p>
+        <p>
+          Met z'n vieren bouwden we één scrollytelling-website waarin elk hoofdstuk één ding vertelt met één
+          visualisatie. Mijn onderdeel is de <strong>roterende wereldbol</strong> plus de <strong>datapijplijn</strong>
+          eronder, die laat zien waar de bezoekers vandaan komen en hoe levend de sluis eigenlijk is.
         </p>
 
-        <h2>Wat ik heb gemaakt</h2>
+        <h2>Mijn rol &amp; de stack</h2>
         <p>
+          In een team van vier (Julius, Mitchell, Nienke en ik) heb ik de geografische laag voor mijn rekening
+          genomen: de bol, de landenlijst, de tooltips, de kaartmodi én de Python-aggregatie die de ruwe data
+          klein genoeg maakt voor de browser.
         </p>
+        <p>
+          <span class="tech-tag tech-tag--state">React</span>
+          <span class="tech-tag tech-tag--api">D3.js</span>
+          <span class="tech-tag tech-tag--layout">TopoJSON</span>
+          <span class="tech-tag tech-tag--astro">Vite</span>
+          <span class="tech-tag tech-tag--three">Python (aggregatie)</span>
+          <span class="tech-tag tech-tag--css">SVG</span>
+          <span class="tech-tag tech-tag--feature">Orthografische projectie</span>
+          <span class="tech-tag tech-tag--feature">requestAnimationFrame</span>
+          <span class="tech-tag tech-tag--feature">Great-circle arcs</span>
+          <span class="tech-tag tech-tag--feature">Toetsenbord &amp; screenreader</span>
+        </p>
+
+        <h2>Het team</h2>
+        <p>
+          De Visdeurbel-site is groepswerk: vier studenten CMD die elk een eigen visualisatie bouwden, samen
+          op één scrollytelling-pagina in de huisstijl van de Visdeurbel. Mijn wereldbol is dus één hoofdstuk
+          in een groter verhaal. Wat de anderen maakten:
+        </p>
+        <div class="component-grid">
+          <div class="component-card" data-num="01">
+            <p class="component-card__title">Julius</p>
+            <p>De vis-carrousel met klikbare statistieken per vissoort en een toegankelijke 24-uursklok met
+              een wijzer per uur. Daarnaast de gedeelde footer en navigatie.</p>
+          </div>
+          <div class="component-card" data-num="02">
+            <p class="component-card__title">Mitchell</p>
+            <p>De scrollytelling-motor en vijf hoofdstukken die onthuld worden terwijl je scrollt: een levend
+              aquarium, een sonar-radar per vissoort, drijvende begroetingen per taal en een bubbelgrafiek.</p>
+          </div>
+          <div class="component-card" data-num="03">
+            <p class="component-card__title">Nienke</p>
+            <p>De scrollende tijdlijn-tabel: een toegankelijke tabel met een rij per uur, waar de balken
+              inanimeren en een vis langs zwemt naar het drukste moment van de dag.</p>
+          </div>
+          <div class="component-card" data-num="04">
+            <p class="component-card__title">Joost (ik)</p>
+            <p>De roterende wereldbol met drie leesmodi en de datapijplijn eronder, plus de landenlijst,
+              tooltips en de stromen naar Utrecht.</p>
+          </div>
+        </div>
+        <p class="muted-note">
+          Opdrachtgever: Studio MOAN, Utrecht (contact via Cyd Stumpel). Begeleiding: Jad Joubran
+          (toegankelijkheid) en Vasilis van Gemert (design).
+        </p>
+
+        <h2>Wat de bol kan</h2>
+        <div class="feature-grid">
+          <div class="feature-card" data-icon="🌍">
+            <p class="feature-card__title">Roterende 3D-bol</p>
+            <p>Orthografische D3-projectie die je met muis, touch en scroll draait en inzoomt. Auto-rotatie
+              pauzeert zodra je 'm aanraakt en hervat na vier seconden stilte.</p>
+          </div>
+          <div class="feature-card" data-icon="🎯">
+            <p class="feature-card__title">Fly-to per land</p>
+            <p>Klik een land in de lijst ernaast aan en de bol animeert soepel naar dat land toe, ook via
+              toetsenbord met Enter of spatie.</p>
+          </div>
+          <div class="feature-card" data-icon="🛰️">
+            <p class="feature-card__title">Drie leesmodi</p>
+            <p>Bezoeken + Lijnen (choropleth met stromen naar Utrecht), Vissoort en Tijdstip. Eén dispatcher
+              kiest de juiste renderer.</p>
+          </div>
+          <div class="feature-card" data-icon="🔔">
+            <p class="feature-card__title">Stromen naar Utrecht</p>
+            <p>Geanimeerde great-circle-lijnen lopen vanaf elk land naar een pulserend Visdeurbel-logo-baken
+              op Utrecht.</p>
+          </div>
+          <div class="feature-card" data-icon="📦">
+            <p class="feature-card__title">Slanke datapijplijn</p>
+            <p>Een Python-stap aggregeert ~288 MB ruwe NDJSON tot ~40 KB JSON, zodat de browser alleen de
+              getallen krijgt die de grafieken nodig hebben.</p>
+          </div>
+          <div class="feature-card" data-icon="♿">
+            <p class="feature-card__title">Toegankelijke lijst</p>
+            <p>De landenlijst is volledig toetsenbord- en schermlezer-bedienbaar: ARIA-labels, logische
+              tabvolgorde en Escape om de lijst te sluiten.</p>
+          </div>
+        </div>
+
+        <h2>Code highlight: de bol opzetten</h2>
+        <p>
+          De kern is een <code>geoOrthographic</code>-projectie. Die geeft een echte bol in plaats van een
+          platte kaart, met <code>clipAngle(90)</code> om de achterkant weg te snijden:
+        </p>
+        <div class="code-block" role="region" aria-label="Code: orthografische projectie">
+<pre><span class="cm">// orthografische projectie = een echte bol i.p.v. platte kaart</span>
+<span class="kw">const</span> proj = d3.<span class="fn">geoOrthographic</span>()
+  .<span class="fn">scale</span>(INIT_R)                  <span class="cm">// R * 2.4, vult het paneel</span>
+  .<span class="fn">translate</span>([W / <span class="str">2</span> H / <span class="str">2</span>])
+  .<span class="fn">rotate</span>([<span class="str">-5</span> <span class="str">-52</span> <span class="str">0</span>])           <span class="cm">// Europa front-and-centre bij laden</span>
+  .<span class="fn">clipAngle</span>(<span class="str">90</span>);                <span class="cm">// snij de achterkant van de bol weg</span>
+
+<span class="kw">const</span> path = d3.<span class="fn">geoPath</span>(proj);
+
+<span class="cm">// oceaan, graticule (coördinatenraster) en landen tekenen</span>
+oceanG.<span class="fn">append</span>(<span class="str">'path'</span>).<span class="fn">datum</span>({ type: <span class="str">'Sphere'</span> }).<span class="fn">attr</span>(<span class="str">'d'</span> path);
+gridG .<span class="fn">append</span>(<span class="str">'path'</span>).<span class="fn">datum</span>(d3.<span class="fn">geoGraticule</span>()()).<span class="fn">attr</span>(<span class="str">'d'</span> path);
+landG .<span class="fn">selectAll</span>(<span class="str">'path'</span>).<span class="fn">data</span>(features).<span class="fn">join</span>(<span class="str">'path'</span>)
+      .<span class="fn">attr</span>(<span class="str">'d'</span> path).<span class="fn">attr</span>(<span class="str">'fill'</span> C.land);</pre>
+        </div>
+
+        <h2>Code highlight: slepen &amp; auto-rotatie</h2>
+        <p>
+          Slepen roteert de bol met 0.3° per pixel; hoger voelde chaotisch. De auto-rotatie draait via een
+          <code>requestAnimationFrame</code>-loop en pauzeert zodra je iets doet:
+        </p>
+        <div class="code-block" role="region" aria-label="Code: drag en auto-rotatie">
+<pre><span class="cm">// muisdrag → roteer de bol, 0.3° per pixel</span>
+<span class="kw">function</span> <span class="fn">onDrag</span>(e) {
+  <span class="kw">const</span> dx = e.clientX - start[<span class="str">0</span>];
+  <span class="kw">const</span> dy = e.clientY - start[<span class="str">1</span>];
+  <span class="kw">const</span> r0 = startRotation;
+  projRef.current.<span class="fn">rotate</span>([r0[<span class="str">0</span>] + dx * <span class="str">0.3</span> r0[<span class="str">1</span>] - dy * <span class="str">0.3</span>]);
+  <span class="fn">redrawAll</span>();                    <span class="cm">// herproject alle landen + lijnen</span>
+}
+
+<span class="cm">// auto-rotatie: pauzeert bij interactie, hervat na 4s stilte</span>
+<span class="kw">function</span> <span class="fn">tick</span>(now) {
+  <span class="kw">if</span> (!dragging &amp;&amp; now - lastInput &gt; <span class="str">4000</span>) {
+    <span class="kw">const</span> [l, p] = projRef.current.<span class="fn">rotate</span>();
+    projRef.current.<span class="fn">rotate</span>([l + <span class="str">0.012</span> * dt, p]);
+    <span class="fn">redrawAll</span>();
+  }
+  <span class="fn">requestAnimationFrame</span>(tick);
+}</pre>
+        </div>
+
+        <h2>Code highlight: lijnen naar Utrecht</h2>
+        <p>
+          Per land bemonster ik de great-circle naar Utrecht en buig die naar buiten met een sinus, zodat de
+          lijn als een boog over de bol loopt. Twaalf punten bleken op bolschaal genoeg, een fractie van het
+          oorspronkelijke renderwerk:
+        </p>
+        <div class="code-block" role="region" aria-label="Code: great-circle lijnen naar Utrecht">
+<pre><span class="cm">// bemonster de great-circle van land → Utrecht en buig 'm naar buiten</span>
+<span class="kw">const</span> interp = d3.<span class="fn">geoInterpolate</span>([lon, lat], UTRECHT);
+<span class="kw">const</span> steps  = <span class="str">12</span>;               <span class="cm">// genoeg op bolschaal, minimaal renderwerk</span>
+<span class="kw">const</span> points = [];
+
+<span class="kw">for</span> (<span class="kw">let</span> i = <span class="str">0</span>; i &lt;= steps; i++) {
+  <span class="kw">const</span> t  = i / steps;
+  <span class="kw">const</span> pt = <span class="fn">proj</span>(<span class="fn">interp</span>(t));     <span class="cm">// [lon,lat] → schermpositie</span>
+  <span class="kw">const</span> lift = maxLift * Math.<span class="fn">sin</span>(t * Math.PI);  <span class="cm">// 0 aan uiteindes, max in midden</span>
+  points.<span class="fn">push</span>(<span class="fn">liftRadially</span>(pt, lift));
+}</pre>
+        </div>
+
+        <h2>Code highlight: drie kaartmodi</h2>
+        <p>
+          In plaats van een grote <code>if/else</code> heeft elke modus zijn eigen render-functie. Een
+          dispatcher-object koppelt de moduskey aan de juiste renderer, zodat <code>GlobeMap</code> alleen maar
+          de juiste functie hoeft aan te roepen:
+        </p>
+        <div class="code-block" role="region" aria-label="Code: kaartmodi dispatcher">
+<pre><span class="cm">// één renderer per modus; GlobeMap kiest simpelweg de juiste</span>
+<span class="kw">export const</span> MODE_RENDERERS = {
+  choropleth_flows: renderChoroplethFlows,  <span class="cm">// bezoeken + lijnen naar Utrecht</span>
+  fish:             renderFish,             <span class="cm">// kleur op meest geziene vissoort</span>
+  time:             renderTime,             <span class="cm">// kleur op gemiddeld actief uur</span>
+};
+
+<span class="cm">// in GlobeMap.jsx:</span>
+(MODE_RENDERERS[mode] || renderChoroplethFlows)(ctx);</pre>
+        </div>
+
+        <h2>Code highlight: de datapijplijn</h2>
+        <p>
+          Het zwaarste werk gebeurt buiten de browser. <code>aggregate()</code> rolt de ruwe events op tot
+          tellingen per land; de vissoort zit verstopt in de referrer-query. Omdat zwaar rekenwerk in een
+          aparte stap zit, blijft de frontend puur tekenen:
+        </p>
+        <div class="code-block" role="region" aria-label="Code: data-aggregatie">
+<pre><span class="cm">// 288 MB ruwe NDJSON → compacte tellingen per land (~40 KB)</span>
+<span class="kw">export function</span> <span class="fn">aggregate</span>(events) {
+  <span class="kw">const</span> map = {};
+
+  events.<span class="fn">forEach</span>(ev =&gt; {
+    <span class="kw">const</span> numId = ALPHA2_TO_NUMERIC[ev.country];
+    <span class="kw">if</span> (!numId) <span class="kw">return</span>;                  <span class="cm">// sla onbekende landen over</span>
+
+    <span class="kw">const</span> c = (map[numId] ??= <span class="fn">newCountry</span>(ev));
+    c.events++;
+    <span class="kw">if</span> (ev.event_name === <span class="str">'uploadedFish'</span>) c.uploaded++;
+
+    <span class="cm">// vissoort zit verstopt in de referrer-query: ?fish=Baars</span>
+    <span class="kw">const</span> m = (ev.referrer_query || <span class="str">''</span>).<span class="fn">match</span>(/fish=([^&amp;]+)/);
+    <span class="kw">if</span> (m) {
+      <span class="kw">const</span> f = <span class="fn">decodeURIComponent</span>(m[<span class="str">1</span>]);
+      c.fish[f] = (c.fish[f] || <span class="str">0</span>) + <span class="str">1</span>;
+    }
+  });
+
+  <span class="kw">return</span> map;
+}</pre>
+        </div>
+
+        <h2>Code highlight: D3 + React zonder stale closures</h2>
+        <p>
+          Halverwege migreerde ik mijn vanilla-versie naar React. De grootste valkuil: laat D3 de SVG beheren
+          via refs en React de omliggende UI, en lees in event-handlers <strong>altijd</strong>
+          <code>ref.current</code> in plaats van een waarde uit de init-closure:
+        </p>
+        <div class="code-block" role="region" aria-label="Code: D3 in React met refs">
+<pre><span class="cm">// D3 beheert de SVG via refs, React de omliggende UI</span>
+<span class="kw">const</span> projRef     = <span class="fn">useRef</span>(<span class="kw">null</span>);
+<span class="kw">const</span> initialized = <span class="fn">useRef</span>(<span class="kw">false</span>);
+
+<span class="fn">useEffect</span>(() =&gt; {
+  <span class="kw">if</span> (initialized.current) <span class="kw">return</span>;       <span class="cm">// geen dubbele init in StrictMode</span>
+  initialized.current = <span class="kw">true</span>;
+  projRef.current = d3.<span class="fn">geoOrthographic</span>()<span class="cm">/* ... */</span>;
+}, []);
+
+<span class="cm">// FOUT: handler sluit over de oude `proj` → stale closure</span>
+svg.<span class="fn">on</span>(<span class="str">'wheel'</span> () =&gt; <span class="fn">zoom</span>(proj));
+<span class="cm">// GOED: lees projRef.current ín de handler zelf</span>
+svg.<span class="fn">on</span>(<span class="str">'wheel'</span> () =&gt; <span class="fn">zoom</span>(projRef.current));</pre>
+        </div>
+
+        <h2>Code highlight: de toegankelijke landenlijst</h2>
+        <p>
+          Elk landkaartje is een echte knop voor de screenreader, met een volledige gesproken label. De
+          tabvolgorde wordt gestuurd met <code>tabIndex</code> en Escape sluit de uitgeklapte lijst en stuurt
+          de focus terug naar de knop:
+        </p>
+        <div class="code-block" role="region" aria-label="Code: toegankelijke landkaart">
+<pre>&lt;<span class="kw">div</span>
+  className=<span class="str">"country-card"</span>
+  role=<span class="str">"button"</span>
+  tabIndex={expanded ? <span class="str">0</span> : <span class="str">-1</span>}      <span class="cm">/* uit tabvolgorde als de lijst dicht is */</span>
+  aria-label={`Nummer ${i + <span class="str">1</span>}. Land: ${c.name}. Vissen gespot: ${<span class="fn">n</span>(c.uploaded)}.`}
+  onClick={() =&gt; <span class="fn">onFlyTo</span>(c)}
+  onKeyDown={e =&gt; {
+    <span class="kw">if</span> (e.key === <span class="str">'Enter'</span> || e.key === <span class="str">' '</span>) <span class="fn">onFlyTo</span>(c);
+    <span class="kw">if</span> (e.key === <span class="str">'Escape'</span>) <span class="fn">collapse</span>();   <span class="cm">/* sluit lijst, focus terug op knop */</span>
+  }}
+&gt;
+  &lt;<span class="kw">span</span> aria-hidden=<span class="str">"true"</span>&gt;{<span class="fn">flag</span>(c.code)} {c.name}&lt;/<span class="kw">span</span>&gt;
+&lt;/<span class="kw">div</span>&gt;</pre>
+        </div>
+
+        <h2>Bestandsstructuur</h2>
+        <div class="file-tree" role="img" aria-label="Bestandsstructuur wereldbol-component">
+          <span class="dir">📁 src/components/world-map/</span><br>
+          &nbsp;&nbsp;<span class="cm">📄 GlobeMap.jsx</span>&nbsp; <span class="cm">SVG-canvas, D3-init, drag/zoom/rotatie, modus-tabs</span><br>
+          &nbsp;&nbsp;<span class="cm">📄 CountryList.jsx</span>&nbsp; <span class="cm">toegankelijke landenlijst met fly-to</span><br>
+          &nbsp;&nbsp;<span class="cm">📄 MapTooltip.jsx</span>&nbsp; <span class="cm">hover-tooltip (pure React)</span><br>
+          &nbsp;&nbsp;<span class="cm">📄 MapLegend.jsx</span>&nbsp; <span class="cm">legenda per modus</span><br>
+          &nbsp;&nbsp;<span class="cm">📄 mapModes.js</span>&nbsp; <span class="cm">één renderer per modus + dispatcher</span><br>
+          &nbsp;&nbsp;<span class="cm">📄 useJoostData.js</span>&nbsp; <span class="cm">data-hook: laden + periodewissel</span><br>
+          &nbsp;&nbsp;<span class="cm">📄 constants.js</span>&nbsp; <span class="cm">kleuren, centroïdes, ALPHA2-mapping, modi</span><br>
+          &nbsp;&nbsp;<span class="cm">📄 utils.js</span>&nbsp; <span class="cm">aggregate(), loadData(), flag(), tooltip-rijen</span><br>
+          <span class="dir">📁 json/</span><br>
+          &nbsp;&nbsp;<span class="new">📄 build_visdata.py</span>&nbsp; <span class="cm">Python-aggregatie: NDJSON → slanke JSON</span>
+        </div>
+
+        <h2>Feedback van de opdrachtgever</h2>
+        <div class="feedback-box">
+          <span class="feedback-box__label">Studio MOAN · tussentijds gesprek</span>
+          <blockquote>
+            "De wereldbol is heel vet, 3D werkt beter dan een platte wereldkaart."
+          </blockquote>
+          <p class="feedback-box__author">Studio MOAN, Utrecht</p>
+        </div>
+        <div class="feedback-box">
+          <span class="feedback-box__label">Studio MOAN · richting</span>
+          <blockquote>
+            "Dat je per land kunt klikken is heel cool, en de lijnen maken inzichtelijk waar het vandaan komt
+            en zetten Utrecht op de kaart."
+          </blockquote>
+          <p class="feedback-box__author">Studio MOAN, Utrecht</p>
+        </div>
+        <p class="muted-note">
+          De rode draad in alle feedback: hou je aan de huisstijl, laat Utrecht eruit springen, geen kader om
+          de bol, en maak het vóór alles <em>leesbaar</em>. Precies die punten heb ik in de laatste sprints
+          doorgevoerd.
+        </p>
+
+        <h2>Proces</h2>
+        <div class="week-log">
+          <div class="week-log__day">
+            <p class="week-log__date">Week 1–2 · ±12–18 uur</p>
+            <p class="week-log__heading">Wereldbol in vanilla D3</p>
+            <ul>
+              <li>Orthografische bol met oceaan-gradiënt, graticule en dropshadow</li>
+              <li>Drag-, touch- en scroll-interactie + auto-rotatie</li>
+              <li>Data-aggregatie en een eerste set van tien kaartmodi</li>
+            </ul>
+          </div>
+          <div class="week-log__day">
+            <p class="week-log__date">Week 3 · ±10–14 uur</p>
+            <p class="week-log__heading">Migratie naar React</p>
+            <ul>
+              <li>Monoliet opgesplitst in losse componenten onder <code>world-map/</code></li>
+              <li>Stale-closure-bug opgelost door overal <code>projRef.current</code> te lezen</li>
+              <li>Tijdelijke platte-kaart-modus toegevoegd (later weer geschrapt)</li>
+            </ul>
+          </div>
+          <div class="week-log__day">
+            <p class="week-log__date">Week 4 · ±11–14 uur</p>
+            <p class="week-log__heading">Toegankelijkheid &amp; performance</p>
+            <ul>
+              <li>Landenlijst volledig toetsenbord- en screenreader-bedienbaar</li>
+              <li>Flow-animatie geoptimaliseerd: 80 → 12 arcpunten, filters weg, DOM-refs gecachet</li>
+              <li>Utrecht-baken met ingelijnd Visdeurbel-logo, oceaan in huisstijlkleuren</li>
+            </ul>
+          </div>
+          <div class="week-log__day">
+            <p class="week-log__date">Week 5 · ±4–5 uur</p>
+            <p class="week-log__heading">Integratie &amp; gebruikerstests</p>
+            <ul>
+              <li>Bol ook op de homepagina, full-bleed buiten de container geplaatst</li>
+              <li>Gebruikerstest modusknoppen: onderin gecentreerd won van rechtsboven</li>
+              <li>Python-extractiescript: alleen de velden bewaren die de kaart echt gebruikt</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2>Problemen &amp; oplossingen</h2>
+        <div class="component-grid">
+          <div class="component-card" data-num="01">
+            <p class="component-card__title">Zoom/drag kapot na moduswissel</p>
+            <p>Event-handlers sloten over de initiële <code>proj</code>-variabele. Alle handlers herschreven
+              zodat ze <code>projRef.current</code> lezen.</p>
+          </div>
+          <div class="component-card" data-num="02">
+            <p class="component-card__title">Bol sprong terug naar het midden</p>
+            <p>D3 overschreef het <code>viewBox</code>-attribuut bij elke mount. Opgelost door JSX de enige
+              eigenaar van de viewBox te maken.</p>
+          </div>
+          <div class="component-card" data-num="03">
+            <p class="component-card__title">Knop 128e in de tabvolgorde</p>
+            <p>Verborgen kaartjes hadden nog <code>tabIndex=0</code>. Met <code>tabIndex=-1</code> zolang de
+              lijst dicht is, springt Tab er netjes overheen.</p>
+          </div>
+          <div class="component-card" data-num="04">
+            <p class="component-card__title">Animatie te traag bij veel lijnen</p>
+            <p>80 punten per arc × alle landen werd een zware loop. Terug naar 12 punten, glow-filter van de
+              paden gehaald en DOM-nodes gecachet.</p>
+          </div>
+          <div class="component-card" data-num="05">
+            <p class="component-card__title">Witruimte naast de kaart</p>
+            <p>De <code>max-width</code> op <code>main</code> kneep de bol af. Structurele fix: de component
+              buiten de container plaatsen i.p.v. CSS-trucs.</p>
+          </div>
+          <div class="component-card" data-num="06">
+            <p class="component-card__title">"unknown" in de vis-legenda</p>
+            <p>Stond hardgecodeerd in <code>FISH_COLORS</code>. Verwijderd en overal gefilterd via
+              <code>UNKNOWN_VALS</code>.</p>
+          </div>
+        </div>
 
         <h2>Nieuwe inzichten</h2>
-        <ul>
-        <li></li>
-        <li></li>
-        <li></li>
-        </ul>
+        <div class="insight-grid">
+          <div class="insight-card">
+            <p class="insight-card__num">01</p>
+            <p class="insight-card__title">D3 en React kunnen samen</p>
+            <p>Zolang D3 de SVG volledig beheert via refs en React de omliggende UI. Lees in handlers altijd
+              <code>ref.current</code> anders loop je tegen stale closures aan, veruit de meest voorkomende
+              bug bij D3-in-React.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__num">02</p>
+            <p class="insight-card__title">Scheid data van visualisatie</p>
+            <p>Zwaar rekenwerk hoort in een build-stap (Python), de frontend tekent alleen. Bonus: omdat de
+              code de lengte van de data-arrays uitleest, werkt dezelfde visualisatie automatisch voor week- én
+              maanddata.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__num">03</p>
+            <p class="insight-card__title">Toegankelijkheid zit in details</p>
+            <p>Tabvolgorde volgt de DOM, niet de visuele <code>order</code>. <code>tabIndex=-1</code> haalt
+              elementen netjes uit de tabvolgorde en <code>:focus-visible</code> toont de focusring alleen bij
+              toetsenbordgebruik.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__num">04</p>
+            <p class="insight-card__title">Performance is meten, niet gokken</p>
+            <p>Minder arcpunten (12 i.p.v. 80) en één blur-filter op een klein punt in plaats van op lange
+              paden scheelden enorm per frame, zonder zichtbaar verschil op bolschaal.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__num">05</p>
+            <p class="insight-card__title">Gebruikerstests verslaan intuïtie</p>
+            <p>Mijn aanname dat de modusknoppen bovenaan logischer waren, klopte niet. Onderin gecentreerd
+              bleek prettiger en stond de data niet in de weg.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__num">06</p>
+            <p class="insight-card__title">Schrappen is ook ontwerpen</p>
+            <p>Van tien kaartmodi naar drie, de platte kaart en OS/browser-data eruit. Wat overbleef werd
+              rustiger en voor veel meer mensen te volgen.</p>
+          </div>
+        </div>
 
         <h2>Reflectie</h2>
         <p>
+          Het lastigste was niet de techniek maar de keuze wát ik wel en niet liet zien. Mijn eerste versie had
+          zo'n tien kaartmodi en voelde als een dashboard, cool, maar je wist niet waar je naar keek. De
+          feedback van Studio MOAN ging steeds over hetzelfde: maak het leesbaar, maak het voor iedereen, hou je
+          aan de huisstijl. Daardoor heb ik flink geschrapt: de platte kaart, de OS- en browsermodi en de helft
+          van de visualisaties zijn eruit gegaan, en wat overbleef werd rustiger en duidelijker.
         </p>
+        <p>
+          Technisch was de React-migratie de grootste sprong; stale closures en terugkerende
+          full-bleed-layoutbugs hebben me het meeste tijd gekost, maar leerden me ook het meest. Achteraf ben ik
+          het meest tevreden over de performance-slag op de flow-animatie en over het toegankelijk maken van de
+          landenlijst, precies de learning goals die ik me had voorgenomen rond schaalbaarheid, stabiliteit en
+          inclusief ontwerp.
+        </p>
+
 <div class="learning-goals">
     <p class="learning-goals__label">Learning goals</p>
     <ul>
@@ -146,6 +566,12 @@
             verbeterd worden.</li>
     </ul>
 </div>
+
+        <p class="mt-xl">
+          <a href="https://vis-b05f.onrender.com/" target="_blank" class="btn btn--primary">→ Bekijk de Visdeurbel live</a>
+          <a href="https://github.com/MitchellKevin/vis" target="_blank" class="btn ml-sm">→ GitHub repo</a>
+        </p>
+
       </article>
 
     </div>

@@ -149,7 +149,7 @@
             <p class="principle-card__title">Prioritise Identity</p>
             <p>Spraak is standaard, niet tekst. Geen overbodige visuele elementen.
             Korte aankondigingen: "Antwoord op bericht 2" nooit de hele berichttekst herhalen.
-              Alles geoptimaliseerd voor <em>Berend</em>, niet voor een generieke gebruiker.</p>
+              Alles geoptimaliseerd voor <em>Berend</em> niet voor een generieke gebruiker.</p>
           </div>
           <div class="principle-card">
             <p class="principle-card__title">Add Nonsense</p>
@@ -175,7 +175,7 @@
                 <li>Kopieerknop (per item)</li>
               </ul>
             <p class="muted-note">
-                Berend leerde ons: de kopieerknop was nutteloos — hij wil antwoorden versturen,
+                Berend leerde ons: de kopieerknop was nutteloos, hij wil antwoorden versturen,
                 niet kopiëren. Tab-navigatie werkte niet logisch. Automatische focus helpt enorm.
               </p>
               <div class="verdict">
@@ -294,10 +294,10 @@
   osc.<span class="fn">connect</span>(gain);
   gain.<span class="fn">connect</span>(ctx.destination);
   osc.type = <span class="str">"sine"</span>;
-  osc.frequency.<span class="fn">setValueAtTime</span>(<span class="str">520</span>, ctx.currentTime);
-  osc.frequency.<span class="fn">exponentialRampToValueAtTime</span>(<span class="str">780</span>, ctx.currentTime + <span class="str">0.08</span>);
-  gain.gain.<span class="fn">setValueAtTime</span>(<span class="str">0.18</span>, ctx.currentTime);
-  gain.gain.<span class="fn">exponentialRampToValueAtTime</span>(<span class="str">0.001</span>, ctx.currentTime + <span class="str">0.25</span>);
+  osc.frequency.<span class="fn">setValueAtTime</span>(<span class="str">520</span> ctx.currentTime);
+  osc.frequency.<span class="fn">exponentialRampToValueAtTime</span>(<span class="str">780</span> ctx.currentTime + <span class="str">0.08</span>);
+  gain.gain.<span class="fn">setValueAtTime</span>(<span class="str">0.18</span> ctx.currentTime);
+  gain.gain.<span class="fn">exponentialRampToValueAtTime</span>(<span class="str">0.001</span> ctx.currentTime + <span class="str">0.25</span>);
   osc.<span class="fn">start</span>(ctx.currentTime);
   osc.<span class="fn">stop</span>(ctx.currentTime + <span class="str">0.25</span>);
 }</pre>
@@ -312,7 +312,7 @@
         <div class="code-block" role="region" aria-label="Code: sessionStorage pagina-brug">
         <pre><span class="cm">// main.js sla data op vóór navigatie</span>
 sessionStorage.setItem(
-  <span class="str">"spraakberichten_antwoorden"</span>,
+  <span class="str">"spraakberichten_antwoorden"</span>
   JSON.stringify(allMessages)
 );
 window.location.href = <span class="str">"antwoorden.html"</span>;
