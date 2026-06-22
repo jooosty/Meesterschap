@@ -658,7 +658,7 @@ top: calc(100% + 0px);
 /* === PAGE ENTRY ANIMATION === */
 @media (prefers-reduced-motion: no-preference) {
   .fade-in {
-    animation: fadeUp 0.6s var(--ease-out) backwards;
+    animation: fadeUp 0.85s var(--ease-out) backwards;
   }
   .fade-in:nth-child(1) { animation-delay: 0.05s; }
   .fade-in:nth-child(2) { animation-delay: 0.15s; }
@@ -671,7 +671,7 @@ top: calc(100% + 0px);
 @keyframes fadeUp {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(28px);
   }
   to {
     opacity: 1;
@@ -1150,4 +1150,180 @@ top: calc(100% + 0px);
   font-size: var(--fs-sm);
   color: var(--color-text-muted);
   line-height: 1.5;
+}
+
+/* ============================================
+   ANIMATIONS LAYER
+   Scroll-reveals, hover micro-interactions & ambient motion.
+   - All motion is gated behind prefers-reduced-motion: no-preference.
+   - Scroll-driven reveals are also gated behind @supports, so browsers
+     without scroll-timelines simply show everything normally (never hidden).
+   - Transforms/opacity only, to keep it GPU-friendly.
+   ============================================ */
+
+/* ---- Keyframes ---- */
+@keyframes revealUp    { from { opacity: 0; transform: translateY(48px); } to { opacity: 1; transform: none; } }
+@keyframes revealLeft  { from { opacity: 0; transform: translateX(-48px); } to { opacity: 1; transform: none; } }
+@keyframes revealRight { from { opacity: 0; transform: translateX(48px); }  to { opacity: 1; transform: none; } }
+@keyframes revealScale { from { opacity: 0; transform: scale(0.85); }       to { opacity: 1; transform: none; } }
+@keyframes stripeSlide { from { background-position: 200% 0; }              to { background-position: -200% 0; } }
+@keyframes floaty      { 0%, 100% { transform: translateY(0); }            50% { transform: translateY(-6px); } }
+@keyframes dotPulse    { 0%, 100% { box-shadow: 0 0 0 0 var(--color-accent); } 50% { box-shadow: 0 0 0 5px transparent; } }
+@keyframes caretBlink  { 0%, 100% { opacity: 1; }                          50% { opacity: 0; } }
+@keyframes underlineGrow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+/* ---- Hover micro-interactions (transition-based, snap to none under reduced-motion) ---- */
+.feature-card, .component-card, .insight-card,
+.team-card, .challenge-card, .failed-card,
+.concept-card, .compare-strip__item {
+  transition: transform var(--duration-base) var(--ease-out),
+              border-color var(--duration-base) var(--ease-out),
+              box-shadow var(--duration-base) var(--ease-out);
+}
+.feature-card:hover, .component-card:hover, .insight-card:hover,
+.team-card:hover, .challenge-card:hover, .failed-card:hover,
+.concept-card:hover, .compare-strip__item:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-border-strong);
+  box-shadow: var(--shadow-card);
+}
+
+/* tech-tags lift + glow on hover */
+.tech-tag {
+  transition: transform var(--duration-fast) var(--ease-out),
+              box-shadow var(--duration-fast) var(--ease-out);
+}
+.tech-tag:hover { transform: translateY(-2px); box-shadow: var(--shadow-glow); }
+
+/* code blocks & file tree lift slightly on hover */
+.code-block, .file-tree {
+  transition: transform var(--duration-base) var(--ease-out),
+              border-color var(--duration-base) var(--ease-out),
+              box-shadow var(--duration-base) var(--ease-out);
+}
+.code-block:hover { transform: translateY(-2px); box-shadow: var(--shadow-card); }
+.file-tree:hover  { border-color: var(--color-border-strong); }
+
+/* feedback / quote blocks slide their accent border on hover */
+.feedback-box, .quote-block, .verdict, .takeaway, .insight-strip {
+  transition: transform var(--duration-base) var(--ease-out),
+              box-shadow var(--duration-base) var(--ease-out);
+}
+.feedback-box:hover, .quote-block:hover, .verdict:hover,
+.takeaway:hover, .insight-strip:hover {
+  transform: translateX(4px);
+  box-shadow: var(--shadow-card);
+}
+
+/* buttons + breadcrumb nudge */
+.btn {
+  transition: transform var(--duration-fast) var(--ease-out),
+              background var(--duration-fast) var(--ease-out),
+              color var(--duration-fast) var(--ease-out),
+              border-color var(--duration-fast) var(--ease-out),
+              box-shadow var(--duration-fast) var(--ease-out);
+}
+.btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-glow); }
+
+/* data-strip cells lift on hover */
+.data-strip__item { transition: transform var(--duration-base) var(--ease-out); }
+.data-strip__item:hover { transform: translateY(-3px); }
+
+/* ---- Ambient / continuous motion ---- */
+@media (prefers-reduced-motion: no-preference) {
+
+  /* racing stripe gently shimmers across */
+  .stripe {
+    background-size: 200% 100%;
+    animation: stripeSlide 6s linear infinite;
+  }
+
+  /* feature-card emoji icons bob, staggered per card */
+  .feature-card::after { animation: floaty 4s var(--ease-in-out) infinite; }
+  .feature-card:nth-child(2n)::after { animation-duration: 5s; }
+  .feature-card:nth-child(3n)::after { animation-duration: 6s; }
+
+  /* week-log timeline dots pulse a soft ring */
+  .week-log__day::before { animation: dotPulse 2.8s var(--ease-in-out) infinite; }
+
+  /* blinking caret at the end of every code block */
+  .code-block pre::after {
+    content: "▋";
+    color: var(--color-accent-cool);
+    animation: caretBlink 1.1s step-end infinite;
+    margin-left: 2px;
+  }
+}
+
+/* ---- Animated underline on prose links ---- */
+.prose a, .breadcrumb a {
+  position: relative;
+  text-decoration: none;
+}
+.prose a::after, .breadcrumb a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--duration-base) var(--ease-out);
+}
+.prose a:hover::after, .breadcrumb a:hover::after { transform: scaleX(1); }
+
+/* ---- Scroll-driven reveals (progressive enhancement) ---- */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+
+    .feature-card, .component-card, .insight-card,
+    .file-tree, .code-block, .feedback-box, .week-log__day,
+    .team-card, .challenge-card, .failed-card,
+    .concept-card, .iteration, .geek-entry, .nerd-entry,
+    .person-row, .compare-strip__item, .insight-strip,
+    .takeaway, .quote-block, .verdict,
+    .data-strip__item, .prose > h2 {
+      animation: revealUp linear both;
+      animation-timeline: view();
+      animation-range: entry 20% cover 30%;
+    }
+
+    /* directional variety for the call-out blocks */
+    .feedback-box, .quote-block, .verdict, .takeaway, .insight-strip {
+      animation-name: revealLeft;
+    }
+    .file-tree, .code-block {
+      animation-name: revealScale;
+    }
+
+    /* light horizontal stagger inside the card grids */
+    .feature-grid   > :nth-child(3n+2),
+    .component-grid > :nth-child(3n+2),
+    .insight-grid   > :nth-child(3n+2) { animation-range: entry 28% cover 35%; }
+    .feature-grid   > :nth-child(3n),
+    .component-grid > :nth-child(3n),
+    .insight-grid   > :nth-child(3n)   { animation-range: entry 36% cover 40%; }
+
+    /* never let the load-time fade-in fight a scroll timeline */
+    .fade-in { animation-timeline: auto; }
+  }
+}
+
+/* ---- Optional manual reveal utilities (tag any element) ---- */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal,
+    .reveal-left,
+    .reveal-right,
+    .reveal-scale {
+      animation: revealUp linear both;
+      animation-timeline: view();
+      animation-range: entry 20% cover 30%;
+    }
+    .reveal-left  { animation-name: revealLeft; }
+    .reveal-right { animation-name: revealRight; }
+    .reveal-scale { animation-name: revealScale; }
+  }
 }
