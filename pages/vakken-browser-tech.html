@@ -45,16 +45,16 @@
               <li role="none"><a href="vakken.html" role="menuitem">Overzicht</a></li>
               <li role="none"><a href="vakken-css-ttr.html" role="menuitem">CSS to the Rescue <span class="nav__dropdown__score">9,5</span></a></li>
               <li role="none"><a href="vakken-browser-tech.html" role="menuitem" aria-current="page">Browser Tech <span class="nav__dropdown__score">10</span></a></li>
-            <li role="none"><a href="vakken-hcd.html" role="menuitem">Human Centered Design <span
-                        class="nav__dropdown__score">9</span></a></li>
-            <li role="none"><a href="vakken-api.html" role="menuitem">API <span class="nav__dropdown__score">10</span></a></li>
+              <li role="none"><a href="vakken-hcd.html" role="menuitem">Human Centered Design <span class="nav__dropdown__score">9</span></a></li>
+              <li role="none"><a href="vakken-api.html" role="menuitem">API <span class="nav__dropdown__score">10</span></a></li>
             </ul>
           </li>
           <li><a class="nav__link" href="meesterproef.html">Meesterproef</a></li>
+          <li><a class="nav__link" href="gesprekken.html">Gesprekken</a></li>
           <li>
             <button class="theme-toggle" data-theme-toggle aria-label="Wissel thema">
               <span class="theme-toggle__indicator" aria-hidden="true"></span>
-            <span data-theme-label>Night</span>
+              <span data-theme-label>Night</span>
             </button>
           </li>
         </ul>
@@ -187,7 +187,7 @@
           <pre><span class="cm">// Elfproef-validatie voor BSN (weging 9-8-7-6-5-4-3-2-1)</span>
 <span class="kw">const</span> <span class="fn">elfValidBsn</span> = (bsn) => {
   <span class="kw">if</span> (!<span class="str">/^\d{8,9}$/</span>.test(bsn)) <span class="kw">return false</span>;
-  <span class="kw">const</span> digits = bsn.padStart(<span class="str">9</span>, <span class="str">"0"</span>).split(<span class="str">""</span>).map(Number);
+  <span class="kw">const</span> digits = bsn.padStart(<span class="str">9</span> <span class="str">"0"</span>).split(<span class="str">""</span>).map(Number);
   <span class="kw">const</span> sum = digits.reduce((acc, digit, index) => {
     <span class="kw">const</span> weight = index === <span class="str">8</span> ? <span class="str">-1</span> : <span class="str">9</span> - index;
     <span class="kw">return</span> acc + digit * weight;
@@ -207,8 +207,8 @@
   }
   <span class="kw">const</span> feedback = document.createElement(<span class="str">"span"</span>);
   feedback.className = <span class="str">"inline-feedback"</span>;
-  feedback.setAttribute(<span class="str">"aria-live"</span>, <span class="str">"polite"</span>);
-  el.insertAdjacentElement(<span class="str">"afterend"</span>, feedback);
+  feedback.setAttribute(<span class="str">"aria-live"</span> <span class="str">"polite"</span>);
+  el.insertAdjacentElement(<span class="str">"afterend"</span> feedback);
   <span class="kw">return</span> feedback;
 };</pre>
         </div>
@@ -225,7 +225,7 @@
     }
     draft[field.name] = field.value;
   });
-  localStorage.setItem(<span class="str">"erfbelasting-form-draft"</span>, JSON.stringify(draft));
+  localStorage.setItem(<span class="str">"erfbelasting-form-draft"</span> JSON.stringify(draft));
 };</pre>
         </div>
 
@@ -317,8 +317,8 @@
           <div class="insight-card">
             <p class="insight-card__num">02</p>
             <p class="insight-card__title">HTML biedt meer dan je gebruikt</p>
-            <p><code>fieldset</code>, <code>legend</code>, <code>datalist</code>, <code>dialog</code>,
-            <code>autocomplete</code>, <code>inputmode</code> native features die UX verbeteren zonder JavaScript.</p>
+            <p><code>fieldset</code> <code>legend</code> <code>datalist</code> <code>dialog</code>
+            <code>autocomplete</code> <code>inputmode</code> native features die UX verbeteren zonder JavaScript.</p>
           </div>
           <div class="insight-card">
             <p class="insight-card__num">03</p>

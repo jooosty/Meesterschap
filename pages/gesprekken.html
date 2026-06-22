@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="nl" data-theme="night">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gesprekken Meesterschap</title>
+  <meta name="description" content="De drie Meesterschap gesprekken: mijn plannen, mijn leerdoelen en mijn reflectie met een blik op de toekomst." />
+
+  <script src="../js/theme-toggle.js"></script>
+
+  <link rel="stylesheet" href="../css/reset.css" />
+  <link rel="stylesheet" href="../css/tokens.css" />
+  <link rel="stylesheet" href="../css/themes.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Skip naar inhoud</a>
+
+  <!-- ============== NAV ============== -->
+  <header class="nav">
+    <div class="container nav__inner">
+      <a href="../index.html" class="nav__brand" aria-label="Meesterschap home">
+        <span>MEESTERSCHAP</span>
+        <span class="nav__brand-tag">'26</span>
+      </a>
+
+      <button class="nav__toggle" data-nav-toggle aria-expanded="false" aria-controls="primary-nav" aria-label="Menu openen">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <line x1="3" y1="6" x2="17" y2="6"/>
+          <line x1="3" y1="10" x2="17" y2="10"/>
+          <line x1="3" y1="14" x2="17" y2="14"/>
+        </svg>
+      </button>
+
+      <nav aria-label="Hoofdnavigatie">
+        <ul class="nav__list" id="primary-nav" data-nav-list>
+          <li><a class="nav__link" href="../index.html">Home</a></li>
+          <li><a class="nav__link" href="sprint-0.html">Sprint 0</a></li>
+          <li><a class="nav__link" href="hackathon.html">Hackathon</a></li>
+          <li><a class="nav__link" href="weekly-nerd.html">Weekly Nerd</a></li>
+          <li><a class="nav__link" href="weekly-geek.html">Weekly Geek</a></li>
+          <li class="nav__item--dropdown">
+            <button class="nav__dropdown-toggle" data-dropdown-toggle aria-expanded="false" aria-haspopup="true">
+              Vakken
+              <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg>
+            </button>
+            <ul class="nav__dropdown" role="menu">
+              <li role="none"><a href="vakken.html" role="menuitem">Overzicht</a></li>
+              <li role="none"><a href="vakken-css-ttr.html" role="menuitem">CSS to the Rescue <span class="nav__dropdown__score">9,5</span></a></li>
+              <li role="none"><a href="vakken-browser-tech.html" role="menuitem">Browser Tech <span class="nav__dropdown__score">10</span></a></li>
+              <li role="none"><a href="vakken-hcd.html" role="menuitem">Human Centered Design <span class="nav__dropdown__score">9</span></a></li>
+              <li role="none"><a href="vakken-api.html" role="menuitem">API <span class="nav__dropdown__score">10</span></a></li>
+            </ul>
+          </li>
+          <li><a class="nav__link" href="meesterproef.html">Meesterproef</a></li>
+          <li><a class="nav__link" href="gesprekken.html" aria-current="page">Gesprekken</a></li>
+          <li>
+            <button class="theme-toggle" data-theme-toggle aria-label="Wissel thema">
+              <span class="theme-toggle__indicator" aria-hidden="true"></span>
+              <span data-theme-label>Night</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============== MAIN ============== -->
+  <main id="main">
+    <div class="container">
+
+      <!-- BREADCRUMB -->
+      <nav aria-label="Kruimelpad" class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span class="breadcrumb__sep">/</span>
+        <span>Gesprekken</span>
+      </nav>
+
+      <!-- HERO -->
+      <section class="hero fade-in" aria-labelledby="page-title">
+        <p class="eyebrow hero__eyebrow">Sector 07 Meesterschap gesprekken</p>
+        <h1 id="page-title">Gesprekken</h1>
+        <p class="hero__lead">
+          Drie keer per jaar bespreek ik mijn voortgang aan de hand van dit blog. Per gesprek leg ik hier vast
+          waar ik sta: mijn plannen, mijn leerdoelen, en aan het eind een reflectie met een blik op de toekomst.
+        </p>
+      </section>
+
+      <!-- META STRIP -->
+      <div class="data-strip">
+        <div class="data-strip__item">
+          <p class="data-strip__label">Gesprek 1</p>
+          <p class="data-strip__value">12 FEB</p>
+        </div>
+        <div class="data-strip__item">
+          <p class="data-strip__label">Gesprek 2</p>
+          <p class="data-strip__value">08 MEI</p>
+        </div>
+        <div class="data-strip__item">
+          <p class="data-strip__label">Gesprek 3</p>
+          <p class="data-strip__value data-strip__value--accent">25 JUN</p>
+        </div>
+        <div class="data-strip__item">
+          <p class="data-strip__label">Vorm</p>
+          <p class="data-strip__value">Blog + gesprek</p>
+        </div>
+      </div>
+
+      <!-- ============================================
+           GESPREK 1
+           ============================================ -->
+      <article class="prose fade-in" aria-labelledby="g1-title">
+        <p class="eyebrow">Gesprek 01 · 12 februari · Je plannen</p>
+        <h2 id="g1-title">Gesprek 1: mijn plannen</h2>
+
+        <h3>Wie ik ben</h3>
+        <p>
+          Ik ben Joost Krebbers, student van de minor Web Design &amp; Development. Ik zit het liefst op het
+          snijvlak van ontwerp en code: dingen bouwen die er goed uitzien én technisch kloppen. Dit blog is mijn
+          eigen proeftuin, met een F1-telemetrie-thema, twee thema's en alles from scratch zonder framework.
+        </p>
+
+        <h3>Mijn plannen (1/3)</h3>
+        <p>
+          Voor deze minor wil ik vooral mijn front-end-vakmanschap verdiepen: schonere CSS, bewuste
+          architectuurkeuzes en interacties die ergens toe dienen in plaats van alleen leuk zijn. Daarnaast wil
+          ik toegankelijkheid niet als sluitpost behandelen maar vanaf het begin meenemen, en ik wil durven
+          experimenteren met technieken die ik nog niet ken.
+        </p>
+
+        <h3>Wat ik meeneem van de eerste Weekly Nerd spreker</h3>
+        <p>
+          De eerste sessie zette meteen de toon: het idee dat je met moderne CSS verrassend ver komt zonder
+          JavaScript. Dat heb ik later concreet toegepast in CSS to the Rescue, waar ik een compleet
+          kerncentrale-paneel bijna volledig in CSS bouwde. De les die ik meenam: kies de lichtste techniek die
+          de klus klaart, en bereik dat lef om iets "puur CSS" te proberen.
+        </p>
+
+        <div class="feedback-box">
+          <span class="feedback-box__label">Blik op de toekomst</span>
+          <blockquote>
+            Ik wil deze minor gebruiken om van "het werkt" naar "het werkt, het is toegankelijk en het is
+            doordacht" te groeien.
+          </blockquote>
+        </div>
+      </article>
+
+      <!-- ============================================
+           GESPREK 2
+           ============================================ -->
+      <article class="prose fade-in" aria-labelledby="g2-title">
+        <p class="eyebrow">Gesprek 02 · 8 mei · Je leerdoelen</p>
+        <h2 id="g2-title">Gesprek 2: mijn leerdoelen</h2>
+
+        <h3>Reflectie (2/3): hoe gaat het tot nu toe</h3>
+        <p>
+          Het eerste deel van de minor zit erop en ik ben tevreden met de basis die er staat. Sprint 0, de
+          Hackathon en de vakken zijn afgerond, met scores waar ik trots op ben: CSS to the Rescue 9,5, Browser
+          Technologies 10, Human Centered Design 9 en API 10. Mijn grootste leermomenten zaten in de vakken waar
+          de techniek nieuw was, zoals de OpenF1-API met Three.js en de toegankelijkheidsfocus bij HCD.
+        </p>
+        <p>
+          Wat nog lastig blijft, is scope bewaken: ik wil vaak te veel tegelijk en moet leren schrappen. Dat is
+          precies iets wat ik in de meesterproef bewust beter wil doen.
+        </p>
+
+        <h3>Mijn drie persoonlijke leerdoelen voor de meesterproef</h3>
+        <p>
+          Deze drie leerdoelen heb ik gekozen op verschillende vlakken (inhoud, betrouwbaarheid en gebruiker) en
+          ze lopen als rode draad door mijn meesterproef:
+        </p>
+        <div class="learning-goals">
+          <p class="learning-goals__label">Learning goals</p>
+          <ul>
+            <li><strong>Verdiepen in architectuur en schaalbaarheid:</strong> bewuste architectuurkeuzes maken die
+              schaal en onderhoudbaarheid ondersteunen. Ik definieer modules en boundaries expliciet zodat nieuwe
+              features zonder regressies toegevoegd kunnen worden, en documenteer ontwerpkeuzes. Hieraan werk ik
+              door mijn code op te splitsen in losse componenten en de dataverwerking te scheiden van de
+              visualisatie.</li>
+            <li><strong>Productieklare performance en stabiliteit:</strong> de app moet betrouwbaar draaien, ook
+              onder load. Ik focus op stabiele data-pipelines en voorspelbare foutafhandeling. Hieraan werk ik
+              door zware aggregatie in een aparte build-stap te zetten en de animaties te optimaliseren voor een
+              soepele framerate.</li>
+            <li><strong>Toegankelijkheid en inclusief ontwerp:</strong> de meesterproef moet voor iedereen
+              bruikbaar zijn. Ik bouw vanaf het begin met semantische HTML en toegankelijke interacties. Hieraan
+              werk ik door toetsenbord- en screenreader-checks in te plannen tijdens het ontwikkelen, niet pas
+              achteraf.</li>
+          </ul>
+        </div>
+
+        <div class="feedback-box">
+          <span class="feedback-box__label">Blik op de toekomst</span>
+          <blockquote>
+            In de meesterproef wil ik bewijzen dat ik niet alleen iets cools kan bouwen, maar het ook
+            onderhoudbaar, snel en voor iedereen bruikbaar kan maken.
+          </blockquote>
+        </div>
+      </article>
+
+      <!-- ============================================
+           GESPREK 3
+           ============================================ -->
+      <article class="prose fade-in" aria-labelledby="g3-title">
+        <p class="eyebrow">Gesprek 03 · circa 25 juni · Je reflectie en vervolg</p>
+        <h2 id="g3-title">Gesprek 3: reflectie en vervolg</h2>
+
+        <h3>Reflectie (3/3): hoe is de meesterproef gegaan</h3>
+        <p>
+          In de meesterproef bouwde ik samen met drie teamgenoten de Visdeurbel-datavisualisaties voor Studio
+          MOAN. Mijn onderdeel was de roterende wereldbol en de datapijplijn eronder. Mijn grootste leermoment
+          was de migratie naar React en het temmen van stale closures, en waar ik het meest trots op ben is de
+          performance-slag op de flow-animatie en de toegankelijke landenlijst. Wat lastig bleef, was kiezen wat
+          ik niet liet zien: ik ben van tien kaartmodi naar drie gegaan, en dat schrappen bleek een ontwerpkeuze
+          op zich.
+        </p>
+
+        <h3>Hoe ging het met mijn leerdoelen</h3>
+        <div class="component-grid">
+          <div class="component-card" data-num="01">
+            <p class="component-card__title">Architectuur en schaalbaarheid</p>
+            <p>Behaald: de monoliet ging naar losse componenten en de dataverwerking zit los van de
+              visualisatie, zodat week- en maanddata dezelfde code gebruiken.</p>
+          </div>
+          <div class="component-card" data-num="02">
+            <p class="component-card__title">Performance en stabiliteit</p>
+            <p>Behaald: aggregatie in een Python-build-stap (288 MB naar 40 KB) en een flow-animatie die van 80
+              naar 12 punten per lijn ging voor een soepele framerate.</p>
+          </div>
+          <div class="component-card" data-num="03">
+            <p class="component-card__title">Toegankelijkheid</p>
+            <p>Behaald: de landenlijst is volledig toetsenbord- en screenreader-bedienbaar, met ARIA-labels en
+              een logische tabvolgorde.</p>
+          </div>
+        </div>
+
+        <h3>Highlights van de Weekly Nerd sessies</h3>
+        <p>
+          Mijn favoriete spreker was zonder twijfel <strong>Peter-Paul Koch (PPK)</strong>. Zijn scherpe,
+          eigenzinnige kijk op het web, browsers en waarom we niet voor alles op JavaScript-frameworks moeten
+          leunen, is me het meest bijgebleven.
+        </p>
+        <div class="insight-grid">
+          <div class="insight-card">
+            <p class="insight-card__num">01</p>
+            <p class="insight-card__title">Peter-Paul Koch · favoriet</p>
+            <p>Zijn jarenlange cross-browser-onderzoek en zijn pleidooi voor een web dat van iedereen is, niet
+              alleen een app-platform, lieten me anders naar het vak kijken.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__num">02</p>
+            <p class="insight-card__title">CSS boven JavaScript</p>
+            <p>Het idee dat moderne CSS veel werk van JavaScript kan overnemen. Dit paste ik direct toe in CSS
+              to the Rescue.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__num">03</p>
+            <p class="insight-card__title">Progressive enhancement</p>
+            <p>Bouw eerst iets dat altijd werkt, verrijk daarna. De Voorhoede maakte dit heel concreet.</p>
+          </div>
+        </div>
+
+        <h3>Highlights per vak</h3>
+        <div class="component-grid">
+          <div class="component-card" data-num="9,5">
+            <p class="component-card__title">CSS to the Rescue</p>
+            <p>KRAFTWERK, een kerncentrale-paneel bijna volledig in CSS, met meltdown via container style queries.</p>
+          </div>
+          <div class="component-card" data-num="10">
+            <p class="component-card__title">Browser Technologies</p>
+            <p>Een toegankelijk erfbelasting-formulier met progressive enhancement en BSN-elfproef-validatie.</p>
+          </div>
+          <div class="component-card" data-num="9">
+            <p class="component-card__title">Human Centered Design</p>
+            <p>Een spraakberichten-splitter voor Berend, blind en afhankelijk van zijn screenreader.</p>
+          </div>
+          <div class="component-card" data-num="10">
+            <p class="component-card__title">API</p>
+            <p>F1 Explorer, een live telemetrie-visualiser op de OpenF1-API met een 3D-track in Three.js.</p>
+          </div>
+        </div>
+
+        <h3>What's next</h3>
+        <p>
+          Na de minor wil ik blijven bouwen op het snijvlak van creatieve front-end en data: visualisaties,
+          interactieve verhalen en toegankelijke interfaces. De gewoontes die ik hier heb opgebouwd, eerst
+          toegankelijk, dan verrijken, en zware logica buiten de UI houden, neem ik mee naar elk volgend project.
+        </p>
+
+        <div class="feedback-box">
+          <span class="feedback-box__label">Blik op de toekomst</span>
+          <blockquote>
+            Deze minor was mijn proeftuin. Wat ik hier heb geleerd over craft, performance en toegankelijkheid
+            wil ik vanaf nu standaard maken, niet uitzondering.
+          </blockquote>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <!-- ============== FOOTER ============== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+    <p>© 2026 Joost Krebbers · Meesterschap Blog</p>
+      <p>Built from scratch · No frameworks · Two themes</p>
+    </div>
+  </footer>
+
+</body>
+</html>
